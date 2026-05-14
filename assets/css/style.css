@@ -179,6 +179,22 @@ img {
   font-weight: 700;
 }
 
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav__brand img {
+  width: 1.65rem;
+  height: 1.65rem;
+  object-fit: contain;
+}
+
+.nav__brand span {
+  line-height: 1;
+}
+
 .nav__link:hover,
 .nav__logo:hover,
 .nav__toggle:hover {
