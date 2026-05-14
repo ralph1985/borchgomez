@@ -88,3 +88,7 @@ new Swiper(".swiper", {
     },
   },
 });
+
+if (window.AOS) {
+  window.AOS.init({ once: true, delay: 0 });
+}
