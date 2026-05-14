@@ -207,6 +207,18 @@ img {
 .home {
   min-height: calc(100vh - 3.5rem);
   margin-bottom: 1rem;
+  position: relative;
+  isolation: isolate;
+}
+
+.home::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(10, 10, 9, 0.8) 10%, rgba(23, 20, 17, 0.45) 50%, rgba(10, 10, 9, 0.8) 100%),
+    radial-gradient(circle at 80% 18%, rgba(197, 171, 126, 0.2), transparent 46%);
+  z-index: -1;
 }
 
 .home__container {
@@ -219,7 +231,7 @@ img {
 
 .home__data {
   color: var(--text);
-  padding: 1rem 0.35rem;
+  padding: 1.2rem 0.35rem;
   z-index: 10;
 }
 
@@ -233,20 +245,22 @@ img {
 
 .home__title {
   display: block;
-  font-size: 2rem;
-  line-height: 1.2;
-  padding: 0.45rem 0 1rem;
+  font-size: 2.25rem;
+  line-height: 1.1;
+  padding: 0.5rem 0 1rem;
+  text-wrap: balance;
 }
 
 .home__career {
   color: var(--sand);
-  margin-bottom: 1.4rem;
-  font-size: 1.08rem;
+  margin-bottom: 1.2rem;
+  font-size: 1.12rem;
 }
 
 .home__description {
-  max-width: 640px;
+  max-width: 700px;
   color: var(--text-soft);
+  font-size: 1rem;
 }
 
 .home__button {
@@ -311,14 +325,14 @@ img {
 
 .home__img {
   justify-self: center;
-  width: min(360px, 92%);
+  width: min(420px, 94%);
 }
 
 .home__img img {
-  border-radius: 1rem;
+  border-radius: 1.1rem;
   border: 1px solid rgba(197, 171, 126, 0.2);
-  background-color: rgba(24, 20, 16, 0.5);
-  box-shadow: 0 26px 70px rgba(0, 0, 0, 0.38);
+  background-color: rgba(24, 20, 16, 0.7);
+  box-shadow: 0 34px 90px rgba(0, 0, 0, 0.45);
 }
 
 .about {
@@ -340,10 +354,19 @@ img {
 .services__data,
 .portfolio__data {
   display: grid;
-  padding: 1.5rem 1rem;
+  padding: 1.55rem 1.05rem;
   border-radius: 0.9rem;
   border: 1px solid rgba(197, 171, 126, 0.16);
   background: linear-gradient(180deg, rgba(50, 44, 37, 0.7) 0%, rgba(30, 27, 23, 0.8) 100%);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.services__data:hover,
+.portfolio__data:hover {
+  transform: translateY(-4px);
+  border-color: rgba(197, 171, 126, 0.35);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.26);
 }
 
 .services__img {
@@ -385,8 +408,66 @@ img {
   margin-bottom: 0.2rem;
 }
 
+.portfolio__category {
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #b99c70;
+  margin-bottom: 0.7rem;
+}
+
 .portfolio__description {
   color: var(--text-soft);
+  margin-bottom: 0.95rem;
+}
+
+.portfolio__cta {
+  width: fit-content;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(197, 171, 126, 0.5);
+  color: var(--text);
+  font-size: 0.85rem;
+  transition: 0.2s ease;
+}
+
+.portfolio__cta:hover {
+  border-color: var(--sand);
+  color: var(--sand);
+}
+
+.instagram__grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
+}
+
+.instagram__item {
+  display: block;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  border: 1px solid rgba(197, 171, 126, 0.22);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.22);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.instagram__item:hover {
+  transform: translateY(-4px);
+  border-color: rgba(197, 171, 126, 0.45);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.26);
+}
+
+.instagram__item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: saturate(0.88) contrast(1.03);
+}
+
+.instagram__actions {
+  margin-top: 1.4rem;
+  text-align: center;
 }
 
 .swiper-pagination {
@@ -435,7 +516,7 @@ img {
 
 @media (min-width: 640px) {
   .home__title {
-    font-size: 2.55rem;
+    font-size: 2.85rem;
   }
 
   .services__container {
@@ -492,6 +573,7 @@ img {
     min-height: 100vh;
     grid-template-columns: 1.15fr 0.85fr;
     align-items: center;
+    gap: 2.6rem;
   }
 
   .home__description {
@@ -499,11 +581,16 @@ img {
   }
 
   .home__img {
-    width: min(420px, 100%);
+    width: min(460px, 100%);
   }
 
   .services__container {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .instagram__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
   }
 }
 
@@ -514,7 +601,7 @@ img {
   }
 
   .home__title {
-    font-size: 3rem;
+    font-size: 3.35rem;
   }
 
   .section-subtitle {
