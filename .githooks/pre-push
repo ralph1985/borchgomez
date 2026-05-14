@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+
+scripts/bump-asset-version.sh
+
+if ! git diff --quiet -- index.html; then
+  git add index.html
+  echo "Se actualizo la version de assets en index.html."
+  echo "Haz un commit de este cambio antes de hacer push:"
+  echo "  git commit -m \"chore: bump asset version\""
+  exit 1
+fi
