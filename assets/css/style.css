@@ -508,6 +508,16 @@ img {
 .footer__container {
   display: grid;
   text-align: center;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.footer__image {
+  width: min(420px, 100%);
+  border-radius: 0.9rem;
+  border: 1px solid rgba(197, 171, 126, 0.3);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
 }
 
 .footer__copy {
