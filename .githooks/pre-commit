@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+
+scripts/bump-asset-version.sh
+git add index.html
