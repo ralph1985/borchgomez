@@ -201,6 +201,18 @@ img {
   color: #384236;
 }
 
+.icon-inline {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.125em;
+}
+
+.icon-inline--social {
+  vertical-align: -0.15em;
+}
+
 .show-menu {
   transform: translateY(0);
   opacity: 1;
