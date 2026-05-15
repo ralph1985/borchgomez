@@ -1,47 +1,52 @@
-// Toggle navbar
-const showMenu = (toggleId, navId) => {
-  const toggle = document.getElementById(toggleId);
-  const nav = document.getElementById(navId);
+const HEADER_SCROLL_OFFSET = 140;
+const SECTION_ACTIVE_OFFSET = 80;
 
-  if (toggle && nav) {
-    toggle.addEventListener("click", () => {
-      nav.classList.toggle("show-menu");
-    });
+const navToggle = document.getElementById("nav-toggle");
+const navMenu = document.getElementById("nav-menu");
+const navLinks = document.querySelectorAll(".nav__link");
+const sections = document.querySelectorAll("section[id]");
+const header = document.getElementById("header");
 
-    toggle.addEventListener("keypress", (event) => {
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
-        nav.classList.toggle("show-menu");
-      }
-    });
-  }
-};
+function setMenuOpen(isOpen) {
+  if (!navMenu || !navToggle) return;
 
-showMenu("nav-toggle", "nav-menu");
-
-// Remove menu for every click
-const navLink = document.querySelectorAll(".nav__link");
-
-function linkAction() {
-  const navMenu = document.getElementById("nav-menu");
-  if (navMenu) {
-    navMenu.classList.remove("show-menu");
-  }
+  navMenu.classList.toggle("show-menu", isOpen);
+  navToggle.setAttribute("aria-expanded", String(isOpen));
+  navToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
 }
 
-navLink.forEach((n) => n.addEventListener("click", linkAction));
+if (navToggle && navMenu) {
+  navToggle.addEventListener("click", () => {
+    setMenuOpen(!navMenu.classList.contains("show-menu"));
+  });
 
-// Scroll Sections Active Link
-const sections = document.querySelectorAll("section[id]");
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      setMenuOpen(false);
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+
+    if (target instanceof Node && !navMenu.contains(target) && !navToggle.contains(target)) {
+      setMenuOpen(false);
+    }
+  });
+}
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => setMenuOpen(false));
+});
 
 function scrollActive() {
-  const scrollY = window.pageYOffset;
+  const scrollY = window.scrollY;
 
   sections.forEach((current) => {
     const sectionHeight = current.offsetHeight;
-    const sectionTop = current.offsetTop - 80;
+    const sectionTop = current.offsetTop - SECTION_ACTIVE_OFFSET;
     const sectionId = current.getAttribute("id");
-    const sectionLink = document.querySelector(`.nav__menu a[href*="${sectionId}"]`);
+    const sectionLink = document.querySelector(`.nav__menu a[href="#${sectionId}"]`);
 
     if (!sectionLink) return;
 
@@ -53,42 +58,63 @@ function scrollActive() {
   });
 }
 
-window.addEventListener("scroll", scrollActive);
-
-// Change BG Header
 function scrollHeader() {
-  const header = document.getElementById("header");
   if (!header) return;
 
-  if (window.scrollY >= 140) {
+  if (window.scrollY >= HEADER_SCROLL_OFFSET) {
     header.classList.add("scroll-header");
   } else {
     header.classList.remove("scroll-header");
   }
 }
 
-window.addEventListener("scroll", scrollHeader);
+let scrollTicking = false;
 
-// Swiper JS
-new Swiper(".swiper", {
-  slidesPerView: 1,
-  spaceBetween: 16,
-  loop: false,
-  grabCursor: true,
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-  breakpoints: {
-    768: {
-      slidesPerView: 2,
+function updateOnScroll() {
+  scrollActive();
+  scrollHeader();
+  scrollTicking = false;
+}
+
+function requestScrollUpdate() {
+  if (scrollTicking) return;
+
+  scrollTicking = true;
+  window.requestAnimationFrame(updateOnScroll);
+}
+
+window.addEventListener("scroll", requestScrollUpdate, { passive: true });
+window.addEventListener("load", updateOnScroll);
+updateOnScroll();
+
+if (window.Swiper && document.querySelector(".swiper")) {
+  new window.Swiper(".swiper", {
+    slidesPerView: 1,
+    spaceBetween: 16,
+    loop: false,
+    grabCursor: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
     },
-    1024: {
-      slidesPerView: 3,
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      },
     },
-  },
-});
+  });
+}
 
 if (window.AOS) {
-  window.AOS.init({ once: true, delay: 0 });
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  window.AOS.init({
+    once: true,
+    delay: 0,
+    duration: reduceMotion ? 0 : 400,
+    disable: reduceMotion,
+  });
 }
