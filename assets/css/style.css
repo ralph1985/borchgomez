@@ -46,10 +46,9 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--anchor-offset);
 }
 
-[id] {
+#home {
   scroll-margin-top: var(--anchor-offset);
 }
 
