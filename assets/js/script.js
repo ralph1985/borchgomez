@@ -502,7 +502,7 @@ function initScrollRootGrowth() {
     rootsLayer.style.opacity = "0";
 
     anime.animate(rootsLayer, {
-      opacity: 0.24,
+      opacity: 0.28,
       duration: 900,
       ease: "outSine",
       delay: 500,
@@ -536,6 +536,64 @@ function initScrollRootGrowth() {
   window.addEventListener("scroll", requestRootGrowth, { passive: true });
   window.addEventListener("resize", requestRootGrowth);
   updateRootGrowth();
+}
+
+function initFooterLandscapeAnimation() {
+  const anime = window.anime;
+  const footer = document.querySelector(".footer");
+  const soils = document.querySelectorAll(".footer__land-soil");
+  const furrows = document.querySelectorAll(".footer__furrows path");
+  const roots = document.querySelectorAll(".footer__roots path");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!anime || typeof anime.animate !== "function" || !footer || !("IntersectionObserver" in window)) return;
+
+  const drawablePaths = [...furrows, ...roots].map((path) => {
+    const length = path.getTotalLength();
+
+    path.style.strokeDasharray = String(length);
+    path.style.strokeDashoffset = reduceMotion ? "0" : String(length);
+    return path;
+  });
+
+  if (reduceMotion) return;
+
+  soils.forEach((soil) => {
+    soil.style.opacity = "0";
+    soil.style.transform = "translateY(34px) scaleY(0.94)";
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        observer.unobserve(entry.target);
+
+        anime.animate(soils, {
+          opacity: [0, 1],
+          y: 0,
+          scaleY: 1,
+          duration: 1050,
+          ease: "outCubic",
+          delay: (_target, index) => index * 160,
+        });
+
+        anime.animate(drawablePaths, {
+          strokeDashoffset: 0,
+          duration: 1550,
+          ease: "inOutSine",
+          delay: (_target, index) => 280 + index * 105,
+        });
+      });
+    },
+    {
+      rootMargin: "0px 0px -12% 0px",
+      threshold: 0.18,
+    }
+  );
+
+  observer.observe(footer);
 }
 
 function initScrollAnimations() {
@@ -694,6 +752,7 @@ function initInteractiveMotion() {
 initHeroAnimation();
 initLandscapeAnimation();
 initScrollRootGrowth();
+initFooterLandscapeAnimation();
 initScrollAnimations();
 initInteractiveMotion();
 
