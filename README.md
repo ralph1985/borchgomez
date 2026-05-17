@@ -20,7 +20,7 @@ La web está planteada como una landing page de una sola página, en español y 
 - Landing responsive para móvil, tablet y escritorio.
 - Navegación fija con menú móvil, cierre automático al pulsar enlaces y marcado de sección activa durante el scroll.
 - Carrusel de proyectos con `Swiper`, servido desde `assets/vendor/swiper/`.
-- Animaciones de entrada con `AOS`, servido desde `assets/vendor/aos/`.
+- Animaciones de entrada, hero y microinteracciones con `Anime.js`, servido desde `assets/vendor/animejs/`.
 - Fuentes locales autoalojadas (`Manrope` y `Playfair Display`) en formato `woff2`.
 - Imágenes optimizadas con variantes `400w`, `800w` y `1200w` en proyectos y hero, además de `loading="lazy"`, `decoding="async"` y tamaños explícitos.
 - Metadatos SEO, Open Graph, Twitter Card, favicons y manifiesto web.
@@ -35,7 +35,7 @@ La web está planteada como una landing page de una sola página, en español y 
 - `JavaScript` vanilla
 - Dependencias frontend autoalojadas:
   - `Swiper` en `assets/vendor/swiper/`
-  - `AOS` en `assets/vendor/aos/`
+  - `Anime.js` en `assets/vendor/animejs/`
 - Fuentes locales:
   - `Manrope`
   - `Playfair Display`
@@ -80,9 +80,8 @@ La web está planteada como una landing page de una sola página, en español y 
     ├── js/
     │   └── script.js
     └── vendor/
-        ├── aos/
-        │   ├── aos.css
-        │   └── aos.js
+        ├── animejs/
+        │   └── anime.umd.min.js
         └── swiper/
             ├── swiper-bundle.min.css
             └── swiper-bundle.min.js
@@ -167,8 +166,8 @@ Modificar `assets/js/script.js` para actualizar:
 - Apertura/cierre del menú móvil.
 - Marcado de enlace activo durante el scroll.
 - Sombra de cabecera al hacer scroll.
+- Animaciones de hero, entradas al scroll y microinteracciones con `Anime.js`.
 - Configuración del carrusel `Swiper`.
-- Inicialización de `AOS`.
 
 ## Checklist antes de publicar cambios
 

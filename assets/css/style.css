@@ -279,6 +279,8 @@ img {
 .home {
   min-height: calc(100vh - var(--header-height));
   margin-bottom: 1rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .home__container {
@@ -308,11 +310,32 @@ img {
   max-width: 11ch;
 }
 
+.home__title span {
+  display: inline-block;
+  transform-origin: left bottom;
+}
+
 .home__career {
   color: #384236;
   margin-bottom: 1rem;
   font-size: 1.15rem;
   font-weight: 700;
+}
+
+.home__trace {
+  width: min(420px, 100%);
+  height: auto;
+  margin: -0.34rem 0 0.95rem;
+  color: #7d8f77;
+  opacity: 0;
+}
+
+.home__trace path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .home__description {
@@ -394,13 +417,37 @@ img {
 
 .home__img {
   justify-self: center;
+  position: relative;
   width: min(450px, 95%);
+  transform-origin: center;
+  will-change: transform, opacity, clip-path;
+}
+
+.home__img::before {
+  content: "";
+  position: absolute;
+  inset: -0.75rem;
+  z-index: -1;
+  border-radius: 1.35rem;
+  background:
+    radial-gradient(circle at 38% 28%, rgba(255, 255, 255, 0.62), transparent 34%),
+    linear-gradient(135deg, rgba(200, 210, 196, 0.58), rgba(179, 174, 163, 0.18));
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.home__img.is-hero-awake::before {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .home__img img {
   border-radius: 1rem;
   border: 1px solid #bab4aa;
   box-shadow: 0 16px 34px rgba(41, 37, 31, 0.14);
+  transform-origin: center;
+  will-change: transform;
 }
 
 .about,
@@ -461,7 +508,6 @@ img {
 }
 
 .portfolio__data:hover {
-  transform: translateY(-3px);
   border-color: #aeb9a8;
 }
 
@@ -532,7 +578,6 @@ img {
 }
 
 .portfolio__preview-item:hover {
-  transform: translateY(-3px);
   border-color: #aeb9a8;
 }
 
