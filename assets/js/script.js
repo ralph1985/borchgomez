@@ -189,6 +189,7 @@ updateOnScroll();
 function initHeroAnimation() {
   const anime = window.anime;
   const heroSection = document.querySelector(".home");
+  const heroData = document.querySelector(".home__data");
   const heroFrame = document.querySelector(".home__img");
   const heroImage = document.querySelector(".home-image");
   const heroWords = document.querySelectorAll("[data-hero-word]");
@@ -214,6 +215,7 @@ function initHeroAnimation() {
     pointerX: 0,
     pointerY: 0,
     scrollY: 0,
+    exitProgress: 0,
     currentX: 0,
     currentY: 0,
     currentRotate: 0,
@@ -221,10 +223,26 @@ function initHeroAnimation() {
   let parallaxTicking = false;
 
   function renderHeroParallax() {
-    motion.currentX += (motion.pointerX - motion.currentX) * 0.08;
-    motion.currentY += (motion.pointerY + motion.scrollY - motion.currentY) * 0.08;
-    motion.currentRotate += (motion.pointerX * 0.08 - motion.currentRotate) * 0.08;
+    const exitX = motion.exitProgress * 96;
+    const exitY = motion.exitProgress * 28;
+    const targetFrameX = motion.pointerX + exitX;
+    const targetFrameY = motion.pointerY + motion.scrollY + exitY;
+    const targetRotate = motion.pointerX * 0.08 + motion.exitProgress * 2.4;
+
+    motion.currentX += (targetFrameX - motion.currentX) * 0.08;
+    motion.currentY += (targetFrameY - motion.currentY) * 0.08;
+    motion.currentRotate += (targetRotate - motion.currentRotate) * 0.08;
     heroFrame.style.transform = `translate3d(${motion.currentX}px, ${motion.currentY}px, 0) rotate(${motion.currentRotate}deg)`;
+
+    if (heroData) {
+      const dataX = motion.exitProgress * -82;
+      const dataY = motion.exitProgress * 18;
+      const dataOpacity = 1 - motion.exitProgress * 0.58;
+
+      heroData.style.transform = `translate3d(${dataX}px, ${dataY}px, 0)`;
+      heroData.style.opacity = String(dataOpacity);
+    }
+
     parallaxTicking = false;
   }
 
@@ -248,10 +266,16 @@ function initHeroAnimation() {
   }
 
   function updateScrollMotion() {
+    if (!heroSection) return;
+
     const rect = heroFrame.getBoundingClientRect();
+    const sectionRect = heroSection.getBoundingClientRect();
     const viewportCenter = window.innerHeight / 2;
+    const exitDistance = Math.max(heroSection.offsetHeight * 0.72, 1);
+    const rawExitProgress = Math.min(Math.max(-sectionRect.top / exitDistance, 0), 1);
 
     motion.scrollY = (viewportCenter - rect.top - rect.height / 2) * 0.025;
+    motion.exitProgress = rawExitProgress * rawExitProgress * (3 - 2 * rawExitProgress);
     requestHeroParallax();
   }
 
@@ -331,6 +355,7 @@ function initHeroAnimation() {
         onComplete: () => {
           window.addEventListener("pointermove", updatePointerMotion, { passive: true });
           window.addEventListener("scroll", updateScrollMotion, { passive: true });
+          window.addEventListener("resize", updateScrollMotion);
           updateScrollMotion();
         },
       });
@@ -477,7 +502,7 @@ function initScrollRootGrowth() {
     rootsLayer.style.opacity = "0";
 
     anime.animate(rootsLayer, {
-      opacity: 0.18,
+      opacity: 0.24,
       duration: 900,
       ease: "outSine",
       delay: 500,

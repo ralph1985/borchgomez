@@ -117,7 +117,7 @@ main,
   width: 100%;
   height: 100vh;
   color: var(--soil);
-  opacity: 0.18;
+  opacity: 0.24;
   pointer-events: none;
 }
 
@@ -129,12 +129,12 @@ main,
 }
 
 .page-roots__cluster > path:first-child {
-  stroke-width: 5;
+  stroke-width: 5.4;
 }
 
 .page-roots__cluster > path:not(:first-child) {
-  stroke-width: 2.4;
-  opacity: 0.74;
+  stroke-width: 2.7;
+  opacity: 0.82;
 }
 
 .section {
@@ -487,6 +487,7 @@ main,
 .home__data {
   color: var(--ink);
   padding: 1rem 0.35rem;
+  will-change: transform, opacity;
 }
 
 .home__greeting {
@@ -872,7 +873,7 @@ main,
   .nav__list {
     display: flex;
     align-items: center;
-    gap: 1.1rem;
+    gap: 0.28rem;
   }
 
   .nav__menu {
@@ -884,7 +885,7 @@ main,
     width: auto;
     padding-top: 0;
     text-align: left;
-    background-color: transparent;
+    background: transparent;
     border-bottom: 0;
     border-radius: 0;
     box-shadow: none;
@@ -897,6 +898,26 @@ main,
 
   .nav__item {
     margin: 0;
+  }
+
+  .nav__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.1rem;
+    padding: 0.36rem 0.68rem;
+    border-radius: 999px;
+  }
+
+  .nav__link:hover {
+    background: rgba(138, 94, 59, 0.1);
+  }
+
+  .active-link {
+    background: rgba(196, 208, 184, 0.36);
+  }
+
+  .active-link::after {
+    display: none;
   }
 
   .nav__toggle {
