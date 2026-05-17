@@ -128,25 +128,21 @@ main,
   stroke-linejoin: round;
 }
 
-.page-roots__body path {
+.page-roots__mass path {
   fill: currentColor;
-  opacity: 0.08;
+  opacity: 0.09;
   stroke: none;
+  transform-origin: top center;
 }
 
 .page-roots__cluster--primary > path:first-child {
-  stroke-width: 5.2;
+  stroke-width: 4.8;
+  opacity: 0.8;
 }
 
-.page-roots__cluster--primary > path:nth-child(n + 2):nth-child(-n + 8) {
-  stroke-width: 2.6;
+.page-roots__branches path {
+  stroke-width: 2.7;
   opacity: 0.72;
-}
-
-.page-roots__cluster--primary > path:nth-child(n + 9),
-.page-roots__cluster--fine path {
-  stroke-width: 1.35;
-  opacity: 0.46;
 }
 
 .page-roots__hairs path {

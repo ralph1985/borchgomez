@@ -478,6 +478,7 @@ function initLandscapeAnimation() {
 function initScrollRootGrowth() {
   const anime = window.anime;
   const rootsLayer = document.querySelector(".page-roots");
+  const rootMasses = document.querySelectorAll(".page-roots__mass path, .page-roots__nodes circle");
   const rootPaths = document.querySelectorAll(".page-roots__cluster path, .page-roots__hairs path");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -495,8 +496,17 @@ function initScrollRootGrowth() {
     rootData.forEach(({ path }) => {
       path.style.strokeDashoffset = "0";
     });
+    rootMasses.forEach((mass) => {
+      mass.style.opacity = "";
+      mass.style.transform = "";
+    });
     return;
   }
+
+  rootMasses.forEach((mass) => {
+    mass.style.opacity = "0";
+    mass.style.transform = "scaleY(0.82)";
+  });
 
   if (anime && typeof anime.animate === "function" && rootsLayer) {
     rootsLayer.style.opacity = "0";
@@ -521,6 +531,16 @@ function initScrollRootGrowth() {
       const pathProgress = Math.min(pathOffset, 1);
 
       path.style.strokeDashoffset = String(length * (1 - pathProgress));
+    });
+
+    rootMasses.forEach((mass, index) => {
+      const massOffset = Math.max(easedProgress * 1.16 - index * 0.025, 0);
+      const massProgress = Math.min(massOffset, 1);
+      const baseOpacity = mass.tagName.toLowerCase() === "circle" ? 0.12 : 0.09;
+      const scaleY = 0.82 + massProgress * 0.18;
+
+      mass.style.opacity = String(baseOpacity * massProgress);
+      mass.style.transform = `scaleY(${scaleY})`;
     });
 
     ticking = false;

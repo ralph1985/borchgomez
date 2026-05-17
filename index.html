@@ -14,7 +14,7 @@
       content="Producción audiovisual rural: vídeo, fotografía, drone, redes sociales y presencia online para negocios y proyectos locales."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="./assets/img/projects/territorio-vivo.webp?v=20260517204921" />
+    <meta property="og:image" content="./assets/img/projects/territorio-vivo.webp?v=20260517205152" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -26,10 +26,10 @@
       content="Vídeo, fotografía y drone para negocios rurales, bodegas, restaurantes, alojamientos y productores locales."
     />
     <title>Borja Gómez | Producción audiovisual para negocios rurales</title>
-    <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicons/favicon-16x16.png?v=20260517204921" />
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicons/favicon-32x32.png?v=20260517204921" />
-    <link rel="icon" type="image/png" sizes="48x48" href="./assets/img/favicons/favicon-48x48.png?v=20260517204921" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/favicons/apple-touch-icon.png?v=20260517204921" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicons/favicon-16x16.png?v=20260517205152" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicons/favicon-32x32.png?v=20260517205152" />
+    <link rel="icon" type="image/png" sizes="48x48" href="./assets/img/favicons/favicon-48x48.png?v=20260517205152" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/favicons/apple-touch-icon.png?v=20260517205152" />
     <link rel="manifest" href="./assets/img/favicons/site.webmanifest?v=20260514224500" />
     <link
       rel="preload"
@@ -45,19 +45,19 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="./assets/css/style.css?v=20260517204921" />
-    <link rel="stylesheet" href="./assets/vendor/swiper/swiper-bundle.min.css?v=20260517204921" />
+    <link rel="stylesheet" href="./assets/css/style.css?v=20260517205152" />
+    <link rel="stylesheet" href="./assets/vendor/swiper/swiper-bundle.min.css?v=20260517205152" />
   </head>
   <body>
     <header class="l-header" id="header">
       <nav class="nav bd-container" aria-label="Navegación principal">
         <a href="#home" class="nav__logo nav__brand" aria-label="Inicio Borja Gómez">
           <img
-            src="./assets/img/logo-128.webp?v=20260517204921"
+            src="./assets/img/logo-128.webp?v=20260517205152"
             srcset="
-              ./assets/img/logo-64.webp?v=20260517204921 1x,
-              ./assets/img/logo-128.webp?v=20260517204921 2x,
-              ./assets/img/logo-256.webp?v=20260517204921 3x
+              ./assets/img/logo-64.webp?v=20260517205152 1x,
+              ./assets/img/logo-128.webp?v=20260517205152 2x,
+              ./assets/img/logo-256.webp?v=20260517205152 3x
             "
             alt="Logo de Borja Gómez"
             width="64"
@@ -87,13 +87,30 @@
     </header>
 
     <svg class="page-roots" viewBox="0 0 1440 1280" aria-hidden="true" focusable="false">
-      <g class="page-roots__body">
-        <path d="M143 0c-19 126-12 246 22 358 24 78 23 162-2 260-27 108-28 221 6 341 12-112 18-205 41-292 24-92 16-181-14-288C166 273 158 151 174 0Z"></path>
-        <path d="M708 70c-11 109-2 214 28 319 26 92 28 183 4 279-23 89-22 183 14 277 6-103 13-190 34-274 23-93 17-183-12-274-31-98-40-206-27-327Z"></path>
-        <path d="M1262 0c31 116 25 229-17 337-39 101-39 206 7 314 42 99 52 205 28 326 45-115 47-226 7-330-42-109-40-207 4-309 40-93 45-208 13-338Z"></path>
+      <defs>
+        <filter id="root-roughen" x="-8%" y="-8%" width="116%" height="116%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.012 0.036" numOctaves="2" seed="7" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+      <g class="page-roots__mass" filter="url(#root-roughen)">
+        <path d="M133-12c34 126 35 245 9 358-20 87-18 155 10 226 34 85 28 161-11 250-28 65-31 142-5 230 28-73 49-139 76-196 41-88 39-173 8-259-28-78-29-150-5-232 34-116 21-242-41-377Z"></path>
+        <path d="M693 58c39 113 48 214 23 302-26 91-16 176 23 254 44 89 46 176 5 275-21 52-25 111-10 177 31-64 54-123 85-176 53-91 49-183 1-276-38-74-46-151-18-235 34-101 14-209-63-321Z"></path>
+        <path d="M1304-10c-66 126-78 242-39 348 30 83 24 160-17 236-49 90-47 181 6 273 31 54 47 121 49 202 31-88 32-166 5-235-31-79-27-151 14-232 45-89 50-175 16-257-42-102-30-216 14-335Z"></path>
+        <path d="M163 377c-62 14-117 46-164 97 65-20 126-35 182-42 46-6 83-24 111-54-40 8-83 8-129-1Z"></path>
+        <path d="M188 578c75 24 141 65 199 123-48-84-104-140-170-168-46-19-91-21-136-9 38 16 74 34 107 54Z"></path>
+        <path d="M148 783c-65 34-114 82-145 145 59-41 112-68 160-82 38-11 70-35 96-70-36 12-73 15-111 7Z"></path>
+        <path d="M731 394c-64 29-114 73-151 133 60-40 113-66 161-79 37-10 68-32 93-66-34 13-68 17-103 12Z"></path>
+        <path d="M762 569c62 24 111 65 146 124-22-76-61-126-117-153-37-18-75-21-114-9 30 11 58 24 85 38Z"></path>
+        <path d="M1261 371c-79 15-144 53-196 116 70-32 133-51 188-58 46-6 86-27 119-62-36 10-73 11-111 4Z"></path>
+        <path d="M1271 690c-66 31-119 79-158 145 66-41 123-69 174-84 39-12 70-36 94-72-35 12-71 16-110 11Z"></path>
       </g>
-      <g class="page-roots__cluster page-roots__cluster--left page-roots__cluster--primary">
-        <path d="M152 0c-27 146-18 253 28 372 38 98 37 191-2 306-32 93-42 175-5 281"></path>
+      <g class="page-roots__cluster page-roots__cluster--primary">
+        <path d="M154 0c-24 136-17 251 24 370 33 96 35 176 0 302-27 98-33 191-7 287"></path>
+        <path d="M720 70c-18 123-7 233 33 331 34 84 36 175 5 272-28 88-26 178 6 272"></path>
+        <path d="M1274 0c35 142 31 257-12 344-55 111-54 212 4 328 52 104 63 205 31 305"></path>
+      </g>
+      <g class="page-roots__cluster page-roots__branches">
         <path d="M173 283c-61 54-112 91-172 116"></path>
         <path d="M165 326c-46-16-89-45-129-87"></path>
         <path d="M191 409c84 30 154 78 210 144"></path>
@@ -101,58 +118,35 @@
         <path d="M157 665c-76 50-122 106-141 169"></path>
         <path d="M170 801c91 37 155 91 191 162"></path>
         <path d="M176 912c-50 41-82 91-96 150"></path>
-        <path d="M174 452c-34 7-66 24-97 52"></path>
-        <path d="M190 738c34-8 68-29 103-63"></path>
-        <path d="M146 1014c42 6 81 24 117 54"></path>
-      </g>
-      <g class="page-roots__cluster page-roots__cluster--center page-roots__cluster--primary">
-        <path d="M720 70c-18 123-7 233 33 331 34 84 36 175 5 272-28 88-26 178 6 272"></path>
         <path d="M739 332c-63 34-115 80-157 137"></path>
         <path d="M751 444c61 31 111 78 151 141"></path>
         <path d="M733 661c-59 22-108 62-147 119"></path>
         <path d="M760 787c55 30 97 77 127 141"></path>
-        <path d="M738 516c-35 7-67 26-96 57"></path>
-        <path d="M759 614c37-2 74-17 111-45"></path>
-        <path d="M751 897c-39 18-69 47-91 86"></path>
-      </g>
-      <g class="page-roots__cluster page-roots__cluster--right page-roots__cluster--primary">
-        <path d="M1274 0c35 142 31 257-12 344-55 111-54 212 4 328 52 104 63 205 31 305"></path>
         <path d="M1265 244c-87 28-153 75-198 142"></path>
         <path d="M1271 310c54-8 107-33 158-74"></path>
         <path d="M1255 424c66 38 125 54 184 48"></path>
         <path d="M1255 561c-54 23-98 60-132 112"></path>
         <path d="M1273 649c-76 41-133 98-170 171"></path>
-        <path d="M1301 807c49 19 91 55 126 108"></path>
-        <path d="M1288 917c-47 30-79 73-97 130"></path>
-        <path d="M1262 510c39-1 77-13 113-36"></path>
-        <path d="M1297 733c-35 14-66 38-94 72"></path>
-        <path d="M1308 976c36 8 70 28 103 59"></path>
-      </g>
-      <g class="page-roots__cluster page-roots__cluster--fine">
-        <path d="M418 0c-30 109-26 209 12 300 31 74 36 149 14 225"></path>
-        <path d="M426 281c-44 18-82 49-115 91"></path>
-        <path d="M439 369c42 13 79 39 111 78"></path>
-        <path d="M1015 0c31 118 25 223-18 315-33 71-37 145-12 222"></path>
-        <path d="M998 276c51 16 95 47 133 93"></path>
-        <path d="M986 392c-39 19-71 48-95 87"></path>
       </g>
       <g class="page-roots__hairs">
         <path d="M77 504c-24 21-45 45-62 72"></path>
+        <path d="M122 431c-32 4-63 16-92 36"></path>
         <path d="M293 675c32-21 61-47 86-78"></path>
         <path d="M124 697c-34 22-63 52-86 89"></path>
         <path d="M660 983c-29 20-51 47-66 82"></path>
+        <path d="M642 573c-39 7-74 25-105 54"></path>
         <path d="M870 569c31-20 58-47 80-82"></path>
         <path d="M1103 820c-29 26-52 56-68 90"></path>
         <path d="M1375 474c22 25 40 55 54 88"></path>
         <path d="M1191 1047c-23 23-41 50-53 83"></path>
       </g>
       <g class="page-roots__nodes">
-        <circle cx="173" cy="283" r="5"></circle>
-        <circle cx="191" cy="409" r="4.3"></circle>
-        <circle cx="720" cy="332" r="4.8"></circle>
-        <circle cx="751" cy="444" r="4"></circle>
-        <circle cx="1265" cy="244" r="5"></circle>
-        <circle cx="1255" cy="561" r="4.2"></circle>
+        <circle cx="173" cy="283" r="5.8"></circle>
+        <circle cx="191" cy="409" r="4.8"></circle>
+        <circle cx="720" cy="332" r="5.4"></circle>
+        <circle cx="751" cy="444" r="4.6"></circle>
+        <circle cx="1265" cy="244" r="5.8"></circle>
+        <circle cx="1255" cy="561" r="4.8"></circle>
       </g>
     </svg>
 
@@ -251,11 +245,11 @@
           </div>
           <div class="home__img">
             <img
-              src="./assets/img/borja-ordenador-drone.webp?v=20260517204921"
+              src="./assets/img/borja-ordenador-drone.webp?v=20260517205152"
               srcset="
-                ./assets/img/borja-ordenador-drone-400.webp?v=20260517204921 400w,
-                ./assets/img/borja-ordenador-drone-800.webp?v=20260517204921 800w,
-                ./assets/img/borja-ordenador-drone-1200.webp?v=20260517204921 1200w
+                ./assets/img/borja-ordenador-drone-400.webp?v=20260517205152 400w,
+                ./assets/img/borja-ordenador-drone-800.webp?v=20260517205152 800w,
+                ./assets/img/borja-ordenador-drone-1200.webp?v=20260517205152 1200w
               "
               sizes="(max-width: 767px) 88vw, (max-width: 1024px) 46vw, 560px"
               alt="Borja Gómez trabajando con ordenador y drone"
@@ -342,11 +336,11 @@
               <p class="portfolio__category">Categoría: Paisaje documental</p>
               <div class="portfolio__img">
                 <img
-                  src="./assets/img/projects/paisajes-memoria.webp?v=20260517204921"
+                  src="./assets/img/projects/paisajes-memoria.webp?v=20260517205152"
                   srcset="
-                    ./assets/img/projects/paisajes-memoria-400.webp?v=20260517204921 400w,
-                    ./assets/img/projects/paisajes-memoria-800.webp?v=20260517204921 800w,
-                    ./assets/img/projects/paisajes-memoria-1200.webp?v=20260517204921 1200w
+                    ./assets/img/projects/paisajes-memoria-400.webp?v=20260517205152 400w,
+                    ./assets/img/projects/paisajes-memoria-800.webp?v=20260517205152 800w,
+                    ./assets/img/projects/paisajes-memoria-1200.webp?v=20260517205152 1200w
                   "
                   sizes="(max-width: 767px) 88vw, (max-width: 1024px) 72vw, 420px"
                   alt="Paisaje rural con atmósfera serena y memoria del territorio"
@@ -367,11 +361,11 @@
               <p class="portfolio__category">Categoría: Cultura popular</p>
               <div class="portfolio__img">
                 <img
-                  src="./assets/img/projects/tradiciones-vivas.webp?v=20260517204921"
+                  src="./assets/img/projects/tradiciones-vivas.webp?v=20260517205152"
                   srcset="
-                    ./assets/img/projects/tradiciones-vivas-400.webp?v=20260517204921 400w,
-                    ./assets/img/projects/tradiciones-vivas-800.webp?v=20260517204921 800w,
-                    ./assets/img/projects/tradiciones-vivas-1200.webp?v=20260517204921 1200w
+                    ./assets/img/projects/tradiciones-vivas-400.webp?v=20260517205152 400w,
+                    ./assets/img/projects/tradiciones-vivas-800.webp?v=20260517205152 800w,
+                    ./assets/img/projects/tradiciones-vivas-1200.webp?v=20260517205152 1200w
                   "
                   sizes="(max-width: 767px) 88vw, (max-width: 1024px) 72vw, 420px"
                   alt="Escena de tradición local en un pueblo"
@@ -392,11 +386,11 @@
               <p class="portfolio__category">Categoría: Vida cotidiana</p>
               <div class="portfolio__img">
                 <img
-                  src="./assets/img/projects/voz-pueblos.webp?v=20260517204921"
+                  src="./assets/img/projects/voz-pueblos.webp?v=20260517205152"
                   srcset="
-                    ./assets/img/projects/voz-pueblos-400.webp?v=20260517204921 400w,
-                    ./assets/img/projects/voz-pueblos-800.webp?v=20260517204921 800w,
-                    ./assets/img/projects/voz-pueblos-1200.webp?v=20260517204921 1200w
+                    ./assets/img/projects/voz-pueblos-400.webp?v=20260517205152 400w,
+                    ./assets/img/projects/voz-pueblos-800.webp?v=20260517205152 800w,
+                    ./assets/img/projects/voz-pueblos-1200.webp?v=20260517205152 1200w
                   "
                   sizes="(max-width: 767px) 88vw, (max-width: 1024px) 72vw, 420px"
                   alt="Escena de vida cotidiana en pueblo con mirada documental"
@@ -417,11 +411,11 @@
               <p class="portfolio__category">Categoría: Territorio y naturaleza</p>
               <div class="portfolio__img">
                 <img
-                  src="./assets/img/projects/territorio-vivo.webp?v=20260517204921"
+                  src="./assets/img/projects/territorio-vivo.webp?v=20260517205152"
                   srcset="
-                    ./assets/img/projects/territorio-vivo-400.webp?v=20260517204921 400w,
-                    ./assets/img/projects/territorio-vivo-800.webp?v=20260517204921 800w,
-                    ./assets/img/projects/territorio-vivo-1200.webp?v=20260517204921 1200w
+                    ./assets/img/projects/territorio-vivo-400.webp?v=20260517205152 400w,
+                    ./assets/img/projects/territorio-vivo-800.webp?v=20260517205152 800w,
+                    ./assets/img/projects/territorio-vivo-1200.webp?v=20260517205152 1200w
                   "
                   sizes="(max-width: 767px) 88vw, (max-width: 1024px) 72vw, 420px"
                   alt="Territorio rural con presencia humana y naturaleza"
@@ -442,11 +436,11 @@
               <p class="portfolio__category">Categoría: Narrativa visual</p>
               <div class="portfolio__img">
                 <img
-                  src="./assets/img/projects/historias-tierra.webp?v=20260517204921"
+                  src="./assets/img/projects/historias-tierra.webp?v=20260517205152"
                   srcset="
-                    ./assets/img/projects/historias-tierra-400.webp?v=20260517204921 400w,
-                    ./assets/img/projects/historias-tierra-800.webp?v=20260517204921 800w,
-                    ./assets/img/projects/historias-tierra-1200.webp?v=20260517204921 1200w
+                    ./assets/img/projects/historias-tierra-400.webp?v=20260517205152 400w,
+                    ./assets/img/projects/historias-tierra-800.webp?v=20260517205152 800w,
+                    ./assets/img/projects/historias-tierra-1200.webp?v=20260517205152 1200w
                   "
                   sizes="(max-width: 767px) 88vw, (max-width: 1024px) 72vw, 420px"
                   alt="Escena documental ligada al territorio y su historia"
@@ -467,11 +461,11 @@
               <p class="portfolio__category">Categoría: Identidad y memoria</p>
               <div class="portfolio__img">
                 <img
-                  src="./assets/img/projects/raices-vivas.webp?v=20260517204921"
+                  src="./assets/img/projects/raices-vivas.webp?v=20260517205152"
                   srcset="
-                    ./assets/img/projects/raices-vivas-400.webp?v=20260517204921 400w,
-                    ./assets/img/projects/raices-vivas-800.webp?v=20260517204921 800w,
-                    ./assets/img/projects/raices-vivas-1200.webp?v=20260517204921 1200w
+                    ./assets/img/projects/raices-vivas-400.webp?v=20260517205152 400w,
+                    ./assets/img/projects/raices-vivas-800.webp?v=20260517205152 800w,
+                    ./assets/img/projects/raices-vivas-1200.webp?v=20260517205152 1200w
                   "
                   sizes="(max-width: 767px) 88vw, (max-width: 1024px) 72vw, 420px"
                   alt="Composición visual sobre raíces, identidad y memoria rural"
@@ -500,13 +494,13 @@
           </p>
           <div class="portfolio__preview-grid" data-animate>
             <a href="https://www.instagram.com/p/DUxbSJzjfBR/" target="_blank" rel="noopener noreferrer" class="portfolio__preview-item" aria-label="Ver publicación de paisajes con memoria">
-              <img src="./assets/img/projects/paisajes-memoria.webp?v=20260517204921" alt="Previsualización de paisaje rural documental" width="672" height="1198" loading="lazy" decoding="async" />
+              <img src="./assets/img/projects/paisajes-memoria.webp?v=20260517205152" alt="Previsualización de paisaje rural documental" width="672" height="1198" loading="lazy" decoding="async" />
             </a>
             <a href="https://www.instagram.com/p/DW1lAEKjRmQ/" target="_blank" rel="noopener noreferrer" class="portfolio__preview-item" aria-label="Ver publicación de territorio vivo">
-              <img src="./assets/img/projects/territorio-vivo.webp?v=20260517204921" alt="Previsualización de territorio vivo y naturaleza" width="1196" height="892" loading="lazy" decoding="async" />
+              <img src="./assets/img/projects/territorio-vivo.webp?v=20260517205152" alt="Previsualización de territorio vivo y naturaleza" width="1196" height="892" loading="lazy" decoding="async" />
             </a>
             <a href="https://www.instagram.com/p/DScfFHwjccd/" target="_blank" rel="noopener noreferrer" class="portfolio__preview-item" aria-label="Ver publicación de raíces vivas">
-              <img src="./assets/img/projects/raices-vivas.webp?v=20260517204921" alt="Previsualización de raíces e identidad rural" width="668" height="1196" loading="lazy" decoding="async" />
+              <img src="./assets/img/projects/raices-vivas.webp?v=20260517205152" alt="Previsualización de raíces e identidad rural" width="668" height="1196" loading="lazy" decoding="async" />
             </a>
           </div>
           <div class="portfolio__actions" data-animate>
@@ -564,7 +558,7 @@
       <div class="footer__container bd-container">
         <img
           class="footer__image"
-          src="./assets/img/borja-drone-foto-movil.jpg?v=20260517204921"
+          src="./assets/img/borja-drone-foto-movil.jpg?v=20260517205152"
           alt="Borja con un dron en la cabeza haciendo una foto con el móvil"
           width="1440"
           height="1440"
@@ -575,8 +569,8 @@
       </div>
     </footer>
 
-    <script src="./assets/vendor/swiper/swiper-bundle.min.js?v=20260517204921"></script>
-    <script src="./assets/vendor/animejs/anime.umd.min.js?v=20260517204921"></script>
-    <script src="./assets/js/script.js?v=20260517204921"></script>
+    <script src="./assets/vendor/swiper/swiper-bundle.min.js?v=20260517205152"></script>
+    <script src="./assets/vendor/animejs/anime.umd.min.js?v=20260517205152"></script>
+    <script src="./assets/js/script.js?v=20260517205152"></script>
   </body>
 </html>
