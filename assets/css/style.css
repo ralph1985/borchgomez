@@ -104,6 +104,39 @@ img {
   display: block;
 }
 
+main,
+.footer {
+  position: relative;
+  z-index: 1;
+}
+
+.page-roots {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  color: var(--soil);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.page-roots path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.page-roots__cluster > path:first-child {
+  stroke-width: 5;
+}
+
+.page-roots__cluster > path:not(:first-child) {
+  stroke-width: 2.4;
+  opacity: 0.74;
+}
+
 .section {
   padding: 5.6rem 0 3.7rem;
 }
@@ -137,6 +170,25 @@ img {
     transparent 10px,
     transparent 16px
   );
+  transform: scaleX(var(--section-line-scale, 1));
+  transform-origin: center;
+}
+
+.section-title.has-animated-line::after {
+  display: none;
+}
+
+.section-title__line {
+  position: absolute;
+  width: 88px;
+  height: 2px;
+  bottom: -0.55rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: linear-gradient(90deg, var(--earth), var(--sage-muted), var(--clay));
+  transform: scaleX(0);
+  transform-origin: center;
 }
 
 .section-subtitle {
@@ -184,18 +236,48 @@ img {
   width: 100%;
   padding: 1.3rem 0 0.45rem;
   text-align: center;
-  background-color: rgba(239, 225, 209, 0.98);
+  background:
+    radial-gradient(circle at 18% 14%, rgba(196, 208, 184, 0.54), transparent 9rem),
+    linear-gradient(145deg, rgba(138, 94, 59, 0.16), rgba(239, 225, 209, 0.98) 58%),
+    rgba(239, 225, 209, 0.98);
   transform: translateY(-140%);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: transform 0.3s ease, opacity 0.25s ease, visibility 0.25s ease;
+  transition: visibility 0.25s ease;
   border-radius: 0 0 1rem 1rem;
   border-bottom: 1px solid var(--line);
+  box-shadow: 0 18px 34px rgba(74, 47, 32, 0.12);
+  overflow: hidden;
+}
+
+.nav__menu::before {
+  content: "";
+  position: absolute;
+  right: -3.8rem;
+  bottom: -4.4rem;
+  width: 14rem;
+  height: 14rem;
+  background:
+    radial-gradient(ellipse at center, transparent 37%, rgba(74, 47, 32, 0.12) 38%, transparent 40%),
+    linear-gradient(35deg, transparent 48%, rgba(74, 47, 32, 0.14) 49%, transparent 51%),
+    linear-gradient(115deg, transparent 48%, rgba(74, 47, 32, 0.1) 49%, transparent 51%);
+  border-radius: 50%;
+  opacity: 0;
+  transform: rotate(-18deg) scale(0.8);
+  pointer-events: none;
+}
+
+.nav__menu.show-menu::before {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+  transition: opacity 0.45s ease 0.12s, transform 0.55s ease 0.12s;
 }
 
 .nav__item {
+  position: relative;
   margin-bottom: 1.3rem;
+  z-index: 1;
 }
 
 .nav__link,
@@ -593,12 +675,18 @@ img {
 .services__item {
   padding: 1.3rem 0;
   border-bottom: 1px solid var(--line);
+  transform-origin: left center;
 }
 
 .services__item h3 {
   color: var(--ink);
   margin-bottom: 0.35rem;
   font-size: 1.32rem;
+  transition: color 0.2s ease;
+}
+
+.services__item:hover h3 {
+  color: var(--earth);
 }
 
 .services__item p {
@@ -617,6 +705,7 @@ img {
   border: 1px solid var(--line);
   background: linear-gradient(180deg, #f8f1e7 0%, #eadcc9 100%);
   transition: transform 0.2s ease, border-color 0.2s ease;
+  transform-origin: center bottom;
 }
 
 .portfolio__data:hover {
@@ -727,6 +816,7 @@ img {
     linear-gradient(180deg, #f8f0e5 0%, #e7d1ba 100%);
   border-radius: 0.95rem;
   text-align: center;
+  transform-origin: center bottom;
 }
 
 .contact__panel p {
@@ -797,6 +887,12 @@ img {
     background-color: transparent;
     border-bottom: 0;
     border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .nav__menu::before {
+    display: none;
   }
 
   .nav__item {
