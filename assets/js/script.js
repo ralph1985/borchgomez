@@ -168,6 +168,7 @@ function initHeroAnimation() {
 
   if (heroTrace) {
     const traceLength = heroTrace.getTotalLength();
+    document.querySelector(".home__trace").style.opacity = "0";
     heroTrace.style.strokeDasharray = String(traceLength);
     heroTrace.style.strokeDashoffset = String(traceLength);
   }
@@ -235,6 +236,118 @@ function initHeroAnimation() {
         },
       });
     },
+  });
+}
+
+function initLandscapeAnimation() {
+  const anime = window.anime;
+  const rootPaths = document.querySelectorAll(".home__roots path");
+  const fields = document.querySelectorAll(".home__field");
+  const furrows = document.querySelectorAll(".home__furrows path");
+  const olives = document.querySelectorAll(".home__olive");
+  const crowns = document.querySelectorAll(".home__olive-crown");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!anime || typeof anime.animate !== "function" || !fields.length) return;
+
+  if (reduceMotion) {
+    fields.forEach((field) => {
+      field.style.opacity = "1";
+      field.style.transform = "none";
+    });
+    olives.forEach((olive) => {
+      olive.style.opacity = "0.82";
+      olive.style.transform = "none";
+    });
+    rootPaths.forEach((rootPath) => {
+      rootPath.style.strokeDasharray = "";
+      rootPath.style.strokeDashoffset = "";
+    });
+    return;
+  }
+
+  rootPaths.forEach((rootPath) => {
+    const rootLength = rootPath.getTotalLength();
+
+    rootPath.style.strokeDasharray = String(rootLength);
+    rootPath.style.strokeDashoffset = String(rootLength);
+  });
+
+  fields.forEach((field) => {
+    field.style.opacity = "0";
+    field.style.transform = "translateY(28px) scaleY(0.92)";
+  });
+
+  olives.forEach((olive) => {
+    olive.style.opacity = "0";
+    olive.style.transform = "translateY(18px) scale(0.88)";
+  });
+
+  furrows.forEach((furrow) => {
+    const furrowLength = furrow.getTotalLength();
+
+    furrow.style.strokeDasharray = String(furrowLength);
+    furrow.style.strokeDashoffset = String(furrowLength);
+  });
+
+  anime.animate(rootPaths, {
+    strokeDashoffset: 0,
+    duration: 2100,
+    ease: "inOutSine",
+    delay: (_target, index) => 240 + index * 115,
+  });
+
+  anime.animate(fields, {
+    opacity: [0, 1],
+    y: 0,
+    scaleY: 1,
+    duration: 1200,
+    ease: "outCubic",
+    delay: (_target, index) => 520 + index * 160,
+  });
+
+  anime.animate(furrows, {
+    strokeDashoffset: 0,
+    duration: 1500,
+    ease: "inOutSine",
+    delay: (_target, index) => 860 + index * 120,
+  });
+
+  anime.animate(olives, {
+    opacity: [0, 0.82],
+    y: 0,
+    scale: 1,
+    duration: 980,
+    ease: "outBack",
+    delay: (_target, index) => 1040 + index * 170,
+  });
+
+  anime.animate(rootPaths, {
+    opacity: [0.42, 1],
+    duration: 3600,
+    ease: "inOutSine",
+    alternate: true,
+    loop: true,
+    delay: 2300,
+  });
+
+  anime.animate(crowns, {
+    rotate: [-1.2, 1.2],
+    scale: [1, 1.025],
+    duration: 4200,
+    ease: "inOutSine",
+    alternate: true,
+    loop: true,
+    delay: 1650,
+  });
+
+  anime.animate(furrows, {
+    opacity: [0.58, 0.95],
+    duration: 3600,
+    ease: "inOutSine",
+    alternate: true,
+    loop: true,
+    delay: 1900,
   });
 }
 
@@ -331,6 +444,7 @@ function initInteractiveMotion() {
 }
 
 initHeroAnimation();
+initLandscapeAnimation();
 initScrollAnimations();
 initInteractiveMotion();
 
