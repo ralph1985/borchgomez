@@ -478,7 +478,7 @@ function initLandscapeAnimation() {
 function initScrollRootGrowth() {
   const anime = window.anime;
   const rootsLayer = document.querySelector(".page-roots");
-  const rootPaths = document.querySelectorAll(".page-roots path");
+  const rootPaths = document.querySelectorAll(".page-roots__cluster path, .page-roots__hairs path");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (!rootPaths.length) return;
