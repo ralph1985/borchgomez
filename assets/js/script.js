@@ -502,7 +502,7 @@ function initScrollRootGrowth() {
     rootsLayer.style.opacity = "0";
 
     anime.animate(rootsLayer, {
-      opacity: 0.28,
+      opacity: 0.16,
       duration: 900,
       ease: "outSine",
       delay: 500,
