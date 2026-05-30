@@ -633,7 +633,7 @@ function initScrollAnimations() {
   });
 
   const revealItems = document.querySelectorAll(
-    "main section:not(.home) [data-animate]:not(.services__layout):not(.portfolio__container):not(.portfolio__preview-grid), .services__item, .portfolio__data, .portfolio__preview-item, .contact__panel, .footer__image"
+    "main section:not(.home) [data-animate]:not(.services__layout):not(.portfolio__container):not(.portfolio__grid):not(.portfolio__preview-grid), .services__item, .portfolio__data, .portfolio__card, .plans__card, .plans__promo, .portfolio__preview-item, .contact__panel, .footer__image"
   );
   const revealItemSet = new Set(revealItems);
 
@@ -701,7 +701,7 @@ function initScrollAnimations() {
           });
         }
 
-        if (element.classList.contains("portfolio__data")) {
+        if (element.classList.contains("portfolio__data") || element.classList.contains("portfolio__card")) {
           const portfolioImage = element.querySelector(".portfolio__img img");
 
           if (portfolioImage) {
@@ -730,7 +730,7 @@ function initInteractiveMotion() {
 
   if (!anime || typeof anime.animate !== "function" || reduceMotion) return;
 
-  document.querySelectorAll(".home__hire, .home__download, .contact__primary, .contact__instagram").forEach((button) => {
+  document.querySelectorAll(".home__hire, .home__download, .contact__primary, .contact__instagram, .plans__cta").forEach((button) => {
     button.addEventListener("pointerenter", () => {
       anime.animate(button, {
         y: -3,
@@ -750,7 +750,7 @@ function initInteractiveMotion() {
     });
   });
 
-  document.querySelectorAll(".portfolio__data, .portfolio__preview-item, .services__item").forEach((card) => {
+  document.querySelectorAll(".portfolio__data, .portfolio__card, .portfolio__preview-item, .services__item, .plans__card").forEach((card) => {
     card.addEventListener("pointerenter", () => {
       anime.animate(card, {
         y: -5,
@@ -775,6 +775,27 @@ initScrollRootGrowth();
 initFooterLandscapeAnimation();
 initScrollAnimations();
 initInteractiveMotion();
+
+(function initPortfolioFilters() {
+  const filters = document.querySelectorAll(".portfolio__filter");
+  const cards = document.querySelectorAll(".portfolio__card[data-category]");
+
+  if (!filters.length || !cards.length) return;
+
+  filters.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+
+      filters.forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      cards.forEach((card) => {
+        const match = filter === "all" || card.dataset.category === filter;
+        card.classList.toggle("hidden", !match);
+      });
+    });
+  });
+})();
 
 if (window.Swiper && document.querySelector(".swiper")) {
   new window.Swiper(".swiper", {
