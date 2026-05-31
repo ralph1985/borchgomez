@@ -936,6 +936,29 @@ main,
   display: none;
 }
 
+.portfolio__card--overflow {
+  display: none;
+}
+
+.portfolio__show-more {
+  display: block;
+  margin: 1.5rem auto 0;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.portfolio__show-more:hover {
+  background: var(--earth-soft);
+  border-color: var(--earth);
+}
+
 .portfolio__container {
   margin-top: 2.7rem;
 }
