@@ -777,26 +777,29 @@ initScrollAnimations();
 initInteractiveMotion();
 
 (function initPortfolioFilters() {
-  const VISIBLE_LIMIT = 9;
+  const INITIAL_VISIBLE = 6;
+  const LOAD_STEP = 6;
   const filters = document.querySelectorAll(".portfolio__filter");
   const cards = document.querySelectorAll(".portfolio__card[data-category]");
   const showMoreBtn = document.querySelector(".portfolio__show-more");
+  let activeFilter = "all";
+  let visibleLimit = INITIAL_VISIBLE;
 
   if (!filters.length || !cards.length) return;
 
-  function applyVisibility(filter) {
+  function renderPortfolio() {
     let visibleCount = 0;
     let totalMatching = 0;
 
     cards.forEach((card) => {
-      const match = filter === "all" || card.dataset.category === filter;
+      const match = activeFilter === "all" || card.dataset.category === activeFilter;
       if (!match) {
         card.classList.add("hidden");
         card.classList.remove("portfolio__card--overflow");
         return;
       }
       totalMatching++;
-      if (visibleCount < VISIBLE_LIMIT) {
+      if (visibleCount < visibleLimit) {
         card.classList.remove("hidden", "portfolio__card--overflow");
         visibleCount++;
       } else {
@@ -806,9 +809,15 @@ initInteractiveMotion();
     });
 
     if (showMoreBtn) {
-      showMoreBtn.hidden = totalMatching <= VISIBLE_LIMIT;
+      showMoreBtn.hidden = totalMatching <= visibleLimit;
       showMoreBtn.textContent = "Mostrar más proyectos";
     }
+  }
+
+  function applyVisibility(filter) {
+    activeFilter = filter;
+    visibleLimit = INITIAL_VISIBLE;
+    renderPortfolio();
   }
 
   filters.forEach((button) => {
@@ -824,10 +833,8 @@ initInteractiveMotion();
 
   if (showMoreBtn) {
     showMoreBtn.addEventListener("click", () => {
-      document.querySelectorAll(".portfolio__card--overflow").forEach((card) => {
-        card.classList.remove("portfolio__card--overflow");
-      });
-      showMoreBtn.hidden = true;
+      visibleLimit += LOAD_STEP;
+      renderPortfolio();
     });
   }
 
