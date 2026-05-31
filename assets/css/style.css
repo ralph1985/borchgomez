@@ -954,6 +954,10 @@ main,
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
+.portfolio__show-more[hidden] {
+  display: none;
+}
+
 .portfolio__show-more:hover {
   background: var(--earth-soft);
   border-color: var(--earth);

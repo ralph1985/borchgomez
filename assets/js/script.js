@@ -809,8 +809,9 @@ initInteractiveMotion();
     });
 
     if (showMoreBtn) {
-      showMoreBtn.hidden = totalMatching <= visibleLimit;
-      showMoreBtn.textContent = "Mostrar más proyectos";
+      const remainingCount = Math.max(totalMatching - visibleCount, 0);
+      showMoreBtn.hidden = remainingCount === 0;
+      showMoreBtn.textContent = `Mostrar más proyectos (${remainingCount} restantes)`;
     }
   }
 
