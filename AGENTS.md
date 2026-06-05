@@ -20,6 +20,9 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 
 - Flujo normal: partir de `develop` y crear ramas `feature/...`, `fix/...` o `docs/...`.
 - Hotfix: partir de `main` solo si la tarea lo pide explícitamente o es una corrección urgente de producción.
+- El comportamiento principal de coordinación vive en este archivo; `coordinator.toml` debe respetar y aplicar estas reglas, no sustituirlas.
+- Antes de cambiar de rama, ejecutar `git status --short`.
+- Si hay cambios locales no creados por Codex, parar y preguntar.
 - El coordinador puede crear ramas locales.
 - Solo el coordinador puede hacer commits.
 - Los subagentes pueden modificar archivos, pero no pueden crear ramas ni hacer commits.
@@ -27,6 +30,7 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 - Codex no debe hacer merge.
 - Codex no debe usar `git push --force`.
 - Codex no debe reescribir historial.
+- Codex no debe usar `git stash`, `git reset --hard`, `git checkout -f` ni limpiar cambios sin permiso explícito.
 - Cada tarea terminada debe tener un único commit hecho por el coordinador.
 - El usuario será responsable de hacer `push`, abrir PR y mergear.
 
@@ -54,6 +58,7 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 ## Archivos protegidos
 
 - `vercel.json` solo puede modificarse con permiso explícito.
+- `AGENTS.md`, `PROJECT_CONTEXT.md`, `.codex/config.toml` y `.codex/agents/*.toml` solo pueden modificarse en tareas explícitas de documentación o agentes.
 - Añadir librerías externas o CDNs requiere permiso explícito.
 - Cambiar CSP, cabeceras de seguridad o reglas de caché requiere permiso explícito.
 
@@ -97,9 +102,17 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 - Los agentes pueden descargar imágenes externas y guardarlas localmente en `assets/img/...`.
 - Las imágenes nuevas deben tener nombres limpios, sin espacios raros.
 - Las imágenes deben optimizarse cuando sea razonable.
+- Las optimizaciones de imágenes solo pueden hacerse con herramientas ya disponibles en el entorno.
+- No instalar herramientas para optimizar imágenes.
+- Si no hay herramientas disponibles para optimizar, reportarlo.
 - No sobrescribir imágenes existentes sin permiso.
 - Los agentes pueden borrar imágenes o archivos antiguos solo si verifican que no están referenciados.
 - Si se borra algo, el resumen final debe indicar qué se borró y por qué.
+
+## Enlaces externos
+
+- Si hay internet, `external_links_reviewer` puede comprobar disponibilidad HTTP real de enlaces externos cuando aporte valor.
+- Si no hay internet, `external_links_reviewer` debe validar formato, atributos y coherencia local, y reportar que no pudo comprobar disponibilidad HTTP real.
 
 ## Validación local
 
@@ -123,16 +136,18 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 
 ## Flujo recomendado
 
-1. El `coordinator` entiende la tarea y revisa `PROJECT_CONTEXT.md`.
+1. El `coordinator` entiende la tarea y revisa `AGENTS.md` y `PROJECT_CONTEXT.md`.
 2. Si hay ambigüedad, pregunta antes de tocar código.
-3. El `coordinator` crea la rama local adecuada desde `develop` o `main`.
-4. El `coordinator` elige los subagentes necesarios.
-5. Los subagentes aplican cambios solo dentro de sus responsabilidades y límites.
-6. El `coordinator` revisa el diff.
-7. El `qa-final-reviewer` valida el resultado.
-8. El `gitflow-reviewer` valida rama, diff y commit.
-9. El `coordinator` crea un único commit final.
-10. Codex no hace `push`, no abre PR y no mergea.
+3. Antes de cambiar de rama, ejecuta `git status --short`.
+4. Si hay cambios locales no creados por Codex, para y pregunta.
+5. El `coordinator` crea la rama local adecuada desde `develop` o `main`.
+6. El `coordinator` elige los subagentes necesarios.
+7. Los subagentes aplican cambios solo dentro de sus responsabilidades y límites.
+8. El `coordinator` revisa el diff.
+9. El `qa-final-reviewer` valida el resultado.
+10. El `gitflow-reviewer` valida rama, diff y commit.
+11. El `coordinator` crea un único commit local final cuando proceda.
+12. Codex no hace `push`, no abre PR y no mergea.
 
 ## Resumen final obligatorio
 

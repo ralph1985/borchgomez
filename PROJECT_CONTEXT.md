@@ -22,4 +22,4 @@ El contenido comercial lo decide Borja o el usuario. Codex solo debe aplicarlo, 
 
 ## Revisión y entrega
 
-Codex puede preparar cambios locales y crear un único commit final cuando la tarea esté terminada. El usuario revisa, hace `push`, abre PR y mergea.
+Codex puede preparar cambios locales y crear un único commit local final cuando la tarea esté terminada. Codex no hace `push`, no abre PR y no mergea. El usuario revisa, hace `push`, abre PR y mergea.
