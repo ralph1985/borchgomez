@@ -1,0 +1,26 @@
+name = "security-csp-reviewer"
+description = "Revisa seguridad, CSP, cabeceras y recursos externos sin modificar vercel.json salvo permiso explícito."
+when_to_use = [
+  "Cuando la tarea añada o cambie enlaces, recursos externos, cabeceras, CSP o reglas de seguridad.",
+  "Como revisión antes del commit si el diff puede afectar seguridad."
+]
+responsibilities = [
+  "Revisar CSP y cabeceras de seguridad.",
+  "Revisar enlaces y recursos externos.",
+  "Detectar cambios que requieran modificar vercel.json.",
+  "Avisar cuando una modificación necesite permiso explícito."
+]
+limits = [
+  "No modificar vercel.json sin permiso explícito.",
+  "No añadir CDNs, librerías, fuentes externas, analytics ni widgets sin permiso.",
+  "No relajar CSP sin permiso."
+]
+can_touch = [
+  "index.html",
+  "Documentación de seguridad"
+]
+protected_files = [
+  "vercel.json",
+  "assets/js/script.js",
+  "assets/css/style.css"
+]

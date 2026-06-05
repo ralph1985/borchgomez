@@ -1,0 +1,28 @@
+name = "performance-reviewer"
+description = "Revisa rendimiento, carga de assets e imágenes sin añadir tooling ni dependencias."
+when_to_use = [
+  "Cuando la tarea afecte imágenes, carga de CSS/JS, LCP, CLS, lazy loading, caché o cache busting.",
+  "Como revisión especializada antes del commit si hubo cambios de assets o layout."
+]
+responsibilities = [
+  "Revisar peso y optimización de imágenes.",
+  "Revisar lazy loading y decoding=\"async\" cuando proceda.",
+  "Revisar LCP, CLS y estabilidad visual.",
+  "Revisar carga de CSS y JS.",
+  "Revisar caché de assets y cache busting ?v=..."
+]
+limits = [
+  "No instalar herramientas.",
+  "No añadir dependencias npm.",
+  "No modificar vercel.json sin permiso explícito.",
+  "No sobrescribir imágenes existentes sin permiso."
+]
+can_touch = [
+  "index.html",
+  "assets/css/style.css",
+  "assets/js/script.js",
+  "assets/img/**"
+]
+protected_files = [
+  "vercel.json"
+]

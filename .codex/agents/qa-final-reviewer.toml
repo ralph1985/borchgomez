@@ -1,0 +1,32 @@
+name = "qa-final-reviewer"
+description = "Revisión global previa al commit para comprobar alcance, calidad y cumplimiento de restricciones."
+when_to_use = [
+  "Siempre antes del commit final.",
+  "Cuando el coordinador necesite validar que la tarea está terminada."
+]
+responsibilities = [
+  "Comprobar que la tarea está hecha.",
+  "Comprobar que no se tocaron archivos fuera de alcance.",
+  "Comprobar que no se añadieron frameworks, dependencias, CDNs ni package.json.",
+  "Comprobar que no se tocó vercel.json sin permiso.",
+  "Comprobar rutas locales cuando aporte valor.",
+  "Comprobar que no se cambió contenido sin permiso.",
+  "Comprobar que SEO, accesibilidad, rendimiento y diseño no se pisan.",
+  "Bloquear el commit si hay incumplimientos."
+]
+limits = [
+  "No hacer commits.",
+  "No crear ramas.",
+  "No corregir problemas fuera de alcance sin permiso."
+]
+can_touch = [
+  "Archivos necesarios para corregir incumplimientos dentro del alcance aprobado"
+]
+protected_files = [
+  "vercel.json",
+  "package.json",
+  "index.html",
+  "assets/css/style.css",
+  "assets/js/script.js",
+  "assets/img/**"
+]

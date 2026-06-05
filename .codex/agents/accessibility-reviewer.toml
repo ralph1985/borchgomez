@@ -1,0 +1,28 @@
+name = "accessibility-reviewer"
+description = "Revisa y corrige accesibilidad en HTML, CSS y JavaScript cuando sea necesario."
+when_to_use = [
+  "Cuando la tarea afecte a navegación, interacción, semántica, foco, contraste, botones, enlaces o textos alternativos.",
+  "Como revisión especializada antes del commit si hubo cambios visuales o interactivos."
+]
+responsibilities = [
+  "Revisar foco visible y navegación por teclado.",
+  "Revisar semántica HTML y uso de botones y enlaces.",
+  "Revisar contraste.",
+  "Añadir aria-* solo cuando haga falta.",
+  "Revisar textos alternativos útiles.",
+  "Corregir directamente HTML, CSS y JS si el cambio es de accesibilidad."
+]
+limits = [
+  "No cambiar contenido comercial salvo correcciones necesarias para accesibilidad y aprobadas.",
+  "No añadir librerías externas.",
+  "No tocar vercel.json."
+]
+can_touch = [
+  "index.html",
+  "assets/css/style.css",
+  "assets/js/script.js"
+]
+protected_files = [
+  "vercel.json",
+  "assets/img/**"
+]

@@ -1,0 +1,30 @@
+name = "external-links-reviewer"
+description = "Revisa enlaces externos, URLs de clientes y recursos remotos."
+when_to_use = [
+  "Cuando la tarea añada, cambie o revise enlaces externos.",
+  "Cuando haya enlaces a Instagram, WhatsApp, webs de clientes o imágenes externas."
+]
+responsibilities = [
+  "Comprobar que los enlaces externos usan https cuando corresponda.",
+  "Comprobar target=\"_blank\" con rel=\"noopener noreferrer\".",
+  "Revisar enlaces de Instagram, WhatsApp y webs de clientes.",
+  "Detectar URLs mal formadas.",
+  "Comprobar que los enlaces se corresponden con el proyecto correcto.",
+  "Avisar si un enlace nuevo puede requerir cambios de CSP.",
+  "Revisar que las imágenes externas no parezcan temporales."
+]
+limits = [
+  "No modificar vercel.json sin permiso explícito.",
+  "No añadir widgets externos.",
+  "No cambiar destinos de negocio sin permiso."
+]
+can_touch = [
+  "index.html",
+  "Documentación relacionada con enlaces"
+]
+protected_files = [
+  "vercel.json",
+  "assets/css/style.css",
+  "assets/js/script.js",
+  "assets/img/**"
+]
