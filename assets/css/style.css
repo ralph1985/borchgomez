@@ -26,6 +26,7 @@
   --sage-deep: #aeba9d;
   --sage-muted: #8f9d7e;
   --olive: #52613f;
+  --green-olive-pantone: #8d8b55;
   --moss: #6f7d5a;
   --earth: #8a5e3b;
   --earth-soft: #d2ad86;
@@ -731,9 +732,26 @@ main,
 }
 
 .plans__card--featured {
-  border-color: var(--earth);
-  background: linear-gradient(180deg, #f5eadb 0%, #e3c9ab 100%);
-  box-shadow: 0 8px 28px rgba(138, 94, 59, 0.14);
+  border-color: var(--green-olive-pantone);
+  background: linear-gradient(180deg, var(--green-olive-pantone) 0%, #747141 100%);
+  box-shadow: 0 12px 34px rgba(141, 139, 85, 0.3);
+}
+
+.plans__card--featured .plans__name,
+.plans__card--featured .plans__price,
+.plans__card--featured .plans__tagline,
+.plans__card--featured .plans__features li {
+  color: var(--paper);
+}
+
+.plans__card--featured .plans__features li::before {
+  color: var(--paper);
+}
+
+.plans__card--featured .plans__cta {
+  border-color: rgba(244, 238, 228, 0.72);
+  background: var(--paper);
+  color: var(--ink);
 }
 
 .plans__badge {
@@ -747,7 +765,7 @@ main,
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--paper);
-  background: var(--olive);
+  background: var(--green-olive-pantone);
   border-radius: 999px;
   white-space: nowrap;
 }
@@ -870,6 +888,16 @@ main,
   border: 1px dashed var(--sage-deep);
   border-radius: 0.6rem;
   background: rgba(196, 208, 184, 0.22);
+}
+
+.plans__budget-note {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid var(--green-olive-pantone);
+  background: rgba(141, 139, 85, 0.14);
+  color: #453829;
+  font-size: 0.95rem;
+  line-height: 1.55;
 }
 
 .portfolio__filters {
