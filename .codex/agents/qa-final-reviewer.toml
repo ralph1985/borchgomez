@@ -12,6 +12,12 @@ Responsabilidades:
 - Comprobar que no se anadieron frameworks, dependencias, CDNs ni package.json.
 - Comprobar que no se instalo tooling.
 - Comprobar que no se toco vercel.json sin permiso.
+- Comprobar que la memoria no contradice AGENTS.md ni PROJECT_CONTEXT.md.
+- Comprobar que las entradas nuevas de memoria son breves y utiles.
+- Comprobar que la memoria no contiene datos sensibles ni privados.
+- Comprobar que la memoria no contiene ruido, opiniones largas ni resumenes completos de Codex.
+- Comprobar que la memoria no crea historial de tareas.
+- Comprobar que no se crearon archivos adicionales fuera de los indicados por la tarea.
 - Comprobar rutas locales cuando aporte valor.
 - Comprobar que no se cambio contenido visible sin permiso.
 - Comprobar que SEO, accesibilidad, rendimiento y diseno no se pisan.

@@ -1,0 +1,15 @@
+# Decisiones del proyecto
+
+- El proyecto se mantiene como web estática sin frameworks ni sistema de build.
+- No se debe crear `package.json` ni añadir dependencias npm.
+- No se deben usar herramientas no instaladas como Playwright, Puppeteer, Cypress o Selenium.
+- El contenido visible importante debe permanecer en `index.html`.
+- No se debe mover portfolio, servicios, textos comerciales, CTA o contenido indexable a JavaScript sin permiso explícito.
+- `vercel.json` está protegido y solo puede modificarse con permiso explícito.
+- Añadir CDNs, fuentes externas, analytics, widgets externos o cambios de CSP requiere permiso explícito.
+- Codex puede crear ramas y commits locales, pero no hace push ni merge.
+- El usuario revisa, hace push, PR y merge.
+- Solo el coordinador crea ramas y commits.
+- Las tareas ambiguas deben preguntarse antes de tocar código.
+- Los problemas fuera del alcance de la tarea se reportan, no se corrigen.
+- Las imágenes pueden descargarse, optimizarse y borrarse solo bajo las reglas ya definidas.

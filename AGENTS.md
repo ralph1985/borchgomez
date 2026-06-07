@@ -134,6 +134,53 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 
 - Si una tarea es ambigua, Codex debe preguntar antes de tocar código.
 
+## Memoria de agentes
+
+El proyecto usa una memoria ligera y versionada en `docs/agent-memory/`.
+
+Archivos:
+- `docs/agent-memory/decisions.md`: resumen de decisiones estables del proyecto.
+- `docs/agent-memory/known-issues.md`: problemas conocidos o pendientes útiles para futuras tareas.
+
+No existe historial de tareas en memoria. Para consultar tareas realizadas se debe usar Git.
+
+Antes de empezar una tarea, el coordinador debe leer:
+- `AGENTS.md`
+- `PROJECT_CONTEXT.md`
+- `docs/agent-memory/decisions.md`
+- `docs/agent-memory/known-issues.md`
+
+Prioridad documental:
+1. `AGENTS.md`
+2. `PROJECT_CONTEXT.md`
+3. `docs/agent-memory/*`
+
+La memoria nunca debe contradecir `AGENTS.md` ni `PROJECT_CONTEXT.md`.
+
+La memoria no sustituye a Git, issues ni documentación oficial.
+
+La memoria debe ser breve y útil:
+- no guardar ruido;
+- no guardar opiniones largas;
+- no guardar datos temporales sin valor futuro;
+- no guardar información sensible ni privada;
+- no guardar emails, teléfonos, tokens, credenciales, rutas locales personales, datos de clientes o información privada;
+- no registrar histórico de tareas;
+- no copiar resúmenes completos de Codex;
+- no duplicar todas las reglas de `AGENTS.md`.
+
+Al terminar una tarea, el coordinador debe proponer actualizar la memoria solo si hay:
+- una decisión estable nueva;
+- un problema conocido nuevo;
+- una lección útil para futuras tareas.
+
+En esta tarea sí está permitido crear y editar la memoria inicial.
+
+En tareas futuras, no se debe editar la memoria salvo que:
+- la tarea lo pida explícitamente;
+- el usuario lo apruebe;
+- o sea una tarea de documentación/mantenimiento de agentes.
+
 ## Flujo recomendado
 
 1. El `coordinator` entiende la tarea y revisa `AGENTS.md` y `PROJECT_CONTEXT.md`.

@@ -8,12 +8,22 @@ Responsabilidad principal:
 - Entender la tarea y confirmar el alcance antes de tocar archivos.
 - Usar AGENTS.md como fuente principal del flujo de coordinacion.
 - Revisar PROJECT_CONTEXT.md para mantener el contexto del proyecto.
+- Leer al inicio docs/agent-memory/decisions.md y docs/agent-memory/known-issues.md cuando existan.
 - Preguntar antes de actuar si la tarea es ambigua.
 - Elegir los subagentes necesarios segun la tarea.
 - Crear ramas locales solo cuando proceda y solo despues de ejecutar git status --short.
 - Revisar el diff completo.
 - Ejecutar o coordinar qa_final_reviewer y gitflow_reviewer antes del commit.
 - Hacer un unico commit local cuando la tarea este terminada y el usuario lo haya pedido o el flujo lo permita.
+
+Memoria de agentes:
+- Prioridad documental: 1) AGENTS.md, 2) PROJECT_CONTEXT.md, 3) docs/agent-memory/*.
+- Usar la memoria para recordar decisiones estables, problemas conocidos y evitar repetir errores.
+- La memoria no sustituye a Git ni debe guardar historial de tareas.
+- Proponer actualizaciones de memoria solo si aportan valor futuro.
+- No inflar la memoria con ruido, opiniones largas ni datos temporales sin valor futuro.
+- No guardar datos sensibles ni privados.
+- No editar la memoria automaticamente salvo permiso explicito, aprobacion del usuario o tarea explicita de documentacion/mantenimiento de agentes.
 
 Reglas Git:
 - Flujo normal: partir de develop y usar ramas feature/..., fix/... o docs/....
