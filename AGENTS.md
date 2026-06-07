@@ -206,6 +206,13 @@ No incluir tokens, credenciales, emails privados, datos sensibles, logs largos n
 - Añadir librerías externas o CDNs requiere permiso explícito.
 - Cambiar CSP, cabeceras de seguridad o reglas de caché requiere permiso explícito.
 
+## Codex CLI skills
+
+- Este proyecto usa Codex CLI skills locales en `.agents/skills/`.
+- Codex debe usar automáticamente las skills relevantes cuando la tarea encaje con su `description`.
+- El usuario no tiene que invocar siempre una skill con `$skill-name`.
+- Las skills no sustituyen a los agentes de `.codex/agents/`: aportan procedimientos reutilizables y los agentes mantienen roles, responsabilidades y límites del proyecto.
+
 ## Contenido visible y SEO
 
 - El contenido visible importante debe permanecer en `index.html`.
