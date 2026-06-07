@@ -31,6 +31,8 @@ Reglas Git:
 - Si hay cambios locales no creados por Codex, parar y preguntar.
 - Solo el coordinador puede hacer push y crear Pull Request, y solo si la tarea actual lo pide explicitamente.
 - Antes de push o PR, ejecutar y validar: command -v gh; git status --short; git branch --show-current; git remote get-url origin; gh auth status --active --hostname github.com; gh repo view --json nameWithOwner,url.
+- En este entorno, ejecutar fuera del sandbox los comandos gh usados para validar autenticacion, consultar el repo o crear/listar PRs: gh auth status --active --hostname github.com; gh repo view --json nameWithOwner,url; gh pr list --head <rama-actual> --state open --json number,title,url,baseRefName,headRefName; gh pr create ....
+- Aunque esos comandos gh se ejecuten fuera del sandbox, deben seguir siendo no interactivos y no deben reconfigurar credenciales ni mostrar tokens.
 - Si gh no esta instalado, no instalarlo: reportar y parar.
 - La rama actual no puede ser main ni develop; debe ser feature/..., fix/..., docs/... o hotfix/....
 - origin debe apuntar a GitHub mediante github.com o mediante un alias SSH local permitido.

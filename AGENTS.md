@@ -63,6 +63,14 @@ Prohibido:
 
 Todos los comandos `gh` deben ser no interactivos. Si un comando pide confirmación o requiere interacción, cancelar y reportar.
 
+En este entorno, los comandos `gh` necesarios para push o Pull Request deben ejecutarse fuera del sandbox cuando se usen para validar autenticación, consultar el repo o crear/listar PRs. Esto aplica como mínimo a:
+- `gh auth status --active --hostname github.com`;
+- `gh repo view --json nameWithOwner,url`;
+- `gh pr list --head <rama-actual> --state open --json number,title,url,baseRefName,headRefName`;
+- `gh pr create ...`.
+
+Aunque se ejecuten fuera del sandbox, siguen aplicando todas las reglas de seguridad: no usar comandos interactivos, no reconfigurar credenciales, no usar `gh auth login/logout/switch`, no usar `gh auth status --show-token` y no mostrar tokens ni credenciales.
+
 Antes de hacer `push` o crear PR, el coordinador debe comprobar:
 
 ```bash
