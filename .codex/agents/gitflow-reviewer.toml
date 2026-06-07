@@ -13,8 +13,28 @@ Responsabilidades:
 - Comprobar que las tareas de memoria/documentacion se hacen preferentemente en ramas docs/....
 - Comprobar que no hay cambios de memoria mezclados con cambios funcionales salvo permiso explicito.
 - Comprobar que no hay edicion de memoria en tareas futuras salvo permiso, aprobacion del usuario o tarea explicita de documentacion/mantenimiento de agentes.
-- Comprobar que no hubo merge ni push.
+- Comprobar que no hubo merge.
+- Comprobar que solo hubo push o PR si la tarea actual lo pidio explicitamente.
+- En flujos de PR, comprobar que gh esta instalado.
+- En flujos de PR, comprobar que la rama actual no es main ni develop.
+- En flujos de PR, comprobar que la rama actual es feature/..., fix/..., docs/... o hotfix/....
+- En flujos de PR, comprobar que origin apunta a GitHub mediante github.com o mediante un alias SSH local permitido.
+- En flujos de PR, aceptar git@github-ralph1985:ralph1985/... como alias SSH valido y normalizarlo como repositorio GitHub del usuario ralph1985.
+- En flujos de PR, comprobar que origin no apunta a ghe.com.
+- En flujos de PR, comprobar que gh auth status --active --hostname github.com esta OK sin usar --show-token.
+- En flujos de PR, comprobar que gh repo view --json nameWithOwner,url coincide con origin comparando owner/repo normalizado cuando origin use alias SSH, contiene github.com y no contiene ghe.com.
+- En flujos de PR, comprobar que no hay cambios sin commitear ni archivos sin seguimiento no previstos antes del push.
+- Comprobar que el push, si existe, es solo git push -u origin <rama-actual>.
+- Comprobar que la base de PR es develop para feature/..., fix/... y docs/....
+- Comprobar que la base de PR es main solo para hotfix/....
+- Comprobar que se comprobo si ya existia una PR abierta antes de crear otra.
+- Comprobar que gh pr create usa --repo <owner/repo>, --base, --head, --title y --body explicitos.
+- Comprobar que los comandos gh son no interactivos.
+- Comprobar que no se usa gh pr merge.
+- Comprobar que no se crean forks ni se usa gh repo fork.
+- Comprobar que no se usan comandos de autenticacion peligrosos: gh auth login, gh auth switch, gh auth logout ni gh auth status --show-token.
 - Comprobar que no se uso git push --force.
+- Comprobar que no se uso git push --force-with-lease.
 - Comprobar que no se reescribio historial sin permiso.
 - Comprobar que solo habra un commit final.
 - Revisar el mensaje de commit.

@@ -29,10 +29,37 @@ Reglas Git:
 - Flujo normal: partir de develop y usar ramas feature/..., fix/... o docs/....
 - Hotfix: partir de main solo si se pide explicitamente o es una urgencia de produccion.
 - Si hay cambios locales no creados por Codex, parar y preguntar.
-- No hacer push.
+- Solo el coordinador puede hacer push y crear Pull Request, y solo si la tarea actual lo pide explicitamente.
+- Antes de push o PR, ejecutar y validar: command -v gh; git status --short; git branch --show-current; git remote get-url origin; gh auth status --active --hostname github.com; gh repo view --json nameWithOwner,url.
+- Si gh no esta instalado, no instalarlo: reportar y parar.
+- La rama actual no puede ser main ni develop; debe ser feature/..., fix/..., docs/... o hotfix/....
+- origin debe apuntar a GitHub mediante github.com o mediante un alias SSH local permitido.
+- El alias SSH git@github-ralph1985:ralph1985/... es valido y debe normalizarse como repositorio GitHub del usuario ralph1985.
+- origin no debe apuntar a ghe.com.
+- gh debe estar autenticado contra github.com.
+- gh repo view --json nameWithOwner,url debe coincidir con origin comparando owner/repo normalizado cuando origin use alias SSH; la URL detectada por gh debe contener github.com y no contener ghe.com.
+- No hacer push ni PR si hay cambios sin commitear o archivos sin seguimiento no previstos.
+- El unico push permitido es git push -u origin <rama-actual>.
+- Si el push falla por permisos o credenciales, no reconfigurar credenciales: reportar y parar.
+- Antes de crear una PR, comprobar si ya existe una abierta con gh pr list --head <rama-actual> --state open --json number,title,url,baseRefName,headRefName.
+- Si ya existe PR abierta para la rama, no crear otra y mostrar su URL.
+- Crear PR con gh pr create --repo <owner/repo> usando el nameWithOwner de gh repo view.
+- Usar --base develop para feature/..., fix/... y docs/....
+- Usar --base main solo para hotfix/....
+- Usar siempre --head <rama-actual>, --title y --body explicitos.
+- No usar --fill si puede generar un cuerpo demasiado largo.
+- Todos los comandos gh deben ser no interactivos; si piden confirmacion o interaccion, cancelar y reportar.
+- Mostrar la URL final de la PR creada o existente.
 - No hacer merge.
+- No ejecutar gh pr merge.
+- No hacer push a main ni develop.
 - No usar git push --force.
+- No usar git push --force-with-lease.
 - No reescribir historial.
+- No crear forks ni ejecutar gh repo fork.
+- No ejecutar gh auth login, gh auth switch, gh auth logout ni gh auth status --show-token.
+- No cambiar de cuenta de GitHub.
+- No mostrar tokens ni credenciales.
 - No usar git stash, git reset --hard, git checkout -f ni limpiar cambios sin permiso explicito.
 - Los commits deben usar Conventional Commits y nombres en ingles.
 

@@ -26,13 +26,149 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 - El coordinador puede crear ramas locales.
 - Solo el coordinador puede hacer commits.
 - Los subagentes pueden modificar archivos, pero no pueden crear ramas ni hacer commits.
-- Codex no debe hacer `push`.
+- El coordinador puede hacer `push` de la rama de trabajo y crear Pull Request solo cuando la tarea actual lo pida explícitamente.
 - Codex no debe hacer merge.
 - Codex no debe usar `git push --force`.
+- Codex no debe usar `git push --force-with-lease`.
 - Codex no debe reescribir historial.
 - Codex no debe usar `git stash`, `git reset --hard`, `git checkout -f` ni limpiar cambios sin permiso explícito.
 - Cada tarea terminada debe tener un único commit hecho por el coordinador.
-- El usuario será responsable de hacer `push`, abrir PR y mergear.
+- El usuario será responsable de revisar y mergear.
+
+## Push y Pull Request
+
+El coordinador solo puede hacer `push` y crear Pull Request cuando la tarea actual lo pida explícitamente.
+
+Permitido:
+- hacer `push` de la rama de trabajo actual;
+- crear Pull Request con `gh pr create`;
+- mostrar la URL de la PR creada o existente.
+
+Prohibido:
+- hacer merge;
+- ejecutar `gh pr merge`;
+- hacer `push` a `main`;
+- hacer `push` a `develop`;
+- hacer `git push --force`;
+- hacer `git push --force-with-lease`;
+- reescribir historial;
+- crear forks;
+- ejecutar `gh repo fork`;
+- aceptar prompts interactivos para fork;
+- ejecutar `gh auth login`;
+- ejecutar `gh auth switch`;
+- ejecutar `gh auth logout`;
+- ejecutar `gh auth status --show-token`;
+- mostrar tokens o credenciales.
+
+Todos los comandos `gh` deben ser no interactivos. Si un comando pide confirmación o requiere interacción, cancelar y reportar.
+
+Antes de hacer `push` o crear PR, el coordinador debe comprobar:
+
+```bash
+command -v gh
+git status --short
+git branch --show-current
+git remote get-url origin
+gh auth status --active --hostname github.com
+gh repo view --json nameWithOwner,url
+```
+
+Debe cumplirse:
+- `gh` debe estar instalado;
+- la rama actual no puede ser `main`;
+- la rama actual no puede ser `develop`;
+- la rama actual debe ser una rama de trabajo tipo `feature/...`, `fix/...`, `docs/...` o `hotfix/...`;
+- el remoto `origin` debe apuntar a GitHub mediante `github.com` o mediante un alias SSH local permitido;
+- el alias SSH `git@github-ralph1985:ralph1985/...` es válido y debe normalizarse como repositorio GitHub del usuario `ralph1985`;
+- el remoto `origin` no debe apuntar a `ghe.com`;
+- `gh` debe estar autenticado contra `github.com`;
+- `gh repo view --json nameWithOwner,url` debe apuntar al mismo repositorio que `origin`, comparando el `owner/repo` normalizado cuando `origin` use alias SSH;
+- la URL del repo detectado por `gh` debe contener `github.com`;
+- la URL del repo detectado por `gh` no debe contener `ghe.com`;
+- no debe haber cambios sin commitear;
+- no debe haber archivos sin seguimiento no previstos.
+
+Si `gh` no está instalado, no intentar instalarlo. Reportar y parar.
+
+Si alguna comprobación falla, no hacer `push` ni PR. Reportar el motivo.
+
+`git push` usa las credenciales de Git/SSH/HTTPS configuradas en el sistema, no necesariamente las mismas que `gh`. Si el `push` falla por permisos o credenciales, no intentar reconfigurar credenciales. Reportar el error y parar.
+
+El único `push` permitido es:
+
+```bash
+git push -u origin <rama-actual>
+```
+
+No usar `push` con otros destinos sin permiso explícito.
+
+Antes de crear una PR nueva, comprobar si ya existe una PR abierta para la rama actual:
+
+```bash
+gh pr list --head <rama-actual> --state open --json number,title,url,baseRefName,headRefName
+```
+
+Si ya existe una PR abierta:
+- no crear otra;
+- mostrar la URL existente;
+- reportar que la PR ya estaba creada.
+
+Después del `push`, crear la PR con `gh pr create` usando argumentos explícitos para evitar prompts interactivos. Primero obtener el repo exacto con:
+
+```bash
+gh repo view --json nameWithOwner,url
+```
+
+Usar el valor `nameWithOwner` como `<owner/repo>` en `--repo`.
+
+Para ramas normales:
+
+```bash
+gh pr create \
+  --repo <owner/repo> \
+  --base develop \
+  --head <rama-actual> \
+  --title "<título>" \
+  --body "<resumen breve>"
+```
+
+Para hotfix:
+
+```bash
+gh pr create \
+  --repo <owner/repo> \
+  --base main \
+  --head <rama-actual> \
+  --title "<título>" \
+  --body "<resumen breve>"
+```
+
+Reglas:
+- usar `--base develop` para `feature/...`, `fix/...` y `docs/...`;
+- usar `--base main` solo para `hotfix/...`;
+- usar `--head <rama-actual>`;
+- usar `--repo <owner/repo>`;
+- no usar `--fill` si puede generar un cuerpo demasiado largo;
+- no abrir editor interactivo;
+- no crear PR si no puede determinar base, head o repo con seguridad;
+- no crear fork si no tiene permisos.
+
+El body debe ser breve:
+
+```md
+## Resumen
+- ...
+
+## Checks
+- QA final: OK
+- Git Flow: OK
+
+## Notas
+- Pendiente de revisión y merge por el usuario.
+```
+
+No incluir tokens, credenciales, emails privados, datos sensibles, logs largos ni dumps completos de consola.
 
 ## Commits
 
@@ -194,7 +330,7 @@ En tareas futuras, no se debe editar la memoria salvo que:
 9. El `qa-final-reviewer` valida el resultado.
 10. El `gitflow-reviewer` valida rama, diff y commit.
 11. El `coordinator` crea un único commit local final cuando proceda.
-12. Codex no hace `push`, no abre PR y no mergea.
+12. Codex no hace `push` ni abre PR salvo petición explícita de la tarea actual, y nunca mergea.
 
 ## Resumen final obligatorio
 
