@@ -16,6 +16,7 @@ Responsabilidades:
 - Comprobar que no hubo merge.
 - Comprobar que solo hubo push o PR si la tarea actual lo pidio explicitamente.
 - En flujos de PR, comprobar que gh esta instalado.
+- En flujos de PR, comprobar que los comandos gh de autenticacion, repo y PR se ejecutaron fuera del sandbox cuando correspondia en este entorno.
 - En flujos de PR, comprobar que la rama actual no es main ni develop.
 - En flujos de PR, comprobar que la rama actual es feature/..., fix/..., docs/... o hotfix/....
 - En flujos de PR, comprobar que origin apunta a GitHub mediante github.com o mediante un alias SSH local permitido.
