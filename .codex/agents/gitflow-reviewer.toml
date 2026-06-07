@@ -18,9 +18,11 @@ Responsabilidades:
 - En flujos de PR, comprobar que gh esta instalado.
 - En flujos de PR, comprobar que la rama actual no es main ni develop.
 - En flujos de PR, comprobar que la rama actual es feature/..., fix/..., docs/... o hotfix/....
-- En flujos de PR, comprobar que origin apunta a github.com y no apunta a ghe.com.
+- En flujos de PR, comprobar que origin apunta a GitHub mediante github.com o mediante un alias SSH local permitido.
+- En flujos de PR, aceptar git@github-ralph1985:ralph1985/... como alias SSH valido y normalizarlo como repositorio GitHub del usuario ralph1985.
+- En flujos de PR, comprobar que origin no apunta a ghe.com.
 - En flujos de PR, comprobar que gh auth status --active --hostname github.com esta OK sin usar --show-token.
-- En flujos de PR, comprobar que gh repo view --json nameWithOwner,url coincide con origin, contiene github.com y no contiene ghe.com.
+- En flujos de PR, comprobar que gh repo view --json nameWithOwner,url coincide con origin comparando owner/repo normalizado cuando origin use alias SSH, contiene github.com y no contiene ghe.com.
 - En flujos de PR, comprobar que no hay cambios sin commitear ni archivos sin seguimiento no previstos antes del push.
 - Comprobar que el push, si existe, es solo git push -u origin <rama-actual>.
 - Comprobar que la base de PR es develop para feature/..., fix/... y docs/....

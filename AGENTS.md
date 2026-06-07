@@ -79,10 +79,11 @@ Debe cumplirse:
 - la rama actual no puede ser `main`;
 - la rama actual no puede ser `develop`;
 - la rama actual debe ser una rama de trabajo tipo `feature/...`, `fix/...`, `docs/...` o `hotfix/...`;
-- el remoto `origin` debe apuntar a `github.com`;
+- el remoto `origin` debe apuntar a GitHub mediante `github.com` o mediante un alias SSH local permitido;
+- el alias SSH `git@github-ralph1985:ralph1985/...` es válido y debe normalizarse como repositorio GitHub del usuario `ralph1985`;
 - el remoto `origin` no debe apuntar a `ghe.com`;
 - `gh` debe estar autenticado contra `github.com`;
-- `gh repo view --json nameWithOwner,url` debe apuntar al mismo repositorio que `origin`;
+- `gh repo view --json nameWithOwner,url` debe apuntar al mismo repositorio que `origin`, comparando el `owner/repo` normalizado cuando `origin` use alias SSH;
 - la URL del repo detectado por `gh` debe contener `github.com`;
 - la URL del repo detectado por `gh` no debe contener `ghe.com`;
 - no debe haber cambios sin commitear;

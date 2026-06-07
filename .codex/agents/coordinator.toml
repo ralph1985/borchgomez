@@ -33,9 +33,11 @@ Reglas Git:
 - Antes de push o PR, ejecutar y validar: command -v gh; git status --short; git branch --show-current; git remote get-url origin; gh auth status --active --hostname github.com; gh repo view --json nameWithOwner,url.
 - Si gh no esta instalado, no instalarlo: reportar y parar.
 - La rama actual no puede ser main ni develop; debe ser feature/..., fix/..., docs/... o hotfix/....
-- origin debe apuntar a github.com, no a ghe.com.
+- origin debe apuntar a GitHub mediante github.com o mediante un alias SSH local permitido.
+- El alias SSH git@github-ralph1985:ralph1985/... es valido y debe normalizarse como repositorio GitHub del usuario ralph1985.
+- origin no debe apuntar a ghe.com.
 - gh debe estar autenticado contra github.com.
-- gh repo view --json nameWithOwner,url debe coincidir con origin, contener github.com y no contener ghe.com.
+- gh repo view --json nameWithOwner,url debe coincidir con origin comparando owner/repo normalizado cuando origin use alias SSH; la URL detectada por gh debe contener github.com y no contener ghe.com.
 - No hacer push ni PR si hay cambios sin commitear o archivos sin seguimiento no previstos.
 - El unico push permitido es git push -u origin <rama-actual>.
 - Si el push falla por permisos o credenciales, no reconfigurar credenciales: reportar y parar.

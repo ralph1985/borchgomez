@@ -9,6 +9,7 @@
 - Añadir CDNs, fuentes externas, analytics, widgets externos o cambios de CSP requiere permiso explícito.
 - Codex puede crear ramas y commits locales.
 - El coordinador puede hacer push de la rama de trabajo y crear PR con `gh` solo si la tarea actual lo pide explícitamente.
+- El alias SSH `git@github-ralph1985:ralph1985/...` es un remoto GitHub válido para comparar contra `gh repo view` por `owner/repo`.
 - El usuario revisa y mergea.
 - Solo el coordinador crea ramas y commits.
 - Las tareas ambiguas deben preguntarse antes de tocar código.
