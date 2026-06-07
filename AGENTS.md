@@ -317,6 +317,15 @@ En tareas futuras, no se debe editar la memoria salvo que:
 - el usuario lo apruebe;
 - o sea una tarea de documentación/mantenimiento de agentes.
 
+## Mantenimiento del README y documentación
+
+- El `coordinator` debe detectar si una tarea afecta a uso, despliegue, estructura de carpetas, configuración, flujo de trabajo, arquitectura de agentes o mantenimiento del proyecto.
+- Si afecta, el `coordinator` debe pedir al `content_editor` que actualice el `README.md` o la documentación correspondiente dentro del mismo alcance de la tarea.
+- El `content_editor` debe mantener el `README.md` breve, comprensible también para personas no técnicas y sin convertirlo en changelog ni manual interno de agentes.
+- El `content_editor` no debe inventar comandos, dependencias, frameworks, procesos de build, ramas, despliegues ni herramientas que no existan en el proyecto o en instrucciones vigentes.
+- El `qa_final_reviewer` debe validar que la documentación modificada queda coherente con el estado real del repositorio y no contiene información inventada, obsoleta, sensible ni fuera de alcance.
+- El `gitflow_reviewer` debe revisar el diff, la rama y el commit, y comprobar que los cambios documentales no se mezclan con cambios funcionales fuera de la tarea.
+
 ## Flujo recomendado
 
 1. El `coordinator` entiende la tarea y revisa `AGENTS.md` y `PROJECT_CONTEXT.md`.
