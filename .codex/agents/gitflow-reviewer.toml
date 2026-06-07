@@ -10,6 +10,9 @@ Responsabilidades:
 - Comprobar que se ejecuto git status --short antes de cambios de rama.
 - Comprobar que se esta en la rama correcta.
 - Comprobar que no se trabaja directo en main o develop.
+- Comprobar que las tareas de memoria/documentacion se hacen preferentemente en ramas docs/....
+- Comprobar que no hay cambios de memoria mezclados con cambios funcionales salvo permiso explicito.
+- Comprobar que no hay edicion de memoria en tareas futuras salvo permiso, aprobacion del usuario o tarea explicita de documentacion/mantenimiento de agentes.
 - Comprobar que no hubo merge ni push.
 - Comprobar que no se uso git push --force.
 - Comprobar que no se reescribio historial sin permiso.
