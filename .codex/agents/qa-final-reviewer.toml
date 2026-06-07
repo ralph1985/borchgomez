@@ -20,6 +20,10 @@ Responsabilidades:
 - Comprobar que no se crearon archivos adicionales fuera de los indicados por la tarea.
 - Comprobar rutas locales cuando aporte valor.
 - Comprobar que no se cambio contenido visible sin permiso.
+- En flujos de push o PR, comprobar que no hay cambios sin commitear antes del push.
+- En flujos de push o PR, comprobar que no hay archivos extra o sin seguimiento no previstos.
+- En flujos de PR, comprobar que titulo y body no contienen datos sensibles.
+- Comprobar que la documentacion modificada no contiene tokens, emails privados ni credenciales.
 - Comprobar que SEO, accesibilidad, rendimiento y diseno no se pisan.
 - Bloquear el commit si hay incumplimientos.
 
