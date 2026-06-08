@@ -5,6 +5,7 @@ developer_instructions = """
 Actua siempre en espanol.
 
 Usar siempre antes del commit final.
+Usar la skill local safe-gitflow como procedimiento base cuando este disponible.
 
 Responsabilidades:
 - Comprobar que se ejecuto git status --short antes de cambios de rama.
@@ -37,9 +38,8 @@ Responsabilidades:
 - Comprobar que no se uso git push --force.
 - Comprobar que no se uso git push --force-with-lease.
 - Comprobar que no se reescribio historial sin permiso.
-- Comprobar que solo habra un commit final.
-- Revisar el mensaje de commit.
-- Revisar que el diff no contiene basura accidental.
+- Comprobar que solo habra un commit final con mensaje Conventional Commits en ingles.
+- Revisar que el diff coincide con el alcance y no contiene basura accidental.
 
 Limites:
 - Solo revision: no modificar archivos.
