@@ -3,35 +3,35 @@ name: qa-final-review
 description: Use before closing a task, delivering changes, preparing commits, or validating an implementation against user requirements and repository rules.
 ---
 
-# QA Final Review
+# Revisión final de QA
 
-Use this skill before considering a task complete, especially before staging, committing, or reporting final results.
+Usa esta skill antes de dar una tarea por terminada, especialmente antes de hacer stage, commit o reportar resultados finales.
 
-## Procedure
+## Procedimiento
 
-1. Re-read the user's objective and compare it with the implemented diff.
-2. Review all changed files:
+1. Relee el objetivo del usuario y compáralo con el diff implementado.
+2. Revisa todos los archivos cambiados:
    - `git status --short`
    - `git diff`
-   - `git diff --check` when useful
-3. Confirm every change is in scope. Flag unrelated edits, accidental formatting churn, generated files, or unexpected untracked files.
-4. Check that the implementation does not contradict repository instructions, project context, or existing documentation.
-5. Look for duplicated procedures, conflicting rules, stale references, and wording that could be hard to maintain.
-6. When applicable, review:
-   - SEO: important indexable content remains available in initial HTML.
-   - Accessibility: semantics, keyboard behavior, labels, alt text, and focus are not degraded.
-   - Security: no credentials, tokens, unsafe external resources, or policy relaxations are introduced.
-   - Performance: no unnecessary asset weight, blocking resources, or avoidable layout instability is added.
-7. Run the most relevant available checks for the change type. Do not invent check results; if a check cannot run, say why.
-8. Before delivery, report:
-   - what was validated
-   - what could not be validated
-   - remaining risks or open questions
+   - `git diff --check` cuando sea útil
+3. Confirma que cada cambio está dentro del alcance. Señala ediciones no relacionadas, ruido accidental de formato, archivos generados o archivos untracked inesperados.
+4. Comprueba que la implementación no contradice las instrucciones del repositorio, el contexto del proyecto ni la documentación existente.
+5. Busca procedimientos duplicados, reglas en conflicto, referencias obsoletas y redacción difícil de mantener.
+6. Cuando aplique, revisa:
+   - SEO: el contenido indexable importante sigue disponible en el HTML inicial.
+   - Accesibilidad: no se degradan semántica, teclado, labels, alt text ni foco.
+   - Seguridad: no se introducen credenciales, tokens, recursos externos inseguros ni relajaciones de políticas.
+   - Performance: no se añade peso innecesario de assets, recursos bloqueantes ni inestabilidad visual evitable.
+7. Ejecuta los checks disponibles más relevantes para el tipo de cambio. No inventes resultados; si un check no puede ejecutarse, explica por qué.
+8. Antes de entregar, reporta:
+   - qué se validó
+   - qué no se pudo validar
+   - riesgos restantes o preguntas abiertas
 
-## Completion Criteria
+## Criterios de finalización
 
-- The change satisfies the user request.
-- The diff is minimal and intentional.
-- No requested boundary was crossed.
-- Validation evidence is explicit.
-- Any residual risk is described without pretending it is resolved.
+- El cambio satisface la petición del usuario.
+- El diff es mínimo e intencional.
+- No se cruzó ningún límite marcado por la tarea.
+- La evidencia de validación es explícita.
+- Cualquier riesgo residual se describe sin fingir que está resuelto.

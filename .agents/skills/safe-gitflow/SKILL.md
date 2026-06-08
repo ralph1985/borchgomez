@@ -3,40 +3,40 @@ name: safe-gitflow
 description: Use for tasks involving git status, branches, commits, diffs, push, pull requests, GitHub CLI, or review of local changes before delivery.
 ---
 
-# Safe Git Flow
+# Flujo Git seguro
 
-Use this skill when a task touches Git state, prepares a commit, reviews changes, or involves push, PRs, GitHub, or `gh`.
+Usa esta skill cuando una tarea toque estado de Git, prepare un commit, revise cambios o implique push, pull request, GitHub o `gh`.
 
-## Procedure
+## Procedimiento
 
-1. Check the current branch and worktree before changing anything:
+1. Comprueba la rama actual y el worktree antes de cambiar nada:
    - `git status --short`
    - `git branch --show-current`
-2. Do not overwrite, hide, clean, or revert changes you did not create. If unexpected local changes affect the task, stop and ask.
-3. Use the repository's branch policy. Create or switch branches only when the project instructions allow it.
-4. Before committing, inspect the complete diff:
+2. No sobrescribas, ocultes, limpies ni reviertas cambios que no hayas creado. Si cambios locales inesperados afectan a la tarea, para y pregunta.
+3. Usa la política de ramas del repositorio. Crea o cambia ramas solo cuando las instrucciones del proyecto lo permitan.
+4. Antes de hacer commit, inspecciona el diff completo:
    - `git diff`
-   - `git diff --staged` when files are staged
-   - `git diff --check` when useful
-5. Keep each finished task to one focused commit using Conventional Commits. Commit messages should be in English unless the repository says otherwise.
-6. Do not push or create a PR unless the current user task explicitly asks for it.
-7. When push or PR is explicitly requested:
-   - Use only non-interactive `gh` commands.
-   - Respect the repository's configured remote and authentication rules.
-   - Do not install or reconfigure `gh`.
-   - Check whether an open PR already exists for the current branch before creating another.
-8. Never merge, force push, rewrite history, use destructive resets, or use stash/cleanup commands without explicit permission.
-9. Before closing the task, summarize:
-   - branch
-   - commit or staged state
-   - files changed
-   - checks performed
-   - remaining risks or manual follow-up
+   - `git diff --staged` cuando haya archivos staged
+   - `git diff --check` cuando sea útil
+5. Mantén cada tarea terminada en un único commit enfocado usando Conventional Commits. Los mensajes de commit deben estar en inglés salvo que el repositorio indique otra cosa.
+6. No hagas push ni crees una pull request salvo que la tarea actual del usuario lo pida explícitamente.
+7. Cuando se pida explícitamente push o pull request:
+   - Usa solo comandos `gh` no interactivos.
+   - Respeta el remote configurado y las reglas de autenticación del repositorio.
+   - No instales ni reconfigures `gh`.
+   - Comprueba si ya existe una pull request abierta para la rama actual antes de crear otra.
+8. Nunca hagas merge, force push, reescritura de historial, resets destructivos ni comandos de stash/limpieza sin permiso explícito.
+9. Antes de cerrar la tarea, resume:
+   - rama
+   - commit o estado staged
+   - archivos cambiados
+   - checks realizados
+   - riesgos pendientes o seguimiento manual
 
-## Review Checklist
+## Lista de revisión
 
-- Current branch is allowed for the task.
-- Worktree contains only expected changes.
-- Diff matches the user's requested scope.
-- No unrelated generated files, dependency files, credentials, or local-only artifacts were added.
-- Push, PR, or merge actions were not performed unless explicitly requested.
+- La rama actual está permitida para la tarea.
+- El worktree contiene solo cambios esperados.
+- El diff coincide con el alcance pedido por el usuario.
+- No se añadieron archivos generados no relacionados, archivos de dependencias, credenciales ni artefactos solo locales.
+- No se hicieron push, pull request ni merge salvo petición explícita.
