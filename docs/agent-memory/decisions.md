@@ -5,6 +5,9 @@
 - No se deben usar herramientas no instaladas como Playwright, Puppeteer, Cypress o Selenium.
 - El contenido visible importante debe permanecer en `index.html`.
 - No se debe mover portfolio, servicios, textos comerciales, CTA o contenido indexable a JavaScript sin permiso explícito.
+- El cache busting de assets se hace con `scripts/bump-asset-version.sh` usando hash de contenido por archivo en los `?v=...` de `index.html`; no se usa timestamp global.
+- El hook `pre-commit` puede actualizar y añadir `index.html` si cambian hashes de assets. El hook `pre-push` no debe modificar archivos.
+- El `pre-commit` debe bloquear si hay assets locales modificados o sin seguimiento que no estén preparados en stage, para evitar que `index.html` apunte a hashes de contenido no commiteado.
 - `vercel.json` está protegido y solo puede modificarse con permiso explícito.
 - Añadir CDNs, fuentes externas, analytics, widgets externos o cambios de CSP requiere permiso explícito.
 - Codex puede crear ramas y commits locales.

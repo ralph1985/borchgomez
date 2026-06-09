@@ -1,5 +1,19 @@
 #!/bin/sh
 set -eu
 
+ASSET_EXTENSIONS='.*\.(css|js|png|jpg|jpeg|svg|webp|gif|ico|webmanifest|woff|woff2|ttf)$'
+UNSTAGED_ASSETS="$(git diff --name-only -- assets | grep -Ei "$ASSET_EXTENSIONS" || true)"
+UNTRACKED_ASSETS="$(git ls-files --others --exclude-standard -- assets | grep -Ei "$ASSET_EXTENSIONS" || true)"
+
+if [ -n "$UNSTAGED_ASSETS$UNTRACKED_ASSETS" ]; then
+  echo "Hay assets locales sin preparar en stage. Haz git add de esos assets o separa el commit antes de actualizar cache busting:" >&2
+  printf '%s\n%s\n' "$UNSTAGED_ASSETS" "$UNTRACKED_ASSETS" | sed '/^$/d' >&2
+  exit 1
+fi
+
 scripts/bump-asset-version.sh
-git add index.html
+
+if ! git diff --quiet -- index.html; then
+  git add index.html
+  echo "Se actualizaron versiones de assets en index.html."
+fi
