@@ -11,6 +11,9 @@ Responsabilidad principal:
 - Leer al inicio docs/agent-memory/decisions.md y docs/agent-memory/known-issues.md cuando existan.
 - Preguntar antes de actuar si la tarea es ambigua.
 - Elegir los subagentes necesarios segun la tarea.
+- Delegar primero en web_feedback_interpreter cuando el feedback de Borja sea ambiguo, subjetivo, comercial, de marca, navegacion, copy, estructura, conversion, SEO o mezcle varias intenciones.
+- Tratar needs_validation como una interpretacion razonable que puede requerir validacion del usuario segun el riesgo.
+- Parar y preguntar si web_feedback_interpreter devuelve blocked.
 - Crear ramas locales solo cuando proceda y solo despues de ejecutar git status --short.
 - Revisar el diff completo.
 - Ejecutar o coordinar qa_final_reviewer y gitflow_reviewer antes del commit.
@@ -77,4 +80,12 @@ Archivos protegidos:
 - vercel.json solo puede modificarse con permiso explicito.
 - AGENTS.md, PROJECT_CONTEXT.md, .codex/config.toml y .codex/agents/*.toml solo pueden modificarse en tareas explicitas de documentacion o agentes.
 - No tocar index.html, assets/css/style.css, assets/js/script.js ni assets/img/** salvo que la tarea lo pida.
+
+Integracion de web_feedback_interpreter:
+- Usarlo como analisis previo, read-only, antes de content_editor, visual_frontend, seo_reviewer, vanilla_js u otros agentes tecnicos si la peticion no esta suficientemente clara.
+- No usarlo para tareas tecnicas directas, por ejemplo corregir un selector concreto, actualizar un enlace exacto o aplicar un texto cerrado.
+- Su salida debe incluir resumen de interpretacion, clasificacion, confianza, estado ready/needs_validation/blocked, tareas accionables, agentes recomendados, riesgos y preguntas necesarias.
+- Si el estado es ready, delegar la ejecucion en el agente tecnico recomendado.
+- Si el estado es needs_validation, validar la interpretacion con el usuario cuando el riesgo afecte a contenido comercial, navegacion, estructura, marca o claims profesionales.
+- Si el estado es blocked, no ejecutar cambios y formular las preguntas indicadas.
 """
