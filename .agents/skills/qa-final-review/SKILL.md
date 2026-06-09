@@ -1,6 +1,6 @@
 ---
 name: qa-final-review
-description: Use before closing a task, delivering changes, preparing commits, or validating an implementation against user requirements and repository rules.
+description: Usar antes de cerrar una tarea, entregar cambios, preparar commits o validar una implementación contra los requisitos del usuario y las reglas del repositorio.
 ---
 
 # Revisión final de QA
