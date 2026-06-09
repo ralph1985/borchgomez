@@ -285,6 +285,58 @@ No incluir tokens, credenciales, emails privados, datos sensibles, logs largos n
 
 - Si una tarea es ambigua, Codex debe preguntar antes de tocar código.
 
+## Interpretación de feedback ambiguo
+
+El proyecto tiene el subagente `web_feedback_interpreter` para interpretar feedback ambiguo o poco técnico de Borja antes de que actúen agentes técnicos.
+
+Propósito:
+- convertir feedback subjetivo o incompleto en tareas web claras;
+- clasificar cada petición;
+- indicar hipótesis, riesgos y nivel de confianza;
+- recomendar el agente técnico adecuado;
+- decidir si la ejecución puede continuar como `ready`, necesita validación como `needs_validation` o debe parar como `blocked`.
+
+Cuándo usarlo:
+- antes de `content_editor`, `visual_frontend`, `seo_reviewer`, `vanilla_js` u otros agentes técnicos cuando una petición sea ambigua, subjetiva, comercial, de marca, navegación, copy, estructura, conversión, SEO o mezcle varias intenciones;
+- cuando una frase pueda interpretarse de varias formas y una mala interpretación pueda cambiar contenido comercial, navegación, estructura, marca, claims profesionales o intención de conversión;
+- cuando falte identificar una imagen, sección, CTA, bloque visual o resultado esperado.
+
+Cuándo no usarlo:
+- cambios técnicos perfectamente claros;
+- correcciones con texto exacto ya aprobado;
+- arreglos puntuales de enlaces, selectores, errores JavaScript o reglas CSS concretas;
+- revisiones finales de QA o Git Flow.
+
+El agente debe ser read-only:
+- no modifica HTML, CSS, JS, assets ni contenido final;
+- no inventa intenciones de Borja;
+- no decide cambios comerciales por sí mismo;
+- no actúa como memoria paralela del proyecto;
+- no sustituye a `content_editor`, `visual_frontend`, `seo_reviewer` ni a otros agentes de ejecución.
+
+Formato de salida esperado:
+- Resumen de interpretación.
+- Clasificación de la petición: cambio directo, cambio visual ambiguo, cambio de contenido, cambio comercial/estratégico, cambio de navegación/estructura, cambio SEO o petición incompleta/bloqueada.
+- Nivel de confianza: alta / media / baja.
+- Estado de ejecución: `ready` / `needs_validation` / `blocked`.
+- Tareas accionables.
+- Agentes recomendados.
+- Riesgos.
+- Preguntas necesarias, si las hay.
+
+Reglas de decisión:
+- Si el estado es `ready`, el `coordinator` puede delegar en el agente técnico recomendado.
+- Si el estado es `needs_validation`, el `coordinator` debe validar la interpretación cuando el riesgo afecte a contenido comercial, navegación, estructura, marca o claims profesionales.
+- Si el estado es `blocked`, el `coordinator` no debe permitir que agentes técnicos improvisen y debe preguntar antes de tocar archivos.
+- No debe bloquear por detalles menores si la intención es clara y el cambio es reversible.
+- No debe hacer más de 3-5 preguntas por bloque de feedback, y debe agrupar dudas similares.
+
+Ejemplos breves:
+- “Hacer la barra superior más ancha” debe tratarse como cambio visual ambiguo: puede significar altura, padding o presencia visual.
+- “Piloto de drones certificado con licencia en vigor o similar” puede proponerse como texto prudente a validar, pero no permite inventar certificaciones concretas.
+- “Retirar la imagen de la web final y añadir en esta sección” debe quedar `blocked` si no se sabe qué imagen ni qué sección.
+- “Resaltar el botón de debajo de cada historia con color” normalmente puede quedar `ready` para `visual_frontend`, con revisión de coherencia visual y contraste.
+
 ## Memoria de agentes
 
 El proyecto usa una memoria ligera y versionada en `docs/agent-memory/`.
@@ -344,7 +396,7 @@ En tareas futuras, no se debe editar la memoria salvo que:
 ## Flujo recomendado
 
 1. El `coordinator` entiende la tarea y revisa `AGENTS.md` y `PROJECT_CONTEXT.md`.
-2. Si hay ambigüedad, pregunta antes de tocar código.
+2. Si hay ambigüedad, usa primero `web_feedback_interpreter`; si devuelve `blocked`, pregunta antes de tocar código.
 3. Antes de cambiar de rama, ejecuta `git status --short`.
 4. Si hay cambios locales no creados por Codex, para y pregunta.
 5. El `coordinator` crea la rama local adecuada desde `develop` o `main`.

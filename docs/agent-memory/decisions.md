@@ -13,5 +13,6 @@
 - El usuario revisa y mergea.
 - Solo el coordinador crea ramas y commits.
 - Las tareas ambiguas deben preguntarse antes de tocar código.
+- El agente `web_feedback_interpreter` interpreta feedback ambiguo de Borja en modo read-only antes de que actúen agentes técnicos; puede devolver `ready`, `needs_validation` o `blocked`.
 - Los problemas fuera del alcance de la tarea se reportan, no se corrigen.
 - Las imágenes pueden descargarse, optimizarse y borrarse solo bajo las reglas ya definidas.
