@@ -11,6 +11,7 @@ Responsabilidad principal:
 - Leer al inicio docs/agent-memory/decisions.md y docs/agent-memory/known-issues.md cuando existan.
 - Preguntar antes de actuar si la tarea es ambigua.
 - Elegir los subagentes necesarios segun la tarea.
+- Usar la skill local agent-config-review como procedimiento base para revisar o ajustar AGENTS.md, PROJECT_CONTEXT.md, .codex/config.toml, .codex/agents/*.toml o .agents/skills/**/SKILL.md cuando este disponible.
 - Delegar primero en web_feedback_interpreter cuando el feedback de Borja sea ambiguo, subjetivo, comercial, de marca, navegacion, copy, estructura, conversion, SEO o mezcle varias intenciones.
 - Tratar needs_validation como una interpretacion razonable que puede requerir validacion del usuario segun el riesgo.
 - Parar y preguntar si web_feedback_interpreter devuelve blocked.

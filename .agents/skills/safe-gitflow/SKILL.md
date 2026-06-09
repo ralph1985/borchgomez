@@ -1,6 +1,6 @@
 ---
 name: safe-gitflow
-description: Use for tasks involving git status, branches, commits, diffs, push, pull requests, GitHub CLI, or review of local changes before delivery.
+description: Usar en tareas que impliquen estado de git, ramas, commits, diffs, push, pull requests, GitHub CLI o revisión de cambios locales antes de entregar.
 ---
 
 # Flujo Git seguro

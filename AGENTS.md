@@ -209,6 +209,7 @@ No incluir tokens, credenciales, emails privados, datos sensibles, logs largos n
 ## Codex CLI skills
 
 - Este proyecto usa Codex CLI skills locales en `.agents/skills/`.
+- Los agentes personalizados del proyecto están en `.codex/agents/`.
 - Codex debe usar automáticamente las skills relevantes cuando la tarea encaje con su `description`.
 - El usuario no tiene que invocar siempre una skill con `$skill-name`.
 - Las skills no sustituyen a los agentes de `.codex/agents/`: aportan procedimientos reutilizables y los agentes mantienen roles, responsabilidades y límites del proyecto.

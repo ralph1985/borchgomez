@@ -1,6 +1,6 @@
 ---
 name: agent-config-review
-description: Use when reviewing or modifying Codex agents, repo instructions, AGENTS.md, PROJECT_CONTEXT.md, .codex config, or local skills under .agents/skills.
+description: Usar al revisar o modificar agentes Codex, instrucciones del repo, AGENTS.md, PROJECT_CONTEXT.md, configuración .codex o skills locales en .agents/skills.
 ---
 
 # Revisión de configuración de agentes
