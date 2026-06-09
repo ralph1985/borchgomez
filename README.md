@@ -49,7 +49,7 @@ No hay comandos `npm`, instalación previa ni compilación.
 - `assets/img/`: imágenes de marca, hero, portfolio y favicons.
 - `assets/fonts/`: fuentes locales autoalojadas.
 - `assets/vendor/`: librerías ya incluidas en el repositorio y servidas en local, como Swiper y Anime.js.
-- `scripts/bump-asset-version.sh`: actualiza los parámetros `?v=...` de assets referenciados desde `index.html`.
+- `scripts/bump-asset-version.sh`: actualiza los parámetros `?v=...` de assets referenciados desde `index.html` usando hash de contenido por archivo.
 - `vercel.json`: configuración de despliegue, cabeceras, CSP y caché para Vercel.
 
 ## Mantenimiento
@@ -60,7 +60,11 @@ El contenido comercial y SEO importante debe seguir en `index.html`, no generado
 - Estilos, responsive, layout, colores, espaciados y animaciones visuales: editar `assets/css/style.css`.
 - Comportamiento interactivo: editar `assets/js/script.js` con JavaScript vanilla.
 - Imágenes nuevas: guardarlas en `assets/img/...` con nombres claros y optimizarlas solo con herramientas ya disponibles.
-- Assets cambiados en `index.html`: ejecutar `./scripts/bump-asset-version.sh` cuando haga falta invalidar caché.
+- Hooks de Git: activarlos una vez con `git config core.hooksPath .githooks`.
+- Cache busting: el `pre-commit` actualiza automáticamente los `?v=...` de `index.html` con un hash corto del contenido de cada asset local.
+- Si un asset no cambia, su versión no cambia. Ya no se usa un timestamp global.
+- `pre-push` solo valida que no queden cambios pendientes en `index.html`; no modifica archivos.
+- Diagnóstico puntual: `./scripts/bump-asset-version.sh` permite recalcular manualmente las versiones si hace falta revisar el resultado antes de commitear.
 
 No se deben añadir frameworks, dependencias npm, CDNs, fuentes externas, analytics ni widgets externos sin permiso explícito.
 

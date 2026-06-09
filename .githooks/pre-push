@@ -1,12 +1,12 @@
 #!/bin/sh
 set -eu
 
-scripts/bump-asset-version.sh
-
 if ! git diff --quiet -- index.html; then
-  git add index.html
-  echo "Se actualizo la version de assets en index.html."
-  echo "Haz un commit de este cambio antes de hacer push:"
-  echo "  git commit -m \"chore: bump asset version\""
+  echo "Hay cambios sin commitear en index.html. Haz commit antes de hacer push." >&2
+  exit 1
+fi
+
+if ! git diff --cached --quiet -- index.html; then
+  echo "Hay cambios staged sin commitear en index.html. Haz commit antes de hacer push." >&2
   exit 1
 fi

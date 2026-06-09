@@ -2,4 +2,8 @@
 set -eu
 
 scripts/bump-asset-version.sh
-git add index.html
+
+if ! git diff --quiet -- index.html; then
+  git add index.html
+  echo "Se actualizaron versiones de assets en index.html."
+fi
