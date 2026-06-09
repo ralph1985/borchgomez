@@ -62,6 +62,7 @@ El contenido comercial y SEO importante debe seguir en `index.html`, no generado
 - Imágenes nuevas: guardarlas en `assets/img/...` con nombres claros y optimizarlas solo con herramientas ya disponibles.
 - Hooks de Git: activarlos una vez con `git config core.hooksPath .githooks`.
 - Cache busting: el `pre-commit` actualiza automáticamente los `?v=...` de `index.html` con un hash corto del contenido de cada asset local.
+- Si hay assets locales modificados o sin seguimiento que no estén preparados en stage, el `pre-commit` se detiene para evitar versiones inconsistentes.
 - Si un asset no cambia, su versión no cambia. Ya no se usa un timestamp global.
 - `pre-push` solo valida que no queden cambios pendientes en `index.html`; no modifica archivos.
 - Diagnóstico puntual: `./scripts/bump-asset-version.sh` permite recalcular manualmente las versiones si hace falta revisar el resultado antes de commitear.
