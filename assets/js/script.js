@@ -10,8 +10,8 @@ const servicesSubmenuLinks = document.querySelectorAll(".nav__submenu-link");
 const sections = document.querySelectorAll("section[id]");
 const header = document.getElementById("header");
 
-function isMobileMenu() {
-  return window.matchMedia("(max-width: 767px)").matches;
+function isCollapsedMenu() {
+  return window.matchMedia("(max-width: 1099px)").matches;
 }
 
 function setServicesSubmenuOpen(isOpen) {
@@ -28,7 +28,7 @@ function setMenuOpen(isOpen) {
 
   const anime = window.anime;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const useAnimatedMenu = anime && typeof anime.animate === "function" && isMobileMenu() && !reduceMotion;
+  const useAnimatedMenu = anime && typeof anime.animate === "function" && isCollapsedMenu() && !reduceMotion;
 
   navToggle.setAttribute("aria-expanded", String(isOpen));
   navToggle.setAttribute("aria-label", isOpen ? "Cerrar menú" : "Abrir menú");
@@ -160,7 +160,7 @@ servicesSubmenuLinks.forEach((link) => {
 window.addEventListener("resize", () => {
   setServicesSubmenuOpen(false);
 
-  if (isMobileMenu() || !navMenu || !navToggle) return;
+  if (isCollapsedMenu() || !navMenu || !navToggle) return;
 
   navMenu.classList.remove("show-menu");
   navMenu.style.opacity = "";
