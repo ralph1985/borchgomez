@@ -4,6 +4,9 @@ const SECTION_ACTIVE_OFFSET = 80;
 const navToggle = document.getElementById("nav-toggle");
 const navMenu = document.getElementById("nav-menu");
 const navLinks = document.querySelectorAll(".nav__link");
+const servicesMenuToggle = document.getElementById("services-menu-toggle");
+const servicesSubmenu = document.getElementById("services-submenu");
+const servicesSubmenuLinks = document.querySelectorAll(".nav__submenu-link");
 const sections = document.querySelectorAll("section[id]");
 const header = document.getElementById("header");
 
@@ -11,8 +14,17 @@ function isMobileMenu() {
   return window.matchMedia("(max-width: 767px)").matches;
 }
 
+function setServicesSubmenuOpen(isOpen) {
+  if (!servicesMenuToggle || !servicesSubmenu) return;
+
+  servicesMenuToggle.setAttribute("aria-expanded", String(isOpen));
+  servicesSubmenu.classList.toggle("is-open", isOpen);
+}
+
 function setMenuOpen(isOpen) {
   if (!navMenu || !navToggle) return;
+
+  if (!isOpen) setServicesSubmenuOpen(false);
 
   const anime = window.anime;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -106,6 +118,7 @@ if (navToggle && navMenu) {
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+      setServicesSubmenuOpen(false);
       setMenuOpen(false);
     }
   });
@@ -113,17 +126,40 @@ if (navToggle && navMenu) {
   document.addEventListener("click", (event) => {
     const target = event.target;
 
-    if (target instanceof Node && !navMenu.contains(target) && !navToggle.contains(target)) {
+    if (!(target instanceof Node)) return;
+
+    if (servicesSubmenu && servicesMenuToggle && !servicesSubmenu.contains(target) && !servicesMenuToggle.contains(target)) {
+      setServicesSubmenuOpen(false);
+    }
+
+    if (!navMenu.contains(target) && !navToggle.contains(target)) {
       setMenuOpen(false);
     }
   });
 }
 
+if (servicesMenuToggle && servicesSubmenu) {
+  servicesMenuToggle.addEventListener("click", () => {
+    setServicesSubmenuOpen(!servicesSubmenu.classList.contains("is-open"));
+  });
+}
+
 navLinks.forEach((link) => {
-  link.addEventListener("click", () => setMenuOpen(false));
+  if (link !== servicesMenuToggle) {
+    link.addEventListener("click", () => setMenuOpen(false));
+  }
+});
+
+servicesSubmenuLinks.forEach((link) => {
+  link.addEventListener("click", () => {
+    setServicesSubmenuOpen(false);
+    setMenuOpen(false);
+  });
 });
 
 window.addEventListener("resize", () => {
+  setServicesSubmenuOpen(false);
+
   if (isMobileMenu() || !navMenu || !navToggle) return;
 
   navMenu.classList.remove("show-menu");
@@ -140,12 +176,15 @@ window.addEventListener("resize", () => {
 
 function scrollActive() {
   const scrollY = window.scrollY;
+  const sectionOffset = Math.max(SECTION_ACTIVE_OFFSET, header ? header.offsetHeight : 0);
 
   sections.forEach((current) => {
     const sectionHeight = current.offsetHeight;
-    const sectionTop = current.offsetTop - SECTION_ACTIVE_OFFSET;
+    const sectionTop = current.offsetTop - sectionOffset;
     const sectionId = current.getAttribute("id");
-    const sectionLink = document.querySelector(`.nav__menu a[href="#${sectionId}"]`);
+    const sectionLink = sectionId === "services"
+      ? servicesMenuToggle
+      : document.querySelector(`.nav__menu a[href="#${sectionId}"]`);
 
     if (!sectionLink) return;
 

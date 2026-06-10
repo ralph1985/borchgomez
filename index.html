@@ -45,7 +45,7 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="./assets/css/style.css?v=cc6f6936" />
+    <link rel="stylesheet" href="./assets/css/style.css?v=1491b877" />
     <link rel="stylesheet" href="./assets/vendor/swiper/swiper-bundle.min.css?v=b4c36bd6" />
   </head>
   <body>
@@ -64,7 +64,36 @@
           <ul class="nav__list">
             <li class="nav__item"><a href="#home" class="nav__link">Inicio</a></li>
             <li class="nav__item"><a href="#about" class="nav__link">Sobre mí</a></li>
-            <li class="nav__item"><a href="#services" class="nav__link">Servicios</a></li>
+            <li class="nav__item nav__item--services">
+              <button
+                class="nav__link nav__submenu-toggle"
+                id="services-menu-toggle"
+                type="button"
+                aria-controls="services-submenu"
+                aria-expanded="false"
+              >
+                Servicios
+                <span class="nav__submenu-icon" aria-hidden="true"></span>
+              </button>
+              <ul class="nav__submenu" id="services-submenu" aria-label="Servicios">
+                <li><a class="nav__submenu-link" href="#service-audiovisual">Producción audiovisual</a></li>
+                <li><a class="nav__submenu-link" href="#service-drone">Vídeo con drone</a></li>
+                <li><a class="nav__submenu-link" href="#service-social">Contenido para redes</a></li>
+                <li><a class="nav__submenu-link" href="#service-online">Presencia online</a></li>
+                <li><a class="nav__submenu-link" href="#service-web">Web y posicionamiento</a></li>
+                <li><a class="nav__submenu-link" href="#service-strategy">Estrategia visual e informes</a></li>
+                <li class="nav__submenu-service">
+                  <a class="nav__submenu-link" href="#service-local-seo">Posicionamiento SEO Local</a>
+                  <ul class="nav__submenu-features">
+                    <li>Optimización de Google Business Profile</li>
+                    <li>Posicionamiento en búsquedas locales</li>
+                    <li>Mejora de reseñas y reputación online</li>
+                    <li>SEO para «cerca de mí»</li>
+                    <li>Visibilidad en Google Maps</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
             <li class="nav__item"><a href="#plans" class="nav__link">Planes</a></li>
             <li class="nav__item"><a href="#portfolio" class="nav__link">Proyectos</a></li>
             <li class="nav__item"><a href="#instagram" class="nav__link">Instagram</a></li>
@@ -310,29 +339,39 @@
             presencia online clara y constante sin perder su origen.
           </p>
           <div class="services__layout" data-animate>
-            <article class="services__item">
+            <article class="services__item" id="service-audiovisual">
               <h3>Producción audiovisual</h3>
               <p>Vídeo profesional y fotografía documental para mostrar tu trabajo con calidad y cercanía.</p>
             </article>
-            <article class="services__item">
+            <article class="services__item" id="service-drone">
               <h3>Vídeo con drone</h3>
               <p>Planos aéreos con drone que aportan una perspectiva diferencial y mayor impacto visual para mostrar entornos, fincas, instalaciones, alojamientos y paisaje.</p>
             </article>
-            <article class="services__item">
+            <article class="services__item" id="service-social">
               <h3>Contenido para redes</h3>
               <p>Contenido para redes sociales pensado para conectar, publicar con constancia y ganar visibilidad.</p>
             </article>
-            <article class="services__item">
+            <article class="services__item" id="service-online">
               <h3>Presencia online</h3>
               <p>Mejora de presencia online para que tu negocio rural sea fácil de encontrar y recordar.</p>
             </article>
-            <article class="services__item">
+            <article class="services__item" id="service-web">
               <h3>Web y posicionamiento</h3>
               <p>Web y SEO local para bodegas, restaurantes, productores, municipios y turismo rural.</p>
             </article>
-            <article class="services__item">
+            <article class="services__item" id="service-strategy">
               <h3>Estrategia visual e informes</h3>
               <p>Plan visual personalizado, adaptado a las necesidades de cada cliente, con seguimiento mensual para tomar decisiones con criterio y continuidad.</p>
+            </article>
+            <article class="services__item" id="service-local-seo">
+              <h3>Posicionamiento SEO Local</h3>
+              <ul class="services__features">
+                <li>Optimización de Google Business Profile</li>
+                <li>Posicionamiento en búsquedas locales</li>
+                <li>Mejora de reseñas y reputación online</li>
+                <li>SEO para «cerca de mí»</li>
+                <li>Visibilidad en Google Maps</li>
+              </ul>
             </article>
           </div>
         </div>
@@ -1167,6 +1206,6 @@
 
     <script src="./assets/vendor/swiper/swiper-bundle.min.js?v=8954ae96"></script>
     <script src="./assets/vendor/animejs/anime.umd.min.js?v=6cec04e0"></script>
-    <script src="./assets/js/script.js?v=036967f1"></script>
+    <script src="./assets/js/script.js?v=87bfe462"></script>
   </body>
 </html>
