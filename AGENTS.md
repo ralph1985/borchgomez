@@ -220,23 +220,7 @@ Reglas:
 - no crear PR si no puede determinar base, head o repo con seguridad;
 - no crear fork si no tiene permisos.
 
-El body debe ser breve y su formato depende del conjunto completo de cambios de la PR.
-
-Si la PR incluye cualquier cambio funcional de la aplicación, mantener este formato:
-
-```md
-## Resumen
-- ...
-
-## Checks
-- QA final: OK
-- Git Flow: OK
-
-## Notas
-- Pendiente de revisión y merge por el usuario.
-```
-
-Si la PR contiene exclusivamente cambios documentales, de `README.md`, configuración de agentes, skills o memoria de agentes, usar solo:
+El body debe ser breve y usar siempre el mismo formato, tanto para cambios funcionales como documentales, de `README.md`, configuración de agentes, skills o memoria de agentes:
 
 ```md
 ## Resumen
@@ -246,7 +230,7 @@ Si la PR contiene exclusivamente cambios documentales, de `README.md`, configura
 - ...
 ```
 
-En estas PRs exclusivamente documentales o de configuración no se deben incluir las secciones `Checks` ni `Notas`. Si se mezclan cambios documentales con cualquier cambio funcional, se debe usar el formato funcional. No se deben inventar pruebas o checks ejecutados.
+No se deben incluir secciones `Checks`, `Notas` ni otras secciones adicionales. No se deben inventar pruebas, checks ejecutados ni motivos que no correspondan al conjunto completo de cambios de la PR.
 
 No incluir tokens, credenciales, emails privados, datos sensibles, logs largos ni dumps completos de consola.
 
