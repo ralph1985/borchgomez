@@ -21,7 +21,7 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 - Flujo normal: partir de `develop` y crear ramas `feature/...`, `fix/...` o `docs/...`.
 - Hotfix: partir de `main` solo si la tarea lo pide explícitamente o es una corrección urgente de producción.
 - El comportamiento principal de coordinación vive en este archivo; `coordinator.toml` debe respetar y aplicar estas reglas, no sustituirlas.
-- Antes de cambiar de rama, ejecutar `git status --short`.
+- Antes de crear o cambiar de rama, ejecutar `git status --short` y `git branch --show-current`.
 - Si hay cambios locales no creados por Codex, parar y preguntar.
 - El coordinador puede crear ramas locales.
 - Solo el coordinador puede hacer commits.
@@ -34,6 +34,49 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 - Codex no debe usar `git stash`, `git reset --hard`, `git checkout -f` ni limpiar cambios sin permiso explícito.
 - Cada tarea terminada debe tener un único commit hecho por el coordinador.
 - El usuario será responsable de revisar y mergear.
+
+### Git y sandbox
+
+En este entorno, las operaciones Git que crean, actualizan o bloquean contenido dentro de `.git` deben ejecutarse fuera del sandbox desde el primer intento. No se debe esperar a que fallen dentro del sandbox.
+
+Esto aplica, como mínimo, a:
+- `git switch -c <rama>`;
+- `git checkout -b <rama>`;
+- `git branch <rama>`;
+- `git switch <rama>` y `git checkout <rama>` cuando actualicen `HEAD`;
+- `git add <rutas>`;
+- `git commit`;
+- `git push`;
+- `gh pr create`;
+- cualquier operación que cree, actualice o bloquee refs, `HEAD`, el index o commits.
+
+Las operaciones Git de solo lectura pueden seguir ejecutándose dentro del sandbox, por ejemplo:
+- `git status --short`;
+- `git branch --show-current`;
+- `git diff`, `git diff --staged`, `git diff --stat` y `git diff --name-only`;
+- `git log`;
+- `git remote get-url origin`.
+
+Antes de crear o cambiar de rama, ejecutar dentro del sandbox:
+
+```bash
+git status --short
+git branch --show-current
+```
+
+Antes de preparar un commit, ejecutar dentro del sandbox:
+
+```bash
+git status --short
+git diff --stat
+git diff --name-only
+```
+
+`git add` debe ejecutarse fuera del sandbox y solo con rutas explícitas. Queda prohibido usar `git add .`, `git add -A` o `git add --all`.
+
+Los errores `cannot lock ref`, `unable to create directory for .git/refs/...`, `permission denied` sobre `.git` o los fallos al actualizar `HEAD`, index o refs deben interpretarse como una limitación conocida del sandbox, no como un problema del worktree. No se debe repetir indefinidamente el mismo comando dentro del sandbox: se debe parar el reintento sandboxed y aplicar esta política.
+
+Ejecutar fuera del sandbox no relaja ninguna regla de seguridad. Siguen prohibidos `git reset --hard`, `git checkout -f`, `git stash`, la limpieza de archivos sin permiso, merge, rebase, force push, reescritura de historial, cambios de credenciales y cambios de cuenta de GitHub.
 
 ## Push y Pull Request
 
