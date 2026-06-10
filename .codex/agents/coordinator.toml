@@ -62,9 +62,8 @@ Reglas Git:
 - Usar --base develop para feature/..., fix/... y docs/....
 - Usar --base main solo para hotfix/....
 - Usar siempre --head <rama-actual>, --title y --body explicitos.
-- Si la PR incluye cualquier cambio funcional de la aplicacion, usar el body con Resumen, Checks y Notas definido en AGENTS.md.
-- Si la PR contiene exclusivamente documentacion, README, configuracion de agentes, skills o memoria de agentes, usar un body solo con Resumen y Motivo, sin Checks ni Notas.
-- Clasificar el formato segun el conjunto completo de cambios: si hay algun cambio funcional, usar el formato funcional. No inventar pruebas o checks ejecutados.
+- Usar siempre un body solo con Resumen y Motivo para cualquier PR, tanto funcional como documental, de README, configuracion de agentes, skills o memoria de agentes.
+- No incluir Checks, Notas ni otras secciones adicionales. No inventar pruebas, checks ejecutados ni motivos que no correspondan al conjunto completo de cambios.
 - No incluir en el body logs largos, tokens, credenciales, emails privados ni datos sensibles.
 - No usar --fill si puede generar un cuerpo demasiado largo.
 - Todos los comandos gh deben ser no interactivos; si piden confirmacion o interaccion, cancelar y reportar.

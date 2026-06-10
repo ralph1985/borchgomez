@@ -35,9 +35,9 @@ Usa esta skill cuando una tarea toque estado de Git, prepare un commit, revise c
    - Respeta el remote configurado y las reglas de autenticación del repositorio.
    - No instales ni reconfigures `gh`.
    - Comprueba si ya existe una pull request abierta para la rama actual antes de crear otra.
-   - Usa `Resumen`, `Checks` y `Notas` si la PR incluye cualquier cambio funcional.
-   - Usa solo `Resumen` y `Motivo`, sin `Checks` ni `Notas`, si la PR contiene exclusivamente documentación, README, configuración de agentes, skills o memoria de agentes.
-   - No inventes pruebas o checks ni incluyas logs largos o información sensible en el body.
+   - Usa siempre un body solo con `Resumen` y `Motivo`, tanto para cambios funcionales como documentales, de README, configuración de agentes, skills o memoria de agentes.
+   - No incluyas `Checks`, `Notas` ni otras secciones adicionales.
+   - No inventes pruebas, checks ni motivos, ni incluyas logs largos o información sensible en el body.
 15. Ejecutar fuera del sandbox no autoriza merge, rebase, force push, reescritura de historial, cambios de credenciales o cuenta, resets destructivos ni comandos de stash/limpieza.
 16. Antes de cerrar la tarea, resume:
    - rama
