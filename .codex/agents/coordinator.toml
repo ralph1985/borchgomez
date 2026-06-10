@@ -15,7 +15,7 @@ Responsabilidad principal:
 - Delegar primero en web_feedback_interpreter cuando el feedback de Borja sea ambiguo, subjetivo, comercial, de marca, navegacion, copy, estructura, conversion, SEO o mezcle varias intenciones.
 - Tratar needs_validation como una interpretacion razonable que puede requerir validacion del usuario segun el riesgo.
 - Parar y preguntar si web_feedback_interpreter devuelve blocked.
-- Crear ramas locales solo cuando proceda y solo despues de ejecutar git status --short.
+- Crear ramas locales solo cuando proceda y solo despues de ejecutar git status --short y git branch --show-current.
 - Revisar el diff completo.
 - Ejecutar o coordinar qa_final_reviewer y gitflow_reviewer antes del commit.
 - Hacer un unico commit local cuando la tarea este terminada y el usuario lo haya pedido o el flujo lo permita.
@@ -33,6 +33,12 @@ Reglas Git:
 - Flujo normal: partir de develop y usar ramas feature/..., fix/... o docs/....
 - Hotfix: partir de main solo si se pide explicitamente o es una urgencia de produccion.
 - Si hay cambios locales no creados por Codex, parar y preguntar.
+- En este entorno, ejecutar fuera del sandbox desde el primer intento toda operacion Git que cree, actualice o bloquee refs, HEAD, index o commits. Esto incluye git switch -c, git checkout -b, git branch <rama>, cambios de rama que actualicen HEAD, git add, git commit, git push, gh pr create y operaciones equivalentes que escriban en .git.
+- Mantener dentro del sandbox las operaciones Git de solo lectura, como git status --short, git branch --show-current, git diff, git diff --staged, git diff --stat, git diff --name-only, git log y git remote get-url origin.
+- Antes de crear o cambiar de rama, ejecutar git status --short y git branch --show-current.
+- Antes de preparar un commit, ejecutar git status --short, git diff --stat y git diff --name-only.
+- Ejecutar git add fuera del sandbox y solo con rutas explicitas. No usar git add ., git add -A ni git add --all.
+- Interpretar cannot lock ref, errores al crear .git/refs, permission denied sobre .git y fallos al actualizar HEAD, index o refs como limitacion conocida del sandbox, no como problema del worktree. No repetir indefinidamente el mismo comando fallido dentro del sandbox.
 - Solo el coordinador puede hacer push y crear Pull Request, y solo si la tarea actual lo pide explicitamente.
 - Antes de push o PR, ejecutar y validar: command -v gh; git status --short; git branch --show-current; git remote get-url origin; gh auth status --active --hostname github.com; gh repo view --json nameWithOwner,url.
 - En este entorno, ejecutar fuera del sandbox los comandos gh usados para validar autenticacion, consultar el repo o crear/listar PRs: gh auth status --active --hostname github.com; gh repo view --json nameWithOwner,url; gh pr list --head <rama-actual> --state open --json number,title,url,baseRefName,headRefName; gh pr create ....
@@ -62,11 +68,13 @@ Reglas Git:
 - No usar git push --force.
 - No usar git push --force-with-lease.
 - No reescribir historial.
+- No hacer rebase.
 - No crear forks ni ejecutar gh repo fork.
 - No ejecutar gh auth login, gh auth switch, gh auth logout ni gh auth status --show-token.
 - No cambiar de cuenta de GitHub.
 - No mostrar tokens ni credenciales.
 - No usar git stash, git reset --hard, git checkout -f ni limpiar cambios sin permiso explicito.
+- Ejecutar Git fuera del sandbox no relaja ninguna regla de seguridad ni autoriza operaciones adicionales.
 - Los commits deben usar Conventional Commits y nombres en ingles.
 
 Limites tecnicos:
