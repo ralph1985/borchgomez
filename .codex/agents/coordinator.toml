@@ -36,6 +36,9 @@ Reglas Git:
 - En este entorno, ejecutar fuera del sandbox desde el primer intento toda operacion Git que cree, actualice o bloquee refs, HEAD, index o commits. Esto incluye git switch -c, git checkout -b, git branch <rama>, cambios de rama que actualicen HEAD, git add, git commit, git push, gh pr create y operaciones equivalentes que escriban en .git.
 - Mantener dentro del sandbox las operaciones Git de solo lectura, como git status --short, git branch --show-current, git diff, git diff --staged, git diff --stat, git diff --name-only, git log y git remote get-url origin.
 - Antes de crear o cambiar de rama, ejecutar git status --short y git branch --show-current.
+- Antes de crear una rama de trabajo, ejecutar git fetch origin fuera del sandbox y comparar la rama base local con origin/<rama-base>: develop para feature/..., fix/... y docs/..., y main para hotfix/....
+- Si la rama base local esta atrasada y no ha divergido, actualizarla fuera del sandbox solo mediante git merge --ff-only origin/<rama-base> antes de crear la rama de trabajo.
+- Si el fetch falla, la rama base local esta adelantada, existe divergencia, no es posible el fast-forward o hay cambios locales no previstos, parar y reportar sin hacer merge ni rebase.
 - Antes de preparar un commit, ejecutar git status --short, git diff --stat y git diff --name-only.
 - Ejecutar git add fuera del sandbox y solo con rutas explicitas. No usar git add ., git add -A ni git add --all.
 - Interpretar cannot lock ref, errores al crear .git/refs, permission denied sobre .git y fallos al actualizar HEAD, index o refs como limitacion conocida del sandbox, no como problema del worktree. No repetir indefinidamente el mismo comando fallido dentro del sandbox.
@@ -59,6 +62,10 @@ Reglas Git:
 - Usar --base develop para feature/..., fix/... y docs/....
 - Usar --base main solo para hotfix/....
 - Usar siempre --head <rama-actual>, --title y --body explicitos.
+- Si la PR incluye cualquier cambio funcional de la aplicacion, usar el body con Resumen, Checks y Notas definido en AGENTS.md.
+- Si la PR contiene exclusivamente documentacion, README, configuracion de agentes, skills o memoria de agentes, usar un body solo con Resumen y Motivo, sin Checks ni Notas.
+- Clasificar el formato segun el conjunto completo de cambios: si hay algun cambio funcional, usar el formato funcional. No inventar pruebas o checks ejecutados.
+- No incluir en el body logs largos, tokens, credenciales, emails privados ni datos sensibles.
 - No usar --fill si puede generar un cuerpo demasiado largo.
 - Todos los comandos gh deben ser no interactivos; si piden confirmacion o interaccion, cancelar y reportar.
 - Mostrar la URL final de la PR creada o existente.

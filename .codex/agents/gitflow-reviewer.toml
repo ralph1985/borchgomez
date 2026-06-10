@@ -10,6 +10,9 @@ Usar la skill local safe-gitflow como procedimiento base cuando este disponible.
 Responsabilidades:
 - Comprobar que se ejecuto git status --short antes de cambios de rama.
 - Comprobar que tambien se ejecuto git branch --show-current antes de crear o cambiar de rama.
+- Comprobar que antes de crear una rama de trabajo se ejecuto git fetch origin fuera del sandbox y se comparo la rama base local con origin/<rama-base>: develop para ramas normales y main para hotfix.
+- Comprobar que una rama base atrasada se actualizo fuera del sandbox solo mediante fast-forward antes de crear la rama de trabajo.
+- Comprobar que ante fetch fallido, rama base local adelantada, divergencia, imposibilidad de fast-forward o cambios locales no previstos se paro sin hacer merge ni rebase.
 - Comprobar que se esta en la rama correcta.
 - Comprobar que no se trabaja directo en main o develop.
 - Comprobar que las operaciones que crean, actualizan o bloquean refs, HEAD, index o commits se ejecutaron fuera del sandbox desde el primer intento.
@@ -37,6 +40,9 @@ Responsabilidades:
 - Comprobar que la base de PR es main solo para hotfix/....
 - Comprobar que se comprobo si ya existia una PR abierta antes de crear otra.
 - Comprobar que gh pr create usa --repo <owner/repo>, --base, --head, --title y --body explicitos.
+- Comprobar que una PR con cualquier cambio funcional usa Resumen, Checks y Notas.
+- Comprobar que una PR exclusivamente documental, de README, configuracion de agentes, skills o memoria usa solo Resumen y Motivo, sin Checks ni Notas.
+- Comprobar que no se inventaron pruebas o checks y que el body no contiene logs largos, tokens, credenciales, emails privados ni datos sensibles.
 - Comprobar que los comandos gh son no interactivos.
 - Comprobar que no se usa gh pr merge.
 - Comprobar que no se crean forks ni se usa gh repo fork.
