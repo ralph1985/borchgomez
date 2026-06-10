@@ -22,6 +22,9 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 - Hotfix: partir de `main` solo si la tarea lo pide explícitamente o es una corrección urgente de producción.
 - El comportamiento principal de coordinación vive en este archivo; `coordinator.toml` debe respetar y aplicar estas reglas, no sustituirlas.
 - Antes de crear o cambiar de rama, ejecutar `git status --short` y `git branch --show-current`.
+- Antes de crear una rama de trabajo, ejecutar `git fetch origin` fuera del sandbox y comprobar que la rama base local está actualizada respecto a su rama remota: `develop` frente a `origin/develop` en el flujo normal y `main` frente a `origin/main` en hotfix.
+- Si la rama base local está atrasada y no ha divergido, actualizarla únicamente mediante fast-forward fuera del sandbox antes de crear la rama de trabajo.
+- Si el fetch falla, la rama base local está adelantada, hay divergencia, la actualización no puede hacerse por fast-forward o existen cambios locales no previstos, parar y reportar sin hacer merge ni rebase.
 - Si hay cambios locales no creados por Codex, parar y preguntar.
 - El coordinador puede crear ramas locales.
 - Solo el coordinador puede hacer commits.
@@ -40,6 +43,7 @@ Este proyecto se trabaja con Codex en español, con subagentes especializados y 
 En este entorno, las operaciones Git que crean, actualizan o bloquean contenido dentro de `.git` deben ejecutarse fuera del sandbox desde el primer intento. No se debe esperar a que fallen dentro del sandbox.
 
 Esto aplica, como mínimo, a:
+- `git fetch origin`;
 - `git switch -c <rama>`;
 - `git checkout -b <rama>`;
 - `git branch <rama>`;
@@ -63,6 +67,17 @@ Antes de crear o cambiar de rama, ejecutar dentro del sandbox:
 git status --short
 git branch --show-current
 ```
+
+Si se va a crear una rama de trabajo, después de estas comprobaciones se debe actualizar la información remota fuera del sandbox y validar la rama base:
+
+```bash
+git fetch origin
+git rev-parse <rama-base>
+git rev-parse origin/<rama-base>
+git rev-list --left-right --count <rama-base>...origin/<rama-base>
+```
+
+La rama base es `develop` para `feature/...`, `fix/...` y `docs/...`, y `main` para `hotfix/...`. El resultado izquierda/derecha se interpreta así: `0 0`, sincronizada; `0 N`, local atrasada y actualizable; `N 0`, local adelantada; `N M`, divergencia. Solo el caso `0 N` se puede actualizar mediante `git merge --ff-only origin/<rama-base>` fuera del sandbox. En los casos adelantado o divergente se debe parar y reportar sin hacer merge ni rebase.
 
 Antes de preparar un commit, ejecutar dentro del sandbox:
 
@@ -205,7 +220,9 @@ Reglas:
 - no crear PR si no puede determinar base, head o repo con seguridad;
 - no crear fork si no tiene permisos.
 
-El body debe ser breve:
+El body debe ser breve y su formato depende del conjunto completo de cambios de la PR.
+
+Si la PR incluye cualquier cambio funcional de la aplicación, mantener este formato:
 
 ```md
 ## Resumen
@@ -218,6 +235,18 @@ El body debe ser breve:
 ## Notas
 - Pendiente de revisión y merge por el usuario.
 ```
+
+Si la PR contiene exclusivamente cambios documentales, de `README.md`, configuración de agentes, skills o memoria de agentes, usar solo:
+
+```md
+## Resumen
+- ...
+
+## Motivo
+- ...
+```
+
+En estas PRs exclusivamente documentales o de configuración no se deben incluir las secciones `Checks` ni `Notas`. Si se mezclan cambios documentales con cualquier cambio funcional, se debe usar el formato funcional. No se deben inventar pruebas o checks ejecutados.
 
 No incluir tokens, credenciales, emails privados, datos sensibles, logs largos ni dumps completos de consola.
 
