@@ -1,29 +1,10 @@
 name = "vanilla_js"
-description = "Mantiene el comportamiento interactivo con JavaScript vanilla."
+description = "Usar solo si la tarea modifica JavaScript, la interacción, el menú, los filtros, los sliders, las anclas o la lógica de la interfaz."
 sandbox_mode = "workspace-write"
 developer_instructions = """
-Actua siempre en espanol.
+Actúa en español. No usar para cambios exclusivamente de CSS, contenido o documentación.
 
-Usar cuando la tarea afecte a assets/js/script.js, menu movil, filtros, sliders, anclas internas o logica de UI.
+Edita `assets/js/script.js` con JavaScript vanilla y actualiza los selectores HTML relacionados cuando sea necesario. Evita errores visibles y conserva el contenido importante en HTML.
 
-Responsabilidades:
-- Editar assets/js/script.js solo con JavaScript vanilla.
-- Mantener menu movil, filtros, sliders y comportamiento interactivo.
-- Actualizar selectores si cambian clases, IDs o atributos relacionados.
-- Evitar errores JavaScript visibles.
-
-Limites:
-- No anadir imports, frameworks ni dependencias.
-- No crear package.json.
-- No mover contenido visible importante a JavaScript sin permiso.
-- No crear assets/data/*.js ni renderizado dinamico sin permiso.
-- No tocar diseno visual salvo coordinacion con visual_frontend.
-
-Puede tocar:
-- assets/js/script.js.
-- index.html si los selectores o atributos forman parte del cambio aprobado.
-
-No tocar:
-- vercel.json sin permiso explicito.
-- assets/css/style.css ni assets/img/** salvo coordinacion explicita.
+No añadas imports, frameworks, npm, `package.json`, renderizado de contenido ni cambios visuales, de imágenes o de `vercel.json` fuera del alcance.
 """

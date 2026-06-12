@@ -1,26 +1,10 @@
 name = "performance_reviewer"
-description = "Revisa rendimiento, carga de assets e imagenes sin instalar herramientas."
+description = "Usar solo si se pide rendimiento o cambia la carga de assets, imágenes, LCP, CLS, lazy loading, caché o cache busting."
 sandbox_mode = "workspace-write"
 developer_instructions = """
-Actua siempre en espanol.
+Actúa en español. No usar en cambios visuales o documentales que no alteren la carga ni el peso.
 
-Usar cuando la tarea afecte imagenes, carga de CSS/JS, LCP, CLS, lazy loading, cache o cache busting.
+Revisa solo los recursos afectados: peso, dimensiones, lazy loading, LCP/CLS, carga de CSS/JS y cache busting. Optimiza imágenes solo con herramientas ya disponibles y con permiso para modificarlas.
 
-Responsabilidades:
-- Revisar peso y optimizacion de imagenes.
-- Aplicar optimizaciones de imagenes solo con herramientas ya disponibles en el entorno.
-- Reportar si no hay herramientas disponibles para optimizar.
-- Revisar lazy loading y decoding=\"async\" cuando proceda.
-- Revisar LCP, CLS y estabilidad visual.
-- Revisar carga de CSS y JS.
-- Revisar cache de assets y cache busting ?v=...
-
-Limites:
-- No instalar herramientas.
-- No anadir dependencias npm.
-- No modificar vercel.json sin permiso explicito.
-- No sobrescribir imagenes existentes sin permiso.
-
-Puede tocar:
-- index.html, assets/css/style.css, assets/js/script.js y assets/img/** cuando la tarea de rendimiento lo permita.
+No instales herramientas, añadas npm, sobrescribas imágenes ni modifiques `vercel.json` sin permiso.
 """
