@@ -45,7 +45,7 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="./assets/css/style.css?v=35482d78" />
+    <link rel="stylesheet" href="./assets/css/style.css?v=a674d2cb" />
     <link rel="stylesheet" href="./assets/vendor/swiper/swiper-bundle.min.css?v=b4c36bd6" />
   </head>
   <body>
@@ -358,6 +358,41 @@
             presencia online clara y constante sin perder su origen.
           </p>
           <div class="services__layout" data-animate>
+            <article class="services__item services__item--featured" id="service-drone">
+              <div class="services__drone-content">
+                <h3>
+                  <svg class="ui-icon ui-icon--service" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path d="M12 9v6M9 12h6M5 7h4l2 3M19 7h-4l-2 3M5 17h4l2-3M19 17h-4l-2-3"></path>
+                    <circle cx="5" cy="7" r="2"></circle>
+                    <circle cx="19" cy="7" r="2"></circle>
+                    <circle cx="5" cy="17" r="2"></circle>
+                    <circle cx="19" cy="17" r="2"></circle>
+                  </svg>
+                  Vídeo con drone
+                </h3>
+                <p>Planos aéreos con drone que aportan una perspectiva diferencial y mayor impacto visual para mostrar entornos, fincas, instalaciones, alojamientos y paisaje.</p>
+                <p class="services__status"><strong>Acreditación profesional:</strong> pendiente de confirmar con Borja.</p>
+              </div>
+              <picture class="services__drone-visual">
+                <source
+                  srcset="
+                    ./assets/img/borja-pilotando-drone-400.webp?v=4f8ff85f 400w,
+                    ./assets/img/borja-pilotando-drone-800.webp?v=c7bf1d1c 800w,
+                    ./assets/img/borja-pilotando-drone-1200.webp?v=26da8316 1200w
+                  "
+                  sizes="(max-width: 767px) calc(100vw - 5rem), 42vw"
+                  type="image/webp"
+                />
+                <img
+                  src="./assets/img/borja-pilotando-drone-1200.webp?v=26da8316"
+                  alt="Borja Gómez pilotando un dron con Toledo al fondo"
+                  width="1200"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+            </article>
             <article class="services__item" id="service-audiovisual">
               <h3>
                 <svg class="ui-icon ui-icon--service" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -367,19 +402,6 @@
                 Producción audiovisual
               </h3>
               <p>Vídeo profesional y fotografía documental para mostrar tu trabajo con calidad y cercanía.</p>
-            </article>
-            <article class="services__item" id="service-drone">
-              <h3>
-                <svg class="ui-icon ui-icon--service" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 9v6M9 12h6M5 7h4l2 3M19 7h-4l-2 3M5 17h4l2-3M19 17h-4l-2-3"></path>
-                  <circle cx="5" cy="7" r="2"></circle>
-                  <circle cx="19" cy="7" r="2"></circle>
-                  <circle cx="5" cy="17" r="2"></circle>
-                  <circle cx="19" cy="17" r="2"></circle>
-                </svg>
-                Vídeo con drone
-              </h3>
-              <p>Planos aéreos con drone que aportan una perspectiva diferencial y mayor impacto visual para mostrar entornos, fincas, instalaciones, alojamientos y paisaje.</p>
             </article>
             <article class="services__item" id="service-social">
               <h3>
