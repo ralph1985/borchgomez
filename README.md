@@ -31,10 +31,14 @@ No hay comandos `npm`, instalación previa ni compilación.
 ├── AGENTS.md
 ├── PROJECT_CONTEXT.md
 ├── vercel.json
+├── .github/
+│   └── workflows/
 ├── docs/
 │   └── agent-memory/
 ├── scripts/
-│   └── bump-asset-version.sh
+│   ├── bump-asset-version.sh
+│   ├── find-orphan-assets.py
+│   └── report-heavy-images.py
 └── assets/
     ├── css/
     ├── fonts/
@@ -66,6 +70,15 @@ El contenido comercial y SEO importante debe seguir en `index.html`, no generado
 - Si un asset no cambia, su versión no cambia. Ya no se usa un timestamp global.
 - `pre-push` solo valida que no queden cambios pendientes en `index.html`; no modifica archivos.
 - Diagnóstico puntual: `./scripts/bump-asset-version.sh` permite recalcular manualmente las versiones si hace falta revisar el resultado antes de commitear.
+
+## Checks automáticos
+
+Las Pull Requests hacia `develop` y `main` ejecutan comprobaciones de GitHub Actions adaptadas a la web estática:
+
+- **Cache busting**: check bloqueante. Falla si `./scripts/bump-asset-version.sh` genera cambios que no están commiteados.
+- **Posibles assets huérfanos**: informe orientativo, no bloqueante. Se puede ejecutar localmente con `python3 scripts/find-orphan-assets.py`.
+- **Imágenes pesadas**: ranking informativo sin límites ni presupuestos. Se puede ejecutar localmente con `python3 scripts/report-heavy-images.py`.
+- **Lighthouse**: se ejecuta solo cuando cambian HTML o archivos dentro de `assets/`. Publica Performance, Accessibility, Best Practices y SEO, y conserva los informes JSON y HTML como artefactos. Las métricas no bloquean; solo falla ante un error técnico de ejecución.
 
 No se deben añadir frameworks, dependencias npm, CDNs, fuentes externas, analytics ni widgets externos sin permiso explícito.
 
