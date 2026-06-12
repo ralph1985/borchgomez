@@ -45,7 +45,7 @@
       type="font/woff2"
       crossorigin
     />
-    <link rel="stylesheet" href="./assets/css/style.css?v=35482d78" />
+    <link rel="stylesheet" href="./assets/css/style.css?v=d7d51d42" />
     <link rel="stylesheet" href="./assets/vendor/swiper/swiper-bundle.min.css?v=b4c36bd6" />
   </head>
   <body>
@@ -379,7 +379,30 @@
                 </svg>
                 Vídeo con drone
               </h3>
-              <p>Planos aéreos con drone que aportan una perspectiva diferencial y mayor impacto visual para mostrar entornos, fincas, instalaciones, alojamientos y paisaje.</p>
+              <div class="services__drone-body">
+                <div>
+                  <p>Planos aéreos con drone que aportan una perspectiva diferencial y mayor impacto visual para mostrar entornos, fincas, instalaciones, alojamientos y paisaje.</p>
+                  <p class="services__status"><strong>Acreditación profesional:</strong> pendiente de confirmar con Borja.</p>
+                </div>
+                <picture class="services__drone-visual">
+                  <source
+                    srcset="
+                      ./assets/img/borja-pilotando-drone-400.webp?v=4f8ff85f 400w,
+                      ./assets/img/borja-pilotando-drone-800.webp?v=c7bf1d1c 800w
+                    "
+                    sizes="(max-width: 767px) 104px, 120px"
+                    type="image/webp"
+                  />
+                  <img
+                    src="./assets/img/borja-pilotando-drone-400.webp?v=4f8ff85f"
+                    alt="Borja Gómez pilotando un dron con Toledo al fondo"
+                    width="400"
+                    height="400"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              </div>
             </article>
             <article class="services__item" id="service-social">
               <h3>
