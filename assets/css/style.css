@@ -173,6 +173,13 @@ main,
   letter-spacing: 0.01em;
 }
 
+.section-title--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
 .section-title::after {
   content: "";
   position: absolute;
@@ -447,6 +454,28 @@ main,
 
 .icon-inline--social {
   vertical-align: -0.15em;
+}
+
+.ui-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ui-icon--section {
+  width: 0.8em;
+  height: 0.8em;
+  color: var(--earth);
+}
+
+.ui-icon--service {
+  color: var(--olive);
 }
 
 .show-menu {
@@ -808,6 +837,9 @@ main,
 }
 
 .services__item h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
   color: var(--ink);
   margin-bottom: 0.35rem;
   font-size: 1.32rem;
