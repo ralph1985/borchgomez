@@ -129,6 +129,56 @@ main,
   stroke-linejoin: round;
 }
 
+.ambient-drone {
+  position: fixed;
+  top: 18vh;
+  left: -8rem;
+  z-index: 2;
+  width: clamp(4.8rem, 7vw, 6.5rem);
+  color: var(--soil);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.ambient-drone__shape {
+  display: block;
+  width: 100%;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 5px 5px rgba(74, 47, 32, 0.16));
+  transform: scaleX(var(--drone-direction, 1));
+}
+
+.ambient-drone__rotor {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.ambient-drone__camera {
+  fill: rgba(74, 47, 32, 0.14);
+}
+
+.ambient-drone.is-flying .ambient-drone__rotor {
+  animation: drone-rotor-spin 0.16s linear infinite;
+}
+
+@keyframes drone-rotor-spin {
+  to {
+    transform: rotateY(180deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ambient-drone {
+    display: none;
+  }
+}
+
 .page-roots__mass path {
   fill: currentColor;
   opacity: 0.09;

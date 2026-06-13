@@ -808,12 +808,86 @@ function initInteractiveMotion() {
   });
 }
 
+function initAmbientDrone() {
+  const anime = window.anime;
+  const drone = document.querySelector(".ambient-drone");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (!anime || typeof anime.animate !== "function" || !drone || reduceMotion) return;
+
+  const FIRST_FLIGHT_DELAY = [6000, 20000];
+  const REPEAT_FLIGHT_DELAY = [25000, 50000];
+  let flightTimer;
+  let fadeTimer;
+
+  function randomBetween(min, max) {
+    return Math.round(min + Math.random() * (max - min));
+  }
+
+  function scheduleFlight([minDelay, maxDelay]) {
+    window.clearTimeout(flightTimer);
+    flightTimer = window.setTimeout(flyDrone, randomBetween(minDelay, maxDelay));
+  }
+
+  function flyDrone() {
+    if (document.hidden) {
+      scheduleFlight([5000, 12000]);
+      return;
+    }
+
+    const fliesRight = Math.random() >= 0.5;
+    const direction = fliesRight ? 1 : -1;
+    const duration = randomBetween(7200, 9000);
+    const travelDistance = window.innerWidth + 190;
+
+    drone.style.left = fliesRight ? "-8rem" : "auto";
+    drone.style.right = fliesRight ? "auto" : "-8rem";
+    drone.style.top = `${randomBetween(13, 31)}vh`;
+    drone.style.setProperty("--drone-direction", String(direction));
+    drone.style.transform = "translate3d(0, 0, 0)";
+    drone.style.opacity = "0";
+    drone.classList.add("is-flying");
+
+    anime.animate(drone, {
+      x: direction * travelDistance,
+      y: [0, -12, 5, -8, 0],
+      rotate: [direction * -1.4, direction * 0.8, direction * -0.5],
+      duration,
+      ease: "inOutSine",
+      onBegin: () => {
+        anime.animate(drone, {
+          opacity: [0, 0.72],
+          duration: 650,
+          ease: "outSine",
+        });
+
+        fadeTimer = window.setTimeout(() => {
+          anime.animate(drone, {
+            opacity: 0,
+            duration: 850,
+            ease: "inSine",
+          });
+        }, duration - 900);
+      },
+      onComplete: () => {
+        window.clearTimeout(fadeTimer);
+        drone.classList.remove("is-flying");
+        drone.style.opacity = "0";
+        scheduleFlight(REPEAT_FLIGHT_DELAY);
+      },
+    });
+  }
+
+  scheduleFlight(FIRST_FLIGHT_DELAY);
+}
+
 initHeroAnimation();
 initLandscapeAnimation();
 initScrollRootGrowth();
 initFooterLandscapeAnimation();
 initScrollAnimations();
 initInteractiveMotion();
+initAmbientDrone();
 
 (function initPortfolioFilters() {
   const INITIAL_VISIBLE = 6;
