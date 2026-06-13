@@ -11,7 +11,7 @@ const sections = document.querySelectorAll("section[id]");
 const header = document.getElementById("header");
 
 function isCollapsedMenu() {
-  return window.matchMedia("(max-width: 1099px)").matches;
+  return window.matchMedia("(max-width: 899px)").matches;
 }
 
 function setServicesSubmenuOpen(isOpen) {
