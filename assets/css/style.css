@@ -1472,7 +1472,7 @@ main,
   }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 900px) {
   .nav__list {
     display: flex;
     align-items: center;
