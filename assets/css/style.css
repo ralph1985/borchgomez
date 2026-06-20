@@ -157,7 +157,7 @@ main,
 }
 
 .section {
-  padding: 5.6rem 0 3.7rem;
+  padding: 4.2rem 0 2.8rem;
 }
 
 .section-title,
@@ -168,7 +168,7 @@ main,
 .section-title {
   position: relative;
   font-size: clamp(2rem, 4.5vw, 3.6rem);
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.1rem;
   line-height: 0.97;
   letter-spacing: 0.01em;
 }
@@ -234,7 +234,7 @@ main,
 
 .bd-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .l-header {
@@ -795,7 +795,7 @@ main,
 }
 
 .about__content {
-  margin-top: 2.2rem;
+  margin-top: 1.7rem;
 }
 
 .about__visual {
@@ -825,7 +825,7 @@ main,
 }
 
 .services__layout {
-  margin-top: 2.7rem;
+  margin-top: 2rem;
   border-top: 1px solid var(--line-strong);
 }
 
@@ -896,9 +896,9 @@ main,
 }
 
 .plans__grid {
-  margin-top: 2.7rem;
+  margin-top: 2rem;
   display: grid;
-  gap: 1.5rem;
+  gap: 1.25rem;
 }
 
 .plans__card {
@@ -1084,7 +1084,7 @@ main,
   display: flex;
   flex-wrap: nowrap;
   gap: 0.5rem;
-  margin-top: 1.6rem;
+  margin-top: 1.2rem;
   padding-bottom: 0.5rem;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
@@ -1122,8 +1122,8 @@ main,
 
 .portfolio__grid {
   display: grid;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
+  gap: 1.25rem;
+  margin-top: 1.15rem;
 }
 
 .portfolio__card {
@@ -1172,7 +1172,7 @@ main,
 }
 
 .portfolio__container {
-  margin-top: 2.7rem;
+  margin-top: 2rem;
 }
 
 .portfolio__data,
@@ -1246,7 +1246,7 @@ main,
 }
 
 .portfolio__preview-grid {
-  margin-top: 1.6rem;
+  margin-top: 1.2rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.8rem;
@@ -1271,7 +1271,7 @@ main,
 }
 
 .portfolio__actions {
-  margin-top: 1.5rem;
+  margin-top: 1.15rem;
   text-align: center;
 }
 
@@ -1289,7 +1289,7 @@ main,
 }
 
 .contact__panel {
-  margin: 2.2rem auto 0;
+  margin: 1.7rem auto 0;
   max-width: 760px;
   padding: 1.55rem 1.25rem;
   border: 1px solid var(--line-strong);
@@ -1401,7 +1401,7 @@ main,
   }
 
   .section {
-    padding-top: 6rem;
+    padding-top: 4.5rem;
   }
 
   .nav__brand img {
@@ -1427,7 +1427,7 @@ main,
     display: grid;
     grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
     align-items: center;
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   .about__story {
@@ -1438,7 +1438,7 @@ main,
   .about__visual {
     position: absolute;
     top: 50%;
-    left: calc(100% + 2.5rem);
+    left: calc(100% + 2rem);
     width: min(420px, calc((100vw - 3rem) * 0.41));
     margin: 0;
     transform: translateY(-50%);
@@ -1447,7 +1447,7 @@ main,
   .services__layout {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: 2.3rem;
+    column-gap: 1.8rem;
   }
 
   .services__drone-body {
