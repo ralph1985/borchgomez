@@ -1472,6 +1472,12 @@ main,
   }
 }
 
+@media (min-width: 768px) and (hover: none) and (pointer: coarse) {
+  .section {
+    padding: 5.2rem 0 3.4rem;
+  }
+}
+
 @media (min-width: 900px) {
   .nav__list {
     display: flex;
