@@ -1473,8 +1473,13 @@ main,
 }
 
 @media (min-width: 768px) and (max-width: 1099px) {
-  .section {
-    padding: 5.6rem 0 3.7rem;
+  .home,
+  .home__container {
+    min-height: auto;
+  }
+
+  .home {
+    padding: 2.25rem 0 1.5rem;
   }
 }
 
