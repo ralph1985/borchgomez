@@ -857,9 +857,13 @@ main,
 
 .services__drone-body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 104px;
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
-  gap: 0.9rem;
+  gap: 1rem;
+}
+
+.services__drone-body > div {
+  grid-row: 2;
 }
 
 .services__item .services__status {
@@ -870,6 +874,8 @@ main,
 
 .services__drone-visual {
   display: block;
+  grid-row: 1;
+  width: min(100%, 260px);
   overflow: hidden;
   border: 1px solid #a98f70;
   border-radius: 0.9rem;
@@ -1451,8 +1457,20 @@ main,
   }
 
   .services__drone-body {
-    grid-template-columns: minmax(0, 1fr) 120px;
-    gap: 1rem;
+    grid-template-columns: 250px minmax(0, 1fr);
+    gap: 1.2rem;
+  }
+
+  .services__drone-body > div {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .services__drone-visual {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    width: 100%;
   }
 
   .plans__grid {
