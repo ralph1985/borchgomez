@@ -21,9 +21,7 @@
       "/assets/vendor/swiper/swiper-bundle.min.css?v=b4c36bd6"
     ],
     "scripts": [
-      "/assets/vendor/swiper/swiper-bundle.min.js?v=8954ae96",
-      "/assets/vendor/animejs/anime.umd.min.js?v=6cec04e0",
-      "/assets/js/script.js?v=0f66bda5"
+      "/assets/vendor/swiper/swiper-bundle.min.js?v=8954ae96"
     ],
     "fontPreloads": [
       "/assets/fonts/manrope-500-700-latin.woff2?v=a30ddcd3",

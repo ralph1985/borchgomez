@@ -1,3 +1,7 @@
+import * as anime from "animejs";
+
+window.anime = anime;
+
 const HEADER_SCROLL_OFFSET = 140;
 const SECTION_ACTIVE_OFFSET = 80;
 
