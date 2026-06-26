@@ -85,6 +85,18 @@ Si falta alguna variable, si la consulta a Sanity falla o si Sanity devuelve cam
 
 Para que la web pueda leer el contenido sin añadir credenciales al repositorio, el dataset de Sanity debe permitir lectura pública desde el build o estar configurado de forma equivalente en el entorno de despliegue.
 
+### Sincronizar fallbacks locales
+
+Para refrescar la copia local de seguridad con el contenido publicado en Sanity:
+
+```bash
+corepack pnpm run sync:fallbacks
+```
+
+El comando carga `.env` si existe y requiere `SANITY_API_VERSION` junto con `SANITY_PROJECT_ID/SANITY_DATASET` o `SANITY_STUDIO_PROJECT_ID/SANITY_STUDIO_DATASET`. Solo actualiza `site.hero` y `site.purpose` en `src/infrastructure/content/data/site-settings.json`; el resto del contenido local se conserva intacto.
+
+Si falta configuración, no existen los documentos singleton o Sanity devuelve campos obligatorios vacíos, el comando falla antes de escribir el JSON. Al ser un comando manual, el build no queda acoplado a esta sincronización.
+
 ## Sanity Studio
 
 El Studio está en `studio/` y usa el login propio de Sanity. No hay login propio en la web. Borja debe ser invitado como miembro del proyecto de Sanity para editar el contenido.
