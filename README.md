@@ -81,7 +81,7 @@ SANITY_DATASET=production
 SANITY_API_VERSION=2026-06-26
 ```
 
-Si falta alguna variable, si la consulta a Sanity falla o si Sanity devuelve campos incompletos, la web usa el JSON local como fallback seguro. Solo `site.purpose` puede venir de Sanity; servicios, planes, proyectos, hero, contacto y el resto de secciones siguen leyendo de `src/infrastructure/content/data/`.
+Si falta alguna variable, si la consulta a Sanity falla o si Sanity devuelve campos incompletos, la web usa el JSON local como fallback seguro. `site.hero` y `site.purpose` pueden venir de Sanity; servicios, planes, proyectos, contacto y el resto de secciones siguen leyendo de `src/infrastructure/content/data/`.
 
 Para que la web pueda leer el contenido sin añadir credenciales al repositorio, el dataset de Sanity debe permitir lectura pública desde el build o estar configurado de forma equivalente en el entorno de despliegue.
 
@@ -97,10 +97,11 @@ corepack pnpm install
 SANITY_STUDIO_PROJECT_ID=... SANITY_STUDIO_DATASET=production corepack pnpm run dev
 ```
 
-El Studio muestra inicialmente solo el documento singleton “Por qué y cómo trabajo”. Para crear o reemplazar el documento inicial con los textos actuales del JSON local:
+El Studio muestra los documentos singleton “Hero” y “Por qué y cómo trabajo”. Para crear o reemplazar los documentos iniciales con los textos actuales del JSON local:
 
 ```bash
 cd studio
+SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:hero
 SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:purpose
 ```
 

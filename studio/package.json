@@ -7,6 +7,7 @@
     "dev": "sanity dev",
     "build": "sanity build",
     "deploy": "sanity deploy",
+    "seed:hero": "set -a; [ -f .env ] && . ./.env; set +a; sanity dataset import seed/hero.ndjson --dataset \"${SANITY_DATASET:-$SANITY_STUDIO_DATASET}\" --replace",
     "seed:purpose": "set -a; [ -f .env ] && . ./.env; set +a; sanity dataset import seed/purpose.ndjson --dataset \"${SANITY_DATASET:-$SANITY_STUDIO_DATASET}\" --replace"
   },
   "dependencies": {

@@ -25,7 +25,7 @@ export default defineConfig({
   },
   document: {
     actions: (previousActions, context) => {
-      if (context.schemaType === "purpose") {
+      if (["hero", "purpose"].includes(context.schemaType)) {
         return previousActions.filter(({ action }) => action && !["delete", "duplicate", "unpublish"].includes(action));
       }
 

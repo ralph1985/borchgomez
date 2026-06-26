@@ -20,7 +20,7 @@ export interface SiteSettings {
   socialLinks: Array<{ type: string; href: string; label: string }>;
   hero: {
     greeting: string;
-    titleWords: string[];
+    title: string;
     career: string;
     description: string;
     claim: string;
