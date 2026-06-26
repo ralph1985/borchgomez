@@ -636,6 +636,10 @@ main,
 }
 
 .home__title {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 0.18em;
+  row-gap: 0.04em;
   font-size: clamp(2.45rem, 6.7vw, 5.1rem);
   line-height: 0.92;
   padding: 0.72rem 0 1rem;
