@@ -2,7 +2,7 @@
 
 Web de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
 
-El proyecto está migrado a Astro con componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla. No usa React, Tailwind ni base de datos. Sanity puede alimentar `site.hero` y `site.purpose`; el resto del contenido sigue en JSON local.
+La web pública está construida con Astro, componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla. No usa React, Tailwind ni base de datos. El contenido base está en JSON local y Sanity puede alimentar `site.hero` y `site.purpose` cuando está configurado.
 
 ## Instalación
 
@@ -86,7 +86,7 @@ corepack pnpm run preview
 
 ## Capa de contenido
 
-La UI no lee JSON directamente. `index.astro` usa `getHomePageContent`, que depende del puerto `ContentRepository`. El contenido base sigue en `LocalContentRepository`, que lee datos locales desde `src/infrastructure/content/data/`.
+La UI no lee JSON directamente. `index.astro` usa `getHomePageContent`, que depende del puerto `ContentRepository`. La fuente base es `LocalContentRepository`, que lee datos locales desde `src/infrastructure/content/data/`.
 
 `src/shared/config/content.ts` usa `SanityContentRepository` solo si están configuradas estas variables de entorno:
 
@@ -96,7 +96,7 @@ SANITY_DATASET=production
 SANITY_API_VERSION=2026-06-26
 ```
 
-Si falta alguna variable, si la consulta a Sanity falla o si Sanity devuelve campos incompletos, la web usa el JSON local como fallback seguro. `site.hero` y `site.purpose` pueden venir de Sanity; servicios, planes, proyectos, contacto y el resto de secciones siguen leyendo de `src/infrastructure/content/data/`.
+Si falta alguna variable, si la consulta a Sanity falla o si Sanity devuelve campos incompletos, la web usa el JSON local como fallback seguro. `site.hero` y `site.purpose` pueden venir de Sanity; servicios, planes, proyectos, contacto y el resto de secciones se leen desde `src/infrastructure/content/data/`.
 
 Para que la web pueda leer el contenido sin añadir credenciales al repositorio, el dataset de Sanity debe permitir lectura pública desde el build o estar configurado de forma equivalente en el entorno de despliegue.
 
@@ -136,9 +136,9 @@ Al ser una web Astro estática, los cambios publicados en Sanity no aparecen aut
 
 ## Assets y despliegue
 
-Los assets existentes se sirven desde `public/assets/` para conservar las rutas públicas. `vercel.json` mantiene las cabeceras y reglas de caché del proyecto y no forma parte de la migración de contenido.
+Los assets públicos se sirven desde `public/assets/` con rutas `/assets/...`. `vercel.json` define las cabeceras y reglas de caché del proyecto.
 
-Si cambian assets o URLs de assets versionadas, ejecuta `scripts/bump-asset-version.sh` para actualizar los `?v=` con hashes de contenido. En el estado Astro actual, si no existe `index.html`, el script actualiza las referencias dentro de `src/infrastructure/content/data/site-settings.json`.
+Si cambian assets o URLs de assets versionadas, ejecuta `scripts/bump-asset-version.sh` para actualizar los `?v=` con hashes de contenido. En la estructura Astro actual, si no existe `index.html`, el script actualiza las referencias dentro de `src/infrastructure/content/data/site-settings.json`.
 
 ## Pendiente
 
