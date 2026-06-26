@@ -2,7 +2,7 @@
 
 Web de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
 
-El proyecto está migrado a Astro con componentes `.astro`, CSS global y JavaScript vanilla. No usa React, Tailwind, base de datos ni CMS en esta fase.
+El proyecto está migrado a Astro con componentes `.astro`, CSS global y JavaScript vanilla. No usa React, Tailwind ni base de datos. La sección “Por qué y cómo trabajo” puede leerse desde Sanity; el resto del contenido sigue en JSON local.
 
 ## Instalación
 
@@ -71,17 +71,45 @@ corepack pnpm run preview
 
 ## Capa de contenido
 
-La UI no lee JSON directamente. `index.astro` usa `getHomePageContent`, que depende del puerto `ContentRepository`. En esta fase el puerto se implementa con `LocalContentRepository`, que lee datos locales desde `src/infrastructure/content/data/`.
+La UI no lee JSON directamente. `index.astro` usa `getHomePageContent`, que depende del puerto `ContentRepository`. El contenido base sigue en `LocalContentRepository`, que lee datos locales desde `src/infrastructure/content/data/`.
 
-Para sustituir el origen por Sanity u otro CMS en una fase posterior, la UI no debería reescribirse: bastaría con crear otro repositorio que implemente `ContentRepository` y conectarlo en `src/shared/config/content.ts`.
+`src/shared/config/content.ts` usa `SanityContentRepository` solo si están configuradas estas variables de entorno:
+
+```bash
+SANITY_PROJECT_ID=...
+SANITY_DATASET=production
+SANITY_API_VERSION=2026-06-26
+```
+
+Si falta alguna variable, si la consulta a Sanity falla o si Sanity devuelve campos incompletos, la web usa el JSON local como fallback seguro. Solo `site.purpose` puede venir de Sanity; servicios, planes, proyectos, hero, contacto y el resto de secciones siguen leyendo de `src/infrastructure/content/data/`.
+
+Para que la web pueda leer el contenido sin añadir credenciales al repositorio, el dataset de Sanity debe permitir lectura pública desde el build o estar configurado de forma equivalente en el entorno de despliegue.
+
+## Sanity Studio
+
+El Studio está en `studio/` y usa el login propio de Sanity. No hay login propio en la web. Borja debe ser invitado como miembro del proyecto de Sanity para editar el contenido.
+
+Para trabajar con el Studio:
+
+```bash
+cd studio
+corepack pnpm install
+SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run dev
+```
+
+El Studio muestra inicialmente solo el documento singleton “Por qué y cómo trabajo”. Para crear o reemplazar el documento inicial con los textos actuales del JSON local:
+
+```bash
+cd studio
+SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:purpose
+```
+
+Al ser una web Astro estática, los cambios publicados en Sanity no aparecen automáticamente en producción: requieren ejecutar un nuevo build y redeploy.
 
 ## Assets y despliegue
 
 Los assets existentes se sirven desde `public/assets/` para conservar las rutas públicas. `vercel.json` mantiene las cabeceras y reglas de caché del proyecto y no forma parte de la migración de contenido.
 
-## Fase 2 pendiente
+## Pendiente
 
-- Añadir Sanity Studio si se confirma como CMS.
-- Definir schemas para servicios, planes, proyectos, ajustes de sitio y home.
-- Crear un repositorio de contenido Sanity que implemente `ContentRepository`.
-- Configurar webhooks de Sanity con Vercel para regenerar el sitio al publicar contenido.
+- Configurar webhooks de Sanity con Vercel si se quiere regenerar el sitio automáticamente al publicar contenido.

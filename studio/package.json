@@ -1,0 +1,19 @@
+{
+  "name": "borchgomez-sanity-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "seed:purpose": "sanity dataset import seed/purpose.ndjson \"$SANITY_DATASET\" --replace"
+  },
+  "dependencies": {
+    "sanity": "6.2.0",
+    "styled-components": "6.4.3"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3"
+  }
+}
