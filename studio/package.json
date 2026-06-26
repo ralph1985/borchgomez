@@ -10,6 +10,8 @@
     "seed:purpose": "sanity dataset import seed/purpose.ndjson \"$SANITY_DATASET\" --replace"
   },
   "dependencies": {
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
     "sanity": "6.2.0",
     "styled-components": "6.4.3"
   },

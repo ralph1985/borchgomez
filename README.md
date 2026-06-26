@@ -94,7 +94,7 @@ Para trabajar con el Studio:
 ```bash
 cd studio
 corepack pnpm install
-SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run dev
+SANITY_STUDIO_PROJECT_ID=... SANITY_STUDIO_DATASET=production corepack pnpm run dev
 ```
 
 El Studio muestra inicialmente solo el documento singleton “Por qué y cómo trabajo”. Para crear o reemplazar el documento inicial con los textos actuales del JSON local:
