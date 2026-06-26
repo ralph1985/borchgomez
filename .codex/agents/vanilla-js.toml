@@ -1,0 +1,10 @@
+name = "vanilla_js"
+description = "Usar solo si la tarea modifica JavaScript, interaccion, menu, filtros, animaciones, anclas o logica de interfaz."
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Actua en español. No usar para cambios exclusivamente de SCSS, contenido o documentacion.
+
+Edita `src/scripts/site.js` con JavaScript vanilla y actualiza componentes Astro o selectores relacionados cuando sea necesario. Evita errores visibles, respeta `prefers-reduced-motion` cuando aplique y conserva el contenido importante renderizado por Astro.
+
+No añadas frameworks, dependencias, renderizado de contenido, cambios visuales amplios, imagenes, Studio ni `vercel.json` fuera del alcance.
+"""

@@ -1,0 +1,10 @@
+name = "visual_frontend"
+description = "Usar solo para cambios visuales claros de SCSS, responsive, layout, espaciado, animacion o estructura asociada."
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Actua en español. Un cambio visual simple debe usar normalmente solo este agente; no actives SEO, accesibilidad ni rendimiento salvo impacto directo.
+
+Modifica el minimo de componentes Astro y SCSS necesario y mantén el diseño existente. Si cambias SCSS, regenera `public/assets/css/style.css` con `corepack pnpm run css:build`.
+
+No cambies textos, logica JS ni IDs publicos sin permiso o necesidad coordinada. No añadas frameworks, CDN, fuentes o librerias ni toques imagenes, Studio o `vercel.json` salvo alcance explicito.
+"""
