@@ -1,0 +1,131 @@
+---
+import Header from "../components/ui/Header.astro";
+import type { Service, SiteSettings } from "../domain/home-page";
+
+interface Props { site: SiteSettings; services: Service[]; }
+const { site, services } = Astro.props;
+---
+<!doctype html>
+<html lang={site.lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={site.description} />
+    <meta property="og:title" content={site.metadata.ogTitle} />
+    <meta property="og:description" content={site.metadata.ogDescription} />
+    <meta property="og:type" content={site.metadata.ogType} />
+    <meta property="og:image" content={site.metadata.ogImage} />
+    <meta property="og:image:type" content={site.metadata.ogImageType} />
+    <meta property="og:image:width" content={site.metadata.ogImageWidth} />
+    <meta property="og:image:height" content={site.metadata.ogImageHeight} />
+    <meta name="twitter:card" content={site.metadata.twitterCard} />
+    <meta name="twitter:image:alt" content={site.metadata.twitterImageAlt} />
+    <meta name="twitter:title" content={site.metadata.twitterTitle} />
+    <meta name="twitter:description" content={site.metadata.twitterDescription} />
+    <title>{site.title}</title>
+    {site.assets.favicons.map((favicon) => <link {...favicon} />)}
+    {site.assets.fontPreloads.map((font) => <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />)}
+    {site.assets.stylesheets.map((href) => <link rel="stylesheet" href={href} />)}
+  </head>
+  <body>
+    <Header site={site} services={services} />
+<svg class="page-roots" viewBox="0 0 1440 1280" aria-hidden="true" focusable="false">
+      <defs>
+        <filter id="root-roughen" x="-8%" y="-8%" width="116%" height="116%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.012 0.036" numOctaves="2" seed="7" result="noise"></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"></feDisplacementMap>
+        </filter>
+      </defs>
+      <g class="page-roots__mass" filter="url(#root-roughen)">
+        <path d="M133-12c34 126 35 245 9 358-20 87-18 155 10 226 34 85 28 161-11 250-28 65-31 142-5 230 28-73 49-139 76-196 41-88 39-173 8-259-28-78-29-150-5-232 34-116 21-242-41-377Z"></path>
+        <path d="M693 58c39 113 48 214 23 302-26 91-16 176 23 254 44 89 46 176 5 275-21 52-25 111-10 177 31-64 54-123 85-176 53-91 49-183 1-276-38-74-46-151-18-235 34-101 14-209-63-321Z"></path>
+        <path d="M1304-10c-66 126-78 242-39 348 30 83 24 160-17 236-49 90-47 181 6 273 31 54 47 121 49 202 31-88 32-166 5-235-31-79-27-151 14-232 45-89 50-175 16-257-42-102-30-216 14-335Z"></path>
+        <path d="M163 377c-62 14-117 46-164 97 65-20 126-35 182-42 46-6 83-24 111-54-40 8-83 8-129-1Z"></path>
+        <path d="M188 578c75 24 141 65 199 123-48-84-104-140-170-168-46-19-91-21-136-9 38 16 74 34 107 54Z"></path>
+        <path d="M148 783c-65 34-114 82-145 145 59-41 112-68 160-82 38-11 70-35 96-70-36 12-73 15-111 7Z"></path>
+        <path d="M731 394c-64 29-114 73-151 133 60-40 113-66 161-79 37-10 68-32 93-66-34 13-68 17-103 12Z"></path>
+        <path d="M762 569c62 24 111 65 146 124-22-76-61-126-117-153-37-18-75-21-114-9 30 11 58 24 85 38Z"></path>
+        <path d="M1261 371c-79 15-144 53-196 116 70-32 133-51 188-58 46-6 86-27 119-62-36 10-73 11-111 4Z"></path>
+        <path d="M1271 690c-66 31-119 79-158 145 66-41 123-69 174-84 39-12 70-36 94-72-35 12-71 16-110 11Z"></path>
+      </g>
+      <g class="page-roots__cluster page-roots__cluster--primary">
+        <path d="M154 0c-24 136-17 251 24 370 33 96 35 176 0 302-27 98-33 191-7 287"></path>
+        <path d="M720 70c-18 123-7 233 33 331 34 84 36 175 5 272-28 88-26 178 6 272"></path>
+        <path d="M1274 0c35 142 31 257-12 344-55 111-54 212 4 328 52 104 63 205 31 305"></path>
+      </g>
+      <g class="page-roots__cluster page-roots__branches">
+        <path d="M173 283c-61 54-112 91-172 116"></path>
+        <path d="M165 326c-46-16-89-45-129-87"></path>
+        <path d="M191 409c84 30 154 78 210 144"></path>
+        <path d="M211 492c-52 63-81 131-87 205"></path>
+        <path d="M157 665c-76 50-122 106-141 169"></path>
+        <path d="M170 801c91 37 155 91 191 162"></path>
+        <path d="M176 912c-50 41-82 91-96 150"></path>
+        <path d="M739 332c-63 34-115 80-157 137"></path>
+        <path d="M751 444c61 31 111 78 151 141"></path>
+        <path d="M733 661c-59 22-108 62-147 119"></path>
+        <path d="M760 787c55 30 97 77 127 141"></path>
+        <path d="M1265 244c-87 28-153 75-198 142"></path>
+        <path d="M1271 310c54-8 107-33 158-74"></path>
+        <path d="M1255 424c66 38 125 54 184 48"></path>
+        <path d="M1255 561c-54 23-98 60-132 112"></path>
+        <path d="M1273 649c-76 41-133 98-170 171"></path>
+      </g>
+      <g class="page-roots__hairs">
+        <path d="M77 504c-24 21-45 45-62 72"></path>
+        <path d="M122 431c-32 4-63 16-92 36"></path>
+        <path d="M293 675c32-21 61-47 86-78"></path>
+        <path d="M124 697c-34 22-63 52-86 89"></path>
+        <path d="M660 983c-29 20-51 47-66 82"></path>
+        <path d="M642 573c-39 7-74 25-105 54"></path>
+        <path d="M870 569c31-20 58-47 80-82"></path>
+        <path d="M1103 820c-29 26-52 56-68 90"></path>
+        <path d="M1375 474c22 25 40 55 54 88"></path>
+        <path d="M1191 1047c-23 23-41 50-53 83"></path>
+      </g>
+      <g class="page-roots__nodes">
+        <circle cx="173" cy="283" r="5.8"></circle>
+        <circle cx="191" cy="409" r="4.8"></circle>
+        <circle cx="720" cy="332" r="5.4"></circle>
+        <circle cx="751" cy="444" r="4.6"></circle>
+        <circle cx="1265" cy="244" r="5.8"></circle>
+        <circle cx="1255" cy="561" r="4.8"></circle>
+      </g>
+    </svg>
+    <main>
+      <slot />
+    </main>
+    <footer class="footer section">
+      <svg class="footer__land" viewBox="0 0 1440 420" aria-hidden="true" focusable="false">
+        <path
+          class="footer__land-soil footer__land-soil--back"
+          d="M0 156c158-49 287-58 432-23 122 30 210 88 342 75 143-14 246-99 405-80 104 13 177 61 261 44v248H0Z"
+        ></path>
+        <path
+          class="footer__land-soil footer__land-soil--front"
+          d="M0 252c189-63 344-76 506-40 138 31 247 93 404 68 129-21 226-92 370-67 67 12 112 32 160 22v185H0Z"
+        ></path>
+        <g class="footer__furrows">
+          <path d="M80 327c154-47 286-54 432-20"></path>
+          <path d="M346 371c196-66 369-66 577-3"></path>
+          <path d="M867 338c158-60 306-69 492-26"></path>
+        </g>
+        <g class="footer__roots">
+          <path d="M709 84c-10 82-4 142 19 196 18 43 19 83 4 122"></path>
+          <path d="M718 214c-57 22-103 58-138 109"></path>
+          <path d="M729 250c51 24 91 61 119 111"></path>
+          <path d="M690 329c-38 16-68 40-90 73"></path>
+          <path d="M759 331c36 18 63 45 82 82"></path>
+        </g>
+      </svg>
+      <div class="footer__container bd-container">
+        <p class="footer__copy">{site.footer.copy}</p>
+      </div>
+    </footer>
+    {site.assets.scripts.map((src) => <script is:inline src={src}></script>)}
+    <script>
+      import "../scripts/site.js";
+    </script>
+  </body>
+</html>

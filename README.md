@@ -1,100 +1,87 @@
 # Borja Gómez | Dando voz a las raíces
 
-Web estática de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
+Web de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
 
-El proyecto está pensado para ser sencillo de mantener: HTML, CSS y JavaScript vanilla, sin framework, sin `package.json`, sin instalación de dependencias y sin proceso de build.
+El proyecto está migrado a Astro con componentes `.astro`, CSS global y JavaScript vanilla. No usa React, Tailwind, base de datos ni CMS en esta fase.
 
-## Cómo ver la web
+## Instalación
 
-Puedes abrir `index.html` directamente en el navegador.
-
-Para revisar mejor rutas, estilos, scripts, fuentes e imágenes, es preferible servir la carpeta como web estática:
+El proyecto fija el gestor en `package.json` con `packageManager`. Si pnpm no está disponible directamente, puede ejecutarse con Corepack.
 
 ```bash
-python3 -m http.server 8080
+corepack pnpm install
 ```
 
-Después abre:
+## Desarrollo
+
+```bash
+corepack pnpm run dev
+```
+
+Astro mostrará la URL local, normalmente:
 
 ```text
-http://localhost:8080
+http://localhost:4321
 ```
 
-No hay comandos `npm`, instalación previa ni compilación.
+## Construcción
+
+```bash
+corepack pnpm run build
+```
+
+## Previsualización del build
+
+```bash
+corepack pnpm run preview
+```
 
 ## Estructura básica
 
 ```text
 .
-├── index.html
-├── README.md
-├── AGENTS.md
-├── PROJECT_CONTEXT.md
-├── vercel.json
-├── .github/
-│   └── workflows/
-├── docs/
-│   └── agent-memory/
+├── astro.config.mjs
+├── package.json
+├── public/
+│   └── assets/
+├── src/
+│   ├── pages/
+│   ├── layouts/
+│   ├── sections/
+│   ├── components/
+│   ├── domain/
+│   ├── application/
+│   ├── ports/
+│   ├── infrastructure/
+│   └── shared/
 ├── scripts/
-│   ├── bump-asset-version.sh
-│   ├── find-orphan-assets.py
-│   └── report-heavy-images.py
-└── assets/
-    ├── css/
-    ├── fonts/
-    ├── img/
-    ├── js/
-    └── vendor/
+├── docs/
+└── vercel.json
 ```
 
-- `index.html`: contenido visible principal, metadatos SEO, enlaces, secciones, imágenes y recursos cargados por la página.
-- `assets/css/style.css`: estilos globales, responsive, layout, animaciones visuales y fuentes locales.
-- `assets/js/script.js`: interacción en JavaScript vanilla, como menú móvil, filtros, carrusel, anclas y estados de interfaz.
-- `assets/img/`: imágenes de marca, hero, portfolio y favicons.
-- `assets/fonts/`: fuentes locales autoalojadas.
-- `assets/vendor/`: librerías ya incluidas en el repositorio y servidas en local, como Swiper y Anime.js.
-- `scripts/bump-asset-version.sh`: actualiza los parámetros `?v=...` de assets referenciados desde `index.html` usando hash de contenido por archivo.
-- `vercel.json`: configuración de despliegue, cabeceras, CSP y caché para Vercel.
+- `src/pages/index.astro`: entrada de la home. Obtiene el contenido y compone layout y secciones.
+- `src/layouts/BaseLayout.astro`: HTML base, metadatos, cabecera, footer, CSS y scripts locales.
+- `src/sections/`: secciones visibles de la home.
+- `src/components/`: piezas reutilizables de UI e iconos.
+- `src/domain/`: tipos simples del contenido.
+- `src/ports/content-repository.ts`: interfaz de acceso a contenido.
+- `src/application/get-home-page-content.ts`: caso de uso que entrega los datos preparados para la página.
+- `src/infrastructure/content/`: repositorio local y JSON actuales.
+- `public/assets/`: CSS, JS, fuentes, vendors, imágenes y favicons servidos con la misma ruta pública `/assets/...`.
 
-## Mantenimiento
+## Capa de contenido
 
-El contenido comercial y SEO importante debe seguir en `index.html`, no generado desde JavaScript. Para cambios habituales:
+La UI no lee JSON directamente. `index.astro` usa `getHomePageContent`, que depende del puerto `ContentRepository`. En esta fase el puerto se implementa con `LocalContentRepository`, que lee datos locales desde `src/infrastructure/content/data/`.
 
-- Textos, secciones, enlaces, metadatos, portfolio, CTA e imágenes enlazadas: editar `index.html`.
-- Estilos, responsive, layout, colores, espaciados y animaciones visuales: editar `assets/css/style.css`.
-- Comportamiento interactivo: editar `assets/js/script.js` con JavaScript vanilla.
-- Imágenes nuevas: guardarlas en `assets/img/...` con nombres claros y optimizarlas solo con herramientas ya disponibles.
-- Hooks de Git: activarlos una vez con `git config core.hooksPath .githooks`.
-- Cache busting: el `pre-commit` actualiza automáticamente los `?v=...` de `index.html` con un hash corto del contenido de cada asset local.
-- Si hay assets locales modificados o sin seguimiento que no estén preparados en stage, el `pre-commit` se detiene para evitar versiones inconsistentes.
-- Si un asset no cambia, su versión no cambia. Ya no se usa un timestamp global.
-- `pre-push` solo valida que no queden cambios pendientes en `index.html`; no modifica archivos.
-- Diagnóstico puntual: `./scripts/bump-asset-version.sh` permite recalcular manualmente las versiones si hace falta revisar el resultado antes de commitear.
+Para sustituir el origen por Sanity u otro CMS en una fase posterior, la UI no debería reescribirse: bastaría con crear otro repositorio que implemente `ContentRepository` y conectarlo en `src/shared/config/content.ts`.
 
-## Checks automáticos
+## Assets y despliegue
 
-Las Pull Requests hacia `develop` y `main` ejecutan comprobaciones de GitHub Actions adaptadas a la web estática:
+Los assets existentes se sirven desde `public/assets/` para conservar las rutas públicas. `vercel.json` mantiene las cabeceras y reglas de caché del proyecto y no forma parte de la migración de contenido.
 
-- **Cache busting**: check bloqueante. Falla si `./scripts/bump-asset-version.sh` genera cambios que no están commiteados.
-- **Posibles assets huérfanos**: informe orientativo, no bloqueante. Se puede ejecutar localmente con `python3 scripts/find-orphan-assets.py`.
-- **Imágenes pesadas**: ranking informativo sin límites ni presupuestos. Se puede ejecutar localmente con `python3 scripts/report-heavy-images.py`.
-- **Lighthouse**: se ejecuta solo cuando cambian HTML o archivos dentro de `assets/`. Publica Performance, Accessibility, Best Practices y SEO, y conserva los informes JSON y HTML como artefactos. Las métricas no bloquean; solo falla ante un error técnico de ejecución.
+## Fase 2 pendiente
 
-No se deben añadir frameworks, dependencias npm, CDNs, fuentes externas, analytics ni widgets externos sin permiso explícito.
-
-## Despliegue
-
-La web está preparada para desplegarse como sitio estático en Vercel mediante `vercel.json`.
-
-Ese archivo define cabeceras de seguridad y reglas de caché para la raíz, `index.html` y los assets. Es un archivo protegido: solo debe modificarse con permiso explícito.
-
-## Arquitectura de agentes
-
-El proyecto se trabaja con Codex y subagentes especializados. La documentación interna vive fuera del README:
-
-- `AGENTS.md`: reglas principales de coordinación, límites técnicos, Git Flow y responsabilidades.
-- `PROJECT_CONTEXT.md`: contexto práctico del proyecto.
-- `.codex/agents/*.toml`: instrucciones de cada subagente.
-- `docs/agent-memory/`: decisiones estables y problemas conocidos.
-
-El README debe quedarse como guía breve para entender, abrir y mantener la web. Las reglas internas de agentes no deben duplicarse aquí.
+- Añadir Sanity Studio si se confirma como CMS.
+- Definir schemas para servicios, planes, proyectos, ajustes de sitio y home.
+- Crear un repositorio de contenido Sanity que implemente `ContentRepository`.
+- Configurar webhooks de Sanity con Vercel para regenerar el sitio al publicar contenido.

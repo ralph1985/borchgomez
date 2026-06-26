@@ -1,0 +1,284 @@
+{
+  "lang": "es",
+  "title": "Borja Gómez | Producción audiovisual para negocios rurales",
+  "description": "Vídeo, fotografía, drone y contenido digital para negocios rurales, restaurantes, bodegas y proyectos rurales con identidad.",
+  "metadata": {
+    "ogTitle": "Borja Gómez | Dando voz a las raíces",
+    "ogDescription": "Producción audiovisual rural: vídeo, fotografía, drone, redes sociales y presencia online para negocios y proyectos locales.",
+    "ogType": "website",
+    "ogImage": "/assets/img/projects/otros/territorio-vivo.webp?v=d320c8f7",
+    "ogImageType": "image/png",
+    "ogImageWidth": "1200",
+    "ogImageHeight": "630",
+    "twitterCard": "summary_large_image",
+    "twitterImageAlt": "Borja Gómez, creador audiovisual rural",
+    "twitterTitle": "Borja Gómez | Dando voz a las raíces",
+    "twitterDescription": "Vídeo, fotografía y drone para negocios rurales, bodegas, restaurantes, alojamientos y productores locales."
+  },
+  "assets": {
+    "stylesheets": [
+      "/assets/css/style.css?v=dc1b6b92",
+      "/assets/vendor/swiper/swiper-bundle.min.css?v=b4c36bd6"
+    ],
+    "scripts": [
+      "/assets/vendor/swiper/swiper-bundle.min.js?v=8954ae96"
+    ],
+    "fontPreloads": [
+      "/assets/fonts/manrope-500-700-latin.woff2?v=a30ddcd3",
+      "/assets/fonts/playfair-display-700-latin.woff2?v=28453852"
+    ],
+    "favicons": [
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "16x16",
+        "href": "/assets/img/favicons/favicon-16x16.png?v=a4826502"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "32x32",
+        "href": "/assets/img/favicons/favicon-32x32.png?v=8a73411f"
+      },
+      {
+        "rel": "icon",
+        "type": "image/png",
+        "sizes": "48x48",
+        "href": "/assets/img/favicons/favicon-48x48.png?v=a6b3d5a6"
+      },
+      {
+        "rel": "apple-touch-icon",
+        "sizes": "180x180",
+        "href": "/assets/img/favicons/apple-touch-icon.png?v=d9b95c5e"
+      },
+      {
+        "rel": "manifest",
+        "href": "/assets/img/favicons/site.webmanifest?v=04e63d35"
+      }
+    ]
+  },
+  "brand": {
+    "label": "Inicio Borja Gómez",
+    "logo": {
+      "src": "/assets/img/logo-eye.webp?v=3afa6cad",
+      "alt": "Logo de Borja Gómez",
+      "width": 210,
+      "height": 128
+    }
+  },
+  "nav": [
+    {
+      "label": "Inicio",
+      "href": "#home"
+    },
+    {
+      "label": "Método",
+      "href": "#purpose"
+    },
+    {
+      "label": "Planes",
+      "href": "#plans"
+    },
+    {
+      "label": "Proyectos",
+      "href": "#portfolio"
+    },
+    {
+      "label": "Instagram",
+      "href": "#instagram"
+    },
+    {
+      "label": "Sobre mí",
+      "href": "#about"
+    },
+    {
+      "label": "Contacto",
+      "href": "#contact"
+    }
+  ],
+  "serviceMenuFeatures": [
+    "Optimización de Google Business Profile",
+    "Posicionamiento en búsquedas locales",
+    "Mejora de reseñas y reputación online",
+    "SEO para «cerca de mí»",
+    "Visibilidad en Google Maps"
+  ],
+  "socialLinks": [
+    {
+      "type": "instagram",
+      "href": "https://www.instagram.com/borchgomez/",
+      "label": "Instagram de Borja Gómez"
+    },
+    {
+      "type": "whatsapp",
+      "href": "https://wa.me/34687695204",
+      "label": "WhatsApp de Borja Gómez"
+    }
+  ],
+  "hero": {
+    "greeting": "Borja Gómez · creador audiovisual rural",
+    "titleWords": [
+      "Haz",
+      "que",
+      "tu",
+      "historia",
+      "se",
+      "vea"
+    ],
+    "career": "Dando voz a las raíces",
+    "description": "Producción audiovisual, fotografía y contenido digital para marcas rurales y negocios locales. Historias reales del campo para que restaurantes, queserías, bodegas, artesanos y municipios del territorio muestren su trabajo con autenticidad.",
+    "claim": "Haz que tu negocio se vea.",
+    "actions": [
+      {
+        "label": "Cuéntame tu proyecto",
+        "href": "#contact",
+        "className": "home__hire"
+      },
+      {
+        "label": "Ver historias",
+        "href": "#portfolio",
+        "className": "home__download"
+      }
+    ],
+    "image": {
+      "src": "/assets/img/borja-ordenador-drone-2.webp?v=e2e08e6f",
+      "srcset": "/assets/img/borja-ordenador-drone-2-400.webp?v=e1fb91bf 400w, /assets/img/borja-ordenador-drone-2-800.webp?v=e017855b 800w, /assets/img/borja-ordenador-drone-2-1200.webp?v=f081314f 1200w",
+      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 46vw, 560px",
+      "alt": "Borja Gómez trabajando con ordenador y drone",
+      "width": 1254,
+      "height": 1254
+    }
+  },
+  "purpose": {
+    "title": "Por qué y cómo trabajo",
+    "subtitle": "El mundo rural tiene historias, oficios y proyectos con valor propio. Mi trabajo consiste en ayudar a que se vean con una mirada cercana, profesional y fiel a su identidad.",
+    "items": [
+      {
+        "title": "Por qué",
+        "text": "Porque muchos negocios, productores, artesanos y municipios hacen un trabajo enorme que no siempre consigue la visibilidad online con la fuerza que merece."
+      },
+      {
+        "title": "Cómo",
+        "text": "Escucho cada proyecto, entiendo su contexto y traduzco su historia en vídeo, fotografía y contenido digital pensado para conectar con quienes valoran lo auténtico y lo cercano."
+      }
+    ],
+    "closing": "El objetivo es mostrar el valor que hay detrás de cada proyecto: su trabajo, su historia y su origen."
+  },
+  "servicesIntro": {
+    "title": "Servicios",
+    "subtitle": "Servicios de vídeo profesional, fotografía y contenido digital para negocios rurales que necesitan una presencia online clara y constante sin perder su origen."
+  },
+  "projectsIntro": {
+    "title": "Proyectos e historias",
+    "subtitle": "Esta parte documental sigue siendo el centro: trabajos reales que muestran cómo se cuenta el territorio desde dentro.",
+    "filters": [
+      {
+        "label": "Todos",
+        "value": "all"
+      },
+      {
+        "label": "Artesanos",
+        "value": "artesanos"
+      },
+      {
+        "label": "Restaurantes",
+        "value": "restaurantes"
+      },
+      {
+        "label": "Turismo Rural",
+        "value": "turismo-rural"
+      },
+      {
+        "label": "Alojamientos",
+        "value": "alojamientos"
+      },
+      {
+        "label": "Queserías",
+        "value": "queserias"
+      },
+      {
+        "label": "Panaderías",
+        "value": "panaderias"
+      },
+      {
+        "label": "Tradiciones",
+        "value": "tradiciones"
+      },
+      {
+        "label": "Otros",
+        "value": "otros"
+      }
+    ]
+  },
+  "instagram": {
+    "title": "Instagram",
+    "subtitle": "Publicaciones recientes, historias del territorio y trabajos visuales en marcha.",
+    "previews": [
+      {
+        "href": "https://www.instagram.com/p/DW1lAEKjRmQ/",
+        "ariaLabel": "Ver publicación de territorio vivo",
+        "image": {
+          "src": "/assets/img/projects/otros/territorio-vivo.webp?v=d320c8f7",
+          "alt": "Previsualización de territorio vivo y naturaleza",
+          "width": 1196,
+          "height": 892
+        }
+      },
+      {
+        "href": "https://www.instagram.com/p/DScfFHwjccd/",
+        "ariaLabel": "Ver publicación de raíces vivas",
+        "image": {
+          "src": "/assets/img/projects/otros/raices-vivas.webp?v=2a9461b0",
+          "alt": "Previsualización de raíces e identidad rural",
+          "width": 668,
+          "height": 1196
+        }
+      }
+    ],
+    "cta": {
+      "label": "Haz que tu negocio se vea",
+      "href": "https://www.instagram.com/borchgomez/"
+    }
+  },
+  "about": {
+    "title": "Sobre mí",
+    "subtitle": "Miradas, tradiciones y sabores del territorio. 🌾 Nací y me crié en el campo, en una forma de trabajar donde importan el esfuerzo, la cercanía y cumplir con la palabra.",
+    "paragraphsBeforeImage": [
+      "Durante años me dediqué al cuidado de personas mayores y con diversidad funcional. Ese trabajo me enseñó algo que hoy sigue marcando cada proyecto: escuchar de verdad, entender a cada persona y aportar valor desde lo humano.",
+      "Tras la pandemia decidí dar un giro. Empecé a usar el vídeo, la fotografía y la narrativa visual para ayudar al mundo rural a crecer con herramientas actuales, sin perder su identidad."
+    ],
+    "image": {
+      "src": "/assets/img/borja-drone-foto-movil.jpg?v=95dec453",
+      "alt": "Borja con un dron en la cabeza haciendo una foto con el móvil",
+      "width": 1440,
+      "height": 1440
+    },
+    "paragraphsAfterImage": [
+      "Mi objetivo es devolver al territorio lo que me dio: visibilidad real para negocios y proyectos que merecen ser vistos, con especial vínculo con Castilla-La Mancha y abierto a cualquier entorno rural.",
+      "Desde Fuera de la Linde ayudo a productores locales, artesanos y pequeños municipios a contar mejor lo que hacen: historias con alma, raíz y oficio."
+    ]
+  },
+  "contact": {
+    "title": "Hablemos",
+    "subtitle": "Trabajo con negocios rurales, bodegas, restaurantes, alojamientos, productores, municipios y proyectos locales que quieren mostrar mejor lo que hacen, con especial vínculo con Castilla-La Mancha y abierto a cualquier entorno rural.",
+    "primary": {
+      "label": "Hablemos",
+      "href": "https://wa.me/34687695204"
+    },
+    "phone": {
+      "label": "687 695 204",
+      "href": "tel:+34687695204"
+    },
+    "email": {
+      "label": "borgomyuste@gmail.com",
+      "href": "mailto:borgomyuste@gmail.com"
+    },
+    "instagram": {
+      "label": "@borchgomez",
+      "href": "https://www.instagram.com/borchgomez/"
+    }
+  },
+  "footer": {
+    "copy": "© Borja Gómez. Dando voz a las raíces."
+  }
+}

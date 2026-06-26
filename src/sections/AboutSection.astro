@@ -1,0 +1,16 @@
+---
+import type { SiteSettings } from "../domain/home-page";
+interface Props { about: SiteSettings["about"]; }
+const { about } = Astro.props;
+---
+<section class="about section" id="about">
+  <div class="bd-container about__container">
+    <h2 class="section-title" data-animate>{about.title}</h2>
+    <p class="section-subtitle" data-animate>{about.subtitle}</p>
+    <div class="about__content"><div class="about__story" data-animate>
+      {about.paragraphsBeforeImage.map((paragraph) => <p>{paragraph}</p>)}
+      <div class="about__visual"><img class="about__image" src={about.image.src} alt={about.image.alt} width={about.image.width} height={about.image.height} loading="lazy" decoding="async" /></div>
+      {about.paragraphsAfterImage.map((paragraph) => <p>{paragraph}</p>)}
+    </div></div>
+  </div>
+</section>
