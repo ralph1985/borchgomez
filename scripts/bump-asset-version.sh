@@ -2,12 +2,8 @@
 set -eu
 
 INDEX_FILE="index.html"
+SITE_SETTINGS_FILE="src/infrastructure/content/data/site-settings.json"
 SUPPORTED_EXTENSIONS="css|js|png|jpg|jpeg|svg|webp|gif|ico|webmanifest|woff|woff2|ttf"
-
-if [ ! -f "$INDEX_FILE" ]; then
-  echo "No se encuentra $INDEX_FILE" >&2
-  exit 1
-fi
 
 if command -v shasum >/dev/null 2>&1; then
   hash_file() {
@@ -19,6 +15,84 @@ elif command -v sha256sum >/dev/null 2>&1; then
   }
 else
   echo "No se encuentra shasum ni sha256sum para calcular hashes de assets." >&2
+  exit 1
+fi
+
+if [ ! -f "$INDEX_FILE" ] && [ -f "$SITE_SETTINGS_FILE" ]; then
+  node <<'NODE'
+const crypto = require("crypto");
+const fs = require("fs");
+const path = require("path");
+
+const settingsFile = "src/infrastructure/content/data/site-settings.json";
+const supportedExtensions = /\.(?:css|js|png|jpg|jpeg|svg|webp|gif|ico|webmanifest|woff|woff2|ttf)(?=$|[?#])/i;
+const assetUrlPattern = /(?:\.?\/)?assets\/[^"',\s)]+?\.(?:css|js|png|jpg|jpeg|svg|webp|gif|ico|webmanifest|woff2?|ttf)(?:\?[^"',\s)]*)?(?:#[^"',\s)]*)?/gi;
+
+function assetPathFromUrl(url) {
+  const [assetPath] = url.split(/[?#]/, 1);
+  if (!assetPath || !supportedExtensions.test(assetPath)) {
+    return null;
+  }
+
+  const normalized = assetPath
+    .replace(/^\.\//, "")
+    .replace(/^\/+/, "")
+    .replace(/^assets\//, "public/assets/");
+
+  return normalized;
+}
+
+function versionUrl(url) {
+  const assetPath = assetPathFromUrl(url);
+  if (!assetPath || !fs.existsSync(assetPath)) {
+    return url;
+  }
+
+  const hash = crypto.createHash("sha256").update(fs.readFileSync(assetPath)).digest("hex").slice(0, 8);
+  const match = url.match(/^([^?#]*)(\?[^#]*)?(#.*)?$/);
+  if (!match) {
+    return url;
+  }
+
+  const [, pathname, query = "", fragment = ""] = match;
+  const params = new URLSearchParams(query.replace(/^\?/, ""));
+  params.set("v", hash);
+  const nextQuery = params.toString();
+
+  return `${pathname}${nextQuery ? `?${nextQuery}` : ""}${fragment}`;
+}
+
+function visit(value) {
+  if (typeof value === "string") {
+    return value.replace(assetUrlPattern, versionUrl);
+  }
+
+  if (Array.isArray(value)) {
+    return value.map(visit);
+  }
+
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.entries(value).map(([key, child]) => [key, visit(child)]));
+  }
+
+  return value;
+}
+
+const before = fs.readFileSync(settingsFile, "utf8");
+const updated = `${JSON.stringify(visit(JSON.parse(before)), null, 2)}\n`;
+
+if (updated === before) {
+  console.log("Las versiones de assets ya estan actualizadas.");
+} else {
+  fs.writeFileSync(settingsFile, updated);
+  console.log(`Versiones de assets actualizadas por hash de contenido en ${settingsFile}.`);
+}
+NODE
+  exit 0
+fi
+
+if [ ! -f "$INDEX_FILE" ]; then
+  echo "No se encuentra $INDEX_FILE ni $SITE_SETTINGS_FILE" >&2
   exit 1
 fi
 

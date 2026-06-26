@@ -1,0 +1,79 @@
+.footer {
+  position: relative;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 50% 18%, rgba(196, 208, 184, 0.28), transparent 22rem),
+    linear-gradient(180deg, #e7d4bd 0%, #d1ad82 100%);
+  border-top: 1px solid var(--line);
+  overflow: hidden;
+  position: relative;
+}
+
+.footer__land {
+  position: absolute;
+  left: 50%;
+  bottom: -1px;
+  z-index: 0;
+  width: min(1640px, 136vw);
+  min-width: 980px;
+  height: auto;
+  color: var(--soil);
+  opacity: 0.68;
+  pointer-events: none;
+  transform: translateX(-50%);
+}
+
+.footer__land-soil {
+  transform-origin: center bottom;
+}
+
+.footer__land-soil--back {
+  fill: rgba(196, 208, 184, 0.26);
+}
+
+.footer__land-soil--front {
+  fill: rgba(91, 63, 45, 0.24);
+}
+
+.footer__furrows path,
+.footer__roots path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.footer__furrows path {
+  stroke: rgba(74, 47, 32, 0.48);
+  stroke-width: 2.4;
+}
+
+.footer__roots path:first-child {
+  stroke-width: 5.2;
+}
+
+.footer__roots path:not(:first-child) {
+  stroke-width: 2.3;
+  opacity: 0.72;
+}
+
+.footer__container {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  text-align: center;
+  gap: 1rem;
+  justify-items: center;
+}
+
+.footer__copy {
+  width: fit-content;
+  max-width: 100%;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid rgba(91, 63, 45, 0.18);
+  border-radius: 999px;
+  color: #24180f;
+  background: rgba(247, 241, 232, 0.88);
+  box-shadow: 0 10px 24px rgba(74, 47, 32, 0.12);
+  backdrop-filter: blur(6px);
+}

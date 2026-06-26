@@ -1,0 +1,11 @@
+.bd-container {
+  max-width: 1140px;
+  width: calc(100% - 2rem);
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.bd-grid {
+  display: grid;
+  gap: 1.25rem;
+}

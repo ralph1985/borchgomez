@@ -1,0 +1,184 @@
+.plans__grid {
+  margin-top: 2rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.plans__card {
+  position: relative;
+  padding: 1.8rem 1.4rem 1.6rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #f8f1e7 0%, #eadcc9 100%);
+  text-align: center;
+  transform-origin: center bottom;
+}
+
+.plans__card--featured {
+  border-color: var(--green-olive-pantone);
+  background: linear-gradient(180deg, var(--green-olive-pantone) 0%, #747141 100%);
+  box-shadow: 0 12px 34px rgba(141, 139, 85, 0.3);
+}
+
+.plans__card--featured .plans__name,
+.plans__card--featured .plans__price,
+.plans__card--featured .plans__tagline,
+.plans__card--featured .plans__features li {
+  color: var(--paper);
+}
+
+.plans__card--featured .plans__features li::before {
+  color: var(--paper);
+}
+
+.plans__card--featured .plans__cta {
+  border-color: rgba(244, 238, 228, 0.72);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.plans__badge {
+  position: absolute;
+  top: -0.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: var(--green-olive-pantone);
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.plans__name {
+  font-size: 1.6rem;
+  color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+
+.plans__price {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--earth);
+  margin-bottom: 0.6rem;
+}
+
+.plans__tagline {
+  color: #564637;
+  font-size: 0.95rem;
+  margin-bottom: 1.2rem;
+}
+
+.plans__features {
+  text-align: left;
+  margin-bottom: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.plans__features li {
+  position: relative;
+  padding-left: 1.3rem;
+  margin-bottom: 0.55rem;
+  color: #564637;
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.plans__features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--olive);
+  font-weight: 700;
+}
+
+.plans__cta {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.68rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--earth);
+  background: linear-gradient(135deg, var(--clay) 0%, var(--earth-soft) 100%);
+  color: var(--ink);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.plans__cta:hover {
+  background: linear-gradient(135deg, var(--earth) 0%, #c19064 100%);
+}
+
+.plans__promo {
+  margin-top: 2rem;
+  padding: 1.5rem 1.3rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #f7f1e8 0%, #eadbc8 100%);
+  text-align: center;
+}
+
+.plans__promo-title {
+  font-size: 1.32rem;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+
+.plans__promo-price {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--earth);
+  margin-bottom: 0.6rem;
+}
+
+.plans__promo-description {
+  color: #564637;
+  margin-bottom: 1rem;
+}
+
+.plans__promo-features {
+  display: inline-block;
+  text-align: left;
+  margin-bottom: 1.2rem;
+}
+
+.plans__promo-features li {
+  position: relative;
+  padding-left: 1.3rem;
+  margin-bottom: 0.4rem;
+  color: #564637;
+  font-size: 0.94rem;
+}
+
+.plans__promo-features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--olive);
+  font-weight: 700;
+}
+
+.plans__promo-note {
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: var(--olive);
+  padding: 0.65rem 1rem;
+  border: 1px dashed var(--sage-deep);
+  border-radius: 0.6rem;
+  background: rgba(196, 208, 184, 0.22);
+}
+
+.plans__budget-note {
+  margin-top: 1rem;
+  padding: 1rem 1.2rem;
+  border-left: 4px solid var(--green-olive-pantone);
+  background: rgba(141, 139, 85, 0.14);
+  color: #453829;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}

@@ -2,7 +2,7 @@
 
 Web de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
 
-El proyecto está migrado a Astro con componentes `.astro`, CSS global y JavaScript vanilla. No usa React, Tailwind ni base de datos. La sección “Por qué y cómo trabajo” puede leerse desde Sanity; el resto del contenido sigue en JSON local.
+El proyecto está migrado a Astro con componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla. No usa React, Tailwind ni base de datos. La sección “Por qué y cómo trabajo” puede leerse desde Sanity; el resto del contenido sigue en JSON local.
 
 ## Instalación
 
@@ -24,10 +24,22 @@ Astro mostrará la URL local, normalmente:
 http://localhost:4321
 ```
 
+Si se están editando estilos, deja también Sass en modo watch en otra terminal:
+
+```bash
+corepack pnpm run css:watch
+```
+
 ## Construcción
 
 ```bash
 corepack pnpm run build
+```
+
+El build compila primero `src/styles/main.scss` en `public/assets/css/style.css` y después ejecuta Astro. Si solo se quieren regenerar los estilos:
+
+```bash
+corepack pnpm run css:build
 ```
 
 ## Previsualización del build
@@ -53,6 +65,7 @@ corepack pnpm run preview
 │   ├── application/
 │   ├── ports/
 │   ├── infrastructure/
+│   ├── styles/
 │   └── shared/
 ├── scripts/
 ├── docs/
@@ -67,7 +80,8 @@ corepack pnpm run preview
 - `src/ports/content-repository.ts`: interfaz de acceso a contenido.
 - `src/application/get-home-page-content.ts`: caso de uso que entrega los datos preparados para la página.
 - `src/infrastructure/content/`: repositorio local y JSON actuales.
-- `public/assets/`: CSS, JS, fuentes, vendors, imágenes y favicons servidos con la misma ruta pública `/assets/...`.
+- `src/styles/`: fuente SCSS global organizada por base, layout, componentes y secciones.
+- `public/assets/`: CSS compilado, JS, fuentes, vendors, imágenes y favicons servidos con la misma ruta pública `/assets/...`.
 
 ## Capa de contenido
 

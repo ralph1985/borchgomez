@@ -1,0 +1,77 @@
+.section {
+  padding: 4.2rem 0 2.8rem;
+}
+
+.section-title,
+.section-subtitle {
+  text-align: center;
+}
+
+.section-title {
+  position: relative;
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  margin-bottom: 1.1rem;
+  line-height: 0.97;
+  letter-spacing: 0.01em;
+}
+
+.section-title--icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  width: 88px;
+  height: 2px;
+  bottom: -0.55rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--line-strong) 0,
+    var(--line-strong) 10px,
+    transparent 10px,
+    transparent 16px
+  );
+  transform: scaleX(var(--section-line-scale, 1));
+  transform-origin: center;
+}
+
+.section-title.has-animated-line::after {
+  display: none;
+}
+
+.section-title__line {
+  position: absolute;
+  width: 88px;
+  height: 2px;
+  bottom: -0.55rem;
+  left: 0;
+  right: 0;
+  margin: auto;
+  background: linear-gradient(90deg, var(--earth), var(--sage-muted), var(--clay));
+  transform: scaleX(0);
+  transform-origin: center;
+}
+
+.section-subtitle {
+  display: block;
+  max-width: 820px;
+  margin: 0 auto;
+  font-size: 1.02rem;
+  color: #564637;
+}
+
+.about,
+.purpose,
+.services,
+.portfolio,
+.contact,
+.instagram {
+  background-color: transparent;
+}

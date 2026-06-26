@@ -1,0 +1,44 @@
+.page-roots {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  color: var(--soil);
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.page-roots path {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.page-roots__mass path {
+  fill: currentColor;
+  opacity: 0.09;
+  stroke: none;
+  transform-origin: top center;
+}
+
+.page-roots__cluster--primary > path:first-child {
+  stroke-width: 4.8;
+  opacity: 0.8;
+}
+
+.page-roots__branches path {
+  stroke-width: 2.7;
+  opacity: 0.72;
+}
+
+.page-roots__hairs path {
+  stroke-width: 0.9;
+  opacity: 0.38;
+}
+
+.page-roots__nodes circle {
+  fill: currentColor;
+  opacity: 0.12;
+}
