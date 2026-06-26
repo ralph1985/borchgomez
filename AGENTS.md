@@ -31,7 +31,7 @@ Este proyecto se trabaja con Codex en español. Mantiene la web profesional de B
 - El layout base, metadatos, cabecera, footer, CSS y scripts se gestionan en `src/layouts/BaseLayout.astro` y componentes relacionados.
 - El contenido local vive en `src/infrastructure/content/data/*.json` y se expone por `ContentRepository`.
 - `src/shared/config/content.ts` usa Sanity solo si existen `SANITY_PROJECT_ID`, `SANITY_DATASET` y `SANITY_API_VERSION`; si falta configuracion, falla la consulta o faltan campos obligatorios, se usa JSON local.
-- Actualmente Sanity solo puede alimentar `site.hero` y `site.purpose`; servicios, planes, proyectos, contacto y resto de secciones siguen en JSON local.
+- Sanity solo alimenta las secciones conectadas explicitamente en `src/infrastructure/content/sanity/`; no asumir que una seccion esta en Sanity sin revisar repositorio, schemas y fallback local.
 - Los estilos fuente viven en `src/styles/**/*.scss` y se compilan a `public/assets/css/style.css`.
 - El JavaScript editable de la web vive en `src/scripts/site.js`. No asumir `assets/js/script.js`.
 - `public/assets/**` contiene assets servidos publicamente. No confundirlo con la fuente editable cuando exista fuente en `src/`.
@@ -43,6 +43,7 @@ Este proyecto se trabaja con Codex en español. Mantiene la web profesional de B
 - No cambiar `vercel.json`, CSP, cabeceras, cache o despliegue sin permiso explicito.
 - No tocar credenciales ni imprimir tokens. No crear ni modificar `.env` salvo peticion explicita.
 - No modificar `studio/` salvo que la tarea afecte al Studio o a esquemas/seed de Sanity.
+- Al anadir o modificar schemas de Sanity, recordar que `seed:*` solo importa documentos al dataset; para que aparezcan schemas o entradas nuevas en el Studio desplegado hay que ejecutar `corepack pnpm run deploy` desde `studio/`.
 - Si cambian SCSS, regenerar `public/assets/css/style.css` con `corepack pnpm run css:build`.
 - Ejecutar `corepack pnpm run build` solo cuando el cambio afecte codigo de la web o haga falta validar integracion Astro; no es obligatorio para cambios solo de agentes/documentacion.
 - Si cambian assets o URLs de assets versionadas, ejecutar `scripts/bump-asset-version.sh` y verificar que se actualizan los `?v=` por hash. En el estado actual puede actualizar `src/infrastructure/content/data/site-settings.json`.

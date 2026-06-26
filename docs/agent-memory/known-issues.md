@@ -5,5 +5,6 @@
 - En este entorno puede faltar `gh`; si se pide abrir PR y `gh` no esta disponible, usar el conector de GitHub si existe o reportar el bloqueo.
 - `corepack pnpm run build` puede regenerar assets compilados; no usarlo como validacion obligatoria para cambios solo de agentes o documentacion.
 - Al cambiar SCSS, `public/assets/css/style.css` debe regenerarse y revisarse porque esta versionado.
+- Si un `seed:*` de Sanity importa documentos correctamente pero no aparece una seccion nueva en el Studio desplegado, probablemente falta desplegar el Studio con `corepack pnpm run deploy` desde `studio/`.
 - Pendiente configurar webhooks Sanity/Vercel si se quiere regenerar produccion automaticamente al publicar contenido en Sanity.
 - Validar manualmente responsive y comportamiento visual cuando se hagan cambios de diseno.
