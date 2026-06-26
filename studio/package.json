@@ -7,7 +7,7 @@
     "dev": "sanity dev",
     "build": "sanity build",
     "deploy": "sanity deploy",
-    "seed:purpose": "sanity dataset import seed/purpose.ndjson \"$SANITY_DATASET\" --replace"
+    "seed:purpose": "sanity dataset import seed/purpose.ndjson \"${SANITY_DATASET:-$SANITY_STUDIO_DATASET}\" --replace"
   },
   "dependencies": {
     "react": "19.2.7",
