@@ -2,7 +2,7 @@
 
 Web de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
 
-El proyecto está migrado a Astro con componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla. No usa React, Tailwind ni base de datos. La sección “Por qué y cómo trabajo” puede leerse desde Sanity; el resto del contenido sigue en JSON local.
+El proyecto está migrado a Astro con componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla. No usa React, Tailwind ni base de datos. Sanity puede alimentar `site.hero` y `site.purpose`; el resto del contenido sigue en JSON local.
 
 ## Instalación
 
@@ -80,8 +80,9 @@ corepack pnpm run preview
 - `src/ports/content-repository.ts`: interfaz de acceso a contenido.
 - `src/application/get-home-page-content.ts`: caso de uso que entrega los datos preparados para la página.
 - `src/infrastructure/content/`: repositorio local y JSON actuales.
+- `src/scripts/site.js`: JavaScript editable de la web pública.
 - `src/styles/`: fuente SCSS global organizada por base, layout, componentes y secciones.
-- `public/assets/`: CSS compilado, JS, fuentes, vendors, imágenes y favicons servidos con la misma ruta pública `/assets/...`.
+- `public/assets/`: CSS compilado, vendors, fuentes, imágenes y favicons servidos con la misma ruta pública `/assets/...`.
 
 ## Capa de contenido
 
@@ -136,6 +137,8 @@ Al ser una web Astro estática, los cambios publicados en Sanity no aparecen aut
 ## Assets y despliegue
 
 Los assets existentes se sirven desde `public/assets/` para conservar las rutas públicas. `vercel.json` mantiene las cabeceras y reglas de caché del proyecto y no forma parte de la migración de contenido.
+
+Si cambian assets o URLs de assets versionadas, ejecuta `scripts/bump-asset-version.sh` para actualizar los `?v=` con hashes de contenido. En el estado Astro actual, si no existe `index.html`, el script actualiza las referencias dentro de `src/infrastructure/content/data/site-settings.json`.
 
 ## Pendiente
 
