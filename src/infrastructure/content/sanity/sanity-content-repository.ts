@@ -1,11 +1,12 @@
 import { createClient, type SanityClient } from "@sanity/client";
-import type { HomePageContent, SiteSettings } from "../../../domain/home-page";
+import type { HomePageContent, Plan, PlansContent, SiteSettings } from "../../../domain/home-page";
 import type { ContentRepository } from "../../../ports/content-repository";
 
 type HeroContent = SiteSettings["hero"];
 type HeroAction = HeroContent["actions"][number];
 type PurposeContent = SiteSettings["purpose"];
 type PurposeItem = PurposeContent["items"][number];
+type PromoContent = PlansContent["promo"];
 
 interface SanityHeroDocument {
   greeting?: unknown;
@@ -29,9 +30,37 @@ interface SanityPurposeDocument {
   closing?: unknown;
 }
 
+interface SanityPlanDocument {
+  intro?: {
+    title?: unknown;
+    subtitle?: unknown;
+  };
+  items?: Array<{
+    name?: unknown;
+    price?: unknown;
+    tagline?: unknown;
+    featured?: unknown;
+    badge?: unknown;
+    features?: unknown;
+    cta?: {
+      label?: unknown;
+      href?: unknown;
+    };
+  }>;
+  promo?: {
+    title?: unknown;
+    price?: unknown;
+    description?: unknown;
+    features?: unknown;
+    note?: unknown;
+  };
+  budgetNote?: unknown;
+}
+
 interface SanityHomePageDocuments {
   hero: SanityHeroDocument | null;
   purpose: SanityPurposeDocument | null;
+  plans: SanityPlanDocument | null;
 }
 
 export interface SanityContentConfig {
@@ -60,6 +89,32 @@ const homePageQuery = `{
       text
     },
     closing
+  },
+  "plans": *[_type == "plans" && _id == "plans"][0]{
+    intro{
+      title,
+      subtitle
+    },
+    items[]{
+      name,
+      price,
+      tagline,
+      featured,
+      badge,
+      features,
+      cta{
+        label,
+        href
+      }
+    },
+    promo{
+      title,
+      price,
+      description,
+      features,
+      note
+    },
+    budgetNote
   }
 }`;
 
@@ -91,6 +146,7 @@ export class SanityContentRepository implements ContentRepository {
           hero: mergeHero(fallbackContent.site.hero, documents.hero),
           purpose: mergePurpose(fallbackContent.site.purpose, documents.purpose),
         },
+        plans: mergePlans(fallbackContent.plans, documents.plans),
       };
     } catch (error) {
       console.warn(`Sanity content could not be loaded. Falling back to local JSON. ${readErrorMessage(error)}`);
@@ -164,6 +220,80 @@ function mergePurposeItems(fallbackItems: PurposeItem[], sourceItems: SanityPurp
   }).filter((item): item is PurposeItem => item !== null);
 
   return mergedItems.length > 0 ? mergedItems : fallbackItems;
+}
+
+function mergePlans(fallback: PlansContent, source: SanityPlanDocument | null): PlansContent {
+  if (!source) {
+    return fallback;
+  }
+
+  return {
+    intro: {
+      title: readString(source.intro?.title) ?? fallback.intro.title,
+      subtitle: readString(source.intro?.subtitle) ?? fallback.intro.subtitle,
+    },
+    items: mergePlanItems(fallback.items, source.items),
+    promo: mergePromo(fallback.promo, source.promo),
+    budgetNote: readString(source.budgetNote) ?? fallback.budgetNote,
+  };
+}
+
+function mergePlanItems(fallbackItems: Plan[], sourceItems: SanityPlanDocument["items"]): Plan[] {
+  if (!Array.isArray(sourceItems) || sourceItems.length === 0) {
+    return fallbackItems;
+  }
+
+  const mergedItems = sourceItems.map(readPlan).filter((plan): plan is Plan => plan !== null);
+
+  return mergedItems.length > 0 ? mergedItems : fallbackItems;
+}
+
+function readPlan(source: SanityPlanDocument["items"][number] | undefined): Plan | null {
+  const name = readString(source?.name);
+  const price = readString(source?.price);
+  const tagline = readString(source?.tagline);
+  const features = readStringArray(source?.features);
+  const ctaLabel = readString(source?.cta?.label);
+  const ctaHref = readString(source?.cta?.href);
+
+  if (!name || !price || !tagline || features.length === 0 || !ctaLabel || !ctaHref) {
+    return null;
+  }
+
+  return {
+    name,
+    price,
+    tagline,
+    featured: typeof source?.featured === "boolean" ? source.featured : undefined,
+    badge: readString(source?.badge),
+    features,
+    cta: {
+      label: ctaLabel,
+      href: ctaHref,
+    },
+  };
+}
+
+function mergePromo(fallback: PromoContent, source: SanityPlanDocument["promo"]): PromoContent {
+  return {
+    title: readString(source?.title) ?? fallback.title,
+    price: readString(source?.price) ?? fallback.price,
+    description: readString(source?.description) ?? fallback.description,
+    features: readStringArray(source?.features, fallback.features),
+    note: readString(source?.note) ?? fallback.note,
+  };
+}
+
+function readStringArray(value: unknown, fallback: string[] = []): string[] {
+  if (!Array.isArray(value)) {
+    return fallback;
+  }
+
+  const strings = value
+    .map(readString)
+    .filter((item): item is string => item !== undefined);
+
+  return strings.length > 0 ? strings : fallback;
 }
 
 function readString(value: unknown): string | undefined {

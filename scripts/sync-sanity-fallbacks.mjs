@@ -3,6 +3,7 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const siteSettingsPath = resolve("src/infrastructure/content/data/site-settings.json");
+const plansPath = resolve("src/infrastructure/content/data/plans.json");
 const envPath = resolve(".env");
 
 loadDotEnv(envPath);
@@ -27,6 +28,32 @@ const homePageQuery = `{
       text
     },
     closing
+  },
+  "plans": *[_type == "plans" && _id == "plans"][0]{
+    intro{
+      title,
+      subtitle
+    },
+    items[]{
+      name,
+      price,
+      tagline,
+      featured,
+      badge,
+      features,
+      cta{
+        label,
+        href
+      }
+    },
+    promo{
+      title,
+      price,
+      description,
+      features,
+      note
+    },
+    budgetNote
   }
 }`;
 
@@ -39,9 +66,11 @@ try {
     useCdn: false,
   });
   const siteSettings = readJson(siteSettingsPath);
+  const fallbackPlans = readJson(plansPath);
   const documents = await client.fetch(homePageQuery);
   const hero = readHero(documents?.hero, siteSettings.hero);
   const purpose = readPurpose(documents?.purpose);
+  const plans = readPlans(documents?.plans, fallbackPlans);
 
   const nextSiteSettings = {
     ...siteSettings,
@@ -50,7 +79,10 @@ try {
   };
 
   writeFileSync(siteSettingsPath, `${JSON.stringify(nextSiteSettings, null, 2)}\n`);
-  console.log("Synced Sanity hero and purpose into src/infrastructure/content/data/site-settings.json.");
+  writeFileSync(plansPath, `${JSON.stringify(plans, null, 2)}\n`);
+  console.log(
+    "Synced Sanity hero and purpose into src/infrastructure/content/data/site-settings.json and plans into src/infrastructure/content/data/plans.json.",
+  );
 } catch (error) {
   console.error(`Could not sync Sanity fallbacks. ${readErrorMessage(error)}`);
   process.exitCode = 1;
@@ -166,6 +198,65 @@ function readPurpose(source) {
   };
 }
 
+function readPlans(source, fallbackPlans) {
+  assertObject(source, "Sanity plans document is missing.");
+  assertObject(fallbackPlans, "Local plans fallback is missing.");
+  assertObject(source.intro, "Sanity plans intro is missing.");
+  assertObject(source.promo, "Sanity plans promo is missing.");
+
+  const sourceItems = readArray(source.items, "Sanity plans items must be an array.");
+  const promoFeatures = readRequiredStringArray(source.promo.features, "plans.promo.features");
+
+  if (sourceItems.length === 0) {
+    throw new Error("Sanity plans items must include at least one plan.");
+  }
+
+  return {
+    intro: {
+      title: readRequiredString(source.intro.title, "plans.intro.title"),
+      subtitle: readRequiredString(source.intro.subtitle, "plans.intro.subtitle"),
+    },
+    items: sourceItems.map(readPlan),
+    promo: {
+      title: readRequiredString(source.promo.title, "plans.promo.title"),
+      price: readRequiredString(source.promo.price, "plans.promo.price"),
+      description: readRequiredString(source.promo.description, "plans.promo.description"),
+      features: promoFeatures,
+      note: readRequiredString(source.promo.note, "plans.promo.note"),
+    },
+    budgetNote: readRequiredString(source.budgetNote, "plans.budgetNote"),
+  };
+}
+
+function readPlan(plan, index) {
+  assertObject(plan, `Sanity plans.items[${index}] must be an object.`);
+  assertObject(plan.cta, `Sanity plans.items[${index}].cta is missing.`);
+
+  const nextPlan = {
+    name: readRequiredString(plan.name, `plans.items[${index}].name`),
+    price: readRequiredString(plan.price, `plans.items[${index}].price`),
+    tagline: readRequiredString(plan.tagline, `plans.items[${index}].tagline`),
+    features: readRequiredStringArray(plan.features, `plans.items[${index}].features`),
+    cta: {
+      label: readRequiredString(plan.cta.label, `plans.items[${index}].cta.label`),
+      href: readRequiredString(plan.cta.href, `plans.items[${index}].cta.href`),
+    },
+  };
+
+  const featured = readOptionalBoolean(plan.featured, `plans.items[${index}].featured`);
+  const badge = readOptionalString(plan.badge, `plans.items[${index}].badge`);
+
+  if (featured !== undefined) {
+    nextPlan.featured = featured;
+  }
+
+  if (badge !== undefined) {
+    nextPlan.badge = badge;
+  }
+
+  return nextPlan;
+}
+
 function assertObject(value, message) {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
     throw new Error(message);
@@ -192,6 +283,43 @@ function readRequiredString(value, fieldName) {
   }
 
   return trimmed;
+}
+
+function readOptionalString(value, fieldName) {
+  if (value === undefined || value === null) {
+    return undefined;
+  }
+
+  if (typeof value !== "string") {
+    throw new Error(`Sanity field ${fieldName} must be a string when provided.`);
+  }
+
+  const trimmed = value.trim();
+
+  return trimmed.length > 0 ? trimmed : undefined;
+}
+
+function readOptionalBoolean(value, fieldName) {
+  if (value === undefined || value === null) {
+    return undefined;
+  }
+
+  if (typeof value !== "boolean") {
+    throw new Error(`Sanity field ${fieldName} must be a boolean when provided.`);
+  }
+
+  return value;
+}
+
+function readRequiredStringArray(value, fieldName) {
+  const items = readArray(value, `Sanity field ${fieldName} must be an array.`);
+  const strings = items.map((item, index) => readRequiredString(item, `${fieldName}[${index}]`));
+
+  if (strings.length === 0) {
+    throw new Error(`Sanity field ${fieldName} must include at least one item.`);
+  }
+
+  return strings;
 }
 
 function readErrorMessage(error) {

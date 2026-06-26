@@ -12,4 +12,8 @@ export const singletonStructure: StructureResolver = (S) =>
         .title("Por qué y cómo trabajo")
         .id("purpose")
         .child(S.document().schemaType("purpose").documentId("purpose").title("Por qué y cómo trabajo")),
+      S.listItem()
+        .title("Planes")
+        .id("plans")
+        .child(S.document().schemaType("plans").documentId("plans").title("Planes")),
     ]);
