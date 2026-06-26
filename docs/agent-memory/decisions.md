@@ -6,8 +6,9 @@
 - `vercel.json` esta protegido y solo puede modificarse con permiso explicito.
 - La entrada principal de la home es `src/pages/index.astro`; no existe `index.html` como fuente principal del contenido.
 - El contenido local vive en `src/infrastructure/content/data/*.json` y debe llegar a la UI mediante el puerto `ContentRepository`.
-- Sanity solo alimenta `site.hero` y `site.purpose`; el resto del contenido sigue en JSON local.
+- Sanity solo alimenta secciones conectadas explicitamente en `src/infrastructure/content/sanity/`; el resto del contenido sigue en JSON local.
 - Si Sanity no esta configurado, falla o devuelve campos incompletos, se usa fallback local.
+- En `studio/`, `seed:*` importa documentos al dataset; para ver schemas o entradas nuevas en el Studio desplegado hace falta `corepack pnpm run deploy`.
 - Los estilos se editan en `src/styles/**/*.scss`; si cambian, se regenera `public/assets/css/style.css`.
 - El JavaScript editable de la web vive en `src/scripts/site.js`.
 - El cache busting de assets se hace con `scripts/bump-asset-version.sh`, usando hashes de contenido en los `?v=...`.

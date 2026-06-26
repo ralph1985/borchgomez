@@ -25,12 +25,18 @@ La UI no debe leer JSON directamente desde las secciones. `src/pages/index.astro
 
 El contenido base esta en `LocalContentRepository` y lee `src/infrastructure/content/data/*.json`. Si existen `SANITY_PROJECT_ID`, `SANITY_DATASET` y `SANITY_API_VERSION`, `src/shared/config/content.ts` usa `SanityContentRepository`.
 
-Sanity puede sustituir solo `site.hero` y `site.purpose`. Si falta configuracion, falla la consulta o faltan campos obligatorios, la web usa el JSON local. Servicios, planes, proyectos, contacto y el resto de secciones siguen en JSON local.
+Sanity puede sustituir solo las secciones conectadas explicitamente en `src/infrastructure/content/sanity/`. Si falta configuracion, falla la consulta o faltan campos obligatorios, la web usa el JSON local.
 
-Para refrescar el fallback local de hero y purpose con Sanity se usa:
+Para refrescar fallbacks locales con Sanity se usa:
 
 ```bash
 corepack pnpm run sync:fallbacks
+```
+
+En `studio/`, los scripts `seed:*` importan documentos al dataset, pero no publican cambios de schema ni estructura del Studio. Cuando se anade un schema o una entrada nueva al Studio desplegado, ejecutar tambien:
+
+```bash
+corepack pnpm run deploy
 ```
 
 ## Estilos, scripts y assets
