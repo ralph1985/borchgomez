@@ -5,6 +5,7 @@ import type { SiteSettings } from "../domain/home-page";
 interface Props { site: SiteSettings; }
 const { site } = Astro.props;
 const hero = site.hero;
+const heroTitleWords = hero.title.split(/\s+/).filter(Boolean);
 ---
 <section class="home" id="home">
         <svg class="home__roots" viewBox="0 0 720 520" aria-hidden="true" focusable="false">
@@ -58,7 +59,7 @@ const hero = site.hero;
     <div class="home__data">
       <p class="home__greeting" data-animate>{hero.greeting}</p>
       <h1 class="home__title" data-animate>
-        {hero.titleWords.map((word) => <span data-hero-word>{word}</span>)}
+        {heroTitleWords.map((word) => <span data-hero-word>{word}</span>)}
       </h1>
       <p class="home__career" data-animate>{hero.career}</p>
       <svg class="home__trace" viewBox="0 0 420 64" aria-hidden="true" focusable="false"><path d="M8 34c54-24 91-24 133-7 45 18 86 24 135 6 42-15 84-14 136 9M151 30c-4 12-9 21-18 29M201 38c-2 9-6 16-14 24M256 35c3 12 10 19 22 25"></path></svg>

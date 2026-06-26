@@ -2,8 +2,22 @@ import { createClient, type SanityClient } from "@sanity/client";
 import type { HomePageContent, SiteSettings } from "../../../domain/home-page";
 import type { ContentRepository } from "../../../ports/content-repository";
 
+type HeroContent = SiteSettings["hero"];
+type HeroAction = HeroContent["actions"][number];
 type PurposeContent = SiteSettings["purpose"];
 type PurposeItem = PurposeContent["items"][number];
+
+interface SanityHeroDocument {
+  greeting?: unknown;
+  title?: unknown;
+  career?: unknown;
+  description?: unknown;
+  claim?: unknown;
+  actions?: Array<{
+    label?: unknown;
+    href?: unknown;
+  }>;
+}
 
 interface SanityPurposeDocument {
   title?: unknown;
@@ -15,20 +29,38 @@ interface SanityPurposeDocument {
   closing?: unknown;
 }
 
+interface SanityHomePageDocuments {
+  hero: SanityHeroDocument | null;
+  purpose: SanityPurposeDocument | null;
+}
+
 export interface SanityContentConfig {
   projectId: string;
   dataset: string;
   apiVersion: string;
 }
 
-const purposeQuery = `*[_type == "purpose" && _id == "purpose"][0]{
-  title,
-  subtitle,
-  items[]{
+const homePageQuery = `{
+  "hero": *[_type == "hero" && _id == "hero"][0]{
+    greeting,
     title,
-    text
+    career,
+    description,
+    claim,
+    actions[]{
+      label,
+      href
+    }
   },
-  closing
+  "purpose": *[_type == "purpose" && _id == "purpose"][0]{
+    title,
+    subtitle,
+    items[]{
+      title,
+      text
+    },
+    closing
+  }
 }`;
 
 export class SanityContentRepository implements ContentRepository {
@@ -50,20 +82,53 @@ export class SanityContentRepository implements ContentRepository {
     const fallbackContent = await this.fallbackRepository.getHomePageContent();
 
     try {
-      const purpose = await this.client.fetch<SanityPurposeDocument | null>(purposeQuery);
+      const documents = await this.client.fetch<SanityHomePageDocuments>(homePageQuery);
 
       return {
         ...fallbackContent,
         site: {
           ...fallbackContent.site,
-          purpose: mergePurpose(fallbackContent.site.purpose, purpose),
+          hero: mergeHero(fallbackContent.site.hero, documents.hero),
+          purpose: mergePurpose(fallbackContent.site.purpose, documents.purpose),
         },
       };
     } catch (error) {
-      console.warn(`Sanity purpose content could not be loaded. Falling back to local JSON. ${readErrorMessage(error)}`);
+      console.warn(`Sanity content could not be loaded. Falling back to local JSON. ${readErrorMessage(error)}`);
       return fallbackContent;
     }
   }
+}
+
+function mergeHero(fallback: HeroContent, source: SanityHeroDocument | null): HeroContent {
+  if (!source) {
+    return fallback;
+  }
+
+  return {
+    ...fallback,
+    greeting: readString(source.greeting) ?? fallback.greeting,
+    title: readString(source.title) ?? fallback.title,
+    career: readString(source.career) ?? fallback.career,
+    description: readString(source.description) ?? fallback.description,
+    claim: readString(source.claim) ?? fallback.claim,
+    actions: mergeHeroActions(fallback.actions, source.actions),
+  };
+}
+
+function mergeHeroActions(fallbackActions: HeroAction[], sourceActions: SanityHeroDocument["actions"]): HeroAction[] {
+  if (!Array.isArray(sourceActions) || sourceActions.length === 0) {
+    return fallbackActions;
+  }
+
+  return fallbackActions.map((fallbackAction, index) => {
+    const sourceAction = sourceActions[index];
+
+    return {
+      ...fallbackAction,
+      label: readString(sourceAction?.label) ?? fallbackAction.label,
+      href: readString(sourceAction?.href) ?? fallbackAction.href,
+    };
+  });
 }
 
 function mergePurpose(fallback: PurposeContent, source: SanityPurposeDocument | null): PurposeContent {
