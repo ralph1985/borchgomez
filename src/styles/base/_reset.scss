@@ -1,0 +1,68 @@
+* {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#home {
+  scroll-margin-top: var(--anchor-offset);
+}
+
+body {
+  margin: var(--header-height) 0 0;
+  font-family: "Manrope", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #33291f;
+  background:
+    linear-gradient(145deg, rgba(138, 94, 59, 0.24) 0%, rgba(138, 94, 59, 0) 36rem),
+    linear-gradient(25deg, rgba(74, 47, 32, 0.1) 0%, rgba(74, 47, 32, 0) 28rem),
+    radial-gradient(circle at 12% 8%, rgba(196, 208, 184, 0.52), transparent 30rem),
+    linear-gradient(180deg, #efe1d1 0%, var(--paper) 36%, #ead6bd 68%, #d8b58c 100%);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+ul,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}

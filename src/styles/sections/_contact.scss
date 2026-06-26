@@ -1,0 +1,28 @@
+.contact__panel {
+  margin: 1.7rem auto 0;
+  max-width: 760px;
+  padding: 1.55rem 1.25rem;
+  border: 1px solid var(--line-strong);
+  background:
+    radial-gradient(circle at top left, rgba(196, 208, 184, 0.52), transparent 18rem),
+    linear-gradient(180deg, #f8f0e5 0%, #e7d1ba 100%);
+  border-radius: 0.95rem;
+  text-align: center;
+  transform-origin: center bottom;
+}
+
+.contact__panel p {
+  margin-top: 0.85rem;
+}
+
+.contact__panel a {
+  color: var(--ink);
+}
+
+.contact__panel a:hover {
+  color: var(--olive);
+}
+
+.contact__primary {
+  margin-bottom: 0.6rem;
+}

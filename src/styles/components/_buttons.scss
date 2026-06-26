@@ -1,0 +1,40 @@
+.home__hire,
+.home__download,
+.contact__instagram,
+.contact__primary,
+.portfolio__cta {
+  font-family: "Manrope", sans-serif;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s ease;
+}
+
+.home__hire,
+.contact__primary,
+.contact__instagram {
+  background: linear-gradient(135deg, var(--clay) 0%, var(--earth-soft) 100%);
+  color: var(--ink);
+  padding: 0.76rem 1.5rem;
+  border: 1px solid var(--earth);
+}
+
+.home__hire:hover,
+.contact__primary:hover,
+.contact__instagram:hover {
+  background: linear-gradient(135deg, var(--earth) 0%, #c19064 100%);
+}
+
+.home__download {
+  background-color: transparent;
+  color: var(--ink);
+  padding: 0.76rem 1.5rem;
+  border: 1px solid var(--line-strong);
+}
+
+.home__download:hover {
+  background: #eaddcc;
+}

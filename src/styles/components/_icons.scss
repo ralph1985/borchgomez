@@ -1,0 +1,33 @@
+.icon-inline {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.125em;
+}
+
+.icon-inline--social {
+  vertical-align: -0.15em;
+}
+
+.ui-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 1.75rem;
+  height: 1.75rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ui-icon--section {
+  width: 0.8em;
+  height: 0.8em;
+  color: var(--earth);
+}
+
+.ui-icon--service {
+  color: var(--olive);
+}
