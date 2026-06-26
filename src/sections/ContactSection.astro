@@ -1,0 +1,17 @@
+---
+import type { SiteSettings } from "../domain/home-page";
+interface Props { contact: SiteSettings["contact"]; }
+const { contact } = Astro.props;
+---
+<section class="contact section" id="contact">
+  <div class="bd-container">
+    <h2 class="section-title" data-animate>{contact.title}</h2>
+    <p class="section-subtitle" data-animate>{contact.subtitle}</p>
+    <div class="contact__panel" data-animate>
+      <a class="contact__primary" href={contact.primary.href} target="_blank" rel="noopener noreferrer">{contact.primary.label}</a>
+      <p><strong>Teléfono:</strong> <a href={contact.phone.href}>{contact.phone.label}</a></p>
+      <p><strong>Email:</strong> <a href={contact.email.href}>{contact.email.label}</a></p>
+      <p><strong>Instagram:</strong> <a href={contact.instagram.href} target="_blank" rel="noopener noreferrer">{contact.instagram.label}</a></p>
+    </div>
+  </div>
+</section>

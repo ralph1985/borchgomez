@@ -1,0 +1,60 @@
+[
+  {
+    "id": "service-drone",
+    "title": "Vídeo con drone",
+    "icon": "drone",
+    "description": "Planos aéreos con drone que aportan una perspectiva diferencial y mayor impacto visual para mostrar entornos, fincas, instalaciones, alojamientos y paisaje.",
+    "statusLabel": "Acreditación profesional:",
+    "statusText": "Piloto de drones con formación A1/A3 y certificado de competencia A2, en categoría abierta UAS.",
+    "image": {
+      "src": "/assets/img/borja-drone-catedral-cuenca-400.webp?v=7b89903b",
+      "srcset": "/assets/img/borja-drone-catedral-cuenca-400.webp?v=7b89903b 400w, /assets/img/borja-drone-catedral-cuenca-800.webp?v=c3bfe47c 800w",
+      "sizes": "(max-width: 767px) 260px, 250px",
+      "alt": "Borja Gómez sujetando su dron con la catedral de Cuenca al fondo",
+      "width": 400,
+      "height": 400
+    }
+  },
+  {
+    "id": "service-audiovisual",
+    "title": "Producción audiovisual",
+    "icon": "video",
+    "description": "Vídeo profesional y fotografía documental para mostrar tu trabajo con calidad y cercanía."
+  },
+  {
+    "id": "service-social",
+    "title": "Contenido para redes",
+    "icon": "share",
+    "description": "Contenido para redes sociales pensado para conectar, publicar con constancia y ganar visibilidad."
+  },
+  {
+    "id": "service-online",
+    "title": "Presencia online",
+    "icon": "globe",
+    "description": "Mejora de presencia online para que tu negocio rural sea fácil de encontrar y recordar."
+  },
+  {
+    "id": "service-web",
+    "title": "Web y posicionamiento",
+    "icon": "monitor-search",
+    "description": "Web y SEO local para bodegas, restaurantes, productores, municipios y turismo rural."
+  },
+  {
+    "id": "service-strategy",
+    "title": "Estrategia visual e informes",
+    "icon": "chart",
+    "description": "Plan visual personalizado, adaptado a las necesidades de cada cliente, con seguimiento mensual para tomar decisiones con criterio y continuidad."
+  },
+  {
+    "id": "service-local-seo",
+    "title": "Posicionamiento SEO Local",
+    "icon": "map-pin",
+    "features": [
+      "Optimización de Google Business Profile",
+      "Posicionamiento en búsquedas locales",
+      "Mejora de reseñas y reputación online",
+      "SEO para «cerca de mí»",
+      "Visibilidad en Google Maps"
+    ]
+  }
+]

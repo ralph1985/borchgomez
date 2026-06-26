@@ -1,0 +1,31 @@
+---
+import type { PlansContent } from "../domain/home-page";
+interface Props { plans: PlansContent; }
+const { plans } = Astro.props;
+---
+<section class="plans section" id="plans">
+  <div class="bd-container">
+    <h2 class="section-title" data-animate>{plans.intro.title}</h2>
+    <p class="section-subtitle" data-animate>{plans.intro.subtitle}</p>
+    <div class="plans__grid" data-animate>
+      {plans.items.map((plan) => (
+        <article class:list={["plans__card", { "plans__card--featured": plan.featured }]}>
+          {plan.badge && <span class="plans__badge">{plan.badge}</span>}
+          <h3 class="plans__name">{plan.name}</h3>
+          <p class="plans__price">{plan.price}</p>
+          <p class="plans__tagline">{plan.tagline}</p>
+          <ul class="plans__features">{plan.features.map((feature) => <li>{feature}</li>)}</ul>
+          <a class="plans__cta" href={plan.cta.href} target="_blank" rel="noopener noreferrer">{plan.cta.label}</a>
+        </article>
+      ))}
+    </div>
+    <div class="plans__promo" data-animate>
+      <h3 class="plans__promo-title">{plans.promo.title}</h3>
+      <p class="plans__promo-price">{plans.promo.price}</p>
+      <p class="plans__promo-description">{plans.promo.description}</p>
+      <ul class="plans__promo-features">{plans.promo.features.map((feature) => <li>{feature}</li>)}</ul>
+      <p class="plans__promo-note">{plans.promo.note}</p>
+    </div>
+    <div class="plans__budget-note" data-animate>{plans.budgetNote}</div>
+  </div>
+</section>

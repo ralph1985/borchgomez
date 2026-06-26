@@ -1,0 +1,35 @@
+---
+import ServiceIcon from "../components/icons/ServiceIcon.astro";
+import type { Service, SiteSettings } from "../domain/home-page";
+interface Props { intro: SiteSettings["servicesIntro"]; services: Service[]; }
+const { intro, services } = Astro.props;
+---
+<section class="services section" id="services">
+  <div class="bd-container">
+    <h2 class="section-title section-title--icon" data-animate><ServiceIcon name="briefcase" class="ui-icon ui-icon--section" />{intro.title}</h2>
+    <p class="section-subtitle" data-animate>{intro.subtitle}</p>
+    <div class="services__layout" data-animate>
+      {services.map((service) => (
+        <article class="services__item" id={service.id}>
+          <h3><ServiceIcon name={service.icon} />{service.title}</h3>
+          {service.image ? (
+            <div class="services__drone-body">
+              <div>
+                {service.description && <p>{service.description}</p>}
+                {service.statusText && <p class="services__status"><strong>{service.statusLabel}</strong> {service.statusText}</p>}
+              </div>
+              <picture class="services__drone-visual">
+                <source srcset={service.image.srcset} sizes={service.image.sizes} type="image/webp" />
+                <img src={service.image.src} alt={service.image.alt} width={service.image.width} height={service.image.height} loading="lazy" decoding="async" />
+              </picture>
+            </div>
+          ) : service.features ? (
+            <ul class="services__features">{service.features.map((feature) => <li>{feature}</li>)}</ul>
+          ) : (
+            <p>{service.description}</p>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

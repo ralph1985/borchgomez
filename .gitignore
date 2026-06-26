@@ -7,3 +7,5 @@
 .vscode/
 *.log
 node_modules/
+dist/
+.astro/
