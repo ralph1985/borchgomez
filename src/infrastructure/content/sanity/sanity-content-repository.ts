@@ -6,6 +6,9 @@ type HeroContent = SiteSettings["hero"];
 type HeroAction = HeroContent["actions"][number];
 type PurposeContent = SiteSettings["purpose"];
 type PurposeItem = PurposeContent["items"][number];
+type AboutContent = SiteSettings["about"];
+type ContactContent = SiteSettings["contact"];
+type ContactLink = ContactContent["primary"];
 type PromoContent = PlansContent["promo"];
 
 interface SanityHeroDocument {
@@ -58,10 +61,39 @@ interface SanityPlanDocument {
   budgetNote?: unknown;
 }
 
+interface SanityAboutDocument {
+  title?: unknown;
+  subtitle?: unknown;
+  paragraphsBeforeImage?: unknown;
+  image?: {
+    src?: unknown;
+    alt?: unknown;
+    width?: unknown;
+    height?: unknown;
+  };
+  paragraphsAfterImage?: unknown;
+}
+
+interface SanityContactDocument {
+  title?: unknown;
+  subtitle?: unknown;
+  primary?: SanityContactLink;
+  phone?: SanityContactLink;
+  email?: SanityContactLink;
+  instagram?: SanityContactLink;
+}
+
+interface SanityContactLink {
+  label?: unknown;
+  href?: unknown;
+}
+
 interface SanityHomePageDocuments {
   hero: SanityHeroDocument | null;
   purpose: SanityPurposeDocument | null;
   plans: SanityPlanDocument | null;
+  about: SanityAboutDocument | null;
+  contact: SanityContactDocument | null;
 }
 
 export interface SanityContentConfig {
@@ -117,6 +149,38 @@ const homePageQuery = `{
       note
     },
     budgetNote
+  },
+  "about": *[_type == "about" && _id == "about"][0]{
+    title,
+    subtitle,
+    paragraphsBeforeImage,
+    image{
+      alt,
+      "src": asset->url,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height
+    },
+    paragraphsAfterImage
+  },
+  "contact": *[_type == "contact" && _id == "contact"][0]{
+    title,
+    subtitle,
+    primary{
+      label,
+      href
+    },
+    phone{
+      label,
+      href
+    },
+    email{
+      label,
+      href
+    },
+    instagram{
+      label,
+      href
+    }
   }
 }`;
 
@@ -147,6 +211,8 @@ export class SanityContentRepository implements ContentRepository {
           ...fallbackContent.site,
           hero: mergeHero(fallbackContent.site.hero, documents.hero),
           purpose: mergePurpose(fallbackContent.site.purpose, documents.purpose),
+          about: mergeAbout(fallbackContent.site.about, documents.about),
+          contact: mergeContact(fallbackContent.site.contact, documents.contact),
         },
         plans: mergePlans(fallbackContent.plans, documents.plans),
       };
@@ -301,6 +367,60 @@ function mergePromo(fallback: PromoContent, source: SanityPlanDocument["promo"])
   };
 }
 
+function mergeAbout(fallback: AboutContent, source: SanityAboutDocument | null): AboutContent {
+  if (!source) {
+    return fallback;
+  }
+
+  return {
+    title: readString(source.title) ?? fallback.title,
+    subtitle: readString(source.subtitle) ?? fallback.subtitle,
+    paragraphsBeforeImage: readStringArray(source.paragraphsBeforeImage, fallback.paragraphsBeforeImage),
+    image: mergeAboutImage(fallback.image, source.image),
+    paragraphsAfterImage: readStringArray(source.paragraphsAfterImage, fallback.paragraphsAfterImage),
+  };
+}
+
+function mergeAboutImage(fallback: AboutContent["image"], source: SanityAboutDocument["image"]): AboutContent["image"] {
+  const src = readString(source?.src);
+  const alt = readString(source?.alt);
+  const width = readPositiveNumber(source?.width);
+  const height = readPositiveNumber(source?.height);
+
+  if (!src || !alt || width === undefined || height === undefined) {
+    return fallback;
+  }
+
+  return {
+    src,
+    alt,
+    width,
+    height,
+  };
+}
+
+function mergeContact(fallback: ContactContent, source: SanityContactDocument | null): ContactContent {
+  if (!source) {
+    return fallback;
+  }
+
+  return {
+    title: readString(source.title) ?? fallback.title,
+    subtitle: readString(source.subtitle) ?? fallback.subtitle,
+    primary: mergeContactLink(fallback.primary, source.primary),
+    phone: mergeContactLink(fallback.phone, source.phone),
+    email: mergeContactLink(fallback.email, source.email),
+    instagram: mergeContactLink(fallback.instagram, source.instagram),
+  };
+}
+
+function mergeContactLink(fallback: ContactLink, source: SanityContactLink | undefined): ContactLink {
+  return {
+    label: readString(source?.label) ?? fallback.label,
+    href: readString(source?.href) ?? fallback.href,
+  };
+}
+
 function readStringArray(value: unknown, fallback: string[] = []): string[] {
   if (!Array.isArray(value)) {
     return fallback;
@@ -311,6 +431,14 @@ function readStringArray(value: unknown, fallback: string[] = []): string[] {
     .filter((item): item is string => item !== undefined);
 
   return strings.length > 0 ? strings : fallback;
+}
+
+function readPositiveNumber(value: unknown): number | undefined {
+  if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) {
+    return undefined;
+  }
+
+  return value;
 }
 
 function readString(value: unknown): string | undefined {

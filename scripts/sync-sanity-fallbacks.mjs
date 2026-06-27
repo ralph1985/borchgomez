@@ -55,6 +55,38 @@ const homePageQuery = `{
       note
     },
     budgetNote
+  },
+  "about": *[_type == "about" && _id == "about"][0]{
+    title,
+    subtitle,
+    paragraphsBeforeImage,
+    image{
+      alt,
+      "src": asset->url,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height
+    },
+    paragraphsAfterImage
+  },
+  "contact": *[_type == "contact" && _id == "contact"][0]{
+    title,
+    subtitle,
+    primary{
+      label,
+      href
+    },
+    phone{
+      label,
+      href
+    },
+    email{
+      label,
+      href
+    },
+    instagram{
+      label,
+      href
+    }
   }
 }`;
 
@@ -72,17 +104,21 @@ try {
   const hero = readHero(documents?.hero, siteSettings.hero);
   const purpose = readPurpose(documents?.purpose);
   const plans = readPlans(documents?.plans, fallbackPlans);
+  const about = readAbout(documents?.about, siteSettings.about);
+  const contact = readContact(documents?.contact);
 
   const nextSiteSettings = {
     ...siteSettings,
     hero,
     purpose,
+    about,
+    contact,
   };
 
   writeFileSync(siteSettingsPath, `${JSON.stringify(nextSiteSettings, null, 2)}\n`);
   writeFileSync(plansPath, `${JSON.stringify(plans, null, 2)}\n`);
   console.log(
-    "Synced Sanity hero and purpose into src/infrastructure/content/data/site-settings.json and plans into src/infrastructure/content/data/plans.json.",
+    "Synced Sanity hero, purpose, about and contact into src/infrastructure/content/data/site-settings.json and plans into src/infrastructure/content/data/plans.json.",
   );
 } catch (error) {
   console.error(`Could not sync Sanity fallbacks. ${readErrorMessage(error)}`);
@@ -241,6 +277,51 @@ function readPlans(source, fallbackPlans) {
   };
 }
 
+function readAbout(source, fallbackAbout) {
+  assertObject(source, "Sanity about document is missing.");
+  assertObject(fallbackAbout, "Local about fallback is missing.");
+  assertObject(fallbackAbout.image, "Local about image fallback is missing.");
+  assertObject(source.image, "Sanity about image is missing.");
+
+  const imageAlt = readRequiredString(source.image.alt, "about.image.alt");
+  readRequiredString(source.image.src, "about.image.asset.url");
+  readRequiredPositiveNumber(source.image.width, "about.image.asset.metadata.dimensions.width");
+  readRequiredPositiveNumber(source.image.height, "about.image.asset.metadata.dimensions.height");
+
+  return {
+    title: readRequiredString(source.title, "about.title"),
+    subtitle: readRequiredString(source.subtitle, "about.subtitle"),
+    paragraphsBeforeImage: readRequiredStringArray(source.paragraphsBeforeImage, "about.paragraphsBeforeImage"),
+    image: {
+      ...fallbackAbout.image,
+      alt: imageAlt,
+    },
+    paragraphsAfterImage: readRequiredStringArray(source.paragraphsAfterImage, "about.paragraphsAfterImage"),
+  };
+}
+
+function readContact(source) {
+  assertObject(source, "Sanity contact document is missing.");
+
+  return {
+    title: readRequiredString(source.title, "contact.title"),
+    subtitle: readRequiredString(source.subtitle, "contact.subtitle"),
+    primary: readContactLink(source.primary, "contact.primary"),
+    phone: readContactLink(source.phone, "contact.phone"),
+    email: readContactLink(source.email, "contact.email"),
+    instagram: readContactLink(source.instagram, "contact.instagram"),
+  };
+}
+
+function readContactLink(source, fieldName) {
+  assertObject(source, `Sanity ${fieldName} is missing.`);
+
+  return {
+    label: readRequiredString(source.label, `${fieldName}.label`),
+    href: readRequiredString(source.href, `${fieldName}.href`),
+  };
+}
+
 function readPlan(plan, index) {
   assertObject(plan, `Sanity plans.items[${index}] must be an object.`);
   assertObject(plan.cta, `Sanity plans.items[${index}].cta is missing.`);
@@ -319,6 +400,14 @@ function readOptionalBoolean(value, fieldName) {
 
   if (typeof value !== "boolean") {
     throw new Error(`Sanity field ${fieldName} must be a boolean when provided.`);
+  }
+
+  return value;
+}
+
+function readRequiredPositiveNumber(value, fieldName) {
+  if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) {
+    throw new Error(`Sanity field ${fieldName} must be a positive number.`);
   }
 
   return value;
