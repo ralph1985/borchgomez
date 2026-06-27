@@ -10,7 +10,8 @@
     "css:watch": "sass --watch --no-source-map src/styles/main.scss public/assets/css/style.css",
     "build": "pnpm run css:build && ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "sync:fallbacks": "node scripts/sync-sanity-fallbacks.mjs"
+    "sync:fallbacks": "node scripts/sync-sanity-fallbacks.mjs",
+    "seed:about": "pnpm --dir studio run seed:about"
   },
   "dependencies": {
     "@sanity/client": "7.23.0",

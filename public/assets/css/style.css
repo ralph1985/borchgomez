@@ -905,9 +905,8 @@ main {
 }
 
 .about__visual {
-  float: right;
-  width: min(42%, 160px);
-  margin: 0.35rem 0 0.75rem 1rem;
+  width: min(72%, 220px);
+  margin: 1rem auto;
 }
 
 .about__image {
@@ -925,6 +924,10 @@ main {
 }
 
 .about__story p + p {
+  margin-top: 1rem;
+}
+
+.about__visual + p {
   margin-top: 1rem;
 }
 

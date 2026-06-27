@@ -9,7 +9,9 @@
     "deploy": "sanity deploy",
     "seed:hero": "set -a; [ -f .env ] && . ./.env; set +a; sanity dataset import seed/hero.ndjson --dataset \"${SANITY_DATASET:-$SANITY_STUDIO_DATASET}\" --replace",
     "seed:purpose": "set -a; [ -f .env ] && . ./.env; set +a; sanity dataset import seed/purpose.ndjson --dataset \"${SANITY_DATASET:-$SANITY_STUDIO_DATASET}\" --replace",
-    "seed:plans": "set -a; [ -f .env ] && . ./.env; set +a; sanity dataset import seed/plans.ndjson --dataset \"${SANITY_DATASET:-$SANITY_STUDIO_DATASET}\" --replace"
+    "seed:plans": "set -a; [ -f .env ] && . ./.env; set +a; sanity dataset import seed/plans.ndjson --dataset \"${SANITY_DATASET:-$SANITY_STUDIO_DATASET}\" --replace",
+    "seed:about": "sanity exec scripts/seed-about.mjs --with-user-token",
+    "seed:contact": "set -a; [ -f .env ] && . ./.env; set +a; sanity dataset import seed/contact.ndjson --dataset \"${SANITY_DATASET:-$SANITY_STUDIO_DATASET}\" --replace"
   },
   "dependencies": {
     "react": "19.2.7",
