@@ -928,6 +928,10 @@ main {
   margin-top: 1rem;
 }
 
+.about__visual + p {
+  margin-top: 1rem;
+}
+
 .services__layout {
   margin-top: 2rem;
   border-top: 1px solid var(--line-strong);
