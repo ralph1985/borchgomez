@@ -2,8 +2,8 @@
   position: relative;
   z-index: 1;
   background:
-    radial-gradient(circle at 50% 18%, rgba(196, 208, 184, 0.28), transparent 22rem),
-    linear-gradient(180deg, #e7d4bd 0%, #d1ad82 100%);
+    radial-gradient(circle at 50% 18%, var(--color-primary-soft), transparent 22rem),
+    linear-gradient(180deg, var(--color-surface-warm) 0%, var(--color-accent-yellow) 100%);
   border-top: 1px solid var(--line);
   overflow: hidden;
   position: relative;
@@ -28,11 +28,11 @@
 }
 
 .footer__land-soil--back {
-  fill: rgba(196, 208, 184, 0.26);
+  fill: var(--color-primary-soft);
 }
 
 .footer__land-soil--front {
-  fill: rgba(91, 63, 45, 0.24);
+  fill: var(--color-secondary-wash);
 }
 
 .footer__furrows path,
@@ -44,7 +44,7 @@
 }
 
 .footer__furrows path {
-  stroke: rgba(74, 47, 32, 0.48);
+  stroke: var(--color-soil-line);
   stroke-width: 2.4;
 }
 
@@ -70,10 +70,10 @@
   width: fit-content;
   max-width: 100%;
   padding: 0.5rem 0.9rem;
-  border: 1px solid rgba(91, 63, 45, 0.18);
+  border: 1px solid var(--color-secondary-soft);
   border-radius: 999px;
-  color: #24180f;
-  background: rgba(247, 241, 232, 0.88);
-  box-shadow: 0 10px 24px rgba(74, 47, 32, 0.12);
+  color: var(--color-ink);
+  background: var(--color-paper-overlay);
+  box-shadow: 0 10px 24px var(--color-shadow-earth);
   backdrop-filter: blur(6px);
 }

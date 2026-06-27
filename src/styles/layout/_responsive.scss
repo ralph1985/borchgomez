@@ -19,7 +19,7 @@
   }
 
   .home__data {
-    background: linear-gradient(90deg, rgba(239, 225, 209, 0.78), rgba(239, 225, 209, 0));
+    background: linear-gradient(90deg, var(--color-paper-fade), transparent);
   }
 
   .home__img {
@@ -157,7 +157,7 @@
   }
 
   .nav__link:hover {
-    background: rgba(138, 94, 59, 0.1);
+    background: var(--color-secondary-soft);
   }
 
   .nav__submenu {
@@ -173,7 +173,7 @@
   }
 
   .active-link {
-    background: rgba(196, 208, 184, 0.36);
+    background: var(--color-primary-hover);
   }
 
   .active-link::after {

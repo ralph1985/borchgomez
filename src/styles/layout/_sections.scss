@@ -54,7 +54,7 @@
   left: 0;
   right: 0;
   margin: auto;
-  background: linear-gradient(90deg, var(--earth), var(--sage-muted), var(--clay));
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent-blue), var(--color-accent-yellow));
   transform: scaleX(0);
   transform-origin: center;
 }
@@ -64,7 +64,7 @@
   max-width: 820px;
   margin: 0 auto;
   font-size: 1.02rem;
-  color: #564637;
+  color: var(--color-text-muted);
 }
 
 .about,
