@@ -27,6 +27,8 @@ El contenido base esta en `LocalContentRepository` y lee `src/infrastructure/con
 
 Sanity puede sustituir solo las secciones conectadas explicitamente en `src/infrastructure/content/sanity/`. Si falta configuracion, falla la consulta o faltan campos obligatorios, la web usa el JSON local.
 
+El hostname del Sanity Studio desplegado es `borchgomez`: `https://borchgomez.sanity.studio/`.
+
 Para refrescar fallbacks locales con Sanity se usa:
 
 ```bash
