@@ -14,6 +14,7 @@ interface SanityHeroDocument {
   career?: unknown;
   description?: unknown;
   claim?: unknown;
+  claims?: unknown;
   actions?: Array<{
     label?: unknown;
     href?: unknown;
@@ -76,6 +77,7 @@ const homePageQuery = `{
     career,
     description,
     claim,
+    claims,
     actions[]{
       label,
       href
@@ -166,9 +168,24 @@ function mergeHero(fallback: HeroContent, source: SanityHeroDocument | null): He
     title: readString(source.title) ?? fallback.title,
     career: readString(source.career) ?? fallback.career,
     description: readString(source.description) ?? fallback.description,
-    claim: readString(source.claim) ?? fallback.claim,
+    claims: readHeroClaims(source),
     actions: mergeHeroActions(fallback.actions, source.actions),
   };
+}
+
+function readHeroClaims(source: SanityHeroDocument): string[] {
+  if (Array.isArray(source.claims)) {
+    return source.claims
+      .map(readString)
+      .filter((claim): claim is string => claim !== undefined);
+  }
+
+  const legacyClaim = readString(source.claim);
+  if (legacyClaim) {
+    return [legacyClaim];
+  }
+
+  return [];
 }
 
 function mergeHeroActions(fallbackActions: HeroAction[], sourceActions: SanityHeroDocument["actions"]): HeroAction[] {

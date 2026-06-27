@@ -15,6 +15,7 @@ const homePageQuery = `{
     career,
     description,
     claim,
+    claims,
     actions[]{
       label,
       href
@@ -169,13 +170,25 @@ function readHero(source, fallbackHero) {
     title: readRequiredString(source.title, "hero.title"),
     career: readRequiredString(source.career, "hero.career"),
     description: readRequiredString(source.description, "hero.description"),
-    claim: readRequiredString(source.claim, "hero.claim"),
+    claims: readHeroClaims(source),
     actions: sourceActions.map((action, index) => ({
       ...fallbackActions[index],
       label: readRequiredString(action?.label, `hero.actions[${index}].label`),
       href: readRequiredString(action?.href, `hero.actions[${index}].href`),
     })),
   };
+}
+
+function readHeroClaims(source) {
+  if (Array.isArray(source.claims)) {
+    return source.claims
+      .map((claim, index) => readOptionalString(claim, `hero.claims[${index}]`))
+      .filter((claim) => claim !== undefined);
+  }
+
+  const legacyClaim = readOptionalString(source.claim, "hero.claim");
+
+  return legacyClaim ? [legacyClaim] : [];
 }
 
 function readPurpose(source) {

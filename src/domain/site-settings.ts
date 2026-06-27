@@ -23,7 +23,7 @@ export interface SiteSettings {
     title: string;
     career: string;
     description: string;
-    claim: string;
+    claims: string[];
     actions: Array<{ label: string; href: string; className: string }>;
     image: ContentImage;
   };

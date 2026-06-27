@@ -31,10 +31,15 @@ export const hero = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "claim",
-      title: "Claim",
-      type: "string",
-      validation: (Rule) => Rule.required(),
+      name: "claims",
+      title: "Claims",
+      description: "Añade uno o varios claims. Déjalo vacío para ocultar este bloque en la web.",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "string",
+        }),
+      ],
     }),
     defineField({
       name: "actions",

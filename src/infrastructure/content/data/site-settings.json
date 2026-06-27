@@ -120,7 +120,9 @@
     "title": "Haz que tu historia se vea",
     "career": "Dando voz a las raíces",
     "description": "Producción audiovisual, fotografía y contenido digital para marcas rurales y negocios locales. Historias reales del campo para que restaurantes, queserías, bodegas, artesanos y municipios del territorio muestren su trabajo con autenticidad.",
-    "claim": "Haz que tu negocio se vea.",
+    "claims": [
+      "Haz que tu negocio se vea."
+    ],
     "actions": [
       {
         "label": "Cuéntame tu proyecto",
