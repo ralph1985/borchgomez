@@ -61,6 +61,8 @@ interface SanityPlanDocument {
   budgetNote?: unknown;
 }
 
+type SanityPlanItem = NonNullable<SanityPlanDocument["items"]>[number];
+
 interface SanityAboutDocument {
   title?: unknown;
   subtitle?: unknown;
@@ -331,7 +333,7 @@ function mergePlanItems(fallbackItems: Plan[], sourceItems: SanityPlanDocument["
   return mergedItems.length > 0 ? mergedItems : fallbackItems;
 }
 
-function readPlan(source: SanityPlanDocument["items"][number] | undefined): Plan | null {
+function readPlan(source: SanityPlanItem | undefined): Plan | null {
   const name = readString(source?.name);
   const price = readString(source?.price);
   const tagline = readString(source?.tagline);

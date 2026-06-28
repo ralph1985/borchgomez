@@ -330,6 +330,8 @@ function readPlan(plan, index) {
     name: readRequiredString(plan.name, `plans.items[${index}].name`),
     price: readRequiredString(plan.price, `plans.items[${index}].price`),
     tagline: readRequiredString(plan.tagline, `plans.items[${index}].tagline`),
+    featured: undefined,
+    badge: undefined,
     features: readRequiredStringArray(plan.features, `plans.items[${index}].features`),
     cta: {
       label: readRequiredString(plan.cta.label, `plans.items[${index}].cta.label`),

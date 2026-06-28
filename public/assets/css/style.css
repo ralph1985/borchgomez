@@ -464,7 +464,6 @@ main {
   background: radial-gradient(circle at 50% 18%, rgba(196, 208, 184, 0.28), transparent 22rem), linear-gradient(180deg, #e7d4bd 0%, #d1ad82 100%);
   border-top: 1px solid var(--line);
   overflow: hidden;
-  position: relative;
 }
 
 .footer__land {

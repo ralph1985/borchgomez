@@ -1,5 +1,12 @@
 import type { ContentImage } from "./service";
 
+interface FaviconLink {
+  rel: string;
+  href: string;
+  type?: string;
+  sizes?: string;
+}
+
 export interface SiteSettings {
   lang: string;
   title: string;
@@ -9,7 +16,7 @@ export interface SiteSettings {
     stylesheets: string[];
     scripts: string[];
     fontPreloads: string[];
-    favicons: Array<Record<string, string>>;
+    favicons: FaviconLink[];
   };
   brand: {
     label: string;
