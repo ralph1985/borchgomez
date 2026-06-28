@@ -203,7 +203,9 @@
         "label": "Otros",
         "value": "otros"
       }
-    ]
+    ],
+    "initialVisible": 6,
+    "loadStep": 6
   },
   "instagram": {
     "title": "Instagram",
