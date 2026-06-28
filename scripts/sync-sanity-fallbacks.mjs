@@ -141,6 +141,30 @@ const homePageQuery = `{
 }`;
 
 try {
+  const isCheckMode = readCheckMode(process.argv.slice(2));
+  const fallbacks = await buildSanityFallbacks();
+
+  if (isCheckMode) {
+    checkFallbacks(fallbacks);
+  } else {
+    writeFallbacks(fallbacks);
+  }
+} catch (error) {
+  console.error(`Could not sync Sanity fallbacks. ${readErrorMessage(error)}`);
+  process.exitCode = 1;
+}
+
+function readCheckMode(args) {
+  const invalidArgs = args.filter((arg) => arg !== "--check");
+
+  if (invalidArgs.length > 0) {
+    throw new Error(`Unsupported argument: ${invalidArgs.join(", ")}.`);
+  }
+
+  return args.includes("--check");
+}
+
+async function buildSanityFallbacks() {
   const config = readSanityConfig();
   const client = createClient({
     projectId: config.projectId,
@@ -161,26 +185,60 @@ try {
   const about = readAbout(documents?.about, siteSettings.about);
   const contact = readContact(documents?.contact);
 
-  const nextSiteSettings = {
-    ...siteSettings,
-    hero,
-    purpose,
-    servicesIntro: services.intro,
-    projectsIntro: portfolio.intro,
-    about,
-    contact,
-  };
+  return [
+    {
+      path: siteSettingsPath,
+      data: {
+        ...siteSettings,
+        hero,
+        purpose,
+        servicesIntro: services.intro,
+        projectsIntro: portfolio.intro,
+        about,
+        contact,
+      },
+    },
+    {
+      path: servicesPath,
+      data: services.items,
+    },
+    {
+      path: plansPath,
+      data: plans,
+    },
+    {
+      path: projectsPath,
+      data: portfolio.projects,
+    },
+  ];
+}
 
-  writeFileSync(siteSettingsPath, `${JSON.stringify(nextSiteSettings, null, 2)}\n`);
-  writeFileSync(servicesPath, `${JSON.stringify(services.items, null, 2)}\n`);
-  writeFileSync(plansPath, `${JSON.stringify(plans, null, 2)}\n`);
-  writeFileSync(projectsPath, `${JSON.stringify(portfolio.projects, null, 2)}\n`);
+function checkFallbacks(fallbacks) {
+  const changedPaths = fallbacks
+    .filter((fallback) => readFileSync(fallback.path, "utf8") !== formatJson(fallback.data))
+    .map((fallback) => fallback.path);
+
+  if (changedPaths.length === 0) {
+    console.log("Sanity fallbacks are up to date.");
+    return;
+  }
+
+  console.error(`Sanity fallbacks are out of sync:\n${changedPaths.map((path) => `- ${path}`).join("\n")}`);
+  process.exitCode = 1;
+}
+
+function writeFallbacks(fallbacks) {
+  for (const fallback of fallbacks) {
+    writeFileSync(fallback.path, formatJson(fallback.data));
+  }
+
   console.log(
     "Synced Sanity hero, purpose, services, portfolio, about and contact into src/infrastructure/content/data/site-settings.json, services into src/infrastructure/content/data/services.json, plans into src/infrastructure/content/data/plans.json and projects into src/infrastructure/content/data/projects.json.",
   );
-} catch (error) {
-  console.error(`Could not sync Sanity fallbacks. ${readErrorMessage(error)}`);
-  process.exitCode = 1;
+}
+
+function formatJson(data) {
+  return `${JSON.stringify(data, null, 2)}\n`;
 }
 
 function loadDotEnv(path) {

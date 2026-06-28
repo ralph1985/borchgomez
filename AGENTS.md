@@ -44,6 +44,9 @@ Este proyecto se trabaja con Codex en español. Mantiene la web profesional de B
 - No tocar credenciales ni imprimir tokens. No crear ni modificar `.env` salvo petición explícita.
 - No modificar `studio/` salvo que la tarea afecte al Studio o a esquemas/seed de Sanity.
 - Al añadir o modificar schemas de Sanity, recordar que `seed:*` solo importa documentos al dataset; para que aparezcan schemas o entradas nuevas en el Studio desplegado hay que ejecutar `corepack pnpm run deploy` desde `studio/`.
+- Los scripts `seed:*` de Sanity son para bootstrap, recuperación o resiembra pedida explícitamente; no usarlos como mantenimiento normal porque pueden sobrescribir cambios editoriales remotos.
+- En tareas de contenido conectado a Sanity, avisar si puede haber cambios de Borja no reflejados en fallbacks locales. Para comprobarlo sin escribir archivos, usar `corepack pnpm run sync:fallbacks:check`; si detecta diferencias, informar y proponer `corepack pnpm run sync:fallbacks` solo si se quiere actualizar la copia local.
+- Si se ejecuta `sync:fallbacks`, revisar el diff de JSON antes de incluir esos cambios en un commit. No commitear fallbacks editoriales sincronizados salvo petición explícita o alcance claro de la tarea.
 - Si cambian SCSS, regenerar `public/assets/css/style.css` con `corepack pnpm run css:build`.
 - Ejecutar `corepack pnpm run build` solo cuando el cambio afecte código de la web o haga falta validar integración Astro; no es obligatorio para cambios solo de agentes/documentación.
 - Si cambian assets o URLs de assets versionadas, ejecutar `scripts/bump-asset-version.sh` y verificar que se actualizan los `?v=` por hash. En el estado actual puede actualizar `src/infrastructure/content/data/site-settings.json`.
