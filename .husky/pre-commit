@@ -1,0 +1,4 @@
+corepack pnpm run lint:js
+corepack pnpm run lint:scss
+corepack pnpm run format:check
+git diff --check
