@@ -1,0 +1,11 @@
+.astro/
+dist/
+node_modules/
+public/assets/css/style.css
+pnpm-lock.yaml
+studio/pnpm-lock.yaml
+
+*.log
+.env
+.env.*
+.vercel/

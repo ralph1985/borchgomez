@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Muestra las imágenes versionadas de mayor tamaño sin imponer límites."""
+"""Muestra las imágenes públicas de mayor tamaño sin imponer límites."""
 
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ def human_size(size: int) -> str:
 
 def main() -> int:
     result = subprocess.run(
-        ["git", "ls-files", "-z", "--", "assets/img"],
+        ["git", "ls-files", "-z", "--", "public/assets/img"],
         cwd=ROOT,
         check=True,
         capture_output=True,

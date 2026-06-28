@@ -10,4 +10,4 @@ export interface HomePageContent {
   plans: PlansContent;
 }
 
-export type { Plan, Project, Service, SiteSettings };
+export type { Plan, PlansContent, Project, Service, SiteSettings };
