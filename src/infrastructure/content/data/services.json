@@ -7,11 +7,12 @@
     "statusLabel": "Acreditación profesional:",
     "statusText": "Piloto de drones con formación A1/A3 y certificado de competencia A2, en categoría abierta UAS.",
     "image": {
-      "src": "https://cdn.sanity.io/images/84r63grh/production/88df04bede2598548b35376c8c9647a3e44e078a-400x400.webp",
+      "src": "/assets/img/borja-drone-catedral-cuenca-400.webp?v=7b89903b",
+      "srcset": "/assets/img/borja-drone-catedral-cuenca-400.webp?v=7b89903b 400w, /assets/img/borja-drone-catedral-cuenca-800.webp?v=c3bfe47c 800w",
+      "sizes": "(max-width: 767px) 260px, 250px",
       "alt": "Borja Gómez sujetando su dron con la catedral de Cuenca al fondo",
       "width": 400,
-      "height": 400,
-      "sizes": "(max-width: 767px) 260px, 250px"
+      "height": 400
     }
   },
   {

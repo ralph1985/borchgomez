@@ -438,19 +438,16 @@ function readOptionalServiceImage(source, fieldName, fallbackImage) {
   }
 
   assertObject(source, `Sanity ${fieldName} must be an object when provided.`);
+  assertLocalFallbackImage(fallbackImage, fieldName);
 
-  const image = {
-    src: readRequiredString(source.src, `${fieldName}.asset.url`),
+  readRequiredString(source.src, `${fieldName}.asset.url`);
+  readRequiredPositiveNumber(source.width, `${fieldName}.asset.metadata.dimensions.width`);
+  readRequiredPositiveNumber(source.height, `${fieldName}.asset.metadata.dimensions.height`);
+
+  return {
+    ...fallbackImage,
     alt: readRequiredString(source.alt, `${fieldName}.alt`),
-    width: readRequiredPositiveNumber(source.width, `${fieldName}.asset.metadata.dimensions.width`),
-    height: readRequiredPositiveNumber(source.height, `${fieldName}.asset.metadata.dimensions.height`),
   };
-
-  if (fallbackImage?.sizes && typeof fallbackImage.sizes === "string") {
-    image.sizes = fallbackImage.sizes;
-  }
-
-  return image;
 }
 
 function readPortfolio(source, fallbackProjects) {
@@ -511,6 +508,10 @@ function readProject(project, index, fallbackProject, validFilterValues) {
     throw new Error(`Sanity portfolio.projects[${index}] uses unknown filters: ${invalidFilters.join(", ")}.`);
   }
 
+  readRequiredString(project.image.src, `portfolio.projects[${index}].image.asset.url`);
+  readRequiredPositiveNumber(project.image.width, `portfolio.projects[${index}].image.asset.metadata.dimensions.width`);
+  readRequiredPositiveNumber(project.image.height, `portfolio.projects[${index}].image.asset.metadata.dimensions.height`);
+
   return {
     title: readRequiredString(project.title, `portfolio.projects[${index}].title`),
     subtitle: readOptionalString(project.subtitle, `portfolio.projects[${index}].subtitle`) ?? "",
@@ -518,20 +519,36 @@ function readProject(project, index, fallbackProject, validFilterValues) {
     filter: filters[0],
     filters,
     image: {
-      src: readRequiredString(project.image.src, `portfolio.projects[${index}].image.asset.url`),
+      ...readFallbackImage(fallbackProject?.image, `portfolio.projects[${index}].image`),
       alt: readRequiredString(project.image.alt, `portfolio.projects[${index}].image.alt`),
-      width: readRequiredPositiveNumber(project.image.width, `portfolio.projects[${index}].image.asset.metadata.dimensions.width`),
-      height: readRequiredPositiveNumber(
-        project.image.height,
-        `portfolio.projects[${index}].image.asset.metadata.dimensions.height`,
-      ),
-      sizes: fallbackProject?.image?.sizes,
     },
     link: {
       label: readRequiredString(project.link.label, `portfolio.projects[${index}].link.label`),
       href: readRequiredString(project.link.href, `portfolio.projects[${index}].link.href`),
     },
   };
+}
+
+function readFallbackImage(fallbackImage, fieldName) {
+  assertLocalFallbackImage(fallbackImage, fieldName);
+
+  return {
+    ...fallbackImage,
+  };
+}
+
+function assertLocalFallbackImage(fallbackImage, fieldName) {
+  assertObject(fallbackImage, `Local fallback image is missing for Sanity ${fieldName}.`);
+
+  const src = readRequiredString(fallbackImage.src, `${fieldName}.fallback.src`);
+
+  if (isRemoteUrl(src)) {
+    throw new Error(`Local fallback image for Sanity ${fieldName} must use a local asset path, not ${src}.`);
+  }
+}
+
+function isRemoteUrl(value) {
+  return /^(?:[a-z][a-z0-9+.-]*:)?\/\//i.test(value);
 }
 
 function readAbout(source, fallbackAbout) {
