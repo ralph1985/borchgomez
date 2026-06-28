@@ -120,18 +120,16 @@
     "title": "Haz que tu historia se vea",
     "career": "Dando voz a las raíces",
     "description": "Producción audiovisual, fotografía y contenido digital para marcas rurales y negocios locales. Historias reales del campo para que restaurantes, queserías, bodegas, artesanos y municipios del territorio muestren su trabajo con autenticidad.",
-    "claims": [
-      "Haz que tu negocio se vea."
-    ],
+    "claims": [],
     "actions": [
-      {
-        "label": "Cuéntame tu proyecto",
-        "href": "#contact",
-        "className": "home__hire"
-      },
       {
         "label": "Ver historias",
         "href": "#portfolio",
+        "className": "home__hire"
+      },
+      {
+        "label": "Cuéntame tu proyecto",
+        "href": "#contact",
         "className": "home__download"
       }
     ],
@@ -157,7 +155,7 @@
         "text": "Escucho cada proyecto, entiendo su contexto y traduzco su historia en vídeo, fotografía y contenido digital pensado para conectar con quienes valoran lo auténtico y lo cercano."
       }
     ],
-    "closing": "El objetivo es mostrar el valor que hay detrás de cada proyecto: su trabajo, su historia y su origen."
+    "closing": "Mi objetivo principal es ayudar a pequeñas empresas de nuestros municipios, dando visibilidad tanto a aquellas que llevan años formando parte de nuestra historia como a los nuevos proyectos que llegan con ilusión y ganas de crecer.\n\nTambién quiero poner en valor todo el trabajo que realizan las instituciones públicas para mejorar el día a día de estas localidades, pueblos pequeños en tamaño, pero enormes por su gente, su esfuerzo y todo lo que aportan."
   },
   "servicesIntro": {
     "title": "Servicios",
@@ -252,7 +250,7 @@
     },
     "paragraphsAfterImage": [
       "Mi objetivo es devolver al territorio lo que me dio: visibilidad real para negocios y proyectos que merecen ser vistos, con especial vínculo con Castilla-La Mancha y abierto a cualquier entorno rural.",
-      "Desde Fuera de la Linde ayudo a productores locales, artesanos y pequeños municipios a contar mejor lo que hacen: historias con alma, raíz y oficio."
+      "Ayudo a productores locales, artesanos y pequeños municipios a contar mejor lo que hacen: historias con alma."
     ]
   },
   "contact": {

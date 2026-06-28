@@ -42,6 +42,7 @@
       "name": "Origen",
       "price": "Precio a consultar",
       "tagline": "Una solución completa para presencia digital y crecimiento exponencial.",
+      "featured": false,
       "features": [
         "6 reels mensuales",
         "6 stories mensuales",
