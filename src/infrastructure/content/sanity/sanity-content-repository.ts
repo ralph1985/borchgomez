@@ -1,5 +1,5 @@
 import { createClient, type SanityClient } from "@sanity/client";
-import type { HomePageContent, Plan, PlansContent, SiteSettings } from "../../../domain/home-page";
+import type { HomePageContent, Plan, PlansContent, Project, SiteSettings } from "../../../domain/home-page";
 import type { ContentRepository } from "../../../ports/content-repository";
 
 type HeroContent = SiteSettings["hero"];
@@ -9,6 +9,8 @@ type PurposeItem = PurposeContent["items"][number];
 type AboutContent = SiteSettings["about"];
 type ContactContent = SiteSettings["contact"];
 type ContactLink = ContactContent["primary"];
+type ProjectsIntroContent = SiteSettings["projectsIntro"];
+type ProjectFilter = ProjectsIntroContent["filters"][number];
 type PromoContent = PlansContent["promo"];
 
 interface SanityHeroDocument {
@@ -90,10 +92,40 @@ interface SanityContactLink {
   href?: unknown;
 }
 
+interface SanityPortfolioDocument {
+  title?: unknown;
+  subtitle?: unknown;
+  filters?: Array<{
+    label?: unknown;
+    value?: unknown;
+  }>;
+  initialVisible?: unknown;
+  loadStep?: unknown;
+  projects?: Array<{
+    title?: unknown;
+    subtitle?: unknown;
+    category?: unknown;
+    filterValues?: unknown;
+    image?: {
+      src?: unknown;
+      alt?: unknown;
+      width?: unknown;
+      height?: unknown;
+    };
+    link?: {
+      label?: unknown;
+      href?: unknown;
+    };
+  }>;
+}
+
+type SanityProjectItem = NonNullable<SanityPortfolioDocument["projects"]>[number];
+
 interface SanityHomePageDocuments {
   hero: SanityHeroDocument | null;
   purpose: SanityPurposeDocument | null;
   plans: SanityPlanDocument | null;
+  portfolio: SanityPortfolioDocument | null;
   about: SanityAboutDocument | null;
   contact: SanityContactDocument | null;
 }
@@ -151,6 +183,32 @@ const homePageQuery = `{
       note
     },
     budgetNote
+  },
+  "portfolio": *[_type == "portfolio" && _id == "portfolio"][0]{
+    title,
+    subtitle,
+    filters[]{
+      label,
+      value
+    },
+    initialVisible,
+    loadStep,
+    projects[]{
+      title,
+      subtitle,
+      category,
+      filterValues,
+      image{
+        alt,
+        "src": asset->url,
+        "width": asset->metadata.dimensions.width,
+        "height": asset->metadata.dimensions.height
+      },
+      link{
+        label,
+        href
+      }
+    }
   },
   "about": *[_type == "about" && _id == "about"][0]{
     title,
@@ -213,9 +271,11 @@ export class SanityContentRepository implements ContentRepository {
           ...fallbackContent.site,
           hero: mergeHero(fallbackContent.site.hero, documents.hero),
           purpose: mergePurpose(fallbackContent.site.purpose, documents.purpose),
+          projectsIntro: mergeProjectsIntro(fallbackContent.site.projectsIntro, documents.portfolio),
           about: mergeAbout(fallbackContent.site.about, documents.about),
           contact: mergeContact(fallbackContent.site.contact, documents.contact),
         },
+        projects: mergeProjects(fallbackContent.projects, documents.portfolio),
         plans: mergePlans(fallbackContent.plans, documents.plans),
       };
     } catch (error) {
@@ -369,6 +429,112 @@ function mergePromo(fallback: PromoContent, source: SanityPlanDocument["promo"])
   };
 }
 
+function mergeProjectsIntro(fallback: ProjectsIntroContent, source: SanityPortfolioDocument | null): ProjectsIntroContent {
+  if (!source) {
+    return fallback;
+  }
+
+  return {
+    title: readString(source.title) ?? fallback.title,
+    subtitle: readString(source.subtitle) ?? fallback.subtitle,
+    filters: mergeProjectFilters(fallback.filters, source.filters),
+    initialVisible: readPositiveInteger(source.initialVisible) ?? fallback.initialVisible,
+    loadStep: readPositiveInteger(source.loadStep) ?? fallback.loadStep,
+  };
+}
+
+function mergeProjectFilters(fallbackFilters: ProjectFilter[], sourceFilters: SanityPortfolioDocument["filters"]): ProjectFilter[] {
+  if (!Array.isArray(sourceFilters) || sourceFilters.length === 0) {
+    return fallbackFilters;
+  }
+
+  const filters = sourceFilters
+    .map((filter): ProjectFilter | null => {
+      const label = readString(filter.label);
+      const value = readString(filter.value);
+
+      if (!label || !value) {
+        return null;
+      }
+
+      return { label, value };
+    })
+    .filter((filter): filter is ProjectFilter => filter !== null);
+
+  return filters.some((filter) => filter.value === "all") ? filters : fallbackFilters;
+}
+
+function mergeProjects(fallbackProjects: Project[], source: SanityPortfolioDocument | null): Project[] {
+  if (!source || !Array.isArray(source.projects) || source.projects.length === 0) {
+    return fallbackProjects;
+  }
+
+  const validFilters = new Set(mergeProjectFilters([], source.filters).map((filter) => filter.value));
+  const projects = source.projects
+    .map((project, index) => readProject(project, fallbackProjects[index], validFilters))
+    .filter((project): project is Project => project !== null);
+
+  return projects.length > 0 ? projects : fallbackProjects;
+}
+
+function readProject(source: SanityProjectItem | undefined, fallback: Project | undefined, validFilters: Set<string>): Project | null {
+  const title = readString(source?.title) ?? fallback?.title;
+  const subtitle = readString(source?.subtitle) ?? fallback?.subtitle;
+  const category = readString(source?.category) ?? fallback?.category;
+  const filters = readProjectFilterValues(source?.filterValues, fallback, validFilters);
+  const image = mergeProjectImage(fallback?.image, source?.image);
+  const linkLabel = readString(source?.link?.label) ?? fallback?.link.label;
+  const linkHref = readString(source?.link?.href) ?? fallback?.link.href;
+
+  if (!title || !category || filters.length === 0 || !image || !linkLabel || !linkHref) {
+    return null;
+  }
+
+  return {
+    title,
+    subtitle,
+    category,
+    filter: filters[0],
+    filters,
+    image,
+    link: {
+      label: linkLabel,
+      href: linkHref,
+    },
+  };
+}
+
+function readProjectFilterValues(value: unknown, fallback: Project | undefined, validFilters: Set<string>): string[] {
+  const sourceFilters = Array.isArray(value) ? value.map(readString).filter((filter): filter is string => filter !== undefined) : [];
+  const fallbackFilters = fallback?.filters?.length ? fallback.filters : fallback?.filter ? [fallback.filter] : [];
+  const filters = sourceFilters.length > 0 ? sourceFilters : fallbackFilters;
+  const uniqueFilters = [...new Set(filters)].filter((filter) => filter !== "all");
+
+  if (validFilters.size === 0) {
+    return uniqueFilters;
+  }
+
+  return uniqueFilters.filter((filter) => validFilters.has(filter));
+}
+
+function mergeProjectImage(fallback: Project["image"] | undefined, source: SanityProjectItem["image"]): Project["image"] | null {
+  const src = readString(source?.src);
+  const alt = readString(source?.alt) ?? fallback?.alt;
+  const width = readPositiveNumber(source?.width) ?? fallback?.width;
+  const height = readPositiveNumber(source?.height) ?? fallback?.height;
+
+  if (!src || !alt || width === undefined || height === undefined) {
+    return fallback ?? null;
+  }
+
+  return {
+    src,
+    alt,
+    width,
+    height,
+  };
+}
+
 function mergeAbout(fallback: AboutContent, source: SanityAboutDocument | null): AboutContent {
   if (!source) {
     return fallback;
@@ -437,6 +603,14 @@ function readStringArray(value: unknown, fallback: string[] = []): string[] {
 
 function readPositiveNumber(value: unknown): number | undefined {
   if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) {
+    return undefined;
+  }
+
+  return value;
+}
+
+function readPositiveInteger(value: unknown): number | undefined {
+  if (typeof value !== "number" || !Number.isInteger(value) || value < 1) {
     return undefined;
   }
 

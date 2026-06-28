@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 
 const siteSettingsPath = resolve("src/infrastructure/content/data/site-settings.json");
 const plansPath = resolve("src/infrastructure/content/data/plans.json");
+const projectsPath = resolve("src/infrastructure/content/data/projects.json");
 const envPath = resolve(".env");
 
 loadDotEnv(envPath);
@@ -56,6 +57,32 @@ const homePageQuery = `{
     },
     budgetNote
   },
+  "portfolio": *[_type == "portfolio" && _id == "portfolio"][0]{
+    title,
+    subtitle,
+    filters[]{
+      label,
+      value
+    },
+    initialVisible,
+    loadStep,
+    projects[]{
+      title,
+      subtitle,
+      category,
+      filterValues,
+      image{
+        alt,
+        "src": asset->url,
+        "width": asset->metadata.dimensions.width,
+        "height": asset->metadata.dimensions.height
+      },
+      link{
+        label,
+        href
+      }
+    }
+  },
   "about": *[_type == "about" && _id == "about"][0]{
     title,
     subtitle,
@@ -100,10 +127,12 @@ try {
   });
   const siteSettings = readJson(siteSettingsPath);
   const fallbackPlans = readJson(plansPath);
+  const fallbackProjects = readJson(projectsPath);
   const documents = await client.fetch(homePageQuery);
   const hero = readHero(documents?.hero, siteSettings.hero);
   const purpose = readPurpose(documents?.purpose);
   const plans = readPlans(documents?.plans, fallbackPlans);
+  const portfolio = readPortfolio(documents?.portfolio, fallbackProjects);
   const about = readAbout(documents?.about, siteSettings.about);
   const contact = readContact(documents?.contact);
 
@@ -111,14 +140,16 @@ try {
     ...siteSettings,
     hero,
     purpose,
+    projectsIntro: portfolio.intro,
     about,
     contact,
   };
 
   writeFileSync(siteSettingsPath, `${JSON.stringify(nextSiteSettings, null, 2)}\n`);
   writeFileSync(plansPath, `${JSON.stringify(plans, null, 2)}\n`);
+  writeFileSync(projectsPath, `${JSON.stringify(portfolio.projects, null, 2)}\n`);
   console.log(
-    "Synced Sanity hero, purpose, about and contact into src/infrastructure/content/data/site-settings.json and plans into src/infrastructure/content/data/plans.json.",
+    "Synced Sanity hero, purpose, portfolio, about and contact into src/infrastructure/content/data/site-settings.json, plans into src/infrastructure/content/data/plans.json and projects into src/infrastructure/content/data/projects.json.",
   );
 } catch (error) {
   console.error(`Could not sync Sanity fallbacks. ${readErrorMessage(error)}`);
@@ -277,6 +308,87 @@ function readPlans(source, fallbackPlans) {
   };
 }
 
+function readPortfolio(source, fallbackProjects) {
+  assertObject(source, "Sanity portfolio document is missing.");
+
+  const filters = readProjectFilters(source.filters);
+  const validFilterValues = new Set(filters.map((filter) => filter.value).filter((value) => value !== "all"));
+  const sourceProjects = readArray(source.projects, "Sanity portfolio projects must be an array.");
+
+  if (sourceProjects.length === 0) {
+    throw new Error("Sanity portfolio projects must include at least one project.");
+  }
+
+  return {
+    intro: {
+      title: readRequiredString(source.title, "portfolio.title"),
+      subtitle: readRequiredString(source.subtitle, "portfolio.subtitle"),
+      filters,
+      initialVisible: readRequiredPositiveInteger(source.initialVisible, "portfolio.initialVisible"),
+      loadStep: readRequiredPositiveInteger(source.loadStep, "portfolio.loadStep"),
+    },
+    projects: sourceProjects.map((project, index) => readProject(project, index, fallbackProjects[index], validFilterValues)),
+  };
+}
+
+function readProjectFilters(source) {
+  const filters = readArray(source, "Sanity portfolio filters must be an array.").map((filter, index) => {
+    assertObject(filter, `Sanity portfolio.filters[${index}] must be an object.`);
+
+    return {
+      label: readRequiredString(filter.label, `portfolio.filters[${index}].label`),
+      value: readRequiredString(filter.value, `portfolio.filters[${index}].value`),
+    };
+  });
+
+  if (!filters.some((filter) => filter.value === "all")) {
+    throw new Error("Sanity portfolio filters must include the all filter.");
+  }
+
+  const uniqueValues = new Set(filters.map((filter) => filter.value));
+
+  if (uniqueValues.size !== filters.length) {
+    throw new Error("Sanity portfolio filters cannot include duplicate values.");
+  }
+
+  return filters;
+}
+
+function readProject(project, index, fallbackProject, validFilterValues) {
+  assertObject(project, `Sanity portfolio.projects[${index}] must be an object.`);
+  assertObject(project.image, `Sanity portfolio.projects[${index}].image is missing.`);
+  assertObject(project.link, `Sanity portfolio.projects[${index}].link is missing.`);
+
+  const filters = readRequiredStringArray(project.filterValues, `portfolio.projects[${index}].filterValues`);
+  const invalidFilters = filters.filter((filter) => !validFilterValues.has(filter));
+
+  if (invalidFilters.length > 0) {
+    throw new Error(`Sanity portfolio.projects[${index}] uses unknown filters: ${invalidFilters.join(", ")}.`);
+  }
+
+  return {
+    title: readRequiredString(project.title, `portfolio.projects[${index}].title`),
+    subtitle: readOptionalString(project.subtitle, `portfolio.projects[${index}].subtitle`) ?? "",
+    category: readRequiredString(project.category, `portfolio.projects[${index}].category`),
+    filter: filters[0],
+    filters,
+    image: {
+      src: readRequiredString(project.image.src, `portfolio.projects[${index}].image.asset.url`),
+      alt: readRequiredString(project.image.alt, `portfolio.projects[${index}].image.alt`),
+      width: readRequiredPositiveNumber(project.image.width, `portfolio.projects[${index}].image.asset.metadata.dimensions.width`),
+      height: readRequiredPositiveNumber(
+        project.image.height,
+        `portfolio.projects[${index}].image.asset.metadata.dimensions.height`,
+      ),
+      sizes: fallbackProject?.image?.sizes,
+    },
+    link: {
+      label: readRequiredString(project.link.label, `portfolio.projects[${index}].link.label`),
+      href: readRequiredString(project.link.href, `portfolio.projects[${index}].link.href`),
+    },
+  };
+}
+
 function readAbout(source, fallbackAbout) {
   assertObject(source, "Sanity about document is missing.");
   assertObject(fallbackAbout, "Local about fallback is missing.");
@@ -410,6 +522,14 @@ function readOptionalBoolean(value, fieldName) {
 function readRequiredPositiveNumber(value, fieldName) {
   if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) {
     throw new Error(`Sanity field ${fieldName} must be a positive number.`);
+  }
+
+  return value;
+}
+
+function readRequiredPositiveInteger(value, fieldName) {
+  if (!Number.isInteger(value) || value < 1) {
+    throw new Error(`Sanity field ${fieldName} must be a positive integer.`);
   }
 
   return value;

@@ -17,6 +17,10 @@ export const singletonStructure: StructureResolver = (S) =>
         .id("plans")
         .child(S.document().schemaType("plans").documentId("plans").title("Planes")),
       S.listItem()
+        .title("Proyectos e historias")
+        .id("portfolio")
+        .child(S.document().schemaType("portfolio").documentId("portfolio").title("Proyectos e historias")),
+      S.listItem()
         .title("Sobre mí")
         .id("about")
         .child(S.document().schemaType("about").documentId("about").title("Sobre mí")),
