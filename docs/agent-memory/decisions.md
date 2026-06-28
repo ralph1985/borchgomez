@@ -1,23 +1,23 @@
 # Decisiones del proyecto
 
-- La web publica usa Astro con salida estatica, componentes `.astro`, SCSS compilado y JavaScript vanilla.
+- La web pública usa Astro con salida estática, componentes `.astro`, SCSS compilado y JavaScript vanilla.
 - `studio/` es un Sanity Studio separado y puede usar React y dependencias propias.
-- No se anaden dependencias, frameworks, cambios de package/lock, recursos externos, analytics ni widgets sin permiso explicito.
-- `vercel.json` esta protegido y solo puede modificarse con permiso explicito.
+- No se añaden dependencias, frameworks, cambios de package/lock, recursos externos, analytics ni widgets sin permiso explícito.
+- `vercel.json` está protegido y solo puede modificarse con permiso explícito.
 - La entrada principal de la home es `src/pages/index.astro`; no existe `index.html` como fuente principal del contenido.
 - El contenido local vive en `src/infrastructure/content/data/*.json` y debe llegar a la UI mediante el puerto `ContentRepository`.
-- Sanity solo alimenta secciones conectadas explicitamente en `src/infrastructure/content/sanity/`; el resto del contenido sigue en JSON local.
-- Si Sanity no esta configurado, falla o devuelve campos incompletos, se usa fallback local.
+- Sanity solo alimenta secciones conectadas explícitamente en `src/infrastructure/content/sanity/`; el resto del contenido sigue en JSON local.
+- Si Sanity no está configurado, falla o devuelve campos incompletos, se usa fallback local.
 - En `studio/`, `seed:*` importa documentos al dataset; para ver schemas o entradas nuevas en el Studio desplegado hace falta `corepack pnpm run deploy`.
 - Los estilos se editan en `src/styles/**/*.scss`; si cambian, se regenera `public/assets/css/style.css`.
 - El JavaScript editable de la web vive en `src/scripts/site.js`.
 - El cache busting de assets se hace con `scripts/bump-asset-version.sh`, usando hashes de contenido en los `?v=...`.
 - En el estado actual, `scripts/bump-asset-version.sh` actualiza `src/infrastructure/content/data/site-settings.json` cuando no existe `index.html`.
 - Los cambios de imagen responsive deben revisar el conjunto completo: `src`, `srcset`, `sizes`, dimensiones, alt y archivos relacionados.
-- El contenido aprobado por Borja o por el usuario se preserva literalmente salvo peticion explicita de reescritura.
+- El contenido aprobado por Borja o por el usuario se preserva literalmente salvo petición explícita de reescritura.
 - Codex puede crear ramas y commits locales solo cuando la tarea lo requiera o el usuario lo pida.
-- Push y PR solo por peticion explicita. El usuario revisa y mergea.
-- Flujo normal desde `develop`; `main` se reserva para hotfixes pedidos o urgencias de produccion.
+- Push y PR solo por petición explícita. El usuario revisa y mergea.
+- Flujo normal desde `develop`; `main` se reserva para hotfixes pedidos o urgencias de producción.
 - Solo el coordinador crea ramas, prepara stage, crea commits, hace push o abre PR.
-- Las tareas ambiguas deben preguntarse antes de tocar codigo.
+- Las tareas ambiguas deben preguntarse antes de tocar código.
 - Los problemas fuera del alcance de la tarea se reportan, no se corrigen.

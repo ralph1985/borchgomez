@@ -1,8 +1,8 @@
 # PROJECT_CONTEXT.md
 
-Este proyecto es la web profesional de Borja Gomez, creador audiovisual rural. La pagina presenta servicios, planes, proyectos, presencia en Instagram y vias de contacto para negocios, territorios y proyectos locales.
+Este proyecto es la web profesional de Borja Gómez, creador audiovisual rural. La página presenta servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
 
-La web publica esta migrada a Astro con salida estatica. Usa componentes `.astro`, SCSS global compilado a CSS publico y JavaScript vanilla para interaccion. No usa React en la web publica; `studio/` si usa React porque es un Sanity Studio.
+La web pública está migrada a Astro con salida estática. Usa componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla para interacción. No usa React en la web pública; `studio/` sí usa React porque es un Sanity Studio.
 
 ## Arquitectura principal
 
@@ -10,9 +10,9 @@ La web publica esta migrada a Astro con salida estatica. Usa componentes `.astro
 - `src/layouts/BaseLayout.astro`: HTML base, metadatos, cabecera, footer, CSS y scripts.
 - `src/sections/`: secciones visibles de la home.
 - `src/components/`: UI reutilizable e iconos.
-- `src/scripts/site.js`: JavaScript fuente de la web publica.
+- `src/scripts/site.js`: JavaScript fuente de la web pública.
 - `src/styles/`: SCSS fuente organizado por base, layout, componentes y secciones.
-- `public/assets/`: assets servidos publicamente, incluido `public/assets/css/style.css` compilado.
+- `public/assets/`: assets servidos públicamente, incluido `public/assets/css/style.css` compilado.
 - `src/domain/`, `src/ports/`, `src/application/`: tipos, puerto de contenido y caso de uso de la home.
 - `src/infrastructure/content/data/`: contenido local en JSON.
 - `src/infrastructure/content/sanity/`: repositorio Sanity con fallback local.
@@ -23,9 +23,9 @@ La web publica esta migrada a Astro con salida estatica. Usa componentes `.astro
 
 La UI no debe leer JSON directamente desde las secciones. `src/pages/index.astro` usa `getHomePageContent`, que depende de `ContentRepository`.
 
-El contenido base esta en `LocalContentRepository` y lee `src/infrastructure/content/data/*.json`. Si existen `SANITY_PROJECT_ID`, `SANITY_DATASET` y `SANITY_API_VERSION`, `src/shared/config/content.ts` usa `SanityContentRepository`.
+El contenido base está en `LocalContentRepository` y lee `src/infrastructure/content/data/*.json`. Si existen `SANITY_PROJECT_ID`, `SANITY_DATASET` y `SANITY_API_VERSION`, `src/shared/config/content.ts` usa `SanityContentRepository`.
 
-Sanity puede sustituir solo las secciones conectadas explicitamente en `src/infrastructure/content/sanity/`. Si falta configuracion, falla la consulta o faltan campos obligatorios, la web usa el JSON local.
+Sanity puede sustituir solo las secciones conectadas explícitamente en `src/infrastructure/content/sanity/`. Si falta configuración, falla la consulta o faltan campos obligatorios, la web usa el JSON local.
 
 El hostname del Sanity Studio desplegado es `borchgomez`: `https://borchgomez.sanity.studio/`.
 
@@ -35,7 +35,7 @@ Para refrescar fallbacks locales con Sanity se usa:
 corepack pnpm run sync:fallbacks
 ```
 
-En `studio/`, los scripts `seed:*` importan documentos al dataset, pero no publican cambios de schema ni estructura del Studio. Cuando se anade un schema o una entrada nueva al Studio desplegado, ejecutar tambien:
+En `studio/`, los scripts `seed:*` importan documentos al dataset, pero no publican cambios de schema ni estructura del Studio. Cuando se añade un schema o una entrada nueva al Studio desplegado, ejecutar también:
 
 ```bash
 corepack pnpm run deploy
@@ -49,11 +49,11 @@ Los cambios de SCSS deben hacerse en `src/styles/**/*.scss` y compilarse con:
 corepack pnpm run css:build
 ```
 
-El CSS compilado `public/assets/css/style.css` esta versionado y debe quedar coherente con los SCSS.
+El CSS compilado `public/assets/css/style.css` está versionado y debe quedar coherente con los SCSS.
 
-El JavaScript editable esta en `src/scripts/site.js`. No asumir la ruta antigua `assets/js/script.js`.
+El JavaScript editable está en `src/scripts/site.js`. No asumir la ruta antigua `assets/js/script.js`.
 
-Los assets existentes se sirven desde `public/assets/` para conservar rutas publicas. Si se cambian assets o URLs versionadas, ejecutar:
+Los assets existentes se sirven desde `public/assets/` para conservar rutas públicas. Si se cambian assets o URLs versionadas, ejecutar:
 
 ```bash
 scripts/bump-asset-version.sh
@@ -71,7 +71,7 @@ corepack pnpm run dev
 corepack pnpm run build
 ```
 
-El build compila primero SCSS y despues Astro. Los cambios publicados en Sanity no aparecen automaticamente en produccion: requieren nuevo build y redeploy, salvo que se configuren webhooks de Vercel.
+El build compila primero SCSS y después Astro. Los cambios publicados en Sanity no aparecen automáticamente en producción: requieren nuevo build y redeploy, salvo que se configuren webhooks de Vercel.
 
 ## Reglas de contenido comercial
 
