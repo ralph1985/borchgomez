@@ -18,7 +18,8 @@
     "prepare": "husky",
     "sync:fallbacks": "node scripts/sync-sanity-fallbacks.mjs",
     "seed:about": "pnpm --dir studio run seed:about",
-    "seed:portfolio": "pnpm --dir studio run seed:portfolio"
+    "seed:portfolio": "pnpm --dir studio run seed:portfolio",
+    "seed:services": "pnpm --dir studio run seed:services"
   },
   "dependencies": {
     "@sanity/client": "7.23.0",

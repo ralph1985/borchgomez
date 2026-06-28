@@ -3,9 +3,11 @@ import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 const siteSettingsPath = resolve("src/infrastructure/content/data/site-settings.json");
+const servicesPath = resolve("src/infrastructure/content/data/services.json");
 const plansPath = resolve("src/infrastructure/content/data/plans.json");
 const projectsPath = resolve("src/infrastructure/content/data/projects.json");
 const envPath = resolve(".env");
+const serviceIconNames = new Set(["drone", "video", "share", "globe", "monitor-search", "chart", "map-pin"]);
 
 loadDotEnv(envPath);
 
@@ -56,6 +58,27 @@ const homePageQuery = `{
       note
     },
     budgetNote
+  },
+  "services": *[_type == "services" && _id == "services"][0]{
+    intro{
+      title,
+      subtitle
+    },
+    items[]{
+      id,
+      title,
+      icon,
+      description,
+      statusLabel,
+      statusText,
+      features,
+      image{
+        alt,
+        "src": asset->url,
+        "width": asset->metadata.dimensions.width,
+        "height": asset->metadata.dimensions.height
+      }
+    }
   },
   "portfolio": *[_type == "portfolio" && _id == "portfolio"][0]{
     title,
@@ -126,12 +149,14 @@ try {
     useCdn: false,
   });
   const siteSettings = readJson(siteSettingsPath);
+  const fallbackServices = readJson(servicesPath);
   const fallbackPlans = readJson(plansPath);
   const fallbackProjects = readJson(projectsPath);
   const documents = await client.fetch(homePageQuery);
   const hero = readHero(documents?.hero, siteSettings.hero);
   const purpose = readPurpose(documents?.purpose);
   const plans = readPlans(documents?.plans, fallbackPlans);
+  const services = readServices(documents?.services, fallbackServices);
   const portfolio = readPortfolio(documents?.portfolio, fallbackProjects);
   const about = readAbout(documents?.about, siteSettings.about);
   const contact = readContact(documents?.contact);
@@ -140,16 +165,18 @@ try {
     ...siteSettings,
     hero,
     purpose,
+    servicesIntro: services.intro,
     projectsIntro: portfolio.intro,
     about,
     contact,
   };
 
   writeFileSync(siteSettingsPath, `${JSON.stringify(nextSiteSettings, null, 2)}\n`);
+  writeFileSync(servicesPath, `${JSON.stringify(services.items, null, 2)}\n`);
   writeFileSync(plansPath, `${JSON.stringify(plans, null, 2)}\n`);
   writeFileSync(projectsPath, `${JSON.stringify(portfolio.projects, null, 2)}\n`);
   console.log(
-    "Synced Sanity hero, purpose, portfolio, about and contact into src/infrastructure/content/data/site-settings.json, plans into src/infrastructure/content/data/plans.json and projects into src/infrastructure/content/data/projects.json.",
+    "Synced Sanity hero, purpose, services, portfolio, about and contact into src/infrastructure/content/data/site-settings.json, services into src/infrastructure/content/data/services.json, plans into src/infrastructure/content/data/plans.json and projects into src/infrastructure/content/data/projects.json.",
   );
 } catch (error) {
   console.error(`Could not sync Sanity fallbacks. ${readErrorMessage(error)}`);
@@ -306,6 +333,66 @@ function readPlans(source, fallbackPlans) {
     },
     budgetNote: readRequiredString(source.budgetNote, "plans.budgetNote"),
   };
+}
+
+function readServices(source, fallbackServices) {
+  assertObject(source, "Sanity services document is missing.");
+
+  const sourceItems = readArray(source.items, "Sanity services items must be an array.");
+
+  if (sourceItems.length === 0) {
+    throw new Error("Sanity services items must include at least one service.");
+  }
+
+  return {
+    intro: {
+      title: readRequiredString(source.intro?.title, "services.intro.title"),
+      subtitle: readRequiredString(source.intro?.subtitle, "services.intro.subtitle"),
+    },
+    items: sourceItems.map((service, index) => readService(service, index, fallbackServices[index])),
+  };
+}
+
+function readService(service, index, fallbackService) {
+  assertObject(service, `Sanity services.items[${index}] must be an object.`);
+
+  const icon = readRequiredString(service.icon, `services.items[${index}].icon`);
+
+  if (!serviceIconNames.has(icon)) {
+    throw new Error(`Sanity services.items[${index}].icon uses an unknown icon: ${icon}.`);
+  }
+
+  return removeUndefined({
+    id: readRequiredString(service.id, `services.items[${index}].id`),
+    title: readRequiredString(service.title, `services.items[${index}].title`),
+    icon,
+    description: readOptionalString(service.description, `services.items[${index}].description`),
+    statusLabel: readOptionalString(service.statusLabel, `services.items[${index}].statusLabel`),
+    statusText: readOptionalString(service.statusText, `services.items[${index}].statusText`),
+    features: readOptionalStringArray(service.features, `services.items[${index}].features`),
+    image: readOptionalServiceImage(service.image, `services.items[${index}].image`, fallbackService?.image),
+  });
+}
+
+function readOptionalServiceImage(source, fieldName, fallbackImage) {
+  if (source === undefined || source === null) {
+    return undefined;
+  }
+
+  assertObject(source, `Sanity ${fieldName} must be an object when provided.`);
+
+  const image = {
+    src: readRequiredString(source.src, `${fieldName}.asset.url`),
+    alt: readRequiredString(source.alt, `${fieldName}.alt`),
+    width: readRequiredPositiveNumber(source.width, `${fieldName}.asset.metadata.dimensions.width`),
+    height: readRequiredPositiveNumber(source.height, `${fieldName}.asset.metadata.dimensions.height`),
+  };
+
+  if (fallbackImage?.sizes && typeof fallbackImage.sizes === "string") {
+    image.sizes = fallbackImage.sizes;
+  }
+
+  return image;
 }
 
 function readPortfolio(source, fallbackProjects) {
@@ -544,6 +631,29 @@ function readRequiredStringArray(value, fieldName) {
   }
 
   return strings;
+}
+
+function readOptionalStringArray(value, fieldName) {
+  if (value === undefined || value === null) {
+    return undefined;
+  }
+
+  const items = readArray(value, `Sanity field ${fieldName} must be an array when provided.`);
+  const strings = items.map((item, index) => readRequiredString(item, `${fieldName}[${index}]`));
+
+  return strings.length > 0 ? strings : undefined;
+}
+
+function removeUndefined(value) {
+  return Object.fromEntries(
+    Object.entries(value).filter(([, entry]) => {
+      if (Array.isArray(entry)) {
+        return entry.length > 0;
+      }
+
+      return entry !== undefined;
+    }),
+  );
 }
 
 function readErrorMessage(error) {
