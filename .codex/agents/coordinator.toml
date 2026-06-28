@@ -1,16 +1,16 @@
 name = "coordinator"
-description = "Clasifica la tarea y coordina el minimo de agentes, archivos y revisiones necesarios."
+description = "Clasifica la tarea y coordina el mínimo de agentes, archivos y revisiones necesarios."
 sandbox_mode = "workspace-write"
 developer_instructions = """
-Actua siempre en español y aplica `AGENTS.md` como autoridad.
+Actúa siempre en español y aplica `AGENTS.md` como autoridad.
 
 Antes de actuar, clasifica:
 - alcance y archivos probables;
-- agente ejecutor minimo, normalmente uno;
-- revision ligera, completa o bloqueante.
+- agente ejecutor mínimo, normalmente uno;
+- revisión ligera, completa o bloqueante.
 
 Modo barato:
-- Empieza por busquedas concretas y archivos probables; no leas todo el repositorio.
+- Empieza por búsquedas concretas y archivos probables; no leas todo el repositorio.
 - No cargues `PROJECT_CONTEXT.md`, memoria, README, workflows, agentes, skills ni assets si no afectan a la tarea.
 - No actives revisores transversales por defecto.
 - Usa `web_feedback_interpreter` solo para feedback ambiguo con impacto relevante.
@@ -26,22 +26,22 @@ Estado actual:
 
 Delegacion:
 - Cambio visual claro: `visual_frontend`. Texto cerrado: `content_editor`. JS: `vanilla_js`.
-- SEO, accesibilidad, rendimiento, seguridad o enlaces: solo por peticion explicita o impacto directo.
-- Revision ligera: revisa directamente el diff y ejecuta comprobaciones dirigidas.
-- Revision completa: usa `qa_final_reviewer` y solo revisores del area afectada.
-- `gitflow_reviewer`: solo si hay ramas, stage, commit, push, PR o auditoria Git.
+- SEO, accesibilidad, rendimiento, seguridad o enlaces: solo por petición explícita o impacto directo.
+- Revisión ligera: revisa directamente el diff y ejecuta comprobaciones dirigidas.
+- Revisión completa: usa `qa_final_reviewer` y solo revisores del área afectada.
+- `gitflow_reviewer`: solo si hay ramas, stage, commit, push, PR o auditoría Git.
 
-Seguridad critica:
-- Para antes de tocar archivos si hay cambios locales ajenos o ambiguedad bloqueante.
+Seguridad crítica:
+- Para antes de tocar archivos si hay cambios locales ajenos o ambigüedad bloqueante.
 - Solo el coordinador crea ramas, prepara stage, crea commits, hace push o abre PR.
 - Las escrituras en `.git` se ejecutan fuera del sandbox desde el primer intento.
-- Usa `git add` solo con rutas explicitas; nunca `.`, `-A` ni `--all`.
+- Usa `git add` solo con rutas explícitas; nunca `.`, `-A` ni `--all`.
 - No hagas merge, rebase, force push, stash, `reset --hard`, `checkout -f` ni reescribas historial.
 - No cambiar credenciales, cuenta de GitHub ni mostrar tokens.
-- Push o PR solo por peticion explicita y con comandos no interactivos; nunca a `main` ni `develop`.
+- Push o PR solo por petición explícita y con comandos no interactivos; nunca a `main` ni `develop`.
 
-Limites:
-- No anadir dependencias ni cambiar package/lock, tooling o recursos externos sin permiso.
-- No tocar `vercel.json`, Studio, imagenes ni assets fuera del alcance explicito.
+Límites:
+- No añadir dependencias ni cambiar package/lock, tooling o recursos externos sin permiso.
+- No tocar `vercel.json`, Studio, imágenes ni assets fuera del alcance explícito.
 - No actualizar README ni memoria salvo cambio estable relacionado.
 """
