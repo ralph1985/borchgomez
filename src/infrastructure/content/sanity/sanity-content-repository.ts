@@ -1,5 +1,5 @@
 import { createClient, type SanityClient } from "@sanity/client";
-import type { HomePageContent, Plan, PlansContent, Project, SiteSettings } from "../../../domain/home-page";
+import type { HomePageContent, Plan, PlansContent, Project, Service, SiteSettings } from "../../../domain/home-page";
 import type { ContentRepository } from "../../../ports/content-repository";
 
 type HeroContent = SiteSettings["hero"];
@@ -9,6 +9,7 @@ type PurposeItem = PurposeContent["items"][number];
 type AboutContent = SiteSettings["about"];
 type ContactContent = SiteSettings["contact"];
 type ContactLink = ContactContent["primary"];
+type ServicesIntroContent = SiteSettings["servicesIntro"];
 type ProjectsIntroContent = SiteSettings["projectsIntro"];
 type ProjectFilter = ProjectsIntroContent["filters"][number];
 type PromoContent = PlansContent["promo"];
@@ -92,6 +93,30 @@ interface SanityContactLink {
   href?: unknown;
 }
 
+interface SanityServicesDocument {
+  intro?: {
+    title?: unknown;
+    subtitle?: unknown;
+  };
+  items?: Array<{
+    id?: unknown;
+    title?: unknown;
+    icon?: unknown;
+    description?: unknown;
+    statusLabel?: unknown;
+    statusText?: unknown;
+    features?: unknown;
+    image?: {
+      src?: unknown;
+      alt?: unknown;
+      width?: unknown;
+      height?: unknown;
+    };
+  }>;
+}
+
+type SanityServiceItem = NonNullable<SanityServicesDocument["items"]>[number];
+
 interface SanityPortfolioDocument {
   title?: unknown;
   subtitle?: unknown;
@@ -125,6 +150,7 @@ interface SanityHomePageDocuments {
   hero: SanityHeroDocument | null;
   purpose: SanityPurposeDocument | null;
   plans: SanityPlanDocument | null;
+  services: SanityServicesDocument | null;
   portfolio: SanityPortfolioDocument | null;
   about: SanityAboutDocument | null;
   contact: SanityContactDocument | null;
@@ -183,6 +209,27 @@ const homePageQuery = `{
       note
     },
     budgetNote
+  },
+  "services": *[_type == "services" && _id == "services"][0]{
+    intro{
+      title,
+      subtitle
+    },
+    items[]{
+      id,
+      title,
+      icon,
+      description,
+      statusLabel,
+      statusText,
+      features,
+      image{
+        alt,
+        "src": asset->url,
+        "width": asset->metadata.dimensions.width,
+        "height": asset->metadata.dimensions.height
+      }
+    }
   },
   "portfolio": *[_type == "portfolio" && _id == "portfolio"][0]{
     title,
@@ -271,10 +318,12 @@ export class SanityContentRepository implements ContentRepository {
           ...fallbackContent.site,
           hero: mergeHero(fallbackContent.site.hero, documents.hero),
           purpose: mergePurpose(fallbackContent.site.purpose, documents.purpose),
+          servicesIntro: mergeServicesIntro(fallbackContent.site.servicesIntro, documents.services),
           projectsIntro: mergeProjectsIntro(fallbackContent.site.projectsIntro, documents.portfolio),
           about: mergeAbout(fallbackContent.site.about, documents.about),
           contact: mergeContact(fallbackContent.site.contact, documents.contact),
         },
+        services: mergeServices(fallbackContent.services, documents.services),
         projects: mergeProjects(fallbackContent.projects, documents.portfolio),
         plans: mergePlans(fallbackContent.plans, documents.plans),
       };
@@ -429,6 +478,61 @@ function mergePromo(fallback: PromoContent, source: SanityPlanDocument["promo"])
   };
 }
 
+function mergeServicesIntro(fallback: ServicesIntroContent, source: SanityServicesDocument | null): ServicesIntroContent {
+  if (!source) {
+    return fallback;
+  }
+
+  return {
+    title: readString(source.intro?.title) ?? fallback.title,
+    subtitle: readString(source.intro?.subtitle) ?? fallback.subtitle,
+  };
+}
+
+function mergeServices(fallbackServices: Service[], source: SanityServicesDocument | null): Service[] {
+  if (!source || !Array.isArray(source.items) || source.items.length === 0) {
+    return fallbackServices;
+  }
+
+  const fallbackById = new Map(fallbackServices.map((service) => [service.id, service]));
+  const services = source.items
+    .map((service, index) => readService(service, fallbackServices[index], fallbackById))
+    .filter((service): service is Service => service !== null);
+
+  return services.length > 0 ? services : fallbackServices;
+}
+
+function readService(
+  source: SanityServiceItem | undefined,
+  fallbackByIndex: Service | undefined,
+  fallbackById: Map<string, Service>,
+): Service | null {
+  const id = readString(source?.id) ?? fallbackByIndex?.id;
+  const fallback = id ? fallbackById.get(id) ?? fallbackByIndex : fallbackByIndex;
+  const title = readString(source?.title) ?? fallback?.title;
+  const icon = readServiceIcon(source?.icon) ?? fallback?.icon;
+  const description = readString(source?.description) ?? fallback?.description;
+  const statusLabel = readString(source?.statusLabel) ?? fallback?.statusLabel;
+  const statusText = readString(source?.statusText) ?? fallback?.statusText;
+  const features = readOptionalStringArray(source?.features, fallback?.features);
+  const image = mergeOptionalImage(fallback?.image, source?.image);
+
+  if (!id || !title || !icon) {
+    return null;
+  }
+
+  return {
+    id,
+    title,
+    icon,
+    description,
+    statusLabel,
+    statusText,
+    features,
+    image,
+  };
+}
+
 function mergeProjectsIntro(fallback: ProjectsIntroContent, source: SanityPortfolioDocument | null): ProjectsIntroContent {
   if (!source) {
     return fallback;
@@ -535,6 +639,24 @@ function mergeProjectImage(fallback: Project["image"] | undefined, source: Sanit
   };
 }
 
+function mergeOptionalImage(fallback: Service["image"] | undefined, source: SanityServiceItem["image"]): Service["image"] | undefined {
+  const src = readString(source?.src);
+  const alt = readString(source?.alt) ?? fallback?.alt;
+  const width = readPositiveNumber(source?.width) ?? fallback?.width;
+  const height = readPositiveNumber(source?.height) ?? fallback?.height;
+
+  if (!src || !alt || width === undefined || height === undefined) {
+    return fallback;
+  }
+
+  return {
+    src,
+    alt,
+    width,
+    height,
+  };
+}
+
 function mergeAbout(fallback: AboutContent, source: SanityAboutDocument | null): AboutContent {
   if (!source) {
     return fallback;
@@ -601,6 +723,18 @@ function readStringArray(value: unknown, fallback: string[] = []): string[] {
   return strings.length > 0 ? strings : fallback;
 }
 
+function readOptionalStringArray(value: unknown, fallback: string[] | undefined): string[] | undefined {
+  if (!Array.isArray(value)) {
+    return fallback;
+  }
+
+  const strings = value
+    .map(readString)
+    .filter((item): item is string => item !== undefined);
+
+  return strings.length > 0 ? strings : fallback;
+}
+
 function readPositiveNumber(value: unknown): number | undefined {
   if (typeof value !== "number" || !Number.isFinite(value) || value <= 0) {
     return undefined;
@@ -615,6 +749,14 @@ function readPositiveInteger(value: unknown): number | undefined {
   }
 
   return value;
+}
+
+const serviceIconNames = new Set(["drone", "video", "share", "globe", "monitor-search", "chart", "map-pin"]);
+
+function readServiceIcon(value: unknown): string | undefined {
+  const icon = readString(value);
+
+  return icon && serviceIconNames.has(icon) ? icon : undefined;
 }
 
 function readString(value: unknown): string | undefined {
