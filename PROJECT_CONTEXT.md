@@ -29,13 +29,19 @@ Sanity puede sustituir solo las secciones conectadas explícitamente en `src/inf
 
 El hostname del Sanity Studio desplegado es `borchgomez`: `https://borchgomez.sanity.studio/`.
 
+Para comprobar si Sanity y los fallbacks locales están desincronizados sin escribir archivos se usa:
+
+```bash
+corepack pnpm run sync:fallbacks:check
+```
+
 Para refrescar fallbacks locales con Sanity se usa:
 
 ```bash
 corepack pnpm run sync:fallbacks
 ```
 
-En `studio/`, los scripts `seed:*` importan documentos al dataset, pero no publican cambios de schema ni estructura del Studio. Cuando se añade un schema o una entrada nueva al Studio desplegado, ejecutar también:
+En `studio/`, los scripts `seed:*` importan documentos al dataset y deben tratarse como bootstrap o recuperación, no como mantenimiento normal de contenido. Algunos usan `--replace`, por lo que pueden sobrescribir cambios editoriales remotos. No publican cambios de schema ni estructura del Studio; cuando se añade un schema o una entrada nueva al Studio desplegado, ejecutar también:
 
 ```bash
 corepack pnpm run deploy

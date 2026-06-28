@@ -9,7 +9,8 @@
 - Sanity solo alimenta secciones conectadas explícitamente en `src/infrastructure/content/sanity/`; el resto del contenido sigue en JSON local.
 - Si Sanity no está configurado, falla o devuelve campos incompletos, se usa fallback local.
 - Los iconos SVG de servicios administrados desde Sanity se gestionan mediante selector de claves aprobadas; no se guarda SVG crudo editable en el CMS por seguridad, estabilidad visual y control del render.
-- En `studio/`, `seed:*` importa documentos al dataset; para ver schemas o entradas nuevas en el Studio desplegado hace falta `corepack pnpm run deploy`.
+- `corepack pnpm run sync:fallbacks:check` detecta desincronización Sanity-fallbacks sin escribir archivos; `corepack pnpm run sync:fallbacks` materializa la copia local desde Sanity.
+- En `studio/`, `seed:*` importa documentos al dataset y se reserva para bootstrap o recuperación pedida explícitamente; puede sobrescribir cambios editoriales remotos, y para ver schemas o entradas nuevas en el Studio desplegado hace falta `corepack pnpm run deploy`.
 - Los estilos se editan en `src/styles/**/*.scss`; si cambian, se regenera `public/assets/css/style.css`.
 - El JavaScript editable de la web vive en `src/scripts/site.js`.
 - El cache busting de assets se hace con `scripts/bump-asset-version.sh`, usando hashes de contenido en los `?v=...`.
