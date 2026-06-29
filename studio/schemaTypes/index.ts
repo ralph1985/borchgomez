@@ -2,6 +2,8 @@ import { about } from "./about";
 import { contact } from "./contact";
 import { hero } from "./hero";
 import { plans } from "./plans";
+import { portfolio } from "./portfolio";
 import { purpose } from "./purpose";
+import { services } from "./services";
 
-export const schemaTypes = [hero, purpose, plans, about, contact];
+export const schemaTypes = [hero, purpose, services, plans, portfolio, about, contact];

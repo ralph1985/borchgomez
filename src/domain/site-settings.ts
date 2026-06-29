@@ -45,6 +45,8 @@ export interface SiteSettings {
     title: string;
     subtitle: string;
     filters: Array<{ label: string; value: string }>;
+    initialVisible: number;
+    loadStep: number;
   };
   instagram: {
     title: string;

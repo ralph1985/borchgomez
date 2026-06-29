@@ -27,7 +27,15 @@ El contenido base está en `LocalContentRepository` y lee `src/infrastructure/co
 
 Sanity puede sustituir solo las secciones conectadas explícitamente en `src/infrastructure/content/sanity/`. Si falta configuración, falla la consulta o faltan campos obligatorios, la web usa el JSON local.
 
+Las secciones conectadas actualmente a Sanity son `hero`, `purpose`, `services`, `plans`, `portfolio`, `about` y `contact`. `instagram` sigue en JSON local mientras no exista schema, entrada de Studio y lectura Sanity para esa sección.
+
 El hostname del Sanity Studio desplegado es `borchgomez`: `https://borchgomez.sanity.studio/`.
+
+Para comprobar si Sanity y los fallbacks locales están desincronizados sin escribir archivos se usa:
+
+```bash
+corepack pnpm run sync:fallbacks:check
+```
 
 Para refrescar fallbacks locales con Sanity se usa:
 
@@ -35,7 +43,9 @@ Para refrescar fallbacks locales con Sanity se usa:
 corepack pnpm run sync:fallbacks
 ```
 
-En `studio/`, los scripts `seed:*` importan documentos al dataset, pero no publican cambios de schema ni estructura del Studio. Cuando se añade un schema o una entrada nueva al Studio desplegado, ejecutar también:
+El sync de fallbacks actual escribe `site-settings.json`, `services.json`, `plans.json` y `projects.json` con las secciones Sanity conectadas.
+
+En `studio/`, los scripts `seed:*` importan documentos al dataset y deben tratarse como bootstrap o recuperación, no como mantenimiento normal de contenido. Algunos usan `--replace`, por lo que pueden sobrescribir cambios editoriales remotos. No publican cambios de schema ni estructura del Studio; cuando se añade un schema o una entrada nueva al Studio desplegado, ejecutar también:
 
 ```bash
 corepack pnpm run deploy

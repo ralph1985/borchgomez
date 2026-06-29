@@ -72,17 +72,17 @@
     grid-row: 2;
   }
 
-  .services__drone-body {
+  .services__media-body {
     grid-template-columns: 250px minmax(0, 1fr);
     gap: 1.2rem;
   }
 
-  .services__drone-body > div {
+  .services__media-body > div {
     grid-column: 2;
     grid-row: 1;
   }
 
-  .services__drone-visual {
+  .services__visual {
     grid-column: 1;
     grid-row: 1;
     justify-self: start;

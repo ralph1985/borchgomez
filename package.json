@@ -17,7 +17,10 @@
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "prepare": "husky",
     "sync:fallbacks": "node scripts/sync-sanity-fallbacks.mjs",
-    "seed:about": "pnpm --dir studio run seed:about"
+    "sync:fallbacks:check": "node scripts/sync-sanity-fallbacks.mjs --check",
+    "seed:about": "pnpm --dir studio run seed:about",
+    "seed:portfolio": "pnpm --dir studio run seed:portfolio",
+    "seed:services": "pnpm --dir studio run seed:services"
   },
   "dependencies": {
     "@sanity/client": "7.23.0",

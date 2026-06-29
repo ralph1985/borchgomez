@@ -8,7 +8,13 @@
 - El contenido local vive en `src/infrastructure/content/data/*.json` y debe llegar a la UI mediante el puerto `ContentRepository`.
 - Sanity solo alimenta secciones conectadas explícitamente en `src/infrastructure/content/sanity/`; el resto del contenido sigue en JSON local.
 - Si Sanity no está configurado, falla o devuelve campos incompletos, se usa fallback local.
-- En `studio/`, `seed:*` importa documentos al dataset; para ver schemas o entradas nuevas en el Studio desplegado hace falta `corepack pnpm run deploy`.
+- Los iconos SVG de servicios administrados desde Sanity se gestionan mediante selector de claves aprobadas; no se guarda SVG crudo editable en el CMS por seguridad, estabilidad visual y control del render.
+- `hero.claims` es el campo canónico para los claims de la cabecera; puede quedar vacío y entonces el bloque se oculta sin recuperar el claim local.
+- Los filtros de portfolio se administran como lista ordenada en Sanity, deben incluir el valor `all` y la UI no debe depender de la posición del filtro.
+- En proyectos, `subtitle` es opcional y `category` funciona como fallback visual cuando falta subtítulo editorial.
+- Los seeds de `about`, `portfolio` y `services` usan scripts del Studio con cliente CLI porque suben assets; `contact` puede mantenerse como import NDJSON.
+- `corepack pnpm run sync:fallbacks:check` detecta desincronización Sanity-fallbacks sin escribir archivos; `corepack pnpm run sync:fallbacks` materializa la copia local desde Sanity.
+- En `studio/`, `seed:*` importa documentos al dataset y se reserva para bootstrap o recuperación pedida explícitamente; puede sobrescribir cambios editoriales remotos, y para ver schemas o entradas nuevas en el Studio desplegado hace falta `corepack pnpm run deploy`.
 - Los estilos se editan en `src/styles/**/*.scss`; si cambian, se regenera `public/assets/css/style.css`.
 - El JavaScript editable de la web vive en `src/scripts/site.js`.
 - El cache busting de assets se hace con `scripts/bump-asset-version.sh`, usando hashes de contenido en los `?v=...`.

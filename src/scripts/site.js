@@ -820,10 +820,11 @@ initScrollAnimations();
 initInteractiveMotion();
 
 (function initPortfolioFilters() {
-  const INITIAL_VISIBLE = 6;
-  const LOAD_STEP = 6;
+  const portfolio = document.querySelector(".portfolio");
+  const INITIAL_VISIBLE = Number.parseInt(portfolio?.dataset.initialVisible, 10) || 6;
+  const LOAD_STEP = Number.parseInt(portfolio?.dataset.loadStep, 10) || 6;
   const filters = document.querySelectorAll(".portfolio__filter");
-  const cards = document.querySelectorAll(".portfolio__card[data-category]");
+  const cards = document.querySelectorAll(".portfolio__card[data-categories]");
   const showMoreBtn = document.querySelector(".portfolio__show-more");
   let activeFilter = "all";
   let visibleLimit = INITIAL_VISIBLE;
@@ -835,7 +836,8 @@ initInteractiveMotion();
     let totalMatching = 0;
 
     cards.forEach((card) => {
-      const match = activeFilter === "all" || card.dataset.category === activeFilter;
+      const categories = (card.dataset.categories || "").split(/\s+/).filter(Boolean);
+      const match = activeFilter === "all" || categories.includes(activeFilter);
       if (!match) {
         card.classList.add("hidden");
         card.classList.remove("portfolio__card--overflow");

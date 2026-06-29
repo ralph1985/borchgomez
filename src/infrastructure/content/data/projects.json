@@ -1,8 +1,12 @@
 [
   {
     "title": "Territorio vivo",
+    "subtitle": "",
     "category": "Territorio y naturaleza",
     "filter": "otros",
+    "filters": [
+      "otros"
+    ],
     "image": {
       "src": "/assets/img/projects/otros/territorio-vivo.webp?v=d320c8f7",
       "srcset": "/assets/img/projects/otros/territorio-vivo-400.webp?v=33d51df5 400w, /assets/img/projects/otros/territorio-vivo-800.webp?v=f17d39b2 800w, /assets/img/projects/otros/territorio-vivo-1200.webp?v=2b2fa921 1200w",
@@ -12,14 +16,18 @@
       "height": 892
     },
     "link": {
-      "href": "https://www.instagram.com/p/DW1lAEKjRmQ/",
-      "label": "Ver publicación"
+      "label": "Ver publicación",
+      "href": "https://www.instagram.com/p/DW1lAEKjRmQ/"
     }
   },
   {
     "title": "Raíces vivas",
+    "subtitle": "",
     "category": "Identidad y memoria",
     "filter": "otros",
+    "filters": [
+      "otros"
+    ],
     "image": {
       "src": "/assets/img/projects/otros/raices-vivas.webp?v=2a9461b0",
       "srcset": "/assets/img/projects/otros/raices-vivas-400.webp?v=d8183e80 400w, /assets/img/projects/otros/raices-vivas-800.webp?v=66840ddf 800w, /assets/img/projects/otros/raices-vivas-1200.webp?v=597db53e 1200w",
@@ -29,14 +37,18 @@
       "height": 1196
     },
     "link": {
-      "href": "https://www.instagram.com/p/DScfFHwjccd/",
-      "label": "Explorar proyecto"
+      "label": "Explorar proyecto",
+      "href": "https://www.instagram.com/p/DScfFHwjccd/"
     }
   },
   {
     "title": "Alfarería De Juan Vajillas",
+    "subtitle": "",
     "category": "Artesanía",
     "filter": "artesanos",
+    "filters": [
+      "artesanos"
+    ],
     "image": {
       "src": "/assets/img/projects/artesanos/artesanos-01.webp?v=170b9218",
       "srcset": "/assets/img/projects/artesanos/artesanos-01-400.webp?v=81f3d1e8 400w, /assets/img/projects/artesanos/artesanos-01-800.webp?v=170b9218 800w, /assets/img/projects/artesanos/artesanos-01-1200.webp?v=170b9218 1200w",
@@ -46,14 +58,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DUxbSJzjfBR/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DUxbSJzjfBR/"
     }
   },
   {
     "title": "Real Espartería",
+    "subtitle": "",
     "category": "Artesanía",
     "filter": "artesanos",
+    "filters": [
+      "artesanos"
+    ],
     "image": {
       "src": "/assets/img/projects/artesanos/artesanos-02.webp?v=1d646fde",
       "srcset": "/assets/img/projects/artesanos/artesanos-02-400.webp?v=51a95f5f 400w, /assets/img/projects/artesanos/artesanos-02-800.webp?v=1d646fde 800w, /assets/img/projects/artesanos/artesanos-02-1200.webp?v=1d646fde 1200w",
@@ -63,14 +79,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DWCsY8ktSy5/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DWCsY8ktSy5/"
     }
   },
   {
     "title": "Raff San Pedro",
+    "subtitle": "",
     "category": "Restauración",
     "filter": "restaurantes",
+    "filters": [
+      "restaurantes"
+    ],
     "image": {
       "src": "/assets/img/projects/restaurantes/restaurantes-01.webp?v=2d2c8faf",
       "srcset": "/assets/img/projects/restaurantes/restaurantes-01-400.webp?v=0c64dd82 400w, /assets/img/projects/restaurantes/restaurantes-01-800.webp?v=2d2c8faf 800w, /assets/img/projects/restaurantes/restaurantes-01-1200.webp?v=2d2c8faf 1200w",
@@ -80,14 +100,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DWLeW6gtBpD/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DWLeW6gtBpD/"
     }
   },
   {
     "title": "Restaurante Casas Colgadas",
+    "subtitle": "",
     "category": "Restauración",
     "filter": "restaurantes",
+    "filters": [
+      "restaurantes"
+    ],
     "image": {
       "src": "/assets/img/projects/restaurantes/restaurantes-02.webp?v=4a05e7c5",
       "srcset": "/assets/img/projects/restaurantes/restaurantes-02-400.webp?v=75fac57c 400w, /assets/img/projects/restaurantes/restaurantes-02-800.webp?v=bf8999cb 800w, /assets/img/projects/restaurantes/restaurantes-02-1200.webp?v=4a05e7c5 1200w",
@@ -97,14 +121,18 @@
       "height": 608
     },
     "link": {
-      "href": "https://www.instagram.com/p/DR_ys5-jy6z/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DR_ys5-jy6z/"
     }
   },
   {
     "title": "Yeste",
+    "subtitle": "",
     "category": "Turismo rural",
     "filter": "turismo-rural",
+    "filters": [
+      "turismo-rural"
+    ],
     "image": {
       "src": "/assets/img/projects/turismo-rural/turismo-rural-01.webp?v=def64313",
       "srcset": "/assets/img/projects/turismo-rural/turismo-rural-01-400.webp?v=57cd3aba 400w, /assets/img/projects/turismo-rural/turismo-rural-01-800.webp?v=def64313 800w, /assets/img/projects/turismo-rural/turismo-rural-01-1200.webp?v=def64313 1200w",
@@ -114,14 +142,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DY_jefCN-sK/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DY_jefCN-sK/"
     }
   },
   {
     "title": "Las Majadas",
+    "subtitle": "",
     "category": "Turismo rural",
     "filter": "turismo-rural",
+    "filters": [
+      "turismo-rural"
+    ],
     "image": {
       "src": "/assets/img/projects/turismo-rural/turismo-rural-02.webp?v=51b6bf0f",
       "srcset": "/assets/img/projects/turismo-rural/turismo-rural-02-400.webp?v=518cb19a 400w, /assets/img/projects/turismo-rural/turismo-rural-02-800.webp?v=51b6bf0f 800w, /assets/img/projects/turismo-rural/turismo-rural-02-1200.webp?v=51b6bf0f 1200w",
@@ -131,14 +163,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DXleGGFtp6n/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DXleGGFtp6n/"
     }
   },
   {
     "title": "Puente del Arzobispo",
+    "subtitle": "",
     "category": "Turismo rural",
     "filter": "turismo-rural",
+    "filters": [
+      "turismo-rural"
+    ],
     "image": {
       "src": "/assets/img/projects/turismo-rural/turismo-rural-03.webp?v=f0218383",
       "srcset": "/assets/img/projects/turismo-rural/turismo-rural-03-400.webp?v=ec0a45b6 400w, /assets/img/projects/turismo-rural/turismo-rural-03-800.webp?v=f0218383 800w, /assets/img/projects/turismo-rural/turismo-rural-03-1200.webp?v=f0218383 1200w",
@@ -148,14 +184,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DWwjl2QtYH-/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DWwjl2QtYH-/"
     }
   },
   {
     "title": "Letur",
+    "subtitle": "",
     "category": "Turismo rural",
     "filter": "turismo-rural",
+    "filters": [
+      "turismo-rural"
+    ],
     "image": {
       "src": "/assets/img/projects/turismo-rural/turismo-rural-04.webp?v=f5880ed4",
       "srcset": "/assets/img/projects/turismo-rural/turismo-rural-04-400.webp?v=729e404e 400w, /assets/img/projects/turismo-rural/turismo-rural-04-800.webp?v=f5880ed4 800w, /assets/img/projects/turismo-rural/turismo-rural-04-1200.webp?v=f5880ed4 1200w",
@@ -165,14 +205,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DYWrtc7Nw4t/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DYWrtc7Nw4t/"
     }
   },
   {
     "title": "Yeste Natural",
+    "subtitle": "",
     "category": "Turismo rural",
     "filter": "turismo-rural",
+    "filters": [
+      "turismo-rural"
+    ],
     "image": {
       "src": "/assets/img/projects/turismo-rural/turismo-rural-06.webp?v=75b7fc69",
       "srcset": "/assets/img/projects/turismo-rural/turismo-rural-06-400.webp?v=e8f37974 400w, /assets/img/projects/turismo-rural/turismo-rural-06-800.webp?v=75b7fc69 800w, /assets/img/projects/turismo-rural/turismo-rural-06-1200.webp?v=75b7fc69 1200w",
@@ -182,14 +226,18 @@
       "height": 1084
     },
     "link": {
-      "href": "https://www.instagram.com/p/DW59y5XNuRb/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DW59y5XNuRb/"
     }
   },
   {
     "title": "Complejo Rural El Hosquillo",
+    "subtitle": "",
     "category": "Alojamientos",
     "filter": "alojamientos",
+    "filters": [
+      "alojamientos"
+    ],
     "image": {
       "src": "/assets/img/projects/alojamientos/alojamientos-01.webp?v=0cb63aa1",
       "srcset": "/assets/img/projects/alojamientos/alojamientos-01-400.webp?v=4319717d 400w, /assets/img/projects/alojamientos/alojamientos-01-800.webp?v=0cb63aa1 800w, /assets/img/projects/alojamientos/alojamientos-01-1200.webp?v=0cb63aa1 1200w",
@@ -199,14 +247,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DV5ZuThDRGZ/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DV5ZuThDRGZ/"
     }
   },
   {
     "title": "Quesera Campo Rus",
+    "subtitle": "",
     "category": "Queserías",
     "filter": "queserias",
+    "filters": [
+      "queserias"
+    ],
     "image": {
       "src": "/assets/img/projects/queserias/queserias-01.webp?v=c98891e3",
       "srcset": "/assets/img/projects/queserias/queserias-01-400.webp?v=54fb6222 400w, /assets/img/projects/queserias/queserias-01-800.webp?v=c98891e3 800w, /assets/img/projects/queserias/queserias-01-1200.webp?v=c98891e3 1200w",
@@ -216,14 +268,18 @@
       "height": 1084
     },
     "link": {
-      "href": "https://www.instagram.com/p/DVVRmqYiMu8/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DVVRmqYiMu8/"
     }
   },
   {
     "title": "La Cabra Tira al Monte",
+    "subtitle": "",
     "category": "Queserías",
     "filter": "queserias",
+    "filters": [
+      "queserias"
+    ],
     "image": {
       "src": "/assets/img/projects/queserias/queserias-02.webp?v=54e06fdf",
       "srcset": "/assets/img/projects/queserias/queserias-02-400.webp?v=6ade36a5 400w, /assets/img/projects/queserias/queserias-02-800.webp?v=54e06fdf 800w, /assets/img/projects/queserias/queserias-02-1200.webp?v=54e06fdf 1200w",
@@ -233,14 +289,18 @@
       "height": 789
     },
     "link": {
-      "href": "https://www.instagram.com/p/DUNju4MiMWU/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DUNju4MiMWU/"
     }
   },
   {
     "title": "Quesería Estrada Castaño",
+    "subtitle": "",
     "category": "Queserías",
     "filter": "queserias",
+    "filters": [
+      "queserias"
+    ],
     "image": {
       "src": "/assets/img/projects/queserias/queserias-03.webp?v=c1979afd",
       "srcset": "/assets/img/projects/queserias/queserias-03-400.webp?v=e0c6c7bf 400w, /assets/img/projects/queserias/queserias-03-800.webp?v=c1979afd 800w, /assets/img/projects/queserias/queserias-03-1200.webp?v=c1979afd 1200w",
@@ -250,14 +310,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DWbAzx2NTDk/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DWbAzx2NTDk/"
     }
   },
   {
     "title": "Carlos Vindel",
+    "subtitle": "",
     "category": "Panaderías",
     "filter": "panaderias",
+    "filters": [
+      "panaderias"
+    ],
     "image": {
       "src": "/assets/img/projects/panaderias/panaderias-01.webp?v=06899c83",
       "srcset": "/assets/img/projects/panaderias/panaderias-01-400.webp?v=c36a7fd5 400w, /assets/img/projects/panaderias/panaderias-01-800.webp?v=06899c83 800w, /assets/img/projects/panaderias/panaderias-01-1200.webp?v=06899c83 1200w",
@@ -267,14 +331,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DTCwjGWDVNA/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DTCwjGWDVNA/"
     }
   },
   {
     "title": "El Chulo",
+    "subtitle": "",
     "category": "Panaderías",
     "filter": "panaderias",
+    "filters": [
+      "panaderias"
+    ],
     "image": {
       "src": "/assets/img/projects/panaderias/panaderias-02.webp?v=d744cdd6",
       "srcset": "/assets/img/projects/panaderias/panaderias-02-400.webp?v=e7ad23f1 400w, /assets/img/projects/panaderias/panaderias-02-800.webp?v=d744cdd6 800w, /assets/img/projects/panaderias/panaderias-02-1200.webp?v=d744cdd6 1200w",
@@ -284,14 +352,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DXTiCIQNL8a/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DXTiCIQNL8a/"
     }
   },
   {
     "title": "Las Mondas - Talavera de la Reina",
+    "subtitle": "",
     "category": "Tradiciones",
     "filter": "tradiciones",
+    "filters": [
+      "tradiciones"
+    ],
     "image": {
       "src": "/assets/img/projects/tradiciones/tradiciones-01.webp?v=46b6f462",
       "srcset": "/assets/img/projects/tradiciones/tradiciones-01-400.webp?v=aa8f9844 400w, /assets/img/projects/tradiciones/tradiciones-01-800.webp?v=46b6f462 800w, /assets/img/projects/tradiciones/tradiciones-01-1200.webp?v=46b6f462 1200w",
@@ -301,14 +373,18 @@
       "height": 1084
     },
     "link": {
-      "href": "https://www.instagram.com/p/DXC9gfqt3YO/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DXC9gfqt3YO/"
     }
   },
   {
     "title": "Carlos V y el Jamón de Montánchez",
+    "subtitle": "",
     "category": "Tradiciones",
     "filter": "tradiciones",
+    "filters": [
+      "tradiciones"
+    ],
     "image": {
       "src": "/assets/img/projects/tradiciones/tradiciones-02.webp?v=fdc05b07",
       "srcset": "/assets/img/projects/tradiciones/tradiciones-02-400.webp?v=76c63be9 400w, /assets/img/projects/tradiciones/tradiciones-02-800.webp?v=fdc05b07 800w, /assets/img/projects/tradiciones/tradiciones-02-1200.webp?v=fdc05b07 1200w",
@@ -318,14 +394,18 @@
       "height": 1084
     },
     "link": {
-      "href": "https://www.instagram.com/p/DYMNvnBN3nW/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DYMNvnBN3nW/"
     }
   },
   {
     "title": "Romería Villas Viejas - El Hito",
+    "subtitle": "",
     "category": "Tradiciones",
     "filter": "tradiciones",
+    "filters": [
+      "tradiciones"
+    ],
     "image": {
       "src": "/assets/img/projects/tradiciones/tradiciones-03.webp?v=13d2633b",
       "srcset": "/assets/img/projects/tradiciones/tradiciones-03-400.webp?v=10d44d2d 400w, /assets/img/projects/tradiciones/tradiciones-03-800.webp?v=13d2633b 800w, /assets/img/projects/tradiciones/tradiciones-03-1200.webp?v=13d2633b 1200w",
@@ -335,14 +415,18 @@
       "height": 1084
     },
     "link": {
-      "href": "https://www.instagram.com/p/DYtlZNjN3Xu/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DYtlZNjN3Xu/"
     }
   },
   {
     "title": "Mario Ezno",
+    "subtitle": "",
     "category": "Cultura rural",
     "filter": "otros",
+    "filters": [
+      "otros"
+    ],
     "image": {
       "src": "/assets/img/projects/otros/otros-01.webp?v=3683f2fa",
       "srcset": "/assets/img/projects/otros/otros-01-400.webp?v=39f4d1e9 400w, /assets/img/projects/otros/otros-01-800.webp?v=3683f2fa 800w, /assets/img/projects/otros/otros-01-1200.webp?v=3683f2fa 1200w",
@@ -352,14 +436,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DVnk8jMjfOO/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DVnk8jMjfOO/"
     }
   },
   {
     "title": "Día del Libro",
+    "subtitle": "",
     "category": "Cultura local",
     "filter": "otros",
+    "filters": [
+      "otros"
+    ],
     "image": {
       "src": "/assets/img/projects/otros/otros-02.webp?v=0f28c46b",
       "srcset": "/assets/img/projects/otros/otros-02-400.webp?v=958b362a 400w, /assets/img/projects/otros/otros-02-800.webp?v=0f28c46b 800w, /assets/img/projects/otros/otros-02-1200.webp?v=0f28c46b 1200w",
@@ -369,14 +457,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DXeqVfkDCAa/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DXeqVfkDCAa/"
     }
   },
   {
     "title": "Gacha's Comedy",
+    "subtitle": "",
     "category": "Cultura rural",
     "filter": "otros",
+    "filters": [
+      "otros"
+    ],
     "image": {
       "src": "/assets/img/projects/otros/otros-03.webp?v=14168ce4",
       "srcset": "/assets/img/projects/otros/otros-03-400.webp?v=6829b522 400w, /assets/img/projects/otros/otros-03-800.webp?v=14168ce4 800w, /assets/img/projects/otros/otros-03-1200.webp?v=14168ce4 1200w",
@@ -386,14 +478,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DXBjvOjt_dt/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DXBjvOjt_dt/"
     }
   },
   {
     "title": "La Tierra se Cuida",
+    "subtitle": "",
     "category": "Territorio rural",
     "filter": "otros",
+    "filters": [
+      "otros"
+    ],
     "image": {
       "src": "/assets/img/projects/otros/otros-04.webp?v=4c7e90f2",
       "srcset": "/assets/img/projects/otros/otros-04-400.webp?v=db3deb9f 400w, /assets/img/projects/otros/otros-04-800.webp?v=4c7e90f2 800w, /assets/img/projects/otros/otros-04-1200.webp?v=4c7e90f2 1200w",
@@ -403,14 +499,18 @@
       "height": 1136
     },
     "link": {
-      "href": "https://www.instagram.com/p/DUBKNS9jayt/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DUBKNS9jayt/"
     }
   },
   {
     "title": "Raíces Trabajadoras",
+    "subtitle": "",
     "category": "Identidad rural",
     "filter": "otros",
+    "filters": [
+      "otros"
+    ],
     "image": {
       "src": "/assets/img/projects/otros/otros-05.webp?v=4100fe4c",
       "srcset": "/assets/img/projects/otros/otros-05-400.webp?v=77d69fc6 400w, /assets/img/projects/otros/otros-05-800.webp?v=4100fe4c 800w, /assets/img/projects/otros/otros-05-1200.webp?v=4100fe4c 1200w",
@@ -420,8 +520,8 @@
       "height": 1084
     },
     "link": {
-      "href": "https://www.instagram.com/p/DXyUN0mt6Mc/",
-      "label": "Ver proyecto"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DXyUN0mt6Mc/"
     }
   }
 ]

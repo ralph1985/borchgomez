@@ -13,13 +13,13 @@ const { intro, services } = Astro.props;
         <article class="services__item" id={service.id}>
           <h3><ServiceIcon name={service.icon} />{service.title}</h3>
           {service.image ? (
-            <div class="services__drone-body">
+            <div class="services__media-body">
               <div>
                 {service.description && <p>{service.description}</p>}
                 {service.statusText && <p class="services__status"><strong>{service.statusLabel}</strong> {service.statusText}</p>}
               </div>
-              <picture class="services__drone-visual">
-                <source srcset={service.image.srcset} sizes={service.image.sizes} type="image/webp" />
+              <picture class="services__visual">
+                {service.image.srcset && <source srcset={service.image.srcset} sizes={service.image.sizes} type="image/webp" />}
                 <img src={service.image.src} alt={service.image.alt} width={service.image.width} height={service.image.height} loading="lazy" decoding="async" />
               </picture>
             </div>
