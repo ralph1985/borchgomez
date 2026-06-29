@@ -5,7 +5,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import AboutSection from "../sections/AboutSection.astro";
 import ContactSection from "../sections/ContactSection.astro";
 import HeroSection from "../sections/HeroSection.astro";
-import InstagramSection from "../sections/InstagramSection.astro";
 import PlansSection from "../sections/PlansSection.astro";
 import ProjectsSection from "../sections/ProjectsSection.astro";
 import PurposeSection from "../sections/PurposeSection.astro";
@@ -19,7 +18,6 @@ const { site, services, projects, plans } = await getHomePageContent(contentRepo
   <ServicesSection intro={site.servicesIntro} services={services} />
   <PlansSection plans={plans} />
   <ProjectsSection intro={site.projectsIntro} projects={projects} />
-  <InstagramSection instagram={site.instagram} />
   <AboutSection about={site.about} />
   <ContactSection contact={site.contact} />
 </BaseLayout>

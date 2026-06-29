@@ -70,7 +70,7 @@ Los subagentes solo pueden modificar los archivos que sean responsabilidad suya.
 - No inventar precios, servicios, claims, nombres propios, enlaces comerciales ni datos del portfolio.
 - `content_editor` puede corregir ortografía, puntuación, gramática y claridad sin alterar sentido, salvo que el texto esté marcado como aprobado o literal.
 - No recortar texto por encaje visual sin coordinar con `visual_frontend`.
-- No cambiar IDs públicos de secciones sin motivo. IDs actuales relevantes: `#home`, `#purpose`, `#services`, `#plans`, `#portfolio`, `#instagram`, `#about`, `#contact` y los IDs de servicios.
+- No cambiar IDs públicos de secciones sin motivo. IDs actuales relevantes: `#home`, `#purpose`, `#services`, `#plans`, `#portfolio`, `#about`, `#contact` y los IDs de servicios.
 - Si cambian clases, IDs o estructura usada por CSS/JS/anclas, actualizar las referencias relacionadas e indicarlo en el resumen.
 - No sobrescribir imágenes existentes. Solo descargar, optimizar o borrar imágenes con permiso y herramientas ya disponibles; antes de borrar, verificar que no estén referenciadas.
 

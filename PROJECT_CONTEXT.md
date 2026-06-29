@@ -1,6 +1,6 @@
 # PROJECT_CONTEXT.md
 
-Este proyecto es la web profesional de Borja Gómez, creador audiovisual rural. La página presenta servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
+Este proyecto es la web profesional de Borja Gómez, creador audiovisual rural. La página presenta servicios, planes, proyectos y vías de contacto para negocios, territorios y proyectos locales.
 
 La web pública está migrada a Astro con salida estática. Usa componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla para interacción. No usa React en la web pública; `studio/` sí usa React porque es un Sanity Studio.
 
@@ -27,7 +27,7 @@ El contenido base está en `LocalContentRepository` y lee `src/infrastructure/co
 
 Sanity puede sustituir solo las secciones conectadas explícitamente en `src/infrastructure/content/sanity/`. Si falta configuración, falla la consulta o faltan campos obligatorios, la web usa el JSON local.
 
-Las secciones conectadas actualmente a Sanity son `hero`, `purpose`, `services`, `plans`, `portfolio`, `about` y `contact`. `instagram` sigue en JSON local mientras no exista schema, entrada de Studio y lectura Sanity para esa sección.
+Las secciones conectadas actualmente a Sanity son `hero`, `purpose`, `services`, `plans`, `portfolio`, `about` y `contact`.
 
 El hostname del Sanity Studio desplegado es `borchgomez`: `https://borchgomez.sanity.studio/`.
 

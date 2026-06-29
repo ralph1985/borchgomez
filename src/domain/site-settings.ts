@@ -48,12 +48,6 @@ export interface SiteSettings {
     initialVisible: number;
     loadStep: number;
   };
-  instagram: {
-    title: string;
-    subtitle: string;
-    previews: Array<{ href: string; ariaLabel: string; image: ContentImage }>;
-    cta: { label: string; href: string };
-  };
   about: {
     title: string;
     subtitle: string;

@@ -1,6 +1,5 @@
 .home__hire,
 .home__download,
-.contact__instagram,
 .contact__primary,
 .portfolio__cta {
   font-family: "Manrope", sans-serif;
@@ -14,8 +13,7 @@
 }
 
 .home__hire,
-.contact__primary,
-.contact__instagram {
+.contact__primary {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent-yellow) 100%);
   color: var(--ink);
   padding: 0.76rem 1.5rem;
@@ -23,8 +21,7 @@
 }
 
 .home__hire:hover,
-.contact__primary:hover,
-.contact__instagram:hover {
+.contact__primary:hover {
   background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent-yellow) 100%);
 }
 
