@@ -1069,24 +1069,3 @@ initInteractiveMotion();
 
   applyVisibility("all");
 })();
-
-if (window.Swiper && document.querySelector(".swiper")) {
-  new window.Swiper(".swiper", {
-    slidesPerView: 1,
-    spaceBetween: 16,
-    loop: false,
-    grabCursor: true,
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
-      },
-      1024: {
-        slidesPerView: 3,
-      },
-    },
-  });
-}
