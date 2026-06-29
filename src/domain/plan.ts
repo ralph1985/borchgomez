@@ -11,6 +11,14 @@ export interface Plan {
   };
 }
 
+export interface PlansInfoBox {
+  title: string;
+  blocks: {
+    title: string;
+    points: string[];
+  }[];
+}
+
 export interface PlansContent {
   intro: {
     title: string;
@@ -24,5 +32,6 @@ export interface PlansContent {
     features: string[];
     note: string;
   };
+  infoBoxes: PlansInfoBox[];
   budgetNote: string;
 }

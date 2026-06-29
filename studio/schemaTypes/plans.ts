@@ -21,6 +21,22 @@ const ctaFields = [
   }),
 ];
 
+const infoBlockFields = [
+  defineField({
+    name: "title",
+    title: "Título",
+    type: "string",
+    validation: (Rule) => Rule.required(),
+  }),
+  defineField({
+    name: "points",
+    title: "Puntos",
+    type: "array",
+    of: featureList,
+    validation: (Rule) => Rule.required().min(1),
+  }),
+];
+
 export const plans = defineType({
   name: "plans",
   title: "Planes",
@@ -150,6 +166,46 @@ export const plans = defineType({
         }),
       ],
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "infoBoxes",
+      title: "Cajas informativas",
+      type: "array",
+      of: [
+        defineArrayMember({
+          type: "object",
+          fields: [
+            defineField({
+              name: "title",
+              title: "Título de la caja",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "blocks",
+              title: "Bloques",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "object",
+                  fields: infoBlockFields,
+                  preview: {
+                    select: {
+                      title: "title",
+                    },
+                  },
+                }),
+              ],
+              validation: (Rule) => Rule.required().min(1),
+            }),
+          ],
+          preview: {
+            select: {
+              title: "title",
+            },
+          },
+        }),
+      ],
     }),
     defineField({
       name: "budgetNote",

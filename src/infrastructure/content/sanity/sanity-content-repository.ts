@@ -1,5 +1,5 @@
 import { createClient, type SanityClient } from "@sanity/client";
-import type { HomePageContent, Plan, PlansContent, Project, Service, SiteSettings } from "../../../domain/home-page";
+import type { HomePageContent, Plan, PlansContent, PlansInfoBox, Project, Service, SiteSettings } from "../../../domain/home-page";
 import type { ContentRepository } from "../../../ports/content-repository";
 
 type HeroContent = SiteSettings["hero"];
@@ -13,6 +13,8 @@ type ServicesIntroContent = SiteSettings["servicesIntro"];
 type ProjectsIntroContent = SiteSettings["projectsIntro"];
 type ProjectFilter = ProjectsIntroContent["filters"][number];
 type PromoContent = PlansContent["promo"];
+type SanityPlansInfoBox = NonNullable<SanityPlanDocument["infoBoxes"]>[number];
+type SanityPlansInfoBlock = NonNullable<SanityPlansInfoBox["blocks"]>[number];
 
 interface SanityHeroDocument {
   greeting?: unknown;
@@ -61,6 +63,13 @@ interface SanityPlanDocument {
     features?: unknown;
     note?: unknown;
   };
+  infoBoxes?: Array<{
+    title?: unknown;
+    blocks?: Array<{
+      title?: unknown;
+      points?: unknown;
+    }>;
+  }>;
   budgetNote?: unknown;
 }
 
@@ -207,6 +216,13 @@ const homePageQuery = `{
       description,
       features,
       note
+    },
+    infoBoxes[]{
+      title,
+      blocks[]{
+        title,
+        points
+      }
     },
     budgetNote
   },
@@ -428,6 +444,7 @@ function mergePlans(fallback: PlansContent, source: SanityPlanDocument | null): 
     },
     items: mergePlanItems(fallback.items, source.items),
     promo: mergePromo(fallback.promo, source.promo),
+    infoBoxes: mergePlansInfoBoxes(fallback.infoBoxes, source.infoBoxes),
     budgetNote: readString(source.budgetNote) ?? fallback.budgetNote,
   };
 }
@@ -476,6 +493,40 @@ function mergePromo(fallback: PromoContent, source: SanityPlanDocument["promo"])
     features: readStringArray(source?.features, fallback.features),
     note: readString(source?.note) ?? fallback.note,
   };
+}
+
+function mergePlansInfoBoxes(fallback: PlansInfoBox[], source: SanityPlanDocument["infoBoxes"]): PlansInfoBox[] {
+  if (!Array.isArray(source) || source.length === 0) {
+    return fallback;
+  }
+
+  const boxes = source.map(readPlansInfoBox).filter((box): box is PlansInfoBox => box !== null);
+
+  return boxes.length > 0 ? boxes : fallback;
+}
+
+function readPlansInfoBox(source: SanityPlansInfoBox | undefined): PlansInfoBox | null {
+  const title = readString(source?.title);
+  const blocks = Array.isArray(source?.blocks)
+    ? source.blocks.map(readPlansInfoBlock).filter((block): block is PlansInfoBox["blocks"][number] => block !== null)
+    : [];
+
+  if (!title || blocks.length === 0) {
+    return null;
+  }
+
+  return { title, blocks };
+}
+
+function readPlansInfoBlock(source: SanityPlansInfoBlock | undefined): PlansInfoBox["blocks"][number] | null {
+  const title = readString(source?.title);
+  const points = readStringArray(source?.points);
+
+  if (!title || points.length === 0) {
+    return null;
+  }
+
+  return { title, points };
 }
 
 function mergeServicesIntro(fallback: ServicesIntroContent, source: SanityServicesDocument | null): ServicesIntroContent {

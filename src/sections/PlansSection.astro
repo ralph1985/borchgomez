@@ -26,6 +26,21 @@ const { plans } = Astro.props;
       <ul class="plans__promo-features">{plans.promo.features.map((feature) => <li>{feature}</li>)}</ul>
       <p class="plans__promo-note">{plans.promo.note}</p>
     </div>
+    {plans.infoBoxes.map((box, index) => (
+      <section class="plans__info-box" aria-labelledby={`plans-info-${index}`} data-animate>
+        <h3 class="plans__info-title" id={`plans-info-${index}`}>{box.title}</h3>
+        <div class="plans__info-grid">
+          {box.blocks.map((block) => (
+            <article class="plans__info-block">
+              <h4 class="plans__info-block-title">{block.title}</h4>
+              <ul class="plans__info-points">
+                {block.points.map((point) => <li>{point}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
     <div class="plans__budget-note" data-animate>{plans.budgetNote}</div>
   </div>
 </section>

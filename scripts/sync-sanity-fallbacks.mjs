@@ -57,6 +57,13 @@ const homePageQuery = `{
       features,
       note
     },
+    infoBoxes[]{
+      title,
+      blocks[]{
+        title,
+        points
+      }
+    },
     budgetNote
   },
   "services": *[_type == "services" && _id == "services"][0]{
@@ -389,6 +396,7 @@ function readPlans(source, fallbackPlans) {
       features: promoFeatures,
       note: readRequiredString(source.promo.note, "plans.promo.note"),
     },
+    infoBoxes: readPlansInfoBoxes(source.infoBoxes, fallbackPlans.infoBoxes),
     budgetNote: readRequiredString(source.budgetNote, "plans.budgetNote"),
   };
 }
@@ -625,6 +633,34 @@ function readPlan(plan, index) {
   }
 
   return nextPlan;
+}
+
+function readPlansInfoBoxes(source, fallbackInfoBoxes) {
+  if (source === undefined || source === null) {
+    return Array.isArray(fallbackInfoBoxes) ? fallbackInfoBoxes : [];
+  }
+
+  return readArray(source, "Sanity plans.infoBoxes must be an array.").map(readPlansInfoBox);
+}
+
+function readPlansInfoBox(box, index) {
+  assertObject(box, `Sanity plans.infoBoxes[${index}] must be an object.`);
+
+  return {
+    title: readRequiredString(box.title, `plans.infoBoxes[${index}].title`),
+    blocks: readArray(box.blocks, `Sanity plans.infoBoxes[${index}].blocks must be an array.`).map((block, blockIndex) =>
+      readPlansInfoBlock(block, index, blockIndex),
+    ),
+  };
+}
+
+function readPlansInfoBlock(block, boxIndex, blockIndex) {
+  assertObject(block, `Sanity plans.infoBoxes[${boxIndex}].blocks[${blockIndex}] must be an object.`);
+
+  return {
+    title: readRequiredString(block.title, `plans.infoBoxes[${boxIndex}].blocks[${blockIndex}].title`),
+    points: readRequiredStringArray(block.points, `plans.infoBoxes[${boxIndex}].blocks[${blockIndex}].points`),
+  };
 }
 
 function assertObject(value, message) {
