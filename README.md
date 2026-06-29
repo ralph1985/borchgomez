@@ -1,6 +1,6 @@
 # Borja Gómez | Dando voz a las raíces
 
-Web de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
+Web de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos y vías de contacto para negocios, territorios y proyectos locales.
 
 La web pública está construida con Astro, componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla. No usa React, Tailwind ni base de datos. El contenido base está en JSON local y Sanity puede alimentar las secciones conectadas cuando está configurado.
 

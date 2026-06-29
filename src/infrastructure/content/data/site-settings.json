@@ -17,7 +17,7 @@
   },
   "assets": {
     "stylesheets": [
-      "/assets/css/style.css?v=241be9c4",
+      "/assets/css/style.css?v=6d6d1edb",
       "/assets/vendor/swiper/swiper-bundle.min.css?v=b4c36bd6"
     ],
     "scripts": [
@@ -82,10 +82,6 @@
     {
       "label": "Proyectos",
       "href": "#portfolio"
-    },
-    {
-      "label": "Instagram",
-      "href": "#instagram"
     },
     {
       "label": "Sobre mí",
@@ -214,36 +210,6 @@
     ],
     "initialVisible": 6,
     "loadStep": 6
-  },
-  "instagram": {
-    "title": "Instagram",
-    "subtitle": "Publicaciones recientes, historias del territorio y trabajos visuales en marcha.",
-    "previews": [
-      {
-        "href": "https://www.instagram.com/p/DW1lAEKjRmQ/",
-        "ariaLabel": "Ver publicación de territorio vivo",
-        "image": {
-          "src": "/assets/img/projects/otros/territorio-vivo.webp?v=d320c8f7",
-          "alt": "Previsualización de territorio vivo y naturaleza",
-          "width": 1196,
-          "height": 892
-        }
-      },
-      {
-        "href": "https://www.instagram.com/p/DScfFHwjccd/",
-        "ariaLabel": "Ver publicación de raíces vivas",
-        "image": {
-          "src": "/assets/img/projects/otros/raices-vivas.webp?v=2a9461b0",
-          "alt": "Previsualización de raíces e identidad rural",
-          "width": 668,
-          "height": 1196
-        }
-      }
-    ],
-    "cta": {
-      "label": "Haz que tu negocio se vea",
-      "href": "https://www.instagram.com/borchgomez/"
-    }
   },
   "about": {
     "title": "Sobre mí",

@@ -676,7 +676,7 @@ function initScrollAnimations() {
   });
 
   const revealItems = document.querySelectorAll(
-    "main section:not(.home) [data-animate]:not(.services__layout):not(.portfolio__container):not(.portfolio__grid):not(.portfolio__preview-grid), .services__item, .portfolio__data, .portfolio__card, .plans__card, .plans__promo, .portfolio__preview-item, .contact__panel, .footer__image"
+    "main section:not(.home) [data-animate]:not(.services__layout):not(.portfolio__container):not(.portfolio__grid), .services__item, .portfolio__data, .portfolio__card, .plans__card, .plans__promo, .contact__panel, .footer__image"
   );
   const revealItemSet = new Set(revealItems);
 
@@ -773,7 +773,7 @@ function initInteractiveMotion() {
 
   if (!anime || typeof anime.animate !== "function" || reduceMotion) return;
 
-  document.querySelectorAll(".home__hire, .home__download, .contact__primary, .contact__instagram, .plans__cta").forEach((button) => {
+  document.querySelectorAll(".home__hire, .home__download, .contact__primary, .plans__cta").forEach((button) => {
     button.addEventListener("pointerenter", () => {
       anime.animate(button, {
         y: -3,
@@ -793,7 +793,7 @@ function initInteractiveMotion() {
     });
   });
 
-  document.querySelectorAll(".portfolio__data, .portfolio__card, .portfolio__preview-item, .services__item, .plans__card").forEach((card) => {
+  document.querySelectorAll(".portfolio__data, .portfolio__card, .services__item, .plans__card").forEach((card) => {
     card.addEventListener("pointerenter", () => {
       anime.animate(card, {
         y: -5,

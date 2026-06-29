@@ -265,8 +265,7 @@ main {
 .purpose,
 .services,
 .portfolio,
-.contact,
-.instagram {
+.contact {
   background-color: transparent;
 }
 
@@ -622,7 +621,6 @@ main {
 
 .home__hire,
 .home__download,
-.contact__instagram,
 .contact__primary,
 .portfolio__cta {
   font-family: "Manrope", sans-serif;
@@ -636,8 +634,7 @@ main {
 }
 
 .home__hire,
-.contact__primary,
-.contact__instagram {
+.contact__primary {
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent-yellow) 100%);
   color: var(--ink);
   padding: 0.76rem 1.5rem;
@@ -645,8 +642,7 @@ main {
 }
 
 .home__hire:hover,
-.contact__primary:hover,
-.contact__instagram:hover {
+.contact__primary:hover {
   background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent-yellow) 100%);
 }
 
@@ -1406,31 +1402,6 @@ main {
   transform: translateY(-1px);
 }
 
-.portfolio__preview-grid {
-  margin-top: 1.2rem;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.8rem;
-}
-
-.portfolio__preview-item {
-  display: block;
-  border-radius: 0.7rem;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.portfolio__preview-item:hover {
-  border-color: var(--color-secondary);
-}
-
-.portfolio__preview-item img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-}
-
 .portfolio__actions {
   margin-top: 1.15rem;
   text-align: center;
@@ -1558,9 +1529,6 @@ main {
   }
   .portfolio__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .portfolio__preview-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 @media (min-width: 768px) and (max-width: 1099px) {
