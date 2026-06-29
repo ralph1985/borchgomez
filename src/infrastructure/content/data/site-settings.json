@@ -17,12 +17,9 @@
   },
   "assets": {
     "stylesheets": [
-      "/assets/css/style.css?v=1b54dd6a",
-      "/assets/vendor/swiper/swiper-bundle.min.css?v=b4c36bd6"
+      "/assets/css/style.css?v=3f101ced"
     ],
-    "scripts": [
-      "/assets/vendor/swiper/swiper-bundle.min.js?v=8954ae96"
-    ],
+    "scripts": [],
     "fontPreloads": [
       "/assets/fonts/manrope-500-700-latin.woff2?v=a30ddcd3",
       "/assets/fonts/playfair-display-700-latin.woff2?v=28453852"
