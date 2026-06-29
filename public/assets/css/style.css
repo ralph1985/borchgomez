@@ -1272,6 +1272,7 @@ main {
   color: var(--ink);
   font-size: 1rem;
   margin-bottom: 0.75rem;
+  margin-top: 0;
 }
 
 .plans__info-points li {
