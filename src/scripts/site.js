@@ -13,6 +13,7 @@ const servicesSubmenu = document.getElementById("services-submenu");
 const servicesSubmenuLinks = document.querySelectorAll(".nav__submenu-link");
 const sections = document.querySelectorAll("section[id]");
 const header = document.getElementById("header");
+const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 function isCollapsedMenu() {
   return window.matchMedia("(max-width: 899px)").matches;
@@ -22,6 +23,53 @@ function setInert(element, isInert) {
   if (!element) return;
 
   element.inert = isInert;
+}
+
+function isInInertSubtree(element) {
+  for (let current = element; current; current = current.parentElement) {
+    if (current.inert) return true;
+  }
+
+  return false;
+}
+
+function isVisibleFocusable(element) {
+  return element instanceof HTMLElement && !isInInertSubtree(element) && element.offsetParent !== null;
+}
+
+function getOpenMenuFocusTargets() {
+  if (!header || !navMenu?.classList.contains("show-menu") || !isCollapsedMenu()) return [];
+
+  return Array.from(header.querySelectorAll(focusableSelector)).filter(isVisibleFocusable);
+}
+
+function trapOpenMenuFocus(event) {
+  if (event.key !== "Tab") return;
+
+  const focusTargets = getOpenMenuFocusTargets();
+
+  if (!focusTargets.length) return;
+
+  const firstTarget = focusTargets[0];
+  const lastTarget = focusTargets[focusTargets.length - 1];
+  const currentTarget = document.activeElement;
+
+  if (!focusTargets.includes(currentTarget)) {
+    firstTarget.focus();
+    event.preventDefault();
+    return;
+  }
+
+  if (event.shiftKey && currentTarget === firstTarget) {
+    lastTarget.focus();
+    event.preventDefault();
+    return;
+  }
+
+  if (!event.shiftKey && currentTarget === lastTarget) {
+    firstTarget.focus();
+    event.preventDefault();
+  }
 }
 
 function updateNavMenuAccessibility() {
@@ -158,6 +206,8 @@ if (navToggle && navMenu) {
         navToggle.focus();
       }
     }
+
+    trapOpenMenuFocus(event);
   });
 
   document.addEventListener("click", (event) => {
