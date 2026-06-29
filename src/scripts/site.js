@@ -90,18 +90,19 @@ function isVisibleFocusable(element) {
 }
 
 function getOpenMenuFocusTargets() {
-  if (!header || !navMenu?.classList.contains("show-menu") || !isCollapsedMenu()) return [];
+  if (!navToggle || !navMenu?.classList.contains("show-menu") || !isCollapsedMenu()) return [];
 
-  return Array.from(header.querySelectorAll(focusableSelector)).filter(isVisibleFocusable);
+  const menuTargets = Array.from(navMenu.querySelectorAll(focusableSelector)).filter(isVisibleFocusable);
+  const focusTargets = isVisibleFocusable(navToggle) ? [navToggle, ...menuTargets] : menuTargets;
+
+  return focusTargets;
 }
 
-function focusFirstOpenMenuItem() {
-  if (!navMenu || !isCollapsedMenu()) return;
+function focusFirstOpenMenuTarget() {
+  const firstTarget = getOpenMenuFocusTargets()[0];
 
-  const firstMenuTarget = Array.from(navMenu.querySelectorAll(focusableSelector)).find(isVisibleFocusable);
-
-  if (firstMenuTarget instanceof HTMLElement) {
-    firstMenuTarget.focus();
+  if (firstTarget instanceof HTMLElement) {
+    firstTarget.focus();
   }
 }
 
@@ -173,7 +174,7 @@ function setMenuOpen(isOpen) {
     });
     updateNavMenuAccessibility();
     setOpenMenuAccessibility(isOpen);
-    if (isOpen) focusFirstOpenMenuItem();
+    if (isOpen) focusFirstOpenMenuTarget();
     return;
   }
 
@@ -209,7 +210,7 @@ function setMenuOpen(isOpen) {
       ease: "outCubic",
       delay: (_target, index) => 80 + index * 45,
     });
-    window.requestAnimationFrame(focusFirstOpenMenuItem);
+    window.requestAnimationFrame(focusFirstOpenMenuTarget);
     return;
   }
 
