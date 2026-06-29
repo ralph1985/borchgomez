@@ -72,5 +72,28 @@
     ],
     "note": "Incluido sin coste adicional al contratar los planes Territorio y Origen."
   },
+  "infoBoxes": [
+    {
+      "title": "Servicios web",
+      "blocks": [
+        {
+          "title": "Auditoría de Web actual",
+          "points": [
+            "Auditoría y optimización inicial de la web actual.",
+            "Hasta el 31 de diciembre mantenimiento web gratuito.",
+            "Informes de resultados."
+          ]
+        },
+        {
+          "title": "Diseño y desarrollo de página",
+          "points": [
+            "Diseño y desarrollo de página web desde cero.",
+            "Estructura optimizada para SEO local.",
+            "Hasta el 31 de diciembre mantenimiento web gratuito."
+          ]
+        }
+      ]
+    }
+  ],
   "budgetNote": "El presupuesto final podrá ajustarse en función de las necesidades del proyecto y la ubicación del servicio."
 }

@@ -1,4 +1,4 @@
-import type { Plan, PlansContent } from "./plan";
+import type { Plan, PlansContent, PlansInfoBox } from "./plan";
 import type { Project } from "./project";
 import type { Service } from "./service";
 import type { SiteSettings } from "./site-settings";
@@ -10,4 +10,4 @@ export interface HomePageContent {
   plans: PlansContent;
 }
 
-export type { Plan, PlansContent, Project, Service, SiteSettings };
+export type { Plan, PlansContent, PlansInfoBox, Project, Service, SiteSettings };
