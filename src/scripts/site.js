@@ -14,6 +14,7 @@ const servicesSubmenuLinks = document.querySelectorAll(".nav__submenu-link");
 const sections = document.querySelectorAll("section[id]");
 const header = document.getElementById("header");
 const focusableSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+const hiddenDuringMenuState = new Map();
 
 function isCollapsedMenu() {
   return window.matchMedia("(max-width: 899px)").matches;
@@ -23,6 +24,57 @@ function setInert(element, isInert) {
   if (!element) return;
 
   element.inert = isInert;
+}
+
+function rememberAccessibilityState(element) {
+  if (hiddenDuringMenuState.has(element)) return;
+
+  hiddenDuringMenuState.set(element, {
+    ariaHidden: element.getAttribute("aria-hidden"),
+    inert: Boolean(element.inert),
+  });
+}
+
+function hideFromOpenMenu(element) {
+  rememberAccessibilityState(element);
+  element.setAttribute("aria-hidden", "true");
+  setInert(element, true);
+}
+
+function restoreFromOpenMenu(element) {
+  const previousState = hiddenDuringMenuState.get(element);
+
+  if (!previousState) return;
+
+  if (previousState.ariaHidden === null) {
+    element.removeAttribute("aria-hidden");
+  } else {
+    element.setAttribute("aria-hidden", previousState.ariaHidden);
+  }
+
+  setInert(element, previousState.inert);
+  hiddenDuringMenuState.delete(element);
+}
+
+function getElementsHiddenDuringOpenMenu() {
+  const bodyElements = Array.from(document.body.children).filter((element) => element !== header && element.tagName !== "SCRIPT");
+  const headerElements = header ? Array.from(header.querySelectorAll(".nav__brand, .nav__social-link")) : [];
+
+  return [...bodyElements, ...headerElements];
+}
+
+function setOpenMenuAccessibility(isOpen) {
+  if (!isCollapsedMenu()) {
+    Array.from(hiddenDuringMenuState.keys()).forEach(restoreFromOpenMenu);
+    return;
+  }
+
+  if (isOpen) {
+    getElementsHiddenDuringOpenMenu().forEach(hideFromOpenMenu);
+    return;
+  }
+
+  Array.from(hiddenDuringMenuState.keys()).forEach(restoreFromOpenMenu);
 }
 
 function isInInertSubtree(element) {
@@ -41,6 +93,16 @@ function getOpenMenuFocusTargets() {
   if (!header || !navMenu?.classList.contains("show-menu") || !isCollapsedMenu()) return [];
 
   return Array.from(header.querySelectorAll(focusableSelector)).filter(isVisibleFocusable);
+}
+
+function focusFirstOpenMenuItem() {
+  if (!navMenu || !isCollapsedMenu()) return;
+
+  const firstMenuTarget = Array.from(navMenu.querySelectorAll(focusableSelector)).find(isVisibleFocusable);
+
+  if (firstMenuTarget instanceof HTMLElement) {
+    firstMenuTarget.focus();
+  }
 }
 
 function trapOpenMenuFocus(event) {
@@ -110,12 +172,15 @@ function setMenuOpen(isOpen) {
       link.style.transform = "";
     });
     updateNavMenuAccessibility();
+    setOpenMenuAccessibility(isOpen);
+    if (isOpen) focusFirstOpenMenuItem();
     return;
   }
 
   if (isOpen) {
     navMenu.classList.add("show-menu");
     updateNavMenuAccessibility();
+    setOpenMenuAccessibility(true);
     navMenu.style.opacity = "0";
     navMenu.style.transform = "translateY(-18px) scale(0.98)";
     navLinks.forEach((link) => {
@@ -144,6 +209,7 @@ function setMenuOpen(isOpen) {
       ease: "outCubic",
       delay: (_target, index) => 80 + index * 45,
     });
+    window.requestAnimationFrame(focusFirstOpenMenuItem);
     return;
   }
 
@@ -172,6 +238,7 @@ function setMenuOpen(isOpen) {
       });
       navToggle.style.transform = "";
       updateNavMenuAccessibility();
+      setOpenMenuAccessibility(false);
     },
   });
 
@@ -249,6 +316,7 @@ servicesSubmenuLinks.forEach((link) => {
 window.addEventListener("resize", () => {
   setServicesSubmenuOpen(false);
   updateNavMenuAccessibility();
+  setOpenMenuAccessibility(Boolean(navMenu?.classList.contains("show-menu")));
 
   if (isCollapsedMenu() || !navMenu || !navToggle) return;
 
