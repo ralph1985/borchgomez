@@ -1430,19 +1430,6 @@ main {
   text-align: center;
 }
 
-.swiper-pagination {
-  margin-top: 0.75rem;
-  text-align: center;
-}
-
-.swiper-pagination .swiper-pagination-bullet {
-  background-color: var(--color-accent-yellow);
-}
-
-.swiper-pagination .swiper-pagination-bullet-active {
-  background-color: var(--color-primary);
-}
-
 .contact__panel {
   margin: 1.7rem auto 0;
   max-width: 760px;
