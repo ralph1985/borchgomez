@@ -18,10 +18,26 @@ function isCollapsedMenu() {
   return window.matchMedia("(max-width: 899px)").matches;
 }
 
+function setInert(element, isInert) {
+  if (!element) return;
+
+  element.inert = isInert;
+}
+
+function updateNavMenuAccessibility() {
+  if (!navMenu) return;
+
+  const isHidden = isCollapsedMenu() && !navMenu.classList.contains("show-menu");
+  navMenu.setAttribute("aria-hidden", String(isHidden));
+  setInert(navMenu, isHidden);
+}
+
 function setServicesSubmenuOpen(isOpen) {
   if (!servicesMenuToggle || !servicesSubmenu) return;
 
   servicesMenuToggle.setAttribute("aria-expanded", String(isOpen));
+  servicesSubmenu.setAttribute("aria-hidden", String(!isOpen));
+  setInert(servicesSubmenu, !isOpen);
   servicesSubmenu.classList.toggle("is-open", isOpen);
 }
 
@@ -45,11 +61,13 @@ function setMenuOpen(isOpen) {
       link.style.opacity = "";
       link.style.transform = "";
     });
+    updateNavMenuAccessibility();
     return;
   }
 
   if (isOpen) {
     navMenu.classList.add("show-menu");
+    updateNavMenuAccessibility();
     navMenu.style.opacity = "0";
     navMenu.style.transform = "translateY(-18px) scale(0.98)";
     navLinks.forEach((link) => {
@@ -105,6 +123,7 @@ function setMenuOpen(isOpen) {
         link.style.transform = "";
       });
       navToggle.style.transform = "";
+      updateNavMenuAccessibility();
     },
   });
 
@@ -116,14 +135,28 @@ function setMenuOpen(isOpen) {
 }
 
 if (navToggle && navMenu) {
+  updateNavMenuAccessibility();
+
   navToggle.addEventListener("click", () => {
     setMenuOpen(!navMenu.classList.contains("show-menu"));
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
+      const wasServicesOpen = servicesSubmenu?.classList.contains("is-open");
+      const wasMenuOpen = navMenu.classList.contains("show-menu");
+
       setServicesSubmenuOpen(false);
       setMenuOpen(false);
+
+      if (wasServicesOpen) {
+        servicesMenuToggle?.focus();
+        return;
+      }
+
+      if (wasMenuOpen) {
+        navToggle.focus();
+      }
     }
   });
 
@@ -143,6 +176,8 @@ if (navToggle && navMenu) {
 }
 
 if (servicesMenuToggle && servicesSubmenu) {
+  setServicesSubmenuOpen(false);
+
   servicesMenuToggle.addEventListener("click", () => {
     setServicesSubmenuOpen(!servicesSubmenu.classList.contains("is-open"));
   });
@@ -163,6 +198,7 @@ servicesSubmenuLinks.forEach((link) => {
 
 window.addEventListener("resize", () => {
   setServicesSubmenuOpen(false);
+  updateNavMenuAccessibility();
 
   if (isCollapsedMenu() || !navMenu || !navToggle) return;
 
@@ -172,6 +208,7 @@ window.addEventListener("resize", () => {
   navToggle.style.transform = "";
   navToggle.setAttribute("aria-expanded", "false");
   navToggle.setAttribute("aria-label", "Abrir menú");
+  updateNavMenuAccessibility();
   navLinks.forEach((link) => {
     link.style.opacity = "";
     link.style.transform = "";
@@ -194,8 +231,10 @@ function scrollActive() {
 
     if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
       sectionLink.classList.add("active-link");
+      sectionLink.setAttribute("aria-current", "location");
     } else {
       sectionLink.classList.remove("active-link");
+      sectionLink.removeAttribute("aria-current");
     }
   });
 }
@@ -826,10 +865,15 @@ initInteractiveMotion();
   const filters = document.querySelectorAll(".portfolio__filter");
   const cards = document.querySelectorAll(".portfolio__card[data-categories]");
   const showMoreBtn = document.querySelector(".portfolio__show-more");
+  const status = document.getElementById("portfolio-status");
   let activeFilter = "all";
   let visibleLimit = INITIAL_VISIBLE;
 
   if (!filters.length || !cards.length) return;
+
+  function getVisibleCards() {
+    return Array.from(cards).filter((card) => !card.classList.contains("hidden") && !card.classList.contains("portfolio__card--overflow"));
+  }
 
   function renderPortfolio() {
     let visibleCount = 0;
@@ -858,6 +902,12 @@ initInteractiveMotion();
       showMoreBtn.hidden = remainingCount === 0;
       showMoreBtn.textContent = `Mostrar más proyectos (${remainingCount} restantes)`;
     }
+
+    if (status) {
+      const visibleText = visibleCount === 1 ? "1 proyecto visible" : `${visibleCount} proyectos visibles`;
+      const totalText = totalMatching === 1 ? "1 proyecto coincide" : `${totalMatching} proyectos coinciden`;
+      status.textContent = `${visibleText}. ${totalText}.`;
+    }
   }
 
   function applyVisibility(filter) {
@@ -870,8 +920,12 @@ initInteractiveMotion();
     button.addEventListener("click", () => {
       const filter = button.dataset.filter;
 
-      filters.forEach((btn) => btn.classList.remove("active"));
+      filters.forEach((btn) => {
+        btn.classList.remove("active");
+        btn.setAttribute("aria-pressed", "false");
+      });
       button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
 
       applyVisibility(filter);
     });
@@ -879,8 +933,18 @@ initInteractiveMotion();
 
   if (showMoreBtn) {
     showMoreBtn.addEventListener("click", () => {
+      const previouslyVisible = getVisibleCards().length;
+
       visibleLimit += LOAD_STEP;
       renderPortfolio();
+
+      if (showMoreBtn.hidden) {
+        const firstRevealedLink = getVisibleCards()[previouslyVisible]?.querySelector("a");
+
+        if (firstRevealedLink instanceof HTMLElement) {
+          firstRevealedLink.focus();
+        }
+      }
     });
   }
 

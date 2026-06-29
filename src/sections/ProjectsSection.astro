@@ -7,10 +7,11 @@ const { intro, projects } = Astro.props;
   <h2 class="section-title" data-animate>{intro.title}</h2>
   <p class="section-subtitle" data-animate>{intro.subtitle}</p>
   <div class="bd-container">
-    <div class="portfolio__filters" data-animate>
-      {intro.filters.map((filter) => <button class:list={["portfolio__filter", { active: filter.value === "all" }]} data-filter={filter.value} type="button">{filter.label}</button>)}
+    <div class="portfolio__filters" data-animate aria-label="Filtrar proyectos">
+      {intro.filters.map((filter) => <button class:list={["portfolio__filter", { active: filter.value === "all" }]} data-filter={filter.value} type="button" aria-pressed={filter.value === "all" ? "true" : "false"}>{filter.label}</button>)}
     </div>
-    <div class="portfolio__grid" data-animate>
+    <p class="visually-hidden" id="portfolio-status" aria-live="polite"></p>
+    <div class="portfolio__grid" id="portfolio-grid" data-animate>
       {projects.map((project) => (
         <article class="portfolio__card" data-categories={(project.filters?.length ? project.filters : [project.filter]).filter(Boolean).join(" ")}>
           <div class="portfolio__img"><img src={project.image.src} srcset={project.image.srcset} sizes={project.image.sizes} alt={project.image.alt} width={project.image.width} height={project.image.height} loading="lazy" decoding="async" /></div>
@@ -20,6 +21,6 @@ const { intro, projects } = Astro.props;
         </article>
       ))}
     </div>
-    <button class="portfolio__show-more" type="button" hidden>Mostrar más proyectos</button>
+    <button class="portfolio__show-more" type="button" aria-controls="portfolio-grid" hidden>Mostrar más proyectos</button>
   </div>
 </section>
