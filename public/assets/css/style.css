@@ -469,7 +469,7 @@ main {
 }
 
 .nav__brand img {
-  width: 4.85rem;
+  width: min(44vw, 7.25rem);
   height: auto;
   object-fit: contain;
 }
@@ -1522,7 +1522,7 @@ main {
     padding-top: 4.5rem;
   }
   .nav__brand img {
-    width: 5.7rem;
+    width: 9.5rem;
   }
   .home__container {
     min-height: calc(100vh - var(--header-height));
