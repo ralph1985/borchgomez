@@ -568,8 +568,8 @@ main {
   left: 50%;
   bottom: -1px;
   z-index: 0;
-  width: min(1640px, 136vw);
-  min-width: 980px;
+  width: max(100vw, 980px);
+  min-width: 0;
   height: auto;
   color: var(--soil);
   opacity: 0.68;
@@ -577,6 +577,11 @@ main {
   transform: translateX(-50%);
 }
 
+@media (min-width: 768px) {
+  .footer__land {
+    width: max(100vw, 1920px);
+  }
+}
 .footer__land-soil {
   transform-origin: center bottom;
 }
