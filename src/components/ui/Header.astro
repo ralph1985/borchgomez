@@ -29,13 +29,13 @@ const { site, services } = Astro.props;
           </ul>
         </li>
         {site.nav.filter((item) => !["#home", "#purpose"].includes(item.href)).map((item) => (
-          <li class="nav__item"><a href={item.href} class="nav__link">{item.label}</a></li>
+          <li class="nav__item"><a href={item.href} class={item.href === "#contact" ? "nav__link nav__link--contact" : "nav__link"}>{item.label}</a></li>
         ))}
       </ul>
     </div>
     <div class="nav__actions">
       {site.socialLinks.map((link) => (
-        <a href={link.href} class="nav__social-link" target="_blank" rel="noopener noreferrer" aria-label={link.label}>
+        <a href={link.href} class={link.type === "whatsapp" ? "nav__social-link nav__social-link--whatsapp" : "nav__social-link"} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
           <SocialIcon type={link.type} />
         </a>
       ))}
