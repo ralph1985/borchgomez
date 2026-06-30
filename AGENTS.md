@@ -33,7 +33,7 @@ Este proyecto se trabaja con Codex en español. Mantiene la web profesional de B
 - `src/shared/config/content.ts` usa Sanity solo si existen `SANITY_PROJECT_ID`, `SANITY_DATASET` y `SANITY_API_VERSION`; si falta configuración, falla la consulta o faltan campos obligatorios, se usa JSON local.
 - Sanity solo alimenta las secciones conectadas explícitamente en `src/infrastructure/content/sanity/`; no asumir que una sección está en Sanity sin revisar repositorio, schemas y fallback local.
 - Los estilos fuente viven en `src/styles/**/*.scss` y se compilan a `public/assets/css/style.css`.
-- El JavaScript editable de la web vive en `src/scripts/site.js`. No asumir `assets/js/script.js`.
+- El JavaScript editable de la web vive en `src/scripts/`; `src/scripts/site.js` es el punto de entrada. No asumir `assets/js/script.js`.
 - `public/assets/**` contiene assets servidos públicamente. No confundirlo con la fuente editable cuando exista fuente en `src/`.
 - `studio/` es el Sanity Studio y usa React por Sanity. No prohibir React ni dependencias dentro de `studio/` por existir ahí; tratarlas como parte del Studio.
 

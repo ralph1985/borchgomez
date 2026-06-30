@@ -10,7 +10,7 @@ La web pública está migrada a Astro con salida estática. Usa componentes `.as
 - `src/layouts/BaseLayout.astro`: HTML base, metadatos, cabecera, footer, CSS y scripts.
 - `src/sections/`: secciones visibles de la home.
 - `src/components/`: UI reutilizable e iconos.
-- `src/scripts/site.js`: JavaScript fuente de la web pública.
+- `src/scripts/site.js`: punto de entrada del JavaScript fuente de la web pública; los módulos de interacción viven en `src/scripts/`.
 - `src/styles/`: SCSS fuente organizado por base, layout, componentes y secciones.
 - `public/assets/`: assets servidos públicamente, incluido `public/assets/css/style.css` compilado.
 - `src/domain/`, `src/ports/`, `src/application/`: tipos, puerto de contenido y caso de uso de la home.
@@ -61,7 +61,7 @@ corepack pnpm run css:build
 
 El CSS compilado `public/assets/css/style.css` está versionado y debe quedar coherente con los SCSS.
 
-El JavaScript editable está en `src/scripts/site.js`. No asumir la ruta antigua `assets/js/script.js`.
+El JavaScript editable está en `src/scripts/`; `src/scripts/site.js` es el punto de entrada. No asumir la ruta antigua `assets/js/script.js`.
 
 Los assets existentes se sirven desde `public/assets/` para conservar rutas públicas. Si se cambian assets o URLs versionadas, ejecutar:
 

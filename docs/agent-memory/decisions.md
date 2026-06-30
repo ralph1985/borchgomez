@@ -16,7 +16,7 @@
 - `corepack pnpm run sync:fallbacks:check` detecta desincronización Sanity-fallbacks sin escribir archivos; `corepack pnpm run sync:fallbacks` materializa la copia local desde Sanity.
 - En `studio/`, `seed:*` importa documentos al dataset y se reserva para bootstrap o recuperación pedida explícitamente; puede sobrescribir cambios editoriales remotos, y para ver schemas o entradas nuevas en el Studio desplegado hace falta `corepack pnpm run deploy`.
 - Los estilos se editan en `src/styles/**/*.scss`; si cambian, se regenera `public/assets/css/style.css`.
-- El JavaScript editable de la web vive en `src/scripts/site.js`.
+- El JavaScript editable de la web vive en `src/scripts/`; `src/scripts/site.js` es el punto de entrada.
 - El cache busting de assets se hace con `scripts/bump-asset-version.sh`, usando hashes de contenido en los `?v=...`.
 - En el estado actual, `scripts/bump-asset-version.sh` actualiza `src/infrastructure/content/data/site-settings.json` cuando no existe `index.html`.
 - Los cambios de imagen responsive deben revisar el conjunto completo: `src`, `srcset`, `sizes`, dimensiones, alt y archivos relacionados.
