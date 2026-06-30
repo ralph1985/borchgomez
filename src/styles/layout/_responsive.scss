@@ -7,18 +7,6 @@
     padding-top: 4.5rem;
   }
 
-  .nav__brand::before {
-    left: -0.32rem;
-    width: 7.95rem;
-    transform: translateY(-35%);
-  }
-
-  .nav__brand img {
-    left: -0.45rem;
-    width: 8.25rem;
-    transform: translateY(-35%);
-  }
-
   .home__container {
     min-height: calc(100vh - var(--header-height));
     grid-template-columns: 1.1fr 0.9fr;
@@ -27,6 +15,7 @@
   }
 
   .home__data {
+    margin-top: 1rem;
     background: linear-gradient(90deg, var(--color-paper-fade), transparent);
   }
 

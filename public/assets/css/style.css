@@ -464,6 +464,8 @@ main {
 }
 
 .nav__brand {
+  --brand-plate-size: clamp(5.1rem, 23vw, 6.45rem);
+  --brand-plate-left: -0.18rem;
   display: inline-flex;
   align-items: center;
   align-self: stretch;
@@ -476,28 +478,29 @@ main {
 .nav__brand::before {
   content: "";
   position: absolute;
-  top: 50%;
-  left: -0.24rem;
-  width: clamp(5.35rem, 24vw, 6.75rem);
+  top: 0;
+  left: var(--brand-plate-left);
+  width: var(--brand-plate-size);
   aspect-ratio: 1;
   background: radial-gradient(circle at center, #fff 0 48%, var(--color-paper-strong) 82%, rgba(255, 255, 255, 0.72) 100%);
   border: 1px solid rgba(255, 255, 255, 0.86);
-  border-radius: 0.65rem;
+  border-radius: 0 0 0.65rem 0.65rem;
   box-shadow: 0 0.45rem 0.85rem var(--color-shadow-earth-soft), 0 0.12rem 0.32rem var(--color-soil-ring);
-  transform: translateY(-37%);
 }
 
 .nav__brand img {
   position: absolute;
-  top: 50%;
-  left: -0.2rem;
-  width: clamp(5.6rem, 25vw, 7rem);
+  top: 0;
+  left: var(--brand-plate-left);
+  box-sizing: border-box;
+  width: var(--brand-plate-size);
   max-width: none;
-  height: auto;
+  height: var(--brand-plate-size);
+  padding: calc(var(--brand-plate-size) * 0.1);
   object-fit: contain;
-  border-radius: 0.55rem;
+  object-position: center;
+  border-radius: 0 0 0.55rem 0.55rem;
   filter: drop-shadow(0 0.12rem 0.18rem var(--color-soil-ring));
-  transform: translateY(-37%);
 }
 
 .nav__actions {
@@ -824,6 +827,7 @@ main {
 
 .home__data {
   color: var(--ink);
+  margin-top: 4rem;
   padding: 1rem 0.35rem 1rem clamp(1.15rem, 5vw, 3.2rem);
   border-radius: 1rem;
   will-change: transform, opacity;
@@ -1547,16 +1551,6 @@ main {
   .section {
     padding-top: 4.5rem;
   }
-  .nav__brand::before {
-    left: -0.32rem;
-    width: 7.95rem;
-    transform: translateY(-35%);
-  }
-  .nav__brand img {
-    left: -0.45rem;
-    width: 8.25rem;
-    transform: translateY(-35%);
-  }
   .home__container {
     min-height: calc(100vh - var(--header-height));
     grid-template-columns: 1.1fr 0.9fr;
@@ -1564,6 +1558,7 @@ main {
     gap: 3rem;
   }
   .home__data {
+    margin-top: 1rem;
     background: linear-gradient(90deg, var(--color-paper-fade), transparent);
   }
   .home__img {
