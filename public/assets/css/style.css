@@ -238,13 +238,6 @@ main {
   letter-spacing: 0.01em;
 }
 
-.section-title--icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-}
-
 .section-title::after {
   content: "";
   position: absolute;
@@ -661,12 +654,6 @@ main {
   stroke-width: 1.75;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.ui-icon--section {
-  width: 0.8em;
-  height: 0.8em;
-  color: var(--earth);
 }
 
 .ui-icon--service {
