@@ -1165,6 +1165,8 @@ main {
 
 .plans__card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   padding: 1.8rem 1.4rem 1.6rem;
   border: 1px solid var(--line);
   border-radius: 1rem;
@@ -1232,6 +1234,7 @@ main {
 }
 
 .plans__features {
+  flex: 1;
   text-align: left;
   margin-bottom: 1.5rem;
   padding: 0 0.5rem;
@@ -1260,6 +1263,8 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  align-self: center;
+  margin-top: auto;
   padding: 0.68rem 1.4rem;
   border-radius: 999px;
   border: 1px solid var(--color-primary);
