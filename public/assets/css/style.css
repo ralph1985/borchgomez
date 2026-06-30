@@ -747,11 +747,11 @@ main {
 .home__landscape {
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: -1.75rem;
   z-index: 0;
-  width: min(1680px, 132vw);
-  min-width: 980px;
-  height: auto;
+  width: 100vw;
+  min-width: 0;
+  height: clamp(245px, 21vw, 420px);
   color: var(--olive);
   opacity: 0.9;
   pointer-events: none;
