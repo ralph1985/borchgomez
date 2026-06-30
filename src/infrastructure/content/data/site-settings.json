@@ -17,7 +17,7 @@
   },
   "assets": {
     "stylesheets": [
-      "/assets/css/style.css?v=6868ea43"
+      "/assets/css/style.css?v=63489057"
     ],
     "scripts": [],
     "fontPreloads": [
@@ -57,10 +57,10 @@
   "brand": {
     "label": "Inicio Borja Gómez",
     "logo": {
-      "src": "/assets/img/logo-borchgomez-wordmark.webp?v=687fbc96",
+      "src": "/assets/img/logo-borchgomez-full.webp?v=0dec119f",
       "alt": "Logo de Borja Gómez",
       "width": 640,
-      "height": 139
+      "height": 640
     }
   },
   "nav": [

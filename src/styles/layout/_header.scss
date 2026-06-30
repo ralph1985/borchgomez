@@ -166,12 +166,24 @@
 .nav__brand {
   display: inline-flex;
   align-items: center;
+  align-self: stretch;
+  position: relative;
+  width: clamp(4.8rem, 22vw, 6.2rem);
+  flex: 0 0 clamp(4.8rem, 22vw, 6.2rem);
+  z-index: 2;
 }
 
 .nav__brand img {
-  width: min(44vw, 7.25rem);
+  position: absolute;
+  top: 50%;
+  left: -0.2rem;
+  width: clamp(5.6rem, 25vw, 7rem);
+  max-width: none;
   height: auto;
   object-fit: contain;
+  border-radius: 1.15rem;
+  filter: drop-shadow(0 0.85rem 1rem var(--color-shadow-earth-soft));
+  transform: translateY(-37%);
 }
 
 .nav__actions {
