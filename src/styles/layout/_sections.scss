@@ -15,13 +15,6 @@
   letter-spacing: 0.01em;
 }
 
-.section-title--icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-}
-
 .section-title::after {
   content: "";
   position: absolute;

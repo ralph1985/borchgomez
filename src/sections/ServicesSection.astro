@@ -6,7 +6,7 @@ const { intro, services } = Astro.props;
 ---
 <section class="services section" id="services">
   <div class="bd-container">
-    <h2 class="section-title section-title--icon" data-animate><ServiceIcon name="briefcase" class="ui-icon ui-icon--section" />{intro.title}</h2>
+    <h2 class="section-title" data-animate>{intro.title}</h2>
     <p class="section-subtitle" data-animate>{intro.subtitle}</p>
     <div class="services__layout" data-animate>
       {services.map((service) => (
