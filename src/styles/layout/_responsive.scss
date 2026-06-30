@@ -7,6 +7,12 @@
     padding-top: 4.5rem;
   }
 
+  .nav__brand::before {
+    left: -0.58rem;
+    width: 8.35rem;
+    transform: translateY(-35%);
+  }
+
   .nav__brand img {
     left: -0.45rem;
     width: 8.25rem;

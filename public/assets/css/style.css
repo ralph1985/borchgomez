@@ -473,6 +473,20 @@ main {
   z-index: 2;
 }
 
+.nav__brand::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -0.32rem;
+  width: clamp(5.65rem, 25vw, 7.05rem);
+  aspect-ratio: 1;
+  background: var(--color-paper-strong);
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  border-radius: 1.4rem;
+  box-shadow: 0 1.05rem 1.45rem var(--color-shadow-earth-soft), 0 0.35rem 0.85rem var(--color-soil-ring);
+  transform: translateY(-37%);
+}
+
 .nav__brand img {
   position: absolute;
   top: 50%;
@@ -482,7 +496,7 @@ main {
   height: auto;
   object-fit: contain;
   border-radius: 1.15rem;
-  filter: drop-shadow(0 0.85rem 1rem var(--color-shadow-earth-soft));
+  filter: drop-shadow(0 0.25rem 0.35rem var(--color-soil-ring));
   transform: translateY(-37%);
 }
 
@@ -1532,6 +1546,11 @@ main {
   }
   .section {
     padding-top: 4.5rem;
+  }
+  .nav__brand::before {
+    left: -0.58rem;
+    width: 8.35rem;
+    transform: translateY(-35%);
   }
   .nav__brand img {
     left: -0.45rem;
