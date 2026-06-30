@@ -17,7 +17,7 @@
   },
   "assets": {
     "stylesheets": [
-      "/assets/css/style.css?v=3f101ced"
+      "/assets/css/style.css?v=06800a6e"
     ],
     "scripts": [],
     "fontPreloads": [
@@ -29,38 +29,38 @@
         "rel": "icon",
         "type": "image/png",
         "sizes": "16x16",
-        "href": "/assets/img/favicons/favicon-16x16.png?v=a4826502"
+        "href": "/assets/img/favicons/favicon-16x16.png?v=74c6d4d2"
       },
       {
         "rel": "icon",
         "type": "image/png",
         "sizes": "32x32",
-        "href": "/assets/img/favicons/favicon-32x32.png?v=8a73411f"
+        "href": "/assets/img/favicons/favicon-32x32.png?v=f0009eae"
       },
       {
         "rel": "icon",
         "type": "image/png",
         "sizes": "48x48",
-        "href": "/assets/img/favicons/favicon-48x48.png?v=a6b3d5a6"
+        "href": "/assets/img/favicons/favicon-48x48.png?v=c160e5ad"
       },
       {
         "rel": "apple-touch-icon",
         "sizes": "180x180",
-        "href": "/assets/img/favicons/apple-touch-icon.png?v=d9b95c5e"
+        "href": "/assets/img/favicons/apple-touch-icon.png?v=ec8c2ec8"
       },
       {
         "rel": "manifest",
-        "href": "/assets/img/favicons/site.webmanifest?v=04e63d35"
+        "href": "/assets/img/favicons/site.webmanifest?v=e93ba4e2"
       }
     ]
   },
   "brand": {
     "label": "Inicio Borja Gómez",
     "logo": {
-      "src": "/assets/img/logo-eye.webp?v=3afa6cad",
+      "src": "/assets/img/logo-borchgomez-full.webp?v=408056f8",
       "alt": "Logo de Borja Gómez",
-      "width": 210,
-      "height": 128
+      "width": 640,
+      "height": 640
     }
   },
   "nav": [

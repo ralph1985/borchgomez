@@ -7,10 +7,6 @@
     padding-top: 4.5rem;
   }
 
-  .nav__brand img {
-    width: 5.7rem;
-  }
-
   .home__container {
     min-height: calc(100vh - var(--header-height));
     grid-template-columns: 1.1fr 0.9fr;
@@ -19,6 +15,7 @@
   }
 
   .home__data {
+    margin-top: 1rem;
     background: linear-gradient(90deg, var(--color-paper-fade), transparent);
   }
 
