@@ -79,6 +79,26 @@
   transition: 0.2s;
 }
 
+.nav__link--contact {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.1rem;
+  padding: 0.36rem 0.68rem;
+  color: var(--color-on-dark);
+  border: 1px solid var(--color-primary);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent-yellow) 100%);
+  box-shadow: 0 0.5rem 1rem var(--color-shadow-primary);
+}
+
+.nav__link.nav__link--contact:hover,
+.nav__link.nav__link--contact:focus-visible {
+  color: var(--color-on-dark);
+  border-color: var(--color-secondary);
+  background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-accent-yellow) 100%);
+  transform: translateY(-1px);
+}
+
 .nav__submenu-toggle {
   appearance: none;
   display: inline-flex;
@@ -233,6 +253,21 @@
   transform: translateY(-1px);
 }
 
+.nav__social-link--whatsapp {
+  color: var(--color-on-dark);
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  box-shadow: 0 0.45rem 0.9rem var(--color-shadow-primary);
+}
+
+.nav__social-link--whatsapp:hover,
+.nav__social-link--whatsapp:focus-visible {
+  color: var(--color-on-dark);
+  border-color: var(--color-secondary);
+  background: var(--color-secondary);
+  transform: translateY(-1px);
+}
+
 .nav__link:hover,
 .nav__logo:hover,
 .nav__toggle:hover {
@@ -259,6 +294,15 @@
   width: 70%;
   height: 2px;
   background-color: var(--color-accent-yellow);
+}
+
+.nav__link--contact.active-link {
+  color: var(--color-on-dark);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent-yellow) 100%);
+}
+
+.nav__link--contact.active-link::after {
+  display: none;
 }
 
 .scroll-header {
