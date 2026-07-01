@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reporta assets versionados que no aparecen referenciados en el repositorio."""
+"""Reporta assets públicos que no aparecen referenciados en el repositorio."""
 
 from __future__ import annotations
 
@@ -11,12 +11,16 @@ from urllib.parse import unquote, urlsplit
 
 
 ROOT = Path(__file__).resolve().parent.parent
-ASSETS_DIR = ROOT / "assets"
+ASSETS_DIR = ROOT / "public" / "assets"
 SCAN_EXTENSIONS = {
     ".css",
+    ".astro",
     ".html",
     ".js",
     ".json",
+    ".mjs",
+    ".scss",
+    ".ts",
     ".toml",
     ".webmanifest",
     ".xml",
@@ -96,7 +100,7 @@ def resolve_reference(source: Path, raw_url: str) -> Path | None:
         return None
 
     if clean_path.startswith("assets/"):
-        resolved = ROOT / clean_path
+        resolved = ROOT / "public" / clean_path
     else:
         resolved = source.parent / clean_path
 

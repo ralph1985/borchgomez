@@ -2,7 +2,7 @@
 set -eu
 
 INDEX_FILE="index.html"
-SITE_SETTINGS_FILE="src/infrastructure/content/data/site-settings.json"
+CONTENT_DATA_DIR="src/infrastructure/content/data"
 SUPPORTED_EXTENSIONS="css|js|png|jpg|jpeg|svg|webp|gif|ico|webmanifest|woff|woff2|ttf"
 
 if command -v shasum >/dev/null 2>&1; then
@@ -18,13 +18,12 @@ else
   exit 1
 fi
 
-if [ ! -f "$INDEX_FILE" ] && [ -f "$SITE_SETTINGS_FILE" ]; then
+if [ ! -f "$INDEX_FILE" ] && [ -d "$CONTENT_DATA_DIR" ]; then
   node <<'NODE'
 const crypto = require("crypto");
 const fs = require("fs");
-const path = require("path");
 
-const settingsFile = "src/infrastructure/content/data/site-settings.json";
+const contentDataDir = "src/infrastructure/content/data";
 const supportedExtensions = /\.(?:css|js|png|jpg|jpeg|svg|webp|gif|ico|webmanifest|woff|woff2|ttf)(?=$|[?#])/i;
 const assetUrlPattern = /(?:\.?\/)?assets\/[^"',\s)]+?\.(?:css|js|png|jpg|jpeg|svg|webp|gif|ico|webmanifest|woff2?|ttf)(?:\?[^"',\s)]*)?(?:#[^"',\s)]*)?/gi;
 
@@ -78,21 +77,34 @@ function visit(value) {
   return value;
 }
 
-const before = fs.readFileSync(settingsFile, "utf8");
-const updated = `${JSON.stringify(visit(JSON.parse(before)), null, 2)}\n`;
+const jsonFiles = fs
+  .readdirSync(contentDataDir)
+  .filter((name) => name.endsWith(".json"))
+  .map((name) => `${contentDataDir}/${name}`)
+  .sort();
 
-if (updated === before) {
+let updatedFiles = 0;
+
+for (const jsonFile of jsonFiles) {
+  const before = fs.readFileSync(jsonFile, "utf8");
+  const updated = `${JSON.stringify(visit(JSON.parse(before)), null, 2)}\n`;
+
+  if (updated !== before) {
+    fs.writeFileSync(jsonFile, updated);
+    console.log(`Versiones de assets actualizadas por hash de contenido en ${jsonFile}.`);
+    updatedFiles += 1;
+  }
+}
+
+if (updatedFiles === 0) {
   console.log("Las versiones de assets ya estan actualizadas.");
-} else {
-  fs.writeFileSync(settingsFile, updated);
-  console.log(`Versiones de assets actualizadas por hash de contenido en ${settingsFile}.`);
 }
 NODE
   exit 0
 fi
 
 if [ ! -f "$INDEX_FILE" ]; then
-  echo "No se encuentra $INDEX_FILE ni $SITE_SETTINGS_FILE" >&2
+  echo "No se encuentra $INDEX_FILE ni $CONTENT_DATA_DIR" >&2
   exit 1
 fi
 

@@ -4,8 +4,8 @@
   padding: 1.55rem 1.25rem;
   border: 1px solid var(--line-strong);
   background:
-    radial-gradient(circle at top left, rgba(196, 208, 184, 0.52), transparent 18rem),
-    linear-gradient(180deg, #f8f0e5 0%, #e7d1ba 100%);
+    radial-gradient(circle at top left, var(--color-primary-wash), transparent 18rem),
+    linear-gradient(180deg, var(--color-cream) 0%, var(--color-surface-warm) 100%);
   border-radius: 0.95rem;
   text-align: center;
   transform-origin: center bottom;
@@ -20,7 +20,7 @@
 }
 
 .contact__panel a:hover {
-  color: var(--olive);
+  color: var(--color-primary);
 }
 
 .contact__primary {

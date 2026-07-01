@@ -17,12 +17,9 @@
   },
   "assets": {
     "stylesheets": [
-      "/assets/css/style.css?v=085d0fc5",
-      "/assets/vendor/swiper/swiper-bundle.min.css?v=b4c36bd6"
+      "/assets/css/style.css?v=efa9c5c7"
     ],
-    "scripts": [
-      "/assets/vendor/swiper/swiper-bundle.min.js?v=8954ae96"
-    ],
+    "scripts": [],
     "fontPreloads": [
       "/assets/fonts/manrope-500-700-latin.woff2?v=a30ddcd3",
       "/assets/fonts/playfair-display-700-latin.woff2?v=28453852"
@@ -32,38 +29,38 @@
         "rel": "icon",
         "type": "image/png",
         "sizes": "16x16",
-        "href": "/assets/img/favicons/favicon-16x16.png?v=a4826502"
+        "href": "/assets/img/favicons/favicon-16x16.png?v=74c6d4d2"
       },
       {
         "rel": "icon",
         "type": "image/png",
         "sizes": "32x32",
-        "href": "/assets/img/favicons/favicon-32x32.png?v=8a73411f"
+        "href": "/assets/img/favicons/favicon-32x32.png?v=f0009eae"
       },
       {
         "rel": "icon",
         "type": "image/png",
         "sizes": "48x48",
-        "href": "/assets/img/favicons/favicon-48x48.png?v=a6b3d5a6"
+        "href": "/assets/img/favicons/favicon-48x48.png?v=c160e5ad"
       },
       {
         "rel": "apple-touch-icon",
         "sizes": "180x180",
-        "href": "/assets/img/favicons/apple-touch-icon.png?v=d9b95c5e"
+        "href": "/assets/img/favicons/apple-touch-icon.png?v=ec8c2ec8"
       },
       {
         "rel": "manifest",
-        "href": "/assets/img/favicons/site.webmanifest?v=04e63d35"
+        "href": "/assets/img/favicons/site.webmanifest?v=e93ba4e2"
       }
     ]
   },
   "brand": {
     "label": "Inicio Borja Gómez",
     "logo": {
-      "src": "/assets/img/logo-eye.webp?v=3afa6cad",
+      "src": "/assets/img/logo-borchgomez-full.webp?v=408056f8",
       "alt": "Logo de Borja Gómez",
-      "width": 210,
-      "height": 128
+      "width": 640,
+      "height": 640
     }
   },
   "nav": [
@@ -82,10 +79,6 @@
     {
       "label": "Proyectos",
       "href": "#portfolio"
-    },
-    {
-      "label": "Instagram",
-      "href": "#instagram"
     },
     {
       "label": "Sobre mí",
@@ -110,6 +103,16 @@
       "label": "Instagram de Borja Gómez"
     },
     {
+      "type": "tiktok",
+      "href": "https://www.tiktok.com/@borja_creadoraudiovisual?_r=1&_t=ZN-97az90fRCEA",
+      "label": "TikTok de Borja Gómez"
+    },
+    {
+      "type": "facebook",
+      "href": "https://www.facebook.com/share/1CsjWhYkmt/",
+      "label": "Facebook de Borja Gómez"
+    },
+    {
       "type": "whatsapp",
       "href": "https://wa.me/34687695204",
       "label": "WhatsApp de Borja Gómez"
@@ -120,18 +123,16 @@
     "title": "Haz que tu historia se vea",
     "career": "Dando voz a las raíces",
     "description": "Producción audiovisual, fotografía y contenido digital para marcas rurales y negocios locales. Historias reales del campo para que restaurantes, queserías, bodegas, artesanos y municipios del territorio muestren su trabajo con autenticidad.",
-    "claims": [
-      "Haz que tu negocio se vea."
-    ],
+    "claims": [],
     "actions": [
-      {
-        "label": "Cuéntame tu proyecto",
-        "href": "#contact",
-        "className": "home__hire"
-      },
       {
         "label": "Ver historias",
         "href": "#portfolio",
+        "className": "home__hire"
+      },
+      {
+        "label": "Cuéntame tu proyecto",
+        "href": "#contact",
         "className": "home__download"
       }
     ],
@@ -157,7 +158,7 @@
         "text": "Escucho cada proyecto, entiendo su contexto y traduzco su historia en vídeo, fotografía y contenido digital pensado para conectar con quienes valoran lo auténtico y lo cercano."
       }
     ],
-    "closing": "El objetivo es mostrar el valor que hay detrás de cada proyecto: su trabajo, su historia y su origen."
+    "closing": "Mi objetivo principal es ayudar a pequeñas empresas de nuestros municipios, dando visibilidad tanto a aquellas que llevan años formando parte de nuestra historia como a los nuevos proyectos que llegan con ilusión y ganas de crecer.\n\nTambién quiero poner en valor todo el trabajo que realizan las instituciones públicas para mejorar el día a día de estas localidades, pueblos pequeños en tamaño, pero enormes por su gente, su esfuerzo y todo lo que aportan."
   },
   "servicesIntro": {
     "title": "Servicios",
@@ -203,37 +204,9 @@
         "label": "Otros",
         "value": "otros"
       }
-    ]
-  },
-  "instagram": {
-    "title": "Instagram",
-    "subtitle": "Publicaciones recientes, historias del territorio y trabajos visuales en marcha.",
-    "previews": [
-      {
-        "href": "https://www.instagram.com/p/DW1lAEKjRmQ/",
-        "ariaLabel": "Ver publicación de territorio vivo",
-        "image": {
-          "src": "/assets/img/projects/otros/territorio-vivo.webp?v=d320c8f7",
-          "alt": "Previsualización de territorio vivo y naturaleza",
-          "width": 1196,
-          "height": 892
-        }
-      },
-      {
-        "href": "https://www.instagram.com/p/DScfFHwjccd/",
-        "ariaLabel": "Ver publicación de raíces vivas",
-        "image": {
-          "src": "/assets/img/projects/otros/raices-vivas.webp?v=2a9461b0",
-          "alt": "Previsualización de raíces e identidad rural",
-          "width": 668,
-          "height": 1196
-        }
-      }
     ],
-    "cta": {
-      "label": "Haz que tu negocio se vea",
-      "href": "https://www.instagram.com/borchgomez/"
-    }
+    "initialVisible": 6,
+    "loadStep": 6
   },
   "about": {
     "title": "Sobre mí",
@@ -250,7 +223,7 @@
     },
     "paragraphsAfterImage": [
       "Mi objetivo es devolver al territorio lo que me dio: visibilidad real para negocios y proyectos que merecen ser vistos, con especial vínculo con Castilla-La Mancha y abierto a cualquier entorno rural.",
-      "Desde Fuera de la Linde ayudo a productores locales, artesanos y pequeños municipios a contar mejor lo que hacen: historias con alma, raíz y oficio."
+      "Ayudo a productores locales, artesanos y pequeños municipios a contar mejor lo que hacen: historias con alma."
     ]
   },
   "contact": {

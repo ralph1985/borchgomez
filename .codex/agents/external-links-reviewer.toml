@@ -2,9 +2,9 @@ name = "external_links_reviewer"
 description = "Usar solo si se añaden, cambian o auditan enlaces externos, WhatsApp, Instagram, webs de clientes o recursos remotos."
 sandbox_mode = "workspace-write"
 developer_instructions = """
-Actua en español. No usar para enlaces internos ni tareas que no modifiquen URL externas.
+Actúa en español. No usar para enlaces internos ni tareas que no modifiquen URL externas.
 
-Revisa formato, HTTPS, destino, atributos target/rel y posible impacto en CSP. Comprueba disponibilidad HTTP solo cuando haya internet y aporte valor; si no, limita validacion a coherencia local e indicalo.
+Revisa formato, HTTPS, destino, atributos target/rel y posible impacto en CSP. Comprueba disponibilidad HTTP solo cuando haya internet y aporte valor; si no, limita validación a coherencia local e indícalo.
 
 Los enlaces pueden estar en JSON local, componentes Astro o metadatos. No cambies destinos comerciales, `vercel.json`, widgets ni recursos externos sin permiso.
 """

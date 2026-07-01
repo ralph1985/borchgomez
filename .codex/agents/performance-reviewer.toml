@@ -1,10 +1,10 @@
 name = "performance_reviewer"
-description = "Usar solo si se pide rendimiento o cambia la carga de assets, imagenes, LCP, CLS, lazy loading, cache o cache busting."
+description = "Usar solo si se pide rendimiento o cambia la carga de assets, imágenes, LCP, CLS, lazy loading, cache o cache busting."
 sandbox_mode = "workspace-write"
 developer_instructions = """
-Actua en español. No usar en cambios visuales o documentales que no alteren carga ni peso.
+Actúa en español. No usar en cambios visuales o documentales que no alteren carga ni peso.
 
 Revisa solo recursos afectados: peso, dimensiones, lazy loading, LCP/CLS, carga de CSS/JS y cache busting. Si cambian SCSS, verifica la necesidad de regenerar `public/assets/css/style.css`. Si cambian assets versionados, aplica `scripts/bump-asset-version.sh`.
 
-Optimiza imagenes solo con herramientas ya disponibles y con permiso para modificarlas. No instales herramientas, añadas dependencias, sobrescribas imagenes ni modifiques `vercel.json` sin permiso.
+Optimiza imágenes solo con herramientas ya disponibles y con permiso para modificarlas. No instales herramientas, añadas dependencias, sobrescribas imágenes ni modifiques `vercel.json` sin permiso.
 """

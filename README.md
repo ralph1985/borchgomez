@@ -1,8 +1,8 @@
 # Borja Gómez | Dando voz a las raíces
 
-Web de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos, presencia en Instagram y vías de contacto para negocios, territorios y proyectos locales.
+Web de presentación profesional para Borja Gómez, creador audiovisual rural. La página muestra servicios, planes, proyectos y vías de contacto para negocios, territorios y proyectos locales.
 
-La web pública está construida con Astro, componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla. No usa React, Tailwind ni base de datos. El contenido base está en JSON local y Sanity puede alimentar `site.hero` y `site.purpose` cuando está configurado.
+La web pública está construida con Astro, componentes `.astro`, SCSS global compilado a CSS público y JavaScript vanilla. No usa React, Tailwind ni base de datos. El contenido base está en JSON local y Sanity puede alimentar las secciones conectadas cuando está configurado.
 
 ## Instalación
 
@@ -96,7 +96,7 @@ SANITY_DATASET=production
 SANITY_API_VERSION=2026-06-26
 ```
 
-Si falta alguna variable, si la consulta a Sanity falla o si Sanity devuelve campos incompletos, la web usa el JSON local como fallback seguro. `site.hero` y `site.purpose` pueden venir de Sanity; servicios, planes, proyectos, contacto y el resto de secciones se leen desde `src/infrastructure/content/data/`.
+Si falta alguna variable, si la consulta a Sanity falla o si Sanity devuelve campos incompletos, la web usa el JSON local como fallback seguro. Sanity puede alimentar `hero`, `purpose`, `plans`, `services`, `portfolio`, `about` y `contact`; las secciones o campos no disponibles conservan la copia local de `src/infrastructure/content/data/`.
 
 Para que la web pueda leer el contenido sin añadir credenciales al repositorio, el dataset de Sanity debe permitir lectura pública desde el build o estar configurado de forma equivalente en el entorno de despliegue.
 
@@ -105,10 +105,11 @@ Para que la web pueda leer el contenido sin añadir credenciales al repositorio,
 Para refrescar la copia local de seguridad con el contenido publicado en Sanity:
 
 ```bash
+corepack pnpm run sync:fallbacks:check
 corepack pnpm run sync:fallbacks
 ```
 
-El comando carga `.env` si existe y requiere `SANITY_API_VERSION` junto con `SANITY_PROJECT_ID/SANITY_DATASET` o `SANITY_STUDIO_PROJECT_ID/SANITY_STUDIO_DATASET`. Solo actualiza `site.hero` y `site.purpose` en `src/infrastructure/content/data/site-settings.json`; el resto del contenido local se conserva intacto.
+El modo `sync:fallbacks:check` comprueba diferencias sin escribir archivos. El comando `sync:fallbacks` carga `.env` si existe y requiere `SANITY_API_VERSION` junto con `SANITY_PROJECT_ID/SANITY_DATASET` o `SANITY_STUDIO_PROJECT_ID/SANITY_STUDIO_DATASET`. Puede actualizar `site-settings.json`, `services.json`, `plans.json` y `projects.json` dentro de `src/infrastructure/content/data/`.
 
 Si falta configuración, no existen los documentos singleton o Sanity devuelve campos obligatorios vacíos, el comando falla antes de escribir el JSON. Al ser un comando manual, el build no queda acoplado a esta sincronización.
 
@@ -124,13 +125,20 @@ corepack pnpm install
 SANITY_STUDIO_PROJECT_ID=... SANITY_STUDIO_DATASET=production corepack pnpm run dev
 ```
 
-El Studio muestra los documentos singleton “Hero” y “Por qué y cómo trabajo”. Para crear o reemplazar los documentos iniciales con los textos actuales del JSON local:
+El Studio muestra los documentos de contenido conectados a la home: Hero, Por qué y cómo trabajo, Servicios, Planes, Portfolio, Sobre mí y Contacto. Para crear o reemplazar documentos iniciales desde los datos locales:
 
 ```bash
 cd studio
 SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:hero
 SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:purpose
+SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:plans
+SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:contact
+SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:about
+SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:portfolio
+SANITY_PROJECT_ID=... SANITY_DATASET=production corepack pnpm run seed:services
 ```
+
+Los scripts `seed:*` son para bootstrap, recuperación o resiembra explícita. Algunos reemplazan documentos del dataset y otros usan `sanity exec --with-user-token`, así que no deben usarse como mantenimiento editorial normal.
 
 Al ser una web Astro estática, los cambios publicados en Sanity no aparecen automáticamente en producción: requieren ejecutar un nuevo build y redeploy.
 

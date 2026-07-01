@@ -9,11 +9,11 @@
       "price": "Precio a consultar",
       "tagline": "El punto de partida para construir presencia digital sólida.",
       "features": [
-        "2 reels mensuales",
-        "2 stories mensuales",
-        "Sesión de fotos",
+        "Vídeo sencillo",
+        "Planificación mensual de contenido",
+        "Creación de publicaciones, stories y reels (4/mes)",
         "Edición de contenido",
-        "Ideas y planificación de contenido"
+        "Publicación en redes sociales o preparación para su uso"
       ],
       "cta": {
         "label": "Hablemos",
@@ -27,11 +27,12 @@
       "featured": true,
       "badge": "Recomendado",
       "features": [
-        "4 reels mensuales",
-        "4 stories mensuales",
-        "Cobertura de eventos",
-        "Estrategia de posicionamiento de contenido",
-        "Planificación básica de publicaciones"
+        "Video + edición + subtítulos",
+        "Auditoría sencilla",
+        "Planificación mensual de contenido",
+        "Creación de publicaciones, stories y reels (6/mes) y preparación para su uso",
+        "Planificación básica de publicaciones",
+        "Poner al día su ficha de Google Bussines Profile"
       ],
       "cta": {
         "label": "Hablemos",
@@ -42,13 +43,16 @@
       "name": "Origen",
       "price": "Precio a consultar",
       "tagline": "Una solución completa para presencia digital y crecimiento exponencial.",
+      "featured": false,
       "features": [
-        "6 reels mensuales",
-        "6 stories mensuales",
-        "Cobertura de eventos",
-        "Estrategia de posicionamiento avanzada",
-        "Creación de web",
-        "Planificación continua"
+        "Video + edición + subtítulos dinámicos",
+        "Auditoría en profundidad",
+        "Planificación mensual de contenido",
+        "Creación de publicaciones, Stories y Reels (8/mes) y/o gestión",
+        "Cobertura de 1 evento/año",
+        "Sesión de vídeo y fotos (1h-25 fotos)",
+        "Creación de landing page (Web)",
+        "Análisis de resultados"
       ],
       "cta": {
         "label": "Hablemos",
@@ -59,7 +63,7 @@
   "promo": {
     "title": "Vídeo promocional puntual",
     "price": "350 €",
-    "description": "Un vídeo único diseñado para campañas, promociones o piezas destacadas de marca.",
+    "description": "Un vídeo personalizado y único diseñado para campañas, promociones o piezas destacadas de marca.",
     "features": [
       "Concepto y guión básico",
       "Grabación y edición profesional",
@@ -68,5 +72,28 @@
     ],
     "note": "Incluido sin coste adicional al contratar los planes Territorio y Origen."
   },
+  "infoBoxes": [
+    {
+      "title": "Servicios web",
+      "blocks": [
+        {
+          "title": "Auditoría de Web actual",
+          "points": [
+            "Auditoría y optimización inicial de la web actual.",
+            "Hasta el 31 de diciembre mantenimiento web gratuito.",
+            "Informes de resultados."
+          ]
+        },
+        {
+          "title": "Diseño y desarrollo de página",
+          "points": [
+            "Diseño y desarrollo de página web desde cero.",
+            "Estructura optimizada para SEO local.",
+            "Hasta el 31 de diciembre mantenimiento web gratuito."
+          ]
+        }
+      ]
+    }
+  ],
   "budgetNote": "El presupuesto final podrá ajustarse en función de las necesidades del proyecto y la ubicación del servicio."
 }

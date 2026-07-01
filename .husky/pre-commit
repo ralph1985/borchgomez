@@ -1,0 +1,27 @@
+set -eu
+
+ASSET_EXTENSIONS='.*\.(css|js|png|jpg|jpeg|svg|webp|gif|ico|webmanifest|woff|woff2|ttf)$'
+STAGED_ASSETS="$(git diff --cached --name-only -- public/assets | grep -Ei "$ASSET_EXTENSIONS" || true)"
+
+if [ -n "$STAGED_ASSETS" ]; then
+  UNSTAGED_ASSETS="$(git diff --name-only -- public/assets | grep -Ei "$ASSET_EXTENSIONS" || true)"
+  UNTRACKED_ASSETS="$(git ls-files --others --exclude-standard -- public/assets | grep -Ei "$ASSET_EXTENSIONS" || true)"
+
+  if [ -n "$UNSTAGED_ASSETS$UNTRACKED_ASSETS" ]; then
+    echo "Hay assets locales sin preparar en stage. Haz git add de esos assets o separa el commit antes de actualizar cache busting:" >&2
+    printf '%s\n%s\n' "$UNSTAGED_ASSETS" "$UNTRACKED_ASSETS" | sed '/^$/d' >&2
+    exit 1
+  fi
+
+  scripts/bump-asset-version.sh
+
+  if ! git diff --quiet -- src/infrastructure/content/data; then
+    echo "Se actualizaron versiones de assets. Revisa y añade los JSON modificados antes de commitear." >&2
+    exit 1
+  fi
+fi
+
+corepack pnpm run lint:js
+corepack pnpm run lint:scss
+corepack pnpm run format:check
+git diff --check

@@ -1,0 +1,7 @@
+corepack pnpm run lint
+corepack pnpm run build
+
+if ! node scripts/sync-sanity-fallbacks.mjs --check; then
+  echo "Aviso: no se pudo confirmar que los fallbacks locales estén sincronizados con Sanity." >&2
+  echo "Si la tarea afecta a contenido gestionado en Sanity, revisa si conviene ejecutar corepack pnpm run sync:fallbacks." >&2
+fi

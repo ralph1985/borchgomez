@@ -12,8 +12,8 @@
   z-index: 0;
   height: min(62vh, 560px);
   background:
-    linear-gradient(115deg, rgba(138, 94, 59, 0.2), transparent 48%),
-    linear-gradient(180deg, rgba(169, 103, 63, 0.18), rgba(169, 103, 63, 0));
+    linear-gradient(115deg, var(--color-secondary-soft), transparent 48%),
+    linear-gradient(180deg, var(--color-accent-yellow-soft), transparent);
   pointer-events: none;
 }
 
@@ -49,11 +49,11 @@
 .home__landscape {
   position: absolute;
   left: 50%;
-  bottom: 0;
+  bottom: -1.75rem;
   z-index: 0;
-  width: min(1680px, 132vw);
-  min-width: 980px;
-  height: auto;
+  width: 100vw;
+  min-width: 0;
+  height: clamp(245px, 21vw, 420px);
   color: var(--olive);
   opacity: 0.9;
   pointer-events: none;
@@ -66,11 +66,11 @@
 }
 
 .home__field--back {
-  fill: rgba(196, 208, 184, 0.42);
+  fill: var(--color-primary-wash);
 }
 
 .home__field--front {
-  fill: rgba(138, 94, 59, 0.38);
+  fill: var(--color-secondary-muted);
 }
 
 .home__furrows path,
@@ -82,7 +82,7 @@
 }
 
 .home__furrows path {
-  stroke: rgba(74, 47, 32, 0.5);
+  stroke: var(--color-soil-line);
   stroke-width: 2;
 }
 
@@ -98,8 +98,8 @@
 }
 
 .home__olive-crown {
-  fill: rgba(111, 125, 90, 0.66);
-  stroke: rgba(82, 97, 63, 0.58);
+  fill: var(--color-primary-muted);
+  stroke: var(--color-primary);
   stroke-width: 3;
   transform-box: fill-box;
   transform-origin: center;
@@ -116,6 +116,7 @@
 
 .home__data {
   color: var(--ink);
+  margin-top: 2rem;
   padding: 1rem 0.35rem 1rem clamp(1.15rem, 5vw, 3.2rem);
   border-radius: 1rem;
   will-change: transform, opacity;
@@ -146,7 +147,7 @@
 }
 
 .home__career {
-  color: var(--clay);
+  color: var(--color-secondary);
   margin-bottom: 1rem;
   font-size: 1.15rem;
   font-weight: 700;
@@ -170,7 +171,7 @@
 
 .home__description {
   max-width: 700px;
-  color: #564637;
+  color: var(--color-text-muted);
   font-size: 1.02rem;
 }
 
@@ -219,8 +220,8 @@
   z-index: -1;
   border-radius: 1.35rem;
   background:
-    radial-gradient(circle at 38% 28%, rgba(255, 255, 255, 0.62), transparent 34%),
-    linear-gradient(135deg, rgba(196, 208, 184, 0.42), rgba(138, 94, 59, 0.42));
+    radial-gradient(circle at 38% 28%, var(--color-white-wash), transparent 34%),
+    linear-gradient(135deg, var(--color-primary-wash), var(--color-secondary-muted));
   opacity: 0;
   transform: scale(0.94);
   transition: opacity 0.45s ease, transform 0.45s ease;
@@ -233,8 +234,8 @@
 
 .home__img img {
   border-radius: 1rem;
-  border: 1px solid #b29b82;
-  box-shadow: 0 18px 40px rgba(91, 63, 45, 0.18);
+  border: 1px solid var(--color-image-border);
+  box-shadow: 0 18px 40px var(--color-shadow-earth-medium);
   transform-origin: center;
   will-change: transform;
 }

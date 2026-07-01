@@ -1,5 +1,12 @@
 import type { ContentImage } from "./service";
 
+interface FaviconLink {
+  rel: string;
+  href: string;
+  type?: string;
+  sizes?: string;
+}
+
 export interface SiteSettings {
   lang: string;
   title: string;
@@ -9,7 +16,7 @@ export interface SiteSettings {
     stylesheets: string[];
     scripts: string[];
     fontPreloads: string[];
-    favicons: Array<Record<string, string>>;
+    favicons: FaviconLink[];
   };
   brand: {
     label: string;
@@ -38,12 +45,8 @@ export interface SiteSettings {
     title: string;
     subtitle: string;
     filters: Array<{ label: string; value: string }>;
-  };
-  instagram: {
-    title: string;
-    subtitle: string;
-    previews: Array<{ href: string; ariaLabel: string; image: ContentImage }>;
-    cta: { label: string; href: string };
+    initialVisible: number;
+    loadStep: number;
   };
   about: {
     title: string;

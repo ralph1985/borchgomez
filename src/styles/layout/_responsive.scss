@@ -7,10 +7,6 @@
     padding-top: 4.5rem;
   }
 
-  .nav__brand img {
-    width: 5.7rem;
-  }
-
   .home__container {
     min-height: calc(100vh - var(--header-height));
     grid-template-columns: 1.1fr 0.9fr;
@@ -19,7 +15,8 @@
   }
 
   .home__data {
-    background: linear-gradient(90deg, rgba(239, 225, 209, 0.78), rgba(239, 225, 209, 0));
+    margin-top: 1rem;
+    background: linear-gradient(90deg, var(--color-paper-fade), transparent);
   }
 
   .home__img {
@@ -72,17 +69,17 @@
     grid-row: 2;
   }
 
-  .services__drone-body {
+  .services__media-body {
     grid-template-columns: 250px minmax(0, 1fr);
     gap: 1.2rem;
   }
 
-  .services__drone-body > div {
+  .services__media-body > div {
     grid-column: 2;
     grid-row: 1;
   }
 
-  .services__drone-visual {
+  .services__visual {
     grid-column: 1;
     grid-row: 1;
     justify-self: start;
@@ -93,16 +90,16 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .plans__info-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .portfolio__img img {
     aspect-ratio: 4 / 5;
   }
 
   .portfolio__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .portfolio__preview-grid {
-    grid-template-columns: repeat(3, 1fr);
   }
 }
 
@@ -157,7 +154,7 @@
   }
 
   .nav__link:hover {
-    background: rgba(138, 94, 59, 0.1);
+    background: var(--color-secondary-soft);
   }
 
   .nav__submenu {
@@ -173,7 +170,7 @@
   }
 
   .active-link {
-    background: rgba(196, 208, 184, 0.36);
+    background: var(--color-primary-hover);
   }
 
   .active-link::after {
