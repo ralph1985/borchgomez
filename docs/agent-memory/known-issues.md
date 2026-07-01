@@ -5,7 +5,7 @@
 - En este entorno puede faltar `gh`; si se pide abrir PR y `gh` no está disponible, usar el conector de GitHub si existe o reportar el bloqueo.
 - `corepack pnpm run build` puede regenerar assets compilados; no usarlo como validación obligatoria para cambios solo de agentes o documentación.
 - `sanity deploy` y la escritura de documentos usan permisos distintos; poder desplegar el Studio no garantiza permiso para crear o actualizar contenido live.
-- Si `astro check` o CI inspeccionan `studio/**`, el workflow debe instalar dependencias del root y de `studio`.
+- Si `astro check` o CI inspeccionan `studio/**`, el workflow debe instalar dependencias del root y de `studio`; no añadir `studio` a `pnpm-workspace.yaml` para arreglar ese síntoma, porque mezclaría lockfiles y ampliaría el diff de forma innecesaria.
 - Al cambiar SCSS, `public/assets/css/style.css` debe regenerarse y revisarse porque está versionado.
 - Si un `seed:*` de Sanity importa documentos correctamente pero no aparece una sección nueva en el Studio desplegado, probablemente falta desplegar el Studio con `corepack pnpm run deploy` desde `studio/`.
 - Pendiente configurar webhooks Sanity/Vercel si se quiere regenerar producción automáticamente al publicar contenido en Sanity.
