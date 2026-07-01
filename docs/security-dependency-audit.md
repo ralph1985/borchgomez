@@ -33,7 +33,7 @@ No se definen exclusiones iniciales. Si una correccion urgente requiere instalar
 
 ## Referencias
 
-- GitHub Dependabot options: https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-- GitHub Dependabot security updates: https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/about-dependabot-security-updates
-- pnpm settings: https://pnpm.io/settings#minimumreleaseage
-- pnpm audit: https://pnpm.io/cli/audit
+- Documentación de opciones de configuración de GitHub Dependabot.
+- Documentación de actualizaciones de seguridad de GitHub Dependabot.
+- Documentación de configuración de pnpm.
+- Documentación de auditoría de pnpm.

@@ -1,10 +1,13 @@
 ---
 import ServiceIcon from "../components/icons/ServiceIcon.astro";
-import type { Service, SiteSettings } from "../domain/home-page";
-interface Props { intro: SiteSettings["servicesIntro"]; services: Service[]; }
-const { intro, services } = Astro.props;
+import type { DevInspectionBlock, Service, SiteSettings } from "../domain/home-page";
+import { getDevInspectorAttrs } from "../shared/utils/dev-inspection";
+
+interface Props { intro: SiteSettings["servicesIntro"]; services: Service[]; inspection: DevInspectionBlock; }
+const { intro, services, inspection } = Astro.props;
+const devInspectorAttrs = getDevInspectorAttrs(inspection);
 ---
-<section class="services section" id="services">
+<section class="services section" id="services" {...devInspectorAttrs}>
   <div class="bd-container">
     <h2 class="section-title" data-animate>{intro.title}</h2>
     <p class="section-subtitle" data-animate>{intro.subtitle}</p>

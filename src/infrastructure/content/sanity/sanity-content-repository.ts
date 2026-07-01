@@ -1,5 +1,16 @@
 import { createClient, type SanityClient } from "@sanity/client";
-import type { HomePageContent, Plan, PlansContent, PlansInfoBox, Project, Service, SiteSettings } from "../../../domain/home-page";
+import type {
+  DevContentSource,
+  DevInspectionField,
+  HomePageContent,
+  HomePageDevInspection,
+  Plan,
+  PlansContent,
+  PlansInfoBox,
+  Project,
+  Service,
+  SiteSettings,
+} from "../../../domain/home-page";
 import type { ContentRepository } from "../../../ports/content-repository";
 
 type HeroContent = SiteSettings["hero"];
@@ -342,12 +353,125 @@ export class SanityContentRepository implements ContentRepository {
         services: mergeServices(fallbackContent.services, documents.services),
         projects: mergeProjects(fallbackContent.projects, documents.portfolio),
         plans: mergePlans(fallbackContent.plans, documents.plans),
+        devInspection: buildDevInspection(fallbackContent.devInspection, documents),
       };
     } catch (error) {
       console.warn(`Sanity content could not be loaded. Falling back to local JSON. ${readErrorMessage(error)}`);
       return fallbackContent;
     }
   }
+}
+
+function buildDevInspection(
+  fallbackInspection: HomePageDevInspection,
+  documents: SanityHomePageDocuments,
+): HomePageDevInspection {
+  return {
+    ...fallbackInspection,
+    hero: buildHeroDevInspection(documents.hero),
+    purpose: buildPurposeDevInspection(documents.purpose),
+    services: buildServicesDevInspection(documents.services),
+    footer: fallbackInspection.footer,
+  };
+}
+
+function buildHeroDevInspection(source: SanityHeroDocument | null): HomePageDevInspection["hero"] {
+  const fields: DevInspectionField[] = [
+    sanityStringField("greeting", "hero", "hero.greeting", source?.greeting),
+    sanityStringField("title", "hero", "hero.title", source?.title),
+    sanityStringField("career", "hero", "hero.career", source?.career),
+    sanityStringField("description", "hero", "hero.description", source?.description),
+    {
+      label: "claims",
+      source: source && (Array.isArray(source.claims) || readString(source.claim)) ? "sanity" : "fallback",
+      document: "hero",
+      field: "hero.claims",
+    },
+    {
+      label: "actions",
+      source: source && Array.isArray(source.actions) && source.actions.length > 0 ? "sanity" : "fallback",
+      document: "hero",
+      field: "hero.actions",
+    },
+    { label: "image", source: "fallback", file: "src/infrastructure/content/data/site-settings.json", field: "hero.image" },
+  ];
+
+  return {
+    component: "HeroSection",
+    source: sourceForFields(fields),
+    document: "hero",
+    field: "hero",
+    file: "src/sections/HeroSection.astro",
+    fields,
+  };
+}
+
+function buildPurposeDevInspection(source: SanityPurposeDocument | null): HomePageDevInspection["purpose"] {
+  const fields: DevInspectionField[] = [
+    sanityStringField("title", "purpose", "purpose.title", source?.title),
+    sanityStringField("subtitle", "purpose", "purpose.subtitle", source?.subtitle),
+    {
+      label: "items",
+      source: source && Array.isArray(source.items) && source.items.length > 0 ? "sanity" : "fallback",
+      document: "purpose",
+      field: "purpose.items",
+    },
+    sanityStringField("closing", "purpose", "purpose.closing", source?.closing),
+  ];
+
+  return {
+    component: "PurposeSection",
+    source: sourceForFields(fields),
+    document: "purpose",
+    field: "purpose",
+    file: "src/sections/PurposeSection.astro",
+    fields,
+  };
+}
+
+function buildServicesDevInspection(source: SanityServicesDocument | null): HomePageDevInspection["services"] {
+  const fields: DevInspectionField[] = [
+    sanityStringField("intro.title", "services", "services.intro.title", source?.intro?.title),
+    sanityStringField("intro.subtitle", "services", "services.intro.subtitle", source?.intro?.subtitle),
+    {
+      label: "items",
+      source: source && Array.isArray(source.items) && source.items.length > 0 ? "sanity" : "fallback",
+      document: "services",
+      field: "services.items",
+    },
+    {
+      label: "items.image",
+      source: source && source.items?.some((item) => readString(item.image?.src)) ? "sanity" : "fallback",
+      document: "services",
+      field: "services.items[].image",
+    },
+  ];
+
+  return {
+    component: "ServicesSection",
+    source: sourceForFields(fields),
+    document: "services",
+    field: "services",
+    file: "src/sections/ServicesSection.astro",
+    fields,
+  };
+}
+
+function sourceForFields(fields: DevInspectionField[]): DevContentSource {
+  return fields.some((field) => field.source === "sanity") ? "sanity" : "fallback";
+}
+
+function sanityStringField(label: string, document: string, field: string, value: unknown): DevInspectionField {
+  return {
+    label,
+    source: sourceForSanityString(value),
+    document,
+    field,
+  };
+}
+
+function sourceForSanityString(value: unknown): DevContentSource {
+  return readString(value) ? "sanity" : "fallback";
 }
 
 function mergeHero(fallback: HeroContent, source: SanityHeroDocument | null): HeroContent {

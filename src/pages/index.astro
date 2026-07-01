@@ -10,12 +10,12 @@ import ProjectsSection from "../sections/ProjectsSection.astro";
 import PurposeSection from "../sections/PurposeSection.astro";
 import ServicesSection from "../sections/ServicesSection.astro";
 
-const { site, services, projects, plans } = await getHomePageContent(contentRepository);
+const { site, services, projects, plans, devInspection } = await getHomePageContent(contentRepository);
 ---
-<BaseLayout site={site} services={services}>
-  <HeroSection site={site} />
-  <PurposeSection purpose={site.purpose} />
-  <ServicesSection intro={site.servicesIntro} services={services} />
+<BaseLayout site={site} services={services} devInspection={devInspection}>
+  <HeroSection site={site} inspection={devInspection.hero} />
+  <PurposeSection purpose={site.purpose} inspection={devInspection.purpose} />
+  <ServicesSection intro={site.servicesIntro} services={services} inspection={devInspection.services} />
   <PlansSection plans={plans} />
   <ProjectsSection intro={site.projectsIntro} projects={projects} />
   <AboutSection about={site.about} />

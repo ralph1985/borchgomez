@@ -31,6 +31,9 @@ const { site, services } = Astro.props;
         {site.nav.filter((item) => !["#home", "#purpose"].includes(item.href)).map((item) => (
           <li class="nav__item"><a href={item.href} class={item.href === "#contact" ? "nav__link nav__link--contact" : "nav__link"}>{item.label}</a></li>
         ))}
+        <li class="nav__item nav__item--dev-tools" data-dev-tools-menu-item hidden>
+          <button class="nav__dev-tools-toggle" type="button" aria-pressed="false" data-dev-tools-toggle>Modo desarrollador</button>
+        </li>
       </ul>
     </div>
     <div class="nav__actions">

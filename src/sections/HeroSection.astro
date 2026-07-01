@@ -1,13 +1,15 @@
 ---
 import SocialIcon from "../components/icons/SocialIcon.astro";
-import type { SiteSettings } from "../domain/home-page";
+import type { DevInspectionBlock, SiteSettings } from "../domain/home-page";
+import { getDevInspectorAttrs } from "../shared/utils/dev-inspection";
 
-interface Props { site: SiteSettings; }
-const { site } = Astro.props;
+interface Props { site: SiteSettings; inspection: DevInspectionBlock; }
+const { site, inspection } = Astro.props;
 const hero = site.hero;
 const heroTitleWords = hero.title.split(/\s+/).filter(Boolean);
+const devInspectorAttrs = getDevInspectorAttrs(inspection);
 ---
-<section class="home" id="home">
+<section class="home" id="home" {...devInspectorAttrs}>
         <svg class="home__roots" viewBox="0 0 720 520" aria-hidden="true" focusable="false">
           <g class="home__roots-main">
             <path d="M359 0c-12 86-12 151 0 229 11 72 5 139-41 215"></path>

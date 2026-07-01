@@ -1,9 +1,11 @@
 ---
 import Header from "../components/ui/Header.astro";
-import type { Service, SiteSettings } from "../domain/home-page";
+import type { HomePageDevInspection, Service, SiteSettings } from "../domain/home-page";
+import { getDevInspectorAttrs } from "../shared/utils/dev-inspection";
 
-interface Props { site: SiteSettings; services: Service[]; }
-const { site, services } = Astro.props;
+interface Props { site: SiteSettings; services: Service[]; devInspection: HomePageDevInspection; }
+const { site, services, devInspection } = Astro.props;
+const footerDevInspectorAttrs = getDevInspectorAttrs(devInspection.footer);
 ---
 <!doctype html>
 <html lang={site.lang}>
@@ -96,7 +98,7 @@ const { site, services } = Astro.props;
     <main>
       <slot />
     </main>
-    <footer class="footer section">
+    <footer class="footer section" {...footerDevInspectorAttrs}>
       <svg class="footer__land" viewBox="0 0 1920 420" aria-hidden="true" focusable="false">
         <path
           class="footer__land-soil footer__land-soil--back"

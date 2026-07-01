@@ -18,11 +18,7 @@ corepack pnpm install
 corepack pnpm run dev
 ```
 
-Astro mostrará la URL local, normalmente:
-
-```text
-http://localhost:4321
-```
+Astro mostrará en terminal la URL local del servidor de desarrollo.
 
 Si se están editando estilos, deja también Sass en modo watch en otra terminal:
 
@@ -99,6 +95,12 @@ SANITY_API_VERSION=2026-06-26
 Si falta alguna variable, si la consulta a Sanity falla o si Sanity devuelve campos incompletos, la web usa el JSON local como fallback seguro. Sanity puede alimentar `hero`, `purpose`, `plans`, `services`, `portfolio`, `about` y `contact`; las secciones o campos no disponibles conservan la copia local de `src/infrastructure/content/data/`.
 
 Para que la web pueda leer el contenido sin añadir credenciales al repositorio, el dataset de Sanity debe permitir lectura pública desde el build o estar configurado de forma equivalente en el entorno de despliegue.
+
+### Modo desarrollador interno
+
+La web incluye un modo oculto para inspeccionar el origen de algunos bloques de contenido. Se desbloquea con 10 clics en el footer y guarda el desbloqueo en `localStorage` con `borjaDevToolsUnlocked`. El estado activo se guarda con `borjaDevToolsEnabled`.
+
+Cuando está activo, añade la clase `dev-tools-enabled` al documento y muestra marcas discretas en Hero, Servicios, Por qué y cómo trabajo, y Footer. Las marcas se generan desde metadatos internos de `ContentRepository`; no abren Sanity, no exponen credenciales y no sustituyen al flujo de sincronización de fallbacks.
 
 ### Sincronizar fallbacks locales
 

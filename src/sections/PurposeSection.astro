@@ -1,9 +1,12 @@
 ---
-import type { SiteSettings } from "../domain/home-page";
-interface Props { purpose: SiteSettings["purpose"]; }
-const { purpose } = Astro.props;
+import type { DevInspectionBlock, SiteSettings } from "../domain/home-page";
+import { getDevInspectorAttrs } from "../shared/utils/dev-inspection";
+
+interface Props { purpose: SiteSettings["purpose"]; inspection: DevInspectionBlock; }
+const { purpose, inspection } = Astro.props;
+const devInspectorAttrs = getDevInspectorAttrs(inspection);
 ---
-<section class="purpose section" id="purpose">
+<section class="purpose section" id="purpose" {...devInspectorAttrs}>
   <div class="bd-container purpose__container">
     <h2 class="section-title" data-animate>{purpose.title}</h2>
     <p class="section-subtitle" data-animate>{purpose.subtitle}</p>

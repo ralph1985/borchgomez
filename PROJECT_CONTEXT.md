@@ -29,7 +29,7 @@ Sanity puede sustituir solo las secciones conectadas explícitamente en `src/inf
 
 Las secciones conectadas actualmente a Sanity son `hero`, `purpose`, `services`, `plans`, `portfolio`, `about` y `contact`.
 
-El hostname del Sanity Studio desplegado es `borchgomez`: `https://borchgomez.sanity.studio/`.
+El Studio desplegado existe, pero su URL no se documenta en el repositorio público.
 
 Para comprobar si Sanity y los fallbacks locales están desincronizados sin escribir archivos se usa:
 
