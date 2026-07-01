@@ -69,8 +69,7 @@
   font-size: 1.45rem;
 }
 
-.purpose__item p,
-.purpose__closing-text {
+.purpose__item p {
   color: var(--color-text-muted);
 }
 
@@ -89,4 +88,8 @@
   font-size: 1.05rem;
   font-weight: 700;
   line-height: 1.6;
+}
+
+.purpose__closing p + p {
+  margin-top: 0.85rem;
 }

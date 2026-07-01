@@ -3,8 +3,6 @@ import type { SiteSettings } from "../domain/home-page";
 interface Props { purpose: SiteSettings["purpose"]; }
 const { purpose } = Astro.props;
 const closingParagraphs = purpose.closing.split(/\n{2,}/).map((paragraph) => paragraph.trim()).filter(Boolean);
-const closingQuote = closingParagraphs.at(-1) ?? purpose.closing;
-const closingBody = closingParagraphs.slice(0, -1);
 ---
 <section class="purpose section" id="purpose">
   <div class="bd-container purpose__container">
@@ -23,8 +21,7 @@ const closingBody = closingParagraphs.slice(0, -1);
           {purpose.items.map((item) => <article class="purpose__item"><h3>{item.title}</h3><p>{item.text}</p></article>)}
         </div>
         <div class="purpose__closing-group" data-animate>
-          {closingBody.map((paragraph) => <p class="purpose__closing-text">{paragraph}</p>)}
-          <blockquote class="purpose__closing">{closingQuote}</blockquote>
+          <blockquote class="purpose__closing">{closingParagraphs.map((paragraph) => <p>{paragraph}</p>)}</blockquote>
         </div>
       </div>
     </div>
