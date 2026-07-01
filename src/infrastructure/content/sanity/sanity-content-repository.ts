@@ -32,6 +32,13 @@ interface SanityHeroDocument {
 interface SanityPurposeDocument {
   title?: unknown;
   subtitle?: unknown;
+  image?: {
+    src?: unknown;
+    alt?: unknown;
+    width?: unknown;
+    height?: unknown;
+  };
+  highlightedQuote?: unknown;
   items?: Array<{
     title?: unknown;
     text?: unknown;
@@ -187,6 +194,13 @@ const homePageQuery = `{
   "purpose": *[_type == "purpose" && _id == "purpose"][0]{
     title,
     subtitle,
+    image{
+      alt,
+      "src": asset->url,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height
+    },
+    highlightedQuote,
     items[]{
       title,
       text
@@ -405,8 +419,28 @@ function mergePurpose(fallback: PurposeContent, source: SanityPurposeDocument | 
   return {
     title: readString(source.title) ?? fallback.title,
     subtitle: readString(source.subtitle) ?? fallback.subtitle,
+    image: mergePurposeImage(fallback.image, source.image),
+    highlightedQuote: readString(source.highlightedQuote) ?? fallback.highlightedQuote,
     items: mergePurposeItems(fallback.items, source.items),
     closing: readString(source.closing) ?? fallback.closing,
+  };
+}
+
+function mergePurposeImage(fallback: PurposeContent["image"], source: SanityPurposeDocument["image"]): PurposeContent["image"] {
+  const src = readString(source?.src);
+  const alt = readString(source?.alt);
+  const width = readPositiveNumber(source?.width);
+  const height = readPositiveNumber(source?.height);
+
+  if (!src || !alt || width === undefined || height === undefined) {
+    return fallback;
+  }
+
+  return {
+    src,
+    alt,
+    width,
+    height,
   };
 }
 

@@ -37,6 +37,8 @@ export interface SiteSettings {
   purpose: {
     title: string;
     subtitle: string;
+    image: ContentImage;
+    highlightedQuote: string;
     items: Array<{ title: string; text: string }>;
     closing: string;
   };

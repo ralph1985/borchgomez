@@ -23,6 +23,16 @@
     width: min(500px, 100%);
   }
 
+  .purpose__layout {
+    grid-template-columns: minmax(260px, 0.45fr) minmax(0, 0.55fr);
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .purpose__visual {
+    width: 100%;
+  }
+
   .purpose__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

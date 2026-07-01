@@ -27,6 +27,13 @@ const homePageQuery = `{
   "purpose": *[_type == "purpose" && _id == "purpose"][0]{
     title,
     subtitle,
+    image{
+      alt,
+      "src": asset->url,
+      "width": asset->metadata.dimensions.width,
+      "height": asset->metadata.dimensions.height
+    },
+    highlightedQuote,
     items[]{
       title,
       text
@@ -185,7 +192,7 @@ async function buildSanityFallbacks() {
   const fallbackProjects = readJson(projectsPath);
   const documents = await client.fetch(homePageQuery);
   const hero = readHero(documents?.hero, siteSettings.hero);
-  const purpose = readPurpose(documents?.purpose);
+  const purpose = readPurpose(documents?.purpose, siteSettings.purpose);
   const plans = readPlans(documents?.plans, fallbackPlans);
   const services = readServices(documents?.services, fallbackServices);
   const portfolio = readPortfolio(documents?.portfolio, fallbackProjects);
@@ -350,8 +357,9 @@ function readHeroClaims(source) {
   return legacyClaim ? [legacyClaim] : [];
 }
 
-function readPurpose(source) {
+function readPurpose(source, fallbackPurpose) {
   assertObject(source, "Sanity purpose document is missing.");
+  assertObject(fallbackPurpose, "Local purpose fallback is missing.");
 
   const sourceItems = readArray(source.items, "Sanity purpose items must be an array.");
 
@@ -362,11 +370,31 @@ function readPurpose(source) {
   return {
     title: readRequiredString(source.title, "purpose.title"),
     subtitle: readRequiredString(source.subtitle, "purpose.subtitle"),
+    image: readOptionalPurposeImage(source.image, "purpose.image", fallbackPurpose.image),
+    highlightedQuote: readOptionalString(source.highlightedQuote, "purpose.highlightedQuote") ?? fallbackPurpose.highlightedQuote,
     items: sourceItems.map((item, index) => ({
       title: readRequiredString(item?.title, `purpose.items[${index}].title`),
       text: readRequiredString(item?.text, `purpose.items[${index}].text`),
     })),
     closing: readRequiredString(source.closing, "purpose.closing"),
+  };
+}
+
+function readOptionalPurposeImage(source, fieldName, fallbackImage) {
+  if (source === undefined || source === null) {
+    return readFallbackImage(fallbackImage, fieldName);
+  }
+
+  assertObject(source, `Sanity ${fieldName} must be an object when provided.`);
+  assertLocalFallbackImage(fallbackImage, fieldName);
+
+  readRequiredString(source.src, `${fieldName}.asset.url`);
+  readRequiredPositiveNumber(source.width, `${fieldName}.asset.metadata.dimensions.width`);
+  readRequiredPositiveNumber(source.height, `${fieldName}.asset.metadata.dimensions.height`);
+
+  return {
+    ...fallbackImage,
+    alt: readRequiredString(source.alt, `${fieldName}.alt`),
   };
 }
 

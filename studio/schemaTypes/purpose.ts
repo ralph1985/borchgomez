@@ -19,6 +19,27 @@ export const purpose = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "image",
+      title: "Imagen principal",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: "alt",
+          title: "Texto alternativo",
+          type: "string",
+        }),
+      ],
+    }),
+    defineField({
+      name: "highlightedQuote",
+      title: "Frase destacada",
+      type: "text",
+      rows: 2,
+    }),
+    defineField({
       name: "items",
       title: "Bloques",
       type: "array",
