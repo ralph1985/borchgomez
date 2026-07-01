@@ -2,6 +2,7 @@
 
 - La web pública usa Astro con salida estática, componentes `.astro`, SCSS compilado y JavaScript vanilla.
 - `studio/` es un Sanity Studio separado y puede usar React y dependencias propias.
+- `studio/` no debe añadirse como paquete de `pnpm-workspace.yaml`: root y Studio mantienen lockfiles separados, y los fallos de `astro check`/CI deben resolverse acotando el typecheck raíz o instalando dependencias separadas, no convirtiendo el Studio en workspace.
 - No se añaden dependencias, frameworks, cambios de package/lock, recursos externos, analytics ni widgets sin permiso explícito.
 - `vercel.json` está protegido y solo puede modificarse con permiso explícito.
 - La entrada principal de la home es `src/pages/index.astro`; no existe `index.html` como fuente principal del contenido.
