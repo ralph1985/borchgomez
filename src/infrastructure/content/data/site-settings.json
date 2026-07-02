@@ -17,7 +17,7 @@
   },
   "assets": {
     "stylesheets": [
-      "/assets/css/style.css?v=efa9c5c7"
+      "/assets/css/style.css?v=b5a6870b"
     ],
     "scripts": [],
     "fontPreloads": [
@@ -148,6 +148,13 @@
   "purpose": {
     "title": "Por qué y cómo trabajo",
     "subtitle": "El mundo rural tiene historias, oficios y proyectos con valor propio. Mi trabajo consiste en ayudar a que se vean con una mirada cercana, profesional y fiel a su identidad.",
+    "image": {
+      "src": "/assets/img/borja-purpose-portrait.jpg?v=851a24f4",
+      "alt": "Borja Gómez sonriendo mientras sostiene dos cabritos en un entorno rural",
+      "width": 1023,
+      "height": 1537
+    },
+    "highlightedQuote": "No cuento historias del mundo rural desde fuera. Las vivo y las conozco de cerca.",
     "items": [
       {
         "title": "Por qué",
