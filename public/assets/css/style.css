@@ -1184,7 +1184,7 @@ main {
 .services__visual {
   display: block;
   grid-row: 1;
-  width: min(100%, 260px);
+  width: 100%;
   overflow: hidden;
   border: 1px solid var(--color-accent-blue);
   border-radius: 0.9rem;
