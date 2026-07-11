@@ -27,7 +27,7 @@ export interface PlansContent {
   items: Plan[];
   promo: {
     title: string;
-    price: string;
+    price?: string;
     description: string;
     features: string[];
     note: string;
