@@ -419,7 +419,7 @@ function readPlans(source, fallbackPlans) {
     items: sourceItems.map(readPlan),
     promo: {
       title: readRequiredString(source.promo.title, "plans.promo.title"),
-      price: readRequiredString(source.promo.price, "plans.promo.price"),
+      price: readOptionalString(source.promo.price, "plans.promo.price"),
       description: readRequiredString(source.promo.description, "plans.promo.description"),
       features: promoFeatures,
       note: readRequiredString(source.promo.note, "plans.promo.note"),

@@ -520,9 +520,13 @@ function readPlan(source: SanityPlanItem | undefined): Plan | null {
 }
 
 function mergePromo(fallback: PromoContent, source: SanityPlanDocument["promo"]): PromoContent {
+  if (!source) {
+    return fallback;
+  }
+
   return {
     title: readString(source?.title) ?? fallback.title,
-    price: readString(source?.price) ?? fallback.price,
+    price: readString(source.price),
     description: readString(source?.description) ?? fallback.description,
     features: readStringArray(source?.features, fallback.features),
     note: readString(source?.note) ?? fallback.note,

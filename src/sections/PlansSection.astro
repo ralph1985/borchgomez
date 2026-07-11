@@ -21,7 +21,7 @@ const { plans } = Astro.props;
     </div>
     <div class="plans__promo" data-animate>
       <h3 class="plans__promo-title">{plans.promo.title}</h3>
-      <p class="plans__promo-price">{plans.promo.price}</p>
+      {plans.promo.price && <p class="plans__promo-price">{plans.promo.price}</p>}
       <p class="plans__promo-description">{plans.promo.description}</p>
       <ul class="plans__promo-features">{plans.promo.features.map((feature) => <li>{feature}</li>)}</ul>
       <p class="plans__promo-note">{plans.promo.note}</p>
