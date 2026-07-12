@@ -15,7 +15,7 @@ const { plans } = Astro.props;
           <p class="plans__price">{plan.price}</p>
           <p class="plans__tagline">{plan.tagline}</p>
           <ul class="plans__features">{plan.features.map((feature) => <li>{feature}</li>)}</ul>
-          <a class="plans__cta" href={plan.cta.href} target="_blank" rel="noopener noreferrer">{plan.cta.label}</a>
+          <a class="plans__cta" href={plan.cta.href} target="_blank" rel="noopener">{plan.cta.label}</a>
         </article>
       ))}
     </div>

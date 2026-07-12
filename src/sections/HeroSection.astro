@@ -84,11 +84,11 @@ const heroTitleWords = hero.title.split(/\s+/).filter(Boolean);
         {hero.actions.map((action) => <a class={action.className} href={action.href}>{action.label}</a>)}
       </div>
       <div class="home__social" data-animate>
-        {site.socialLinks.map((link) => <a href={link.href} class="home__icon" target="_blank" rel="noopener noreferrer" aria-label={link.label}><SocialIcon type={link.type} /></a>)}
+        {site.socialLinks.map((link) => <a href={link.href} class="home__icon" target="_blank" rel="noopener" aria-label={link.label}><SocialIcon type={link.type} /></a>)}
       </div>
     </div>
     <div class="home__img">
-      <img src={hero.image.src} srcset={hero.image.srcset} sizes={hero.image.sizes} alt={hero.image.alt} width={hero.image.width} height={hero.image.height} decoding="async" class="home-image" />
+      <img src={hero.image.src} srcset={hero.image.srcset} sizes={hero.image.sizes} alt={hero.image.alt} width={hero.image.width} height={hero.image.height} fetchpriority="high" decoding="async" class="home-image" />
     </div>
   </div>
 </section>
