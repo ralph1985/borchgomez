@@ -35,7 +35,7 @@ const { site, services } = Astro.props;
     </div>
     <div class="nav__actions">
       {site.socialLinks.map((link) => (
-        <a href={link.href} class={link.type === "whatsapp" ? "nav__social-link nav__social-link--whatsapp" : "nav__social-link"} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
+        <a href={link.href} class={link.type === "whatsapp" ? "nav__social-link nav__social-link--whatsapp" : "nav__social-link"} target="_blank" rel="noopener" aria-label={link.label}>
           <SocialIcon type={link.type} />
         </a>
       ))}
