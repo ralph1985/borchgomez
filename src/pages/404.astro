@@ -1,0 +1,16 @@
+---
+import { getHomePageContent } from "../application/get-home-page-content";
+import { contentRepository } from "../shared/config/content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const { site, services } = await getHomePageContent(contentRepository);
+---
+<BaseLayout site={site} services={services} title="Página no encontrada | Borja Gómez" description="La página solicitada no existe en la web de Borja Gómez." indexable={false}>
+  <section class="section" aria-labelledby="not-found-title">
+    <div class="bd-container">
+      <h1 class="section-title" id="not-found-title">Página no encontrada</h1>
+      <p class="section-subtitle">La página solicitada no existe. Puedes volver al inicio o contactar con Borja Gómez.</p>
+      <a class="button" href="/">Volver al inicio</a>
+    </div>
+  </section>
+</BaseLayout>
