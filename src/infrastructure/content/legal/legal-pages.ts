@@ -65,8 +65,8 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
         {
           title: "Responsabilidad técnica",
           paragraphs: [
-            "La web se publica como sitio estático y puede quedar temporalmente inaccesible por operaciones de mantenimiento, incidencias del proveedor de alojamiento, problemas de red o causas ajenas al titular.",
-            "El titular no garantiza la ausencia absoluta de errores, aunque mantiene una arquitectura orientada a minimizar dependencias externas innecesarias en la web pública.",
+            "El titular adopta medidas razonables para procurar el correcto funcionamiento del sitio web. No obstante, el acceso puede verse interrumpido por tareas de mantenimiento, incidencias técnicas, problemas de red, actuaciones del proveedor de alojamiento o causas ajenas a su control.",
+            "El titular no garantiza la disponibilidad continua del sitio ni la inexistencia absoluta de errores, pero actuará con diligencia para corregir las incidencias que puedan afectar a su funcionamiento cuando tenga conocimiento de ellas.",
           ],
         },
         {
@@ -99,10 +99,10 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
           ],
         },
         {
-          title: "Funcionamiento real de la web",
+          title: "Medios de contacto y origen de los datos",
           paragraphs: [
-            "La web no incluye formularios de contacto, newsletter, área de usuario, comentarios, descargas con registro, analítica web, reCAPTCHA ni sistemas de publicidad comportamental.",
-            "Las vías de contacto disponibles son enlaces de teléfono, email, WhatsApp e Instagram. Si la persona usuaria contacta por esas vías, el tratamiento se realiza a partir de la comunicación iniciada voluntariamente por ella y, en su caso, también conforme a las condiciones del servicio externo utilizado.",
+            "El sitio web tiene carácter informativo y facilita distintos canales para contactar con el responsable, principalmente teléfono, correo electrónico, WhatsApp e Instagram. No se recaban datos personales mediante formularios propios del sitio web.",
+            "Cuando una persona contacta a través de cualquiera de los medios indicados, los datos facilitados voluntariamente se tratarán para atender la consulta, solicitud o comunicación remitida.",
           ],
         },
         {
@@ -110,7 +110,7 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
           list: [
             "Datos identificativos y de contacto que la persona facilite al escribir por email, WhatsApp, Instagram, teléfono u otro canal enlazado desde la web.",
             "Información incluida libremente en la consulta o solicitud profesional.",
-            "Datos técnicos mínimos derivados de la conexión al sitio, como dirección IP, fecha, hora, recurso solicitado, agente de usuario y registros necesarios para servir la web y mantener su seguridad.",
+            "Datos técnicos asociados al acceso y uso del sitio que puedan ser tratados por el proveedor de alojamiento para entregar la página, mantener la seguridad del servicio y diagnosticar incidencias.",
           ],
         },
         {
@@ -140,9 +140,9 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
         {
           title: "Destinatarios y proveedores",
           paragraphs: [
-            "No se comunican datos personales a terceros con fines comerciales, analíticos o publicitarios desde la web pública.",
-            "Pueden intervenir proveedores técnicos necesarios para la prestación del servicio: Vercel como plataforma de alojamiento de la web pública y Sanity como sistema de gestión de contenido usado en el proceso de construcción o mantenimiento editorial. La web pública no carga el Studio de Sanity ni sus scripts al usuario final.",
-            "Los canales externos enlazados, como WhatsApp, Instagram, TikTok, Facebook o el cliente de email/teléfono que use la persona, son servicios de terceros con políticas propias cuando se accede a ellos.",
+            "No están previstas comunicaciones de datos personales a terceros con fines comerciales, analíticos o publicitarios desde este sitio web.",
+            "Podrán acceder a determinados datos los proveedores técnicos necesarios para la prestación del servicio, en particular el proveedor de alojamiento de la web y el sistema de gestión de contenidos empleado para su mantenimiento editorial, en la medida estrictamente necesaria para sus respectivas funciones.",
+            "Cuando la persona usuaria acceda a canales externos enlazados desde la web, como WhatsApp, Instagram, TikTok, Facebook o su propio cliente de correo o teléfono, el tratamiento realizado por dichos servicios se regirá por sus respectivas condiciones y políticas de privacidad.",
           ],
         },
         {
@@ -155,7 +155,7 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
         {
           title: "Menores",
           paragraphs: [
-            "La web no está dirigida específicamente a menores ni ofrece servicios de registro o contratación online. Si una persona menor de edad contacta a través de un canal externo, deberá contar con la autorización necesaria de sus representantes legales cuando proceda.",
+            "El sitio web no está dirigido específicamente a menores de edad. Si una persona menor contacta a través de un canal externo, deberá contar con la autorización necesaria de sus representantes legales cuando proceda.",
           ],
         },
       ],
@@ -167,38 +167,41 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
       updatedAt: currentDate,
       sections: [
         {
-          title: "Resumen",
+          title: "Uso de cookies",
           paragraphs: [
-            "La auditoría técnica del proyecto no ha detectado cookies propias, cookies analíticas, cookies publicitarias, cookies de terceros, localStorage, sessionStorage ni IndexedDB en la web pública.",
-            "Por tanto, no se implementa un banner de consentimiento porque no hay cookies no técnicas ni tecnologías equivalentes que requieran consentimiento previo en el funcionamiento actual.",
+            "En la fecha de la última revisión de esta política, este sitio web no instala cookies propias, cookies analíticas, cookies publicitarias ni cookies de terceros durante la navegación por sus páginas.",
+            "Tampoco utiliza tecnologías equivalentes de almacenamiento en el navegador para realizar medición, seguimiento, publicidad comportamental o elaboración de perfiles.",
+            "Por este motivo, no se muestra un panel o banner de consentimiento de cookies, al no existir cookies no exceptuadas que deban ser aceptadas o rechazadas antes de su instalación.",
           ],
         },
         {
-          title: "Cookies utilizadas",
+          title: "Cookies y tecnologías equivalentes",
           list: [
-            "Cookies propias: no detectadas en el código de la web pública.",
-            "Cookies analíticas: no detectadas. No hay Google Analytics ni herramientas equivalentes.",
-            "Cookies publicitarias o de seguimiento: no detectadas.",
-            "Cookies de terceros por embeds: no detectadas. La web no inserta iframes de YouTube, Vimeo, Instagram, Google Maps ni servicios similares.",
-            "Almacenamiento local del navegador: no detectado.",
+            "Cookies técnicas propias: no se instalan desde el código del sitio web.",
+            "Cookies analíticas: no se utilizan.",
+            "Cookies publicitarias o de seguimiento: no se utilizan.",
+            "Cookies de terceros derivadas de contenido embebido: no se utilizan, ya que el sitio no incorpora reproductores, mapas, iframes o widgets sociales embebidos.",
+            "Almacenamiento local del navegador: no se utiliza con fines de identificación, medición, seguimiento o personalización.",
           ],
         },
         {
           title: "Servicios externos enlazados",
           paragraphs: [
-            "La web contiene enlaces a plataformas externas como WhatsApp, Instagram, TikTok y Facebook. Estos enlaces no instalan cookies desde esta web por sí mismos, pero al abrirlos la persona usuaria navega a servicios de terceros que pueden usar sus propias cookies y tecnologías de seguimiento.",
+            "El sitio web puede contener enlaces a plataformas externas como WhatsApp, Instagram, TikTok o Facebook. Estos enlaces no instalan cookies desde este sitio por sí mismos.",
+            "Si la persona usuaria decide abrir dichos enlaces, accederá a sitios o aplicaciones gestionados por terceros, que podrán utilizar sus propias cookies y tecnologías similares conforme a sus respectivas políticas.",
           ],
         },
         {
           title: "Proveedor de alojamiento",
           paragraphs: [
-            "La web se aloja en Vercel. El proveedor de alojamiento puede tratar datos técnicos de conexión necesarios para entregar la página, seguridad, prevención de abuso y diagnóstico de incidencias. Este tratamiento no deriva de cookies creadas por el código de la web pública.",
+            "El proveedor de alojamiento del sitio puede tratar datos técnicos de conexión necesarios para entregar las páginas, preservar la seguridad del servicio, prevenir abusos y diagnosticar incidencias. Dicho tratamiento técnico no implica la instalación de cookies propias desde el código de este sitio web.",
           ],
         },
         {
           title: "Cambios futuros",
           paragraphs: [
-            "Si en el futuro se incorporan analítica, publicidad, mapas embebidos, vídeos embebidos, widgets sociales, formularios con protección antiabuso u otros servicios que usen cookies o tecnologías equivalentes, esta política deberá actualizarse antes de su publicación y, cuando proceda, deberá bloquearse su carga hasta obtener consentimiento válido.",
+            "Si en el futuro se incorporan herramientas de analítica, publicidad, mapas embebidos, vídeos embebidos, widgets sociales, formularios con protección antiabuso u otros servicios que utilicen cookies o tecnologías equivalentes, esta política será actualizada.",
+            "Cuando dichas cookies requieran consentimiento previo, no deberán instalarse hasta que la persona usuaria haya prestado un consentimiento válido conforme a la normativa aplicable.",
           ],
         },
         {
