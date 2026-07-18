@@ -1,0 +1,11 @@
+---
+import { getLegalPageContent } from "../application/get-legal-page-content";
+import LegalPage from "../components/ui/LegalPage.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { contentRepository } from "../shared/config/content";
+
+const { site, services, page } = await getLegalPageContent(contentRepository, "politica-privacidad");
+---
+<BaseLayout site={site} services={services} title={`${page.title} | Borja Gómez`} description={page.description}>
+  <LegalPage page={page} />
+</BaseLayout>

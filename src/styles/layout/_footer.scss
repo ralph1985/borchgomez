@@ -82,3 +82,30 @@
   box-shadow: 0 10px 24px var(--color-shadow-earth);
   backdrop-filter: blur(6px);
 }
+
+.footer__legal-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem 0.95rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.footer__legal-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.2rem;
+  color: var(--color-ink);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.footer__legal-link:hover,
+.footer__legal-link:focus-visible {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
