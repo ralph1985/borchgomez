@@ -65,5 +65,8 @@ export interface SiteSettings {
     email: { label: string; href: string };
     instagram: { label: string; href: string };
   };
-  footer: { copy: string };
+  footer: {
+    copy: string;
+    links?: Array<{ label: string; href: string }>;
+  };
 }

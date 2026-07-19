@@ -17,7 +17,7 @@
   },
   "assets": {
     "stylesheets": [
-      "/assets/css/style.css?v=59e3b3fb"
+      "/assets/css/style.css?v=5d70893d"
     ],
     "scripts": [],
     "fontPreloads": [
@@ -254,6 +254,20 @@
     }
   },
   "footer": {
-    "copy": "© Borja Gómez. Dando voz a las raíces."
+    "copy": "© Borja Gómez. Dando voz a las raíces.",
+    "links": [
+      {
+        "label": "Aviso Legal",
+        "href": "/aviso-legal"
+      },
+      {
+        "label": "Privacidad",
+        "href": "/politica-privacidad"
+      },
+      {
+        "label": "Cookies",
+        "href": "/politica-cookies"
+      }
+    ]
   }
 }

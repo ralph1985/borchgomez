@@ -14,9 +14,11 @@ const { site, services, title = site.title, description = site.description, inde
 const siteOrigin = Astro.site ?? new URL("https://borchgomez.es");
 const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).toString();
 const socialImageUrl = toAbsoluteUrl(site.metadata.ogImage);
+const socialTitle = title === site.title ? site.metadata.ogTitle : title;
+const socialDescription = description === site.description ? site.metadata.ogDescription : description;
 const publisherId = new URL("/#borja-gomez", siteOrigin).toString();
 const websiteId = new URL("/#website", siteOrigin).toString();
-const webpageId = new URL("/#webpage", siteOrigin).toString();
+const webpageId = new URL(`${Astro.url.pathname}#webpage`, siteOrigin).toString();
 const professionalServiceId = new URL("/#professional-service", siteOrigin).toString();
 const socialUrls = site.socialLinks.filter((link) => link.type !== "whatsapp").map((link) => link.href);
 const serviceJsonLd = services.map((service) => ({
@@ -34,7 +36,7 @@ const jsonLd = indexable ? [
     "@id": websiteId,
     url: new URL("/", siteOrigin).toString(),
     name: "Borja Gómez",
-    description,
+    description: site.description,
     inLanguage: site.lang,
     publisher: { "@id": publisherId },
   },
@@ -71,7 +73,7 @@ const jsonLd = indexable ? [
     "@id": professionalServiceId,
     name: "Borja Gómez",
     url: new URL("/", siteOrigin).toString(),
-    description,
+    description: site.description,
     image: socialImageUrl,
     provider: { "@id": publisherId },
     sameAs: socialUrls,
@@ -97,8 +99,8 @@ function serializeJsonLd(value: unknown): string {
     <meta name="robots" content={indexable ? "index, follow" : "noindex, nofollow"} />
     <meta name="theme-color" content="#F4F1EC" />
     <link rel="canonical" href={canonicalUrl} />
-    <meta property="og:title" content={site.metadata.ogTitle} />
-    <meta property="og:description" content={site.metadata.ogDescription} />
+    <meta property="og:title" content={socialTitle} />
+    <meta property="og:description" content={socialDescription} />
     <meta property="og:type" content={site.metadata.ogType} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Borja Gómez" />
@@ -110,8 +112,8 @@ function serializeJsonLd(value: unknown): string {
     <meta name="twitter:card" content={site.metadata.twitterCard} />
     <meta name="twitter:image" content={socialImageUrl} />
     <meta name="twitter:image:alt" content={site.metadata.twitterImageAlt} />
-    <meta name="twitter:title" content={site.metadata.twitterTitle} />
-    <meta name="twitter:description" content={site.metadata.twitterDescription} />
+    <meta name="twitter:title" content={title === site.title ? site.metadata.twitterTitle : title} />
+    <meta name="twitter:description" content={description === site.description ? site.metadata.twitterDescription : description} />
     <title>{title}</title>
     {site.assets.favicons.map((favicon) => <link {...favicon} />)}
     {site.assets.fontPreloads.map((font) => <link rel="preload" href={font} as="font" type="font/woff2" crossorigin />)}
@@ -215,6 +217,15 @@ function serializeJsonLd(value: unknown): string {
       </svg>
       <div class="footer__container bd-container">
         <p class="footer__copy">{site.footer.copy}</p>
+        {site.footer.links && site.footer.links.length > 0 && (
+          <nav class="footer__legal" aria-label="Información legal">
+            <ul class="footer__legal-list">
+              {site.footer.links.map((link) => (
+                <li><a class="footer__legal-link" href={link.href}>{link.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+        )}
       </div>
     </footer>
     {site.assets.scripts.map((src) => <script is:inline src={src}></script>)}
