@@ -3,22 +3,24 @@ import { canAnimate, getPrefersReducedMotion } from "./dom.js";
 export function initHeroAnimation({ anime }) {
   const heroSection = document.querySelector(".home");
   const heroData = document.querySelector(".home__data");
-  const heroFrame = document.querySelector(".home__img");
-  const heroVisual = document.querySelector(".home__video-frame, .home-image");
+  const heroFrame = document.querySelector(".home__img:not(.home__video)");
+  const heroImage = document.querySelector(".home-image");
   const heroWords = document.querySelectorAll("[data-hero-word]");
   const heroTrace = document.querySelector(".home__trace path");
   const heroSupport = document.querySelectorAll(
     ".home__greeting, .home__career, .home__description, .home__claim, .home__button, .home__social"
   );
 
-  if (!canAnimate(anime) || !heroFrame || !heroVisual) return;
+  if (!canAnimate(anime)) return;
 
   if (getPrefersReducedMotion()) {
-    heroFrame.style.opacity = "1";
-    heroFrame.style.transform = "none";
-    heroFrame.style.clipPath = "none";
-    heroVisual.style.transform = "none";
-    heroFrame.classList.add("is-hero-awake");
+    if (heroFrame && heroImage) {
+      heroFrame.style.opacity = "1";
+      heroFrame.style.transform = "none";
+      heroFrame.style.clipPath = "none";
+      heroImage.style.transform = "none";
+      heroFrame.classList.add("is-hero-awake");
+    }
     document.querySelector(".home__trace")?.style.setProperty("opacity", "1");
     return;
   }
@@ -35,6 +37,8 @@ export function initHeroAnimation({ anime }) {
   let parallaxTicking = false;
 
   function renderHeroParallax() {
+    if (!heroFrame) return;
+
     const exitX = motion.exitProgress * 96;
     const exitY = motion.exitProgress * 28;
     const targetFrameX = motion.pointerX + exitX;
@@ -79,6 +83,7 @@ export function initHeroAnimation({ anime }) {
 
   function updateScrollMotion() {
     if (!heroSection) return;
+    if (!heroFrame) return;
 
     const rect = heroFrame.getBoundingClientRect();
     const sectionRect = heroSection.getBoundingClientRect();
@@ -107,11 +112,6 @@ export function initHeroAnimation({ anime }) {
     heroTrace.style.strokeDasharray = String(traceLength);
     heroTrace.style.strokeDashoffset = String(traceLength);
   }
-
-  heroFrame.style.opacity = "0";
-  heroFrame.style.clipPath = "inset(22% 0 22% 0 round 1rem)";
-  heroFrame.style.transform = "translateY(46px) scale(0.9) rotate(-1.2deg)";
-  heroVisual.style.transform = "scale(1.08)";
 
   anime.animate(heroWords, {
     opacity: 1,
@@ -146,6 +146,13 @@ export function initHeroAnimation({ anime }) {
     });
   }
 
+  if (!heroFrame || !heroImage) return;
+
+  heroFrame.style.opacity = "0";
+  heroFrame.style.clipPath = "inset(22% 0 22% 0 round 1rem)";
+  heroFrame.style.transform = "translateY(46px) scale(0.9) rotate(-1.2deg)";
+  heroImage.style.transform = "scale(1.18)";
+
   anime.animate(heroFrame, {
     opacity: 1,
     y: 0,
@@ -160,8 +167,8 @@ export function initHeroAnimation({ anime }) {
       heroFrame.style.opacity = "";
       heroFrame.style.clipPath = "";
 
-      anime.animate(heroVisual, {
-        scale: 1,
+      anime.animate(heroImage, {
+        scale: 1.025,
         duration: 1100,
         ease: "outSine",
         onComplete: () => {
