@@ -27,7 +27,6 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
           list: [
             `Titular: ${owner}`,
             `Nombre comercial: ${brand}`,
-            `NIF: ${legalData.nif}`,
             `Domicilio: ${legalData.address}`,
             `Dominio: ${legalData.domain}`,
             `Email: ${legalData.email}`,
@@ -92,7 +91,6 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
           list: [
             `Responsable: ${owner}`,
             `Nombre comercial: ${brand}`,
-            `NIF: ${legalData.nif}`,
             `Domicilio: ${legalData.address}`,
             `Email: ${legalData.email}`,
             `Teléfono: ${legalData.phone}`,

@@ -114,7 +114,6 @@ interface SanityLegalDataDocument {
   fullName?: unknown;
   commercialName?: unknown;
   domain?: unknown;
-  nif?: unknown;
   address?: unknown;
   email?: unknown;
   phone?: unknown;
@@ -193,7 +192,6 @@ const legalDataQuery = `*[_type == "legalData" && _id == "legalData"][0]{
   fullName,
   commercialName,
   domain,
-  nif,
   address,
   email,
   phone
@@ -407,7 +405,6 @@ function mergeLegalData(fallback: LegalData, source: SanityLegalDataDocument | n
     fullName: readString(source.fullName) ?? fallback.fullName,
     commercialName: readString(source.commercialName) ?? fallback.commercialName,
     domain: readString(source.domain) ?? fallback.domain,
-    nif: readString(source.nif) ?? fallback.nif,
     address: readString(source.address) ?? fallback.address,
     email: readString(source.email) ?? fallback.email,
     phone: readString(source.phone) ?? fallback.phone,

@@ -2,7 +2,6 @@
   "fullName": "{{nombre_completo}}",
   "commercialName": "{{nombre_comercial}}",
   "domain": "{{dominio}}",
-  "nif": "{{nif}}",
   "address": "{{domicilio}}",
   "email": "{{email}}",
   "phone": "{{telefono}}"
