@@ -1,5 +1,6 @@
 import { createClient, type SanityClient } from "@sanity/client";
 import type { HomePageContent, Plan, PlansContent, PlansInfoBox, Project, Service, SiteSettings } from "../../../domain/home-page";
+import type { LegalData } from "../../../domain/legal";
 import type { ContentRepository } from "../../../ports/content-repository";
 
 type HeroContent = SiteSettings["hero"];
@@ -109,6 +110,15 @@ interface SanityContactLink {
   href?: unknown;
 }
 
+interface SanityLegalDataDocument {
+  fullName?: unknown;
+  commercialName?: unknown;
+  domain?: unknown;
+  address?: unknown;
+  email?: unknown;
+  phone?: unknown;
+}
+
 interface SanityServicesDocument {
   intro?: {
     title?: unknown;
@@ -177,6 +187,15 @@ export interface SanityContentConfig {
   dataset: string;
   apiVersion: string;
 }
+
+const legalDataQuery = `*[_type == "legalData" && _id == "legalData"][0]{
+  fullName,
+  commercialName,
+  domain,
+  address,
+  email,
+  phone
+}`;
 
 const homePageQuery = `{
   "hero": *[_type == "hero" && _id == "hero"][0]{
@@ -362,6 +381,34 @@ export class SanityContentRepository implements ContentRepository {
       return fallbackContent;
     }
   }
+
+  async getLegalData(): Promise<LegalData> {
+    const fallbackLegalData = await this.fallbackRepository.getLegalData();
+
+    try {
+      const document = await this.client.fetch<SanityLegalDataDocument | null>(legalDataQuery);
+
+      return mergeLegalData(fallbackLegalData, document);
+    } catch (error) {
+      console.warn(`Sanity legal data could not be loaded. Falling back to local JSON. ${readErrorMessage(error)}`);
+      return fallbackLegalData;
+    }
+  }
+}
+
+function mergeLegalData(fallback: LegalData, source: SanityLegalDataDocument | null): LegalData {
+  if (!source) {
+    return fallback;
+  }
+
+  return {
+    fullName: readString(source.fullName) ?? fallback.fullName,
+    commercialName: readString(source.commercialName) ?? fallback.commercialName,
+    domain: readString(source.domain) ?? fallback.domain,
+    address: readString(source.address) ?? fallback.address,
+    email: readString(source.email) ?? fallback.email,
+    phone: readString(source.phone) ?? fallback.phone,
+  };
 }
 
 function mergeHero(fallback: HeroContent, source: SanityHeroDocument | null): HeroContent {

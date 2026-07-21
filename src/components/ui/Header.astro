@@ -4,16 +4,18 @@ import type { Service, SiteSettings } from "../../domain/home-page";
 
 interface Props { site: SiteSettings; services: Service[]; }
 const { site, services } = Astro.props;
+const homePrefix = Astro.url.pathname === "/" ? "" : "/";
+const toPageHref = (href: string) => href.startsWith("#") ? `${homePrefix}${href}` : href;
 ---
 <header class="l-header" id="header">
   <nav class="nav bd-container" aria-label="Navegación principal">
-    <a href="#home" class="nav__logo nav__brand" aria-label={site.brand.label}>
+    <a href={toPageHref("#home")} class="nav__logo nav__brand" aria-label={site.brand.label}>
       <img src={site.brand.logo.src} alt={site.brand.logo.alt} width={site.brand.logo.width} height={site.brand.logo.height} decoding="async" />
     </a>
     <div class="nav__menu" id="nav-menu">
       <ul class="nav__list">
-        <li class="nav__item"><a href="#home" class="nav__link">Inicio</a></li>
-        <li class="nav__item"><a href="#purpose" class="nav__link">Método</a></li>
+        <li class="nav__item"><a href={toPageHref("#home")} class="nav__link">Inicio</a></li>
+        <li class="nav__item"><a href={toPageHref("#purpose")} class="nav__link">Método</a></li>
         <li class="nav__item nav__item--services">
           <button class="nav__link nav__submenu-toggle" id="services-menu-toggle" type="button" aria-controls="services-submenu" aria-expanded="false">
             Servicios
@@ -22,14 +24,14 @@ const { site, services } = Astro.props;
           <ul class="nav__submenu" id="services-submenu" aria-label="Servicios">
             {services.map((service) => (
               <li class={service.id === "service-local-seo" ? "nav__submenu-service" : undefined}>
-                <a class="nav__submenu-link" href={`#${service.id}`}>{service.title}</a>
+                <a class="nav__submenu-link" href={toPageHref(`#${service.id}`)}>{service.title}</a>
                 {service.id === "service-local-seo" && <ul class="nav__submenu-features">{site.serviceMenuFeatures.map((feature) => <li>{feature}</li>)}</ul>}
               </li>
             ))}
           </ul>
         </li>
         {site.nav.filter((item) => !["#home", "#purpose"].includes(item.href)).map((item) => (
-          <li class="nav__item"><a href={item.href} class={item.href === "#contact" ? "nav__link nav__link--contact" : "nav__link"}>{item.label}</a></li>
+          <li class="nav__item"><a href={toPageHref(item.href)} class={item.href === "#contact" ? "nav__link nav__link--contact" : "nav__link"}>{item.label}</a></li>
         ))}
       </ul>
     </div>

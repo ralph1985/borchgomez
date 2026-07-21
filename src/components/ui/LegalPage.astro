@@ -1,0 +1,42 @@
+---
+import type { LegalPageContent } from "../../domain/legal";
+
+interface Props {
+  page: LegalPageContent;
+}
+
+const { page } = Astro.props;
+
+function slugify(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+---
+<article class="legal-page section" aria-labelledby="legal-title">
+  <div class="legal-page__container bd-container">
+    <header class="legal-page__header">
+      <p class="legal-page__eyebrow">Información legal</p>
+      <h1 class="section-title" id="legal-title">{page.title}</h1>
+      <p class="section-subtitle">{page.description}</p>
+      <p class="legal-page__updated">Última revisión: {page.updatedAt}</p>
+    </header>
+
+    <div class="legal-page__content">
+      {page.sections.map((section) => (
+        <section class="legal-page__section" aria-labelledby={`${page.slug}-${slugify(section.title)}`}>
+          <h2 id={`${page.slug}-${slugify(section.title)}`}>{section.title}</h2>
+          {section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+          {section.list && (
+            <ul>
+              {section.list.map((item) => <li>{item}</li>)}
+            </ul>
+          )}
+        </section>
+      ))}
+    </div>
+  </div>
+</article>
