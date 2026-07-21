@@ -2,7 +2,6 @@ export interface LegalData {
   fullName: string;
   commercialName: string;
   domain: string;
-  nif: string;
   address: string;
   email: string;
   phone: string;

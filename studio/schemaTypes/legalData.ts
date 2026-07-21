@@ -22,11 +22,6 @@ export const legalData = defineType({
       description: "Ejemplo: borchgomez.es",
     }),
     defineField({
-      name: "nif",
-      title: "NIF",
-      type: "string",
-    }),
-    defineField({
       name: "address",
       title: "Dirección",
       type: "text",

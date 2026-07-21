@@ -123,7 +123,6 @@ Fecha de revisión: 18 de julio de 2026.
 
 - Nombre completo.
 - Nombre comercial.
-- NIF.
 - Dirección fiscal o domicilio profesional que deba publicarse.
 - Email legal de contacto.
 - Teléfono legal de contacto.
