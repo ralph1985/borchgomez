@@ -6,7 +6,7 @@ export interface Project {
   category: string;
   filter?: string;
   filters?: string[];
-  image: ContentImage;
+  image?: ContentImage;
   link: {
     href: string;
     label: string;

@@ -726,7 +726,7 @@ function readProject(source: SanityProjectItem | undefined, fallback: Project | 
   const linkLabel = readString(source?.link?.label) ?? fallback?.link.label;
   const linkHref = readString(source?.link?.href) ?? fallback?.link.href;
 
-  if (!title || !category || filters.length === 0 || !image || !linkLabel || !linkHref) {
+  if (!title || !category || filters.length === 0 || !linkLabel || !linkHref) {
     return null;
   }
 
@@ -757,14 +757,14 @@ function readProjectFilterValues(value: unknown, fallback: Project | undefined, 
   return uniqueFilters.filter((filter) => validFilters.has(filter));
 }
 
-function mergeProjectImage(fallback: Project["image"] | undefined, source: SanityProjectItem["image"]): Project["image"] | null {
+function mergeProjectImage(fallback: Project["image"] | undefined, source: SanityProjectItem["image"]): Project["image"] | undefined {
   const src = readString(source?.src);
   const alt = readString(source?.alt) ?? fallback?.alt;
   const width = readPositiveNumber(source?.width) ?? fallback?.width;
   const height = readPositiveNumber(source?.height) ?? fallback?.height;
 
   if (!src || !alt || width === undefined || height === undefined) {
-    return fallback ?? null;
+    return fallback;
   }
 
   return {

@@ -198,7 +198,6 @@ export const portfolio = defineType({
                   validation: (Rule) => Rule.required(),
                 }),
               ],
-              validation: (Rule) => Rule.required(),
             }),
             defineField({
               name: "link",

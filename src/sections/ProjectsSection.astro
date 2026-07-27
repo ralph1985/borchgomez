@@ -14,7 +14,11 @@ const { intro, projects } = Astro.props;
     <div class="portfolio__grid" id="portfolio-grid" data-animate>
       {projects.map((project) => (
         <article class="portfolio__card" data-categories={(project.filters?.length ? project.filters : [project.filter]).filter(Boolean).join(" ")}>
-          <div class="portfolio__img"><img src={project.image.src} srcset={project.image.srcset} sizes={project.image.sizes} alt={project.image.alt} width={project.image.width} height={project.image.height} loading="lazy" decoding="async" /></div>
+          {project.image ? (
+            <div class="portfolio__img"><img src={project.image.src} srcset={project.image.srcset} sizes={project.image.sizes} alt={project.image.alt} width={project.image.width} height={project.image.height} loading="lazy" decoding="async" /></div>
+          ) : (
+            <div class="portfolio__img portfolio__img--placeholder" role="img" aria-label="Imagen no disponible"><span>Imagen no disponible</span></div>
+          )}
           <h3 class="portfolio__title">{project.title}</h3>
           <p class="portfolio__category">{project.subtitle || project.category}</p>
           <a class="portfolio__cta" href={project.link.href} target="_blank" rel="noopener">{project.link.label}</a>
