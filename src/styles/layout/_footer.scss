@@ -83,6 +83,42 @@
   backdrop-filter: blur(6px);
 }
 
+.footer__credit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  max-width: 100%;
+  margin: 0;
+  color: var(--color-secondary);
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
+.footer__credit-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  border-radius: 0.2rem;
+  opacity: 0.82;
+  transition: opacity 180ms ease;
+}
+
+.footer__credit-logo {
+  display: block;
+  width: clamp(5.9rem, 18vw, 7.2rem);
+  height: auto;
+}
+
+.footer__credit-link:hover {
+  opacity: 1;
+}
+
+.footer__credit-link:focus-visible {
+  outline: 2px solid var(--color-primary-deep);
+  outline-offset: 0.18rem;
+}
+
 .footer__legal-list {
   display: flex;
   flex-wrap: wrap;

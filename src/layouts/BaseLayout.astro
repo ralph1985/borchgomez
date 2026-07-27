@@ -217,6 +217,26 @@ function serializeJsonLd(value: unknown): string {
       </svg>
       <div class="footer__container bd-container">
         <p class="footer__copy">{site.footer.copy}</p>
+        <p class="footer__credit">
+          <span>Web hecha por</span>
+          <a
+            class="footer__credit-link"
+            href="https://conquense.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="conquense.dev, web de desarrollo de Conquense Dev"
+          >
+            <img
+              class="footer__credit-logo"
+              src="/assets/img/conquense-dev-logo.webp"
+              alt="conquense.dev"
+              width="1200"
+              height="407"
+              loading="lazy"
+              decoding="async"
+            />
+          </a>
+        </p>
         {site.footer.links && site.footer.links.length > 0 && (
           <nav class="footer__legal" aria-label="Información legal">
             <ul class="footer__legal-list">
