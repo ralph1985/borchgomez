@@ -523,5 +523,18 @@
       "label": "Ver proyecto",
       "href": "https://www.instagram.com/p/DXyUN0mt6Mc/"
     }
+  },
+  {
+    "title": "Ajo Morado de Las Pedroñeras",
+    "subtitle": "Producto Local",
+    "category": "Producto local",
+    "filter": "producto-local",
+    "filters": [
+      "producto-local"
+    ],
+    "link": {
+      "label": "Ver Proyecto",
+      "href": "https://www.instagram.com/reel/DaH0GC1tu8q/?igsh=bjV5Zmo4czdjNjkx"
+    }
   }
 ]

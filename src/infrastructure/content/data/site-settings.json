@@ -119,7 +119,7 @@
     }
   ],
   "hero": {
-    "greeting": "Borja Gómez · CREADOR AUDIOVISUAL DEL TERRITORIO",
+    "greeting": "Borja Gómez · COMUNICACIÓN AUDIOVISUAL DEL TERRITORIO",
     "title": "Haz que tu historia se vea",
     "career": "Dando voz a las raíces",
     "description": "Producción audiovisual, fotografía y contenido digital para marcas rurales y negocios locales. Historias reales del campo para que restaurantes, queserías, bodegas, artesanos y municipios del territorio muestren su trabajo con autenticidad.",
@@ -208,12 +208,16 @@
         "value": "tradiciones"
       },
       {
+        "label": "Producto Local",
+        "value": "producto-local"
+      },
+      {
         "label": "Otros",
         "value": "otros"
       }
     ],
-    "initialVisible": 6,
-    "loadStep": 6
+    "initialVisible": 7,
+    "loadStep": 7
   },
   "about": {
     "title": "Sobre mí",
@@ -245,8 +249,8 @@
       "href": "tel:+34687695204"
     },
     "email": {
-      "label": "borgomyuste@gmail.com",
-      "href": "mailto:borgomyuste@gmail.com"
+      "label": "info@borchgomez.es",
+      "href": "mailto:info@borchgomez.es"
     },
     "instagram": {
       "label": "@borchgomez",
