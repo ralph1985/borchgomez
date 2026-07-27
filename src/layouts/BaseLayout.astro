@@ -217,6 +217,15 @@ function serializeJsonLd(value: unknown): string {
       </svg>
       <div class="footer__container bd-container">
         <p class="footer__copy">{site.footer.copy}</p>
+        {site.footer.links && site.footer.links.length > 0 && (
+          <nav class="footer__legal" aria-label="Información legal">
+            <ul class="footer__legal-list">
+              {site.footer.links.map((link) => (
+                <li><a class="footer__legal-link" href={link.href}>{link.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+        )}
         <p class="footer__credit">
           <span>Web hecha por</span>
           <a
@@ -237,15 +246,6 @@ function serializeJsonLd(value: unknown): string {
             />
           </a>
         </p>
-        {site.footer.links && site.footer.links.length > 0 && (
-          <nav class="footer__legal" aria-label="Información legal">
-            <ul class="footer__legal-list">
-              {site.footer.links.map((link) => (
-                <li><a class="footer__legal-link" href={link.href}>{link.label}</a></li>
-              ))}
-            </ul>
-          </nav>
-        )}
       </div>
     </footer>
     {site.assets.scripts.map((src) => <script is:inline src={src}></script>)}
