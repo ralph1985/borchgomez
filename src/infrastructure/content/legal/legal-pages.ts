@@ -109,6 +109,7 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
             "Datos identificativos y de contacto que la persona facilite al escribir por email, WhatsApp, Instagram, teléfono u otro canal enlazado desde la web.",
             "Información incluida libremente en la consulta o solicitud profesional.",
             "Datos técnicos asociados al acceso y uso del sitio que puedan ser tratados por el proveedor de alojamiento para entregar la página, mantener la seguridad del servicio y diagnosticar incidencias.",
+            "Datos agregados de audiencia tratados mediante Vercel Web Analytics, como la página visitada, la procedencia de la visita, el tipo de dispositivo, el navegador, la ubicación aproximada y la fecha de acceso. Esta medición no utiliza cookies ni identificadores personales para seguir la navegación entre sitios.",
           ],
         },
         {
@@ -117,6 +118,7 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
             "Responder consultas y solicitudes recibidas por los canales de contacto disponibles.",
             "Mantener comunicaciones relacionadas con una petición, presupuesto, servicio o relación profesional iniciada por la persona interesada.",
             "Garantizar la disponibilidad, seguridad y funcionamiento técnico de la web.",
+            "Obtener estadísticas agregadas de audiencia para conocer el uso de la web y mejorar sus contenidos y funcionamiento.",
             "Cumplir obligaciones legales aplicables.",
           ],
         },
@@ -126,6 +128,7 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
             "Consentimiento o solicitud de la persona interesada al contactar voluntariamente.",
             "Aplicación de medidas precontractuales o ejecución de una relación profesional cuando la comunicación tenga por objeto solicitar o gestionar un servicio.",
             "Interés legítimo en mantener la seguridad, disponibilidad y correcto funcionamiento de la web.",
+            "Interés legítimo en realizar una medición agregada de audiencia sin cookies ni seguimiento entre sitios, limitada a la mejora de esta web.",
             "Cumplimiento de obligaciones legales cuando corresponda.",
           ],
         },
@@ -138,8 +141,8 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
         {
           title: "Destinatarios y proveedores",
           paragraphs: [
-            "No están previstas comunicaciones de datos personales a terceros con fines comerciales, analíticos o publicitarios desde este sitio web.",
-            "Podrán acceder a determinados datos los proveedores técnicos necesarios para la prestación del servicio, en particular el proveedor de alojamiento de la web y el sistema de gestión de contenidos empleado para su mantenimiento editorial, en la medida estrictamente necesaria para sus respectivas funciones.",
+            "No están previstas comunicaciones de datos personales a terceros con fines comerciales o publicitarios desde este sitio web.",
+            "Podrán acceder a determinados datos los proveedores técnicos necesarios para la prestación del servicio, en particular Vercel, como proveedor de alojamiento y de Vercel Web Analytics, y el sistema de gestión de contenidos empleado para su mantenimiento editorial, en la medida estrictamente necesaria para sus respectivas funciones.",
             "Cuando la persona usuaria acceda a canales externos enlazados desde la web, como WhatsApp, Instagram, TikTok, Facebook o su propio cliente de correo o teléfono, el tratamiento realizado por dichos servicios se regirá por sus respectivas condiciones y políticas de privacidad.",
           ],
         },
@@ -168,15 +171,15 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
           title: "Uso de cookies",
           paragraphs: [
             "En la fecha de la última revisión de esta política, este sitio web no instala cookies propias, cookies analíticas, cookies publicitarias ni cookies de terceros durante la navegación por sus páginas.",
-            "Tampoco utiliza tecnologías equivalentes de almacenamiento en el navegador para realizar medición, seguimiento, publicidad comportamental o elaboración de perfiles.",
-            "Por este motivo, no se muestra un panel o banner de consentimiento de cookies, al no existir cookies no exceptuadas que deban ser aceptadas o rechazadas antes de su instalación.",
+            "La web utiliza Vercel Web Analytics para obtener estadísticas agregadas de audiencia. Esta herramienta no utiliza cookies ni almacenamiento local: emplea una identificación técnica anónima y temporal generada a partir de la solicitud para elaborar estadísticas, sin identificar personalmente a la persona visitante ni seguirla entre sitios web.",
+            "Por este motivo, no se muestra un panel o banner de consentimiento de cookies en relación con esta herramienta, al no instalar cookies ni tecnologías equivalentes que requieran aceptación previa según la configuración actual.",
           ],
         },
         {
           title: "Cookies y tecnologías equivalentes",
           list: [
             "Cookies técnicas propias: no se instalan desde el código del sitio web.",
-            "Cookies analíticas: no se utilizan.",
+            "Cookies analíticas: no se utilizan. La medición de audiencia se realiza mediante Vercel Web Analytics sin cookies.",
             "Cookies publicitarias o de seguimiento: no se utilizan.",
             "Cookies de terceros derivadas de contenido embebido: no se utilizan, ya que el sitio no incorpora reproductores, mapas, iframes o widgets sociales embebidos.",
             "Almacenamiento local del navegador: no se utiliza con fines de identificación, medición, seguimiento o personalización.",
@@ -192,13 +195,13 @@ function createLegalPages(legalData: LegalData): Record<LegalPageKey, LegalPageC
         {
           title: "Proveedor de alojamiento",
           paragraphs: [
-            "El proveedor de alojamiento del sitio puede tratar datos técnicos de conexión necesarios para entregar las páginas, preservar la seguridad del servicio, prevenir abusos y diagnosticar incidencias. Dicho tratamiento técnico no implica la instalación de cookies propias desde el código de este sitio web.",
+            "El proveedor de alojamiento del sitio puede tratar datos técnicos de conexión necesarios para entregar las páginas, preservar la seguridad del servicio, prevenir abusos y diagnosticar incidencias. Además, Vercel trata datos agregados de audiencia mediante Vercel Web Analytics para elaborar estadísticas sobre el uso de la web. Esta herramienta no instala cookies ni almacenamiento local desde el código del sitio.",
           ],
         },
         {
           title: "Cambios futuros",
           paragraphs: [
-            "Si en el futuro se incorporan herramientas de analítica, publicidad, mapas embebidos, vídeos embebidos, widgets sociales, formularios con protección antiabuso u otros servicios que utilicen cookies o tecnologías equivalentes, esta política será actualizada.",
+            "Si en el futuro se incorporan herramientas de analítica distintas, publicidad, mapas embebidos, vídeos embebidos, widgets sociales, formularios con protección antiabuso u otros servicios que utilicen cookies o tecnologías equivalentes, esta política será actualizada.",
             "Cuando dichas cookies requieran consentimiento previo, no deberán instalarse hasta que la persona usuaria haya prestado un consentimiento válido conforme a la normativa aplicable.",
           ],
         },
