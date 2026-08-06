@@ -1,6 +1,5 @@
 ---
 import Header from "../components/ui/Header.astro";
-import Analytics from "@vercel/analytics/astro";
 import type { Service, SiteSettings } from "../domain/home-page";
 
 interface Props {
@@ -253,6 +252,5 @@ function serializeJsonLd(value: unknown): string {
     <script>
       import "../scripts/site.js";
     </script>
-    <Analytics />
   </body>
 </html>
