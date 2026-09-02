@@ -1,6 +1,6 @@
 # Dependency security audit
 
-Fecha: 2026-06-30
+Fecha: 2026-09-02
 
 ## Alcance
 
@@ -8,11 +8,11 @@ Esta auditoria cubre dependencias npm/pnpm de la web Astro, dependencias del San
 
 ## Hallazgos
 
-- La raiz del proyecto no reporta vulnerabilidades conocidas con `corepack pnpm audit --prod --audit-level moderate`.
-- La raiz del proyecto tampoco reporta vulnerabilidades conocidas con `corepack pnpm audit --audit-level moderate` en la rama usada para configurar Dependabot.
-- `studio/` reporta 14 vulnerabilidades con `corepack pnpm --dir studio audit --prod --audit-level moderate`: 2 bajas, 8 moderadas y 4 altas.
-- Los hallazgos de `studio/` son transitivos bajo `sanity` y su CLI/build toolchain. Los paquetes afectados incluyen `ws`, `undici`, `js-yaml`, `smol-toml` y `uuid`.
-- Dependabot alerts estaban desactivadas en GitHub y se activaron mediante la API de GitHub.
+- La raiz del proyecto no reporta vulnerabilidades conocidas con `corepack pnpm audit --prod`.
+- `studio/` tampoco reporta vulnerabilidades conocidas con `corepack pnpm --dir studio audit --prod`.
+- La revisión inicial había detectado 9 avisos de producción en la raíz y 21 en el Studio, todos transitivos salvo las versiones base que los arrastraban.
+- Los paquetes afectados incluían `astro`, `postcss`, `js-yaml`, `nanoid`, `svgo`, `undici`, `adm-zip`, `brace-expansion`, `tar`, `browserslist` y `dompurify`.
+- Secret scanning y push protection están activos en GitHub; Dependabot security updates permanece desactivado y debe activarse como tarea operativa pendiente.
 
 ## Buenas practicas aplicadas
 
@@ -23,13 +23,15 @@ Esta auditoria cubre dependencias npm/pnpm de la web Astro, dependencias del San
 - Limitar PRs abiertos para evitar que el mantenimiento de dependencias bloquee el trabajo normal.
 - Mantener versiones fijas en `package.json`; Dependabot debe actualizar specifiers exactos y lockfiles.
 - Bloquear instalaciones de versiones publicadas hace menos de 7 dias con `minimumReleaseAge: 10080`.
-- Tratar las vulnerabilidades del Studio como trabajo de seguimiento separado, validando build/lint/audit antes de aceptar updates de Sanity o transitorios.
+- Actualizar las dependencias del Studio junto con su lockfile y validar build/lint/audit antes de publicar nuevas versiones de Sanity o transitorios.
 
 ## Politica de versiones jovenes
 
 `pnpm-workspace.yaml` define `minimumReleaseAge: 10080`, equivalente a 7 dias. Esta espera aplica a dependencias directas y transitivas, y reduce el riesgo de instalar paquetes recien publicados que todavia no hayan pasado por deteccion comunitaria o retirada del registro.
 
 No se definen exclusiones iniciales. Si una correccion urgente requiere instalar una version mas joven, debe justificarse en la PR y anadirse una excepcion puntual con `minimumReleaseAgeExclude`.
+
+En la revision del 2 de septiembre de 2026 se usaron versiones parcheadas con al menos siete dias de antiguedad: Astro `7.2.7`, `@sanity/client` `7.26.2`, Sanity `6.11.0`, js-yaml `3.15.1` y los transitorios resueltos por los lockfiles. Las instalaciones se validaron con `--frozen-lockfile --ignore-scripts`.
 
 ## Referencias
 

@@ -1,7 +1,16 @@
 import { createClient, type SanityClient } from "@sanity/client";
-import type { HomePageContent, Plan, PlansContent, PlansInfoBox, Project, Service, SiteSettings } from "../../../domain/home-page";
+import type {
+  HomePageContent,
+  Plan,
+  PlansContent,
+  PlansInfoBox,
+  Project,
+  Service,
+  SiteSettings,
+} from "../../../domain/home-page";
 import type { LegalData } from "../../../domain/legal";
 import type { ContentRepository } from "../../../ports/content-repository";
+import { readSafeHref } from "../../../shared/utils/safe-url";
 
 type HeroContent = SiteSettings["hero"];
 type HeroAction = HeroContent["actions"][number];
@@ -170,7 +179,9 @@ interface SanityPortfolioDocument {
   }>;
 }
 
-type SanityProjectItem = NonNullable<SanityPortfolioDocument["projects"]>[number];
+type SanityProjectItem = NonNullable<
+  SanityPortfolioDocument["projects"]
+>[number];
 
 interface SanityHomePageDocuments {
   hero: SanityHeroDocument | null;
@@ -359,25 +370,40 @@ export class SanityContentRepository implements ContentRepository {
     const fallbackContent = await this.fallbackRepository.getHomePageContent();
 
     try {
-      const documents = await this.client.fetch<SanityHomePageDocuments>(homePageQuery);
+      const documents =
+        await this.client.fetch<SanityHomePageDocuments>(homePageQuery);
 
       return {
         ...fallbackContent,
         site: {
           ...fallbackContent.site,
           hero: mergeHero(fallbackContent.site.hero, documents.hero),
-          purpose: mergePurpose(fallbackContent.site.purpose, documents.purpose),
-          servicesIntro: mergeServicesIntro(fallbackContent.site.servicesIntro, documents.services),
-          projectsIntro: mergeProjectsIntro(fallbackContent.site.projectsIntro, documents.portfolio),
+          purpose: mergePurpose(
+            fallbackContent.site.purpose,
+            documents.purpose,
+          ),
+          servicesIntro: mergeServicesIntro(
+            fallbackContent.site.servicesIntro,
+            documents.services,
+          ),
+          projectsIntro: mergeProjectsIntro(
+            fallbackContent.site.projectsIntro,
+            documents.portfolio,
+          ),
           about: mergeAbout(fallbackContent.site.about, documents.about),
-          contact: mergeContact(fallbackContent.site.contact, documents.contact),
+          contact: mergeContact(
+            fallbackContent.site.contact,
+            documents.contact,
+          ),
         },
         services: mergeServices(fallbackContent.services, documents.services),
         projects: mergeProjects(fallbackContent.projects, documents.portfolio),
         plans: mergePlans(fallbackContent.plans, documents.plans),
       };
     } catch (error) {
-      console.warn(`Sanity content could not be loaded. Falling back to local JSON. ${readErrorMessage(error)}`);
+      console.warn(
+        `Sanity content could not be loaded. Falling back to local JSON. ${readErrorMessage(error)}`,
+      );
       return fallbackContent;
     }
   }
@@ -386,24 +412,32 @@ export class SanityContentRepository implements ContentRepository {
     const fallbackLegalData = await this.fallbackRepository.getLegalData();
 
     try {
-      const document = await this.client.fetch<SanityLegalDataDocument | null>(legalDataQuery);
+      const document = await this.client.fetch<SanityLegalDataDocument | null>(
+        legalDataQuery,
+      );
 
       return mergeLegalData(fallbackLegalData, document);
     } catch (error) {
-      console.warn(`Sanity legal data could not be loaded. Falling back to local JSON. ${readErrorMessage(error)}`);
+      console.warn(
+        `Sanity legal data could not be loaded. Falling back to local JSON. ${readErrorMessage(error)}`,
+      );
       return fallbackLegalData;
     }
   }
 }
 
-function mergeLegalData(fallback: LegalData, source: SanityLegalDataDocument | null): LegalData {
+function mergeLegalData(
+  fallback: LegalData,
+  source: SanityLegalDataDocument | null,
+): LegalData {
   if (!source) {
     return fallback;
   }
 
   return {
     fullName: readString(source.fullName) ?? fallback.fullName,
-    commercialName: readString(source.commercialName) ?? fallback.commercialName,
+    commercialName:
+      readString(source.commercialName) ?? fallback.commercialName,
     domain: readString(source.domain) ?? fallback.domain,
     address: readString(source.address) ?? fallback.address,
     email: readString(source.email) ?? fallback.email,
@@ -411,7 +445,10 @@ function mergeLegalData(fallback: LegalData, source: SanityLegalDataDocument | n
   };
 }
 
-function mergeHero(fallback: HeroContent, source: SanityHeroDocument | null): HeroContent {
+function mergeHero(
+  fallback: HeroContent,
+  source: SanityHeroDocument | null,
+): HeroContent {
   if (!source) {
     return fallback;
   }
@@ -442,7 +479,10 @@ function readHeroClaims(source: SanityHeroDocument): string[] {
   return [];
 }
 
-function mergeHeroActions(fallbackActions: HeroAction[], sourceActions: SanityHeroDocument["actions"]): HeroAction[] {
+function mergeHeroActions(
+  fallbackActions: HeroAction[],
+  sourceActions: SanityHeroDocument["actions"],
+): HeroAction[] {
   if (!Array.isArray(sourceActions) || sourceActions.length === 0) {
     return fallbackActions;
   }
@@ -453,12 +493,17 @@ function mergeHeroActions(fallbackActions: HeroAction[], sourceActions: SanityHe
     return {
       ...fallbackAction,
       label: readString(sourceAction?.label) ?? fallbackAction.label,
-      href: readString(sourceAction?.href) ?? fallbackAction.href,
+      href:
+        readSafeHref(sourceAction?.href, fallbackAction.href) ??
+        fallbackAction.href,
     };
   });
 }
 
-function mergePurpose(fallback: PurposeContent, source: SanityPurposeDocument | null): PurposeContent {
+function mergePurpose(
+  fallback: PurposeContent,
+  source: SanityPurposeDocument | null,
+): PurposeContent {
   if (!source) {
     return fallback;
   }
@@ -467,13 +512,17 @@ function mergePurpose(fallback: PurposeContent, source: SanityPurposeDocument | 
     title: readString(source.title) ?? fallback.title,
     subtitle: readString(source.subtitle) ?? fallback.subtitle,
     image: mergePurposeImage(fallback.image, source.image),
-    highlightedQuote: readString(source.highlightedQuote) ?? fallback.highlightedQuote,
+    highlightedQuote:
+      readString(source.highlightedQuote) ?? fallback.highlightedQuote,
     items: mergePurposeItems(fallback.items, source.items),
     closing: readString(source.closing) ?? fallback.closing,
   };
 }
 
-function mergePurposeImage(fallback: PurposeContent["image"], source: SanityPurposeDocument["image"]): PurposeContent["image"] {
+function mergePurposeImage(
+  fallback: PurposeContent["image"],
+  source: SanityPurposeDocument["image"],
+): PurposeContent["image"] {
   const src = readString(source?.src);
   const alt = readString(source?.alt);
   const width = readPositiveNumber(source?.width);
@@ -491,29 +540,38 @@ function mergePurposeImage(fallback: PurposeContent["image"], source: SanityPurp
   };
 }
 
-function mergePurposeItems(fallbackItems: PurposeItem[], sourceItems: SanityPurposeDocument["items"]): PurposeItem[] {
+function mergePurposeItems(
+  fallbackItems: PurposeItem[],
+  sourceItems: SanityPurposeDocument["items"],
+): PurposeItem[] {
   if (!Array.isArray(sourceItems) || sourceItems.length === 0) {
     return fallbackItems;
   }
 
   const maxLength = Math.max(fallbackItems.length, sourceItems.length);
-  const mergedItems = Array.from({ length: maxLength }, (_, index): PurposeItem | null => {
-    const sourceItem = sourceItems[index];
-    const fallbackItem = fallbackItems[index];
-    const title = readString(sourceItem?.title) ?? fallbackItem?.title;
-    const text = readString(sourceItem?.text) ?? fallbackItem?.text;
+  const mergedItems = Array.from(
+    { length: maxLength },
+    (_, index): PurposeItem | null => {
+      const sourceItem = sourceItems[index];
+      const fallbackItem = fallbackItems[index];
+      const title = readString(sourceItem?.title) ?? fallbackItem?.title;
+      const text = readString(sourceItem?.text) ?? fallbackItem?.text;
 
-    if (!title || !text) {
-      return null;
-    }
+      if (!title || !text) {
+        return null;
+      }
 
-    return { title, text };
-  }).filter((item): item is PurposeItem => item !== null);
+      return { title, text };
+    },
+  ).filter((item): item is PurposeItem => item !== null);
 
   return mergedItems.length > 0 ? mergedItems : fallbackItems;
 }
 
-function mergePlans(fallback: PlansContent, source: SanityPlanDocument | null): PlansContent {
+function mergePlans(
+  fallback: PlansContent,
+  source: SanityPlanDocument | null,
+): PlansContent {
   if (!source) {
     return fallback;
   }
@@ -530,12 +588,17 @@ function mergePlans(fallback: PlansContent, source: SanityPlanDocument | null): 
   };
 }
 
-function mergePlanItems(fallbackItems: Plan[], sourceItems: SanityPlanDocument["items"]): Plan[] {
+function mergePlanItems(
+  fallbackItems: Plan[],
+  sourceItems: SanityPlanDocument["items"],
+): Plan[] {
   if (!Array.isArray(sourceItems) || sourceItems.length === 0) {
     return fallbackItems;
   }
 
-  const mergedItems = sourceItems.map(readPlan).filter((plan): plan is Plan => plan !== null);
+  const mergedItems = sourceItems
+    .map(readPlan)
+    .filter((plan): plan is Plan => plan !== null);
 
   return mergedItems.length > 0 ? mergedItems : fallbackItems;
 }
@@ -546,9 +609,16 @@ function readPlan(source: SanityPlanItem | undefined): Plan | null {
   const tagline = readString(source?.tagline);
   const features = readStringArray(source?.features);
   const ctaLabel = readString(source?.cta?.label);
-  const ctaHref = readString(source?.cta?.href);
+  const ctaHref = readSafeHref(source?.cta?.href);
 
-  if (!name || !price || !tagline || features.length === 0 || !ctaLabel || !ctaHref) {
+  if (
+    !name ||
+    !price ||
+    !tagline ||
+    features.length === 0 ||
+    !ctaLabel ||
+    !ctaHref
+  ) {
     return null;
   }
 
@@ -556,7 +626,8 @@ function readPlan(source: SanityPlanItem | undefined): Plan | null {
     name,
     price,
     tagline,
-    featured: typeof source?.featured === "boolean" ? source.featured : undefined,
+    featured:
+      typeof source?.featured === "boolean" ? source.featured : undefined,
     badge: readString(source?.badge),
     features,
     cta: {
@@ -566,7 +637,10 @@ function readPlan(source: SanityPlanItem | undefined): Plan | null {
   };
 }
 
-function mergePromo(fallback: PromoContent, source: SanityPlanDocument["promo"]): PromoContent {
+function mergePromo(
+  fallback: PromoContent,
+  source: SanityPlanDocument["promo"],
+): PromoContent {
   if (!source) {
     return fallback;
   }
@@ -580,20 +654,31 @@ function mergePromo(fallback: PromoContent, source: SanityPlanDocument["promo"])
   };
 }
 
-function mergePlansInfoBoxes(fallback: PlansInfoBox[], source: SanityPlanDocument["infoBoxes"]): PlansInfoBox[] {
+function mergePlansInfoBoxes(
+  fallback: PlansInfoBox[],
+  source: SanityPlanDocument["infoBoxes"],
+): PlansInfoBox[] {
   if (!Array.isArray(source) || source.length === 0) {
     return fallback;
   }
 
-  const boxes = source.map(readPlansInfoBox).filter((box): box is PlansInfoBox => box !== null);
+  const boxes = source
+    .map(readPlansInfoBox)
+    .filter((box): box is PlansInfoBox => box !== null);
 
   return boxes.length > 0 ? boxes : fallback;
 }
 
-function readPlansInfoBox(source: SanityPlansInfoBox | undefined): PlansInfoBox | null {
+function readPlansInfoBox(
+  source: SanityPlansInfoBox | undefined,
+): PlansInfoBox | null {
   const title = readString(source?.title);
   const blocks = Array.isArray(source?.blocks)
-    ? source.blocks.map(readPlansInfoBlock).filter((block): block is PlansInfoBox["blocks"][number] => block !== null)
+    ? source.blocks
+        .map(readPlansInfoBlock)
+        .filter(
+          (block): block is PlansInfoBox["blocks"][number] => block !== null,
+        )
     : [];
 
   if (!title || blocks.length === 0) {
@@ -603,7 +688,9 @@ function readPlansInfoBox(source: SanityPlansInfoBox | undefined): PlansInfoBox 
   return { title, blocks };
 }
 
-function readPlansInfoBlock(source: SanityPlansInfoBlock | undefined): PlansInfoBox["blocks"][number] | null {
+function readPlansInfoBlock(
+  source: SanityPlansInfoBlock | undefined,
+): PlansInfoBox["blocks"][number] | null {
   const title = readString(source?.title);
   const points = readStringArray(source?.points);
 
@@ -614,7 +701,10 @@ function readPlansInfoBlock(source: SanityPlansInfoBlock | undefined): PlansInfo
   return { title, points };
 }
 
-function mergeServicesIntro(fallback: ServicesIntroContent, source: SanityServicesDocument | null): ServicesIntroContent {
+function mergeServicesIntro(
+  fallback: ServicesIntroContent,
+  source: SanityServicesDocument | null,
+): ServicesIntroContent {
   if (!source) {
     return fallback;
   }
@@ -625,14 +715,21 @@ function mergeServicesIntro(fallback: ServicesIntroContent, source: SanityServic
   };
 }
 
-function mergeServices(fallbackServices: Service[], source: SanityServicesDocument | null): Service[] {
+function mergeServices(
+  fallbackServices: Service[],
+  source: SanityServicesDocument | null,
+): Service[] {
   if (!source || !Array.isArray(source.items) || source.items.length === 0) {
     return fallbackServices;
   }
 
-  const fallbackById = new Map(fallbackServices.map((service) => [service.id, service]));
+  const fallbackById = new Map(
+    fallbackServices.map((service) => [service.id, service]),
+  );
   const services = source.items
-    .map((service, index) => readService(service, fallbackServices[index], fallbackById))
+    .map((service, index) =>
+      readService(service, fallbackServices[index], fallbackById),
+    )
     .filter((service): service is Service => service !== null);
 
   return services.length > 0 ? services : fallbackServices;
@@ -644,13 +741,18 @@ function readService(
   fallbackById: Map<string, Service>,
 ): Service | null {
   const id = readString(source?.id) ?? fallbackByIndex?.id;
-  const fallback = id ? fallbackById.get(id) ?? fallbackByIndex : fallbackByIndex;
+  const fallback = id
+    ? (fallbackById.get(id) ?? fallbackByIndex)
+    : fallbackByIndex;
   const title = readString(source?.title) ?? fallback?.title;
   const icon = readServiceIcon(source?.icon) ?? fallback?.icon;
   const description = readString(source?.description) ?? fallback?.description;
   const statusLabel = readString(source?.statusLabel) ?? fallback?.statusLabel;
   const statusText = readString(source?.statusText) ?? fallback?.statusText;
-  const features = readOptionalStringArray(source?.features, fallback?.features);
+  const features = readOptionalStringArray(
+    source?.features,
+    fallback?.features,
+  );
   const image = mergeOptionalImage(fallback?.image, source?.image);
 
   if (!id || !title || !icon) {
@@ -669,7 +771,10 @@ function readService(
   };
 }
 
-function mergeProjectsIntro(fallback: ProjectsIntroContent, source: SanityPortfolioDocument | null): ProjectsIntroContent {
+function mergeProjectsIntro(
+  fallback: ProjectsIntroContent,
+  source: SanityPortfolioDocument | null,
+): ProjectsIntroContent {
   if (!source) {
     return fallback;
   }
@@ -678,12 +783,16 @@ function mergeProjectsIntro(fallback: ProjectsIntroContent, source: SanityPortfo
     title: readString(source.title) ?? fallback.title,
     subtitle: readString(source.subtitle) ?? fallback.subtitle,
     filters: mergeProjectFilters(fallback.filters, source.filters),
-    initialVisible: readPositiveInteger(source.initialVisible) ?? fallback.initialVisible,
+    initialVisible:
+      readPositiveInteger(source.initialVisible) ?? fallback.initialVisible,
     loadStep: readPositiveInteger(source.loadStep) ?? fallback.loadStep,
   };
 }
 
-function mergeProjectFilters(fallbackFilters: ProjectFilter[], sourceFilters: SanityPortfolioDocument["filters"]): ProjectFilter[] {
+function mergeProjectFilters(
+  fallbackFilters: ProjectFilter[],
+  sourceFilters: SanityPortfolioDocument["filters"],
+): ProjectFilter[] {
   if (!Array.isArray(sourceFilters) || sourceFilters.length === 0) {
     return fallbackFilters;
   }
@@ -701,30 +810,51 @@ function mergeProjectFilters(fallbackFilters: ProjectFilter[], sourceFilters: Sa
     })
     .filter((filter): filter is ProjectFilter => filter !== null);
 
-  return filters.some((filter) => filter.value === "all") ? filters : fallbackFilters;
+  return filters.some((filter) => filter.value === "all")
+    ? filters
+    : fallbackFilters;
 }
 
-function mergeProjects(fallbackProjects: Project[], source: SanityPortfolioDocument | null): Project[] {
-  if (!source || !Array.isArray(source.projects) || source.projects.length === 0) {
+function mergeProjects(
+  fallbackProjects: Project[],
+  source: SanityPortfolioDocument | null,
+): Project[] {
+  if (
+    !source ||
+    !Array.isArray(source.projects) ||
+    source.projects.length === 0
+  ) {
     return fallbackProjects;
   }
 
-  const validFilters = new Set(mergeProjectFilters([], source.filters).map((filter) => filter.value));
+  const validFilters = new Set(
+    mergeProjectFilters([], source.filters).map((filter) => filter.value),
+  );
   const projects = source.projects
-    .map((project, index) => readProject(project, fallbackProjects[index], validFilters))
+    .map((project, index) =>
+      readProject(project, fallbackProjects[index], validFilters),
+    )
     .filter((project): project is Project => project !== null);
 
   return projects.length > 0 ? projects : fallbackProjects;
 }
 
-function readProject(source: SanityProjectItem | undefined, fallback: Project | undefined, validFilters: Set<string>): Project | null {
+function readProject(
+  source: SanityProjectItem | undefined,
+  fallback: Project | undefined,
+  validFilters: Set<string>,
+): Project | null {
   const title = readString(source?.title) ?? fallback?.title;
   const subtitle = readString(source?.subtitle) ?? fallback?.subtitle;
   const category = readString(source?.category) ?? fallback?.category;
-  const filters = readProjectFilterValues(source?.filterValues, fallback, validFilters);
+  const filters = readProjectFilterValues(
+    source?.filterValues,
+    fallback,
+    validFilters,
+  );
   const image = mergeProjectImage(fallback?.image, source?.image);
   const linkLabel = readString(source?.link?.label) ?? fallback?.link.label;
-  const linkHref = readString(source?.link?.href) ?? fallback?.link.href;
+  const linkHref = readSafeHref(source?.link?.href, fallback?.link.href);
 
   if (!title || !category || filters.length === 0 || !linkLabel || !linkHref) {
     return null;
@@ -744,11 +874,25 @@ function readProject(source: SanityProjectItem | undefined, fallback: Project | 
   };
 }
 
-function readProjectFilterValues(value: unknown, fallback: Project | undefined, validFilters: Set<string>): string[] {
-  const sourceFilters = Array.isArray(value) ? value.map(readString).filter((filter): filter is string => filter !== undefined) : [];
-  const fallbackFilters = fallback?.filters?.length ? fallback.filters : fallback?.filter ? [fallback.filter] : [];
+function readProjectFilterValues(
+  value: unknown,
+  fallback: Project | undefined,
+  validFilters: Set<string>,
+): string[] {
+  const sourceFilters = Array.isArray(value)
+    ? value
+        .map(readString)
+        .filter((filter): filter is string => filter !== undefined)
+    : [];
+  const fallbackFilters = fallback?.filters?.length
+    ? fallback.filters
+    : fallback?.filter
+      ? [fallback.filter]
+      : [];
   const filters = sourceFilters.length > 0 ? sourceFilters : fallbackFilters;
-  const uniqueFilters = [...new Set(filters)].filter((filter) => filter !== "all");
+  const uniqueFilters = [...new Set(filters)].filter(
+    (filter) => filter !== "all",
+  );
 
   if (validFilters.size === 0) {
     return uniqueFilters;
@@ -757,7 +901,10 @@ function readProjectFilterValues(value: unknown, fallback: Project | undefined, 
   return uniqueFilters.filter((filter) => validFilters.has(filter));
 }
 
-function mergeProjectImage(fallback: Project["image"] | undefined, source: SanityProjectItem["image"]): Project["image"] | undefined {
+function mergeProjectImage(
+  fallback: Project["image"] | undefined,
+  source: SanityProjectItem["image"],
+): Project["image"] | undefined {
   const src = readString(source?.src);
   const alt = readString(source?.alt) ?? fallback?.alt;
   const width = readPositiveNumber(source?.width) ?? fallback?.width;
@@ -775,7 +922,10 @@ function mergeProjectImage(fallback: Project["image"] | undefined, source: Sanit
   };
 }
 
-function mergeOptionalImage(fallback: Service["image"] | undefined, source: SanityServiceItem["image"]): Service["image"] | undefined {
+function mergeOptionalImage(
+  fallback: Service["image"] | undefined,
+  source: SanityServiceItem["image"],
+): Service["image"] | undefined {
   const src = readString(source?.src);
   const alt = readString(source?.alt) ?? fallback?.alt;
   const width = readPositiveNumber(source?.width) ?? fallback?.width;
@@ -793,7 +943,10 @@ function mergeOptionalImage(fallback: Service["image"] | undefined, source: Sani
   };
 }
 
-function mergeAbout(fallback: AboutContent, source: SanityAboutDocument | null): AboutContent {
+function mergeAbout(
+  fallback: AboutContent,
+  source: SanityAboutDocument | null,
+): AboutContent {
   if (!source) {
     return fallback;
   }
@@ -801,13 +954,22 @@ function mergeAbout(fallback: AboutContent, source: SanityAboutDocument | null):
   return {
     title: readString(source.title) ?? fallback.title,
     subtitle: readString(source.subtitle) ?? fallback.subtitle,
-    paragraphsBeforeImage: readStringArray(source.paragraphsBeforeImage, fallback.paragraphsBeforeImage),
+    paragraphsBeforeImage: readStringArray(
+      source.paragraphsBeforeImage,
+      fallback.paragraphsBeforeImage,
+    ),
     image: mergeAboutImage(fallback.image, source.image),
-    paragraphsAfterImage: readStringArray(source.paragraphsAfterImage, fallback.paragraphsAfterImage),
+    paragraphsAfterImage: readStringArray(
+      source.paragraphsAfterImage,
+      fallback.paragraphsAfterImage,
+    ),
   };
 }
 
-function mergeAboutImage(fallback: AboutContent["image"], source: SanityAboutDocument["image"]): AboutContent["image"] {
+function mergeAboutImage(
+  fallback: AboutContent["image"],
+  source: SanityAboutDocument["image"],
+): AboutContent["image"] {
   const src = readString(source?.src);
   const alt = readString(source?.alt);
   const width = readPositiveNumber(source?.width);
@@ -825,7 +987,10 @@ function mergeAboutImage(fallback: AboutContent["image"], source: SanityAboutDoc
   };
 }
 
-function mergeContact(fallback: ContactContent, source: SanityContactDocument | null): ContactContent {
+function mergeContact(
+  fallback: ContactContent,
+  source: SanityContactDocument | null,
+): ContactContent {
   if (!source) {
     return fallback;
   }
@@ -840,10 +1005,13 @@ function mergeContact(fallback: ContactContent, source: SanityContactDocument | 
   };
 }
 
-function mergeContactLink(fallback: ContactLink, source: SanityContactLink | undefined): ContactLink {
+function mergeContactLink(
+  fallback: ContactLink,
+  source: SanityContactLink | undefined,
+): ContactLink {
   return {
     label: readString(source?.label) ?? fallback.label,
-    href: readString(source?.href) ?? fallback.href,
+    href: readSafeHref(source?.href, fallback.href) ?? fallback.href,
   };
 }
 
@@ -859,7 +1027,10 @@ function readStringArray(value: unknown, fallback: string[] = []): string[] {
   return strings.length > 0 ? strings : fallback;
 }
 
-function readOptionalStringArray(value: unknown, fallback: string[] | undefined): string[] | undefined {
+function readOptionalStringArray(
+  value: unknown,
+  fallback: string[] | undefined,
+): string[] | undefined {
   if (!Array.isArray(value)) {
     return fallback;
   }
@@ -887,7 +1058,15 @@ function readPositiveInteger(value: unknown): number | undefined {
   return value;
 }
 
-const serviceIconNames = new Set(["drone", "video", "share", "globe", "monitor-search", "chart", "map-pin"]);
+const serviceIconNames = new Set([
+  "drone",
+  "video",
+  "share",
+  "globe",
+  "monitor-search",
+  "chart",
+  "map-pin",
+]);
 
 function readServiceIcon(value: unknown): string | undefined {
   const icon = readString(value);

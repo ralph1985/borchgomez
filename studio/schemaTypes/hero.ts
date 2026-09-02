@@ -33,7 +33,8 @@ export const hero = defineType({
     defineField({
       name: "claims",
       title: "Claims",
-      description: "Añade uno o varios claims. Déjalo vacío para ocultar este bloque en la web.",
+      description:
+        "Añade uno o varios claims. Déjalo vacío para ocultar este bloque en la web.",
       type: "array",
       of: [
         defineArrayMember({
@@ -59,7 +60,11 @@ export const hero = defineType({
               name: "href",
               title: "Enlace",
               type: "string",
-              validation: (Rule) => Rule.required(),
+              validation: (Rule) =>
+                Rule.required().uri({
+                  scheme: ["https", "mailto", "tel"],
+                  allowRelative: true,
+                }),
             }),
           ],
           preview: {
