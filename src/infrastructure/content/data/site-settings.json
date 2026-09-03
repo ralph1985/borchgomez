@@ -200,12 +200,12 @@
         "value": "queserias"
       },
       {
-        "label": "Panaderías",
-        "value": "panaderias"
-      },
-      {
         "label": "Tradiciones",
         "value": "tradiciones"
+      },
+      {
+        "label": "Panaderías",
+        "value": "panaderias"
       },
       {
         "label": "Producto Local",
@@ -216,8 +216,8 @@
         "value": "otros"
       }
     ],
-    "initialVisible": 7,
-    "loadStep": 7
+    "initialVisible": 8,
+    "loadStep": 8
   },
   "about": {
     "title": "Sobre mí",

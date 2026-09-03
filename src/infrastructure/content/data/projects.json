@@ -1,44 +1,23 @@
 [
   {
-    "title": "Territorio vivo",
+    "title": "Artesano Santillana del Mar",
     "subtitle": "",
-    "category": "Territorio y naturaleza",
-    "filter": "otros",
+    "category": "Artesanía",
+    "filter": "artesanos",
     "filters": [
-      "otros"
+      "artesanos"
     ],
     "image": {
       "src": "/assets/img/projects/otros/territorio-vivo.webp?v=d320c8f7",
       "srcset": "/assets/img/projects/otros/territorio-vivo-400.webp?v=33d51df5 400w, /assets/img/projects/otros/territorio-vivo-800.webp?v=f17d39b2 800w, /assets/img/projects/otros/territorio-vivo-1200.webp?v=2b2fa921 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
-      "alt": "Territorio rural con presencia humana y naturaleza",
+      "alt": "Entrada a taller de madera",
       "width": 1196,
       "height": 892
     },
     "link": {
-      "label": "Ver publicación",
-      "href": "https://www.instagram.com/p/DW1lAEKjRmQ/"
-    }
-  },
-  {
-    "title": "Raíces vivas",
-    "subtitle": "",
-    "category": "Identidad y memoria",
-    "filter": "otros",
-    "filters": [
-      "otros"
-    ],
-    "image": {
-      "src": "/assets/img/projects/otros/raices-vivas.webp?v=2a9461b0",
-      "srcset": "/assets/img/projects/otros/raices-vivas-400.webp?v=d8183e80 400w, /assets/img/projects/otros/raices-vivas-800.webp?v=66840ddf 800w, /assets/img/projects/otros/raices-vivas-1200.webp?v=597db53e 1200w",
-      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
-      "alt": "Composición visual sobre raíces, identidad y memoria rural",
-      "width": 668,
-      "height": 1196
-    },
-    "link": {
-      "label": "Explorar proyecto",
-      "href": "https://www.instagram.com/p/DScfFHwjccd/"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/reel/Dbhx11-t_aE/?igsh=NTd5bHVsNXZ5ODA1"
     }
   },
   {
@@ -50,16 +29,37 @@
       "artesanos"
     ],
     "image": {
+      "src": "/assets/img/projects/otros/raices-vivas.webp?v=2a9461b0",
+      "srcset": "/assets/img/projects/otros/raices-vivas-400.webp?v=d8183e80 400w, /assets/img/projects/otros/raices-vivas-800.webp?v=66840ddf 800w, /assets/img/projects/otros/raices-vivas-1200.webp?v=597db53e 1200w",
+      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
+      "alt": "Fran Agudo trabajando piezas de alfarería artesanal en El Puente del Arzobispo",
+      "width": 668,
+      "height": 1196
+    },
+    "link": {
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DUxbSJzjfBR/"
+    }
+  },
+  {
+    "title": "Mario Ezno",
+    "subtitle": "",
+    "category": "Cultura rural",
+    "filter": "otros",
+    "filters": [
+      "otros"
+    ],
+    "image": {
       "src": "/assets/img/projects/artesanos/artesanos-01.webp?v=170b9218",
       "srcset": "/assets/img/projects/artesanos/artesanos-01-400.webp?v=81f3d1e8 400w, /assets/img/projects/artesanos/artesanos-01-800.webp?v=170b9218 800w, /assets/img/projects/artesanos/artesanos-01-1200.webp?v=170b9218 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
-      "alt": "Fran Agudo trabajando piezas de alfarería artesanal en El Puente del Arzobispo",
+      "alt": "Mario Ezno actuando como titiritero en un entorno rural",
       "width": 640,
       "height": 1136
     },
     "link": {
       "label": "Ver proyecto",
-      "href": "https://www.instagram.com/p/DUxbSJzjfBR/"
+      "href": "https://www.instagram.com/p/DVnk8jMjfOO/"
     }
   },
   {
@@ -105,27 +105,6 @@
     }
   },
   {
-    "title": "Restaurante Casas Colgadas",
-    "subtitle": "",
-    "category": "Restauración",
-    "filter": "restaurantes",
-    "filters": [
-      "restaurantes"
-    ],
-    "image": {
-      "src": "/assets/img/projects/restaurantes/restaurantes-02.webp?v=4a05e7c5",
-      "srcset": "/assets/img/projects/restaurantes/restaurantes-02-400.webp?v=75fac57c 400w, /assets/img/projects/restaurantes/restaurantes-02-800.webp?v=bf8999cb 800w, /assets/img/projects/restaurantes/restaurantes-02-1200.webp?v=4a05e7c5 1200w",
-      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
-      "alt": "Escena gastronómica vinculada al origen y a la memoria de Cuenca",
-      "width": 1080,
-      "height": 608
-    },
-    "link": {
-      "label": "Ver proyecto",
-      "href": "https://www.instagram.com/p/DR_ys5-jy6z/"
-    }
-  },
-  {
     "title": "Yeste",
     "subtitle": "",
     "category": "Turismo rural",
@@ -134,16 +113,79 @@
       "turismo-rural"
     ],
     "image": {
+      "src": "/assets/img/projects/restaurantes/restaurantes-02.webp?v=4a05e7c5",
+      "srcset": "/assets/img/projects/restaurantes/restaurantes-02-400.webp?v=75fac57c 400w, /assets/img/projects/restaurantes/restaurantes-02-800.webp?v=bf8999cb 800w, /assets/img/projects/restaurantes/restaurantes-02-1200.webp?v=4a05e7c5 1200w",
+      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
+      "alt": "Vista documental de Yeste y su entorno rural en la Sierra del Segura",
+      "width": 1080,
+      "height": 608
+    },
+    "link": {
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DY_jefCN-sK/"
+    }
+  },
+  {
+    "title": "Quesería Estrada Castaño",
+    "subtitle": "",
+    "category": "Queserías",
+    "filter": "queserias",
+    "filters": [
+      "queserias"
+    ],
+    "image": {
       "src": "/assets/img/projects/turismo-rural/turismo-rural-01.webp?v=def64313",
       "srcset": "/assets/img/projects/turismo-rural/turismo-rural-01-400.webp?v=57cd3aba 400w, /assets/img/projects/turismo-rural/turismo-rural-01-800.webp?v=def64313 800w, /assets/img/projects/turismo-rural/turismo-rural-01-1200.webp?v=def64313 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
-      "alt": "Vista documental de Yeste y su entorno rural en la Sierra del Segura",
+      "alt": "Mujeres rurales trabajando en la quesería Estrada Castaño",
       "width": 640,
       "height": 1136
     },
     "link": {
       "label": "Ver proyecto",
-      "href": "https://www.instagram.com/p/DY_jefCN-sK/"
+      "href": "https://www.instagram.com/p/DWbAzx2NTDk/"
+    }
+  },
+  {
+    "title": "Ajo Morado de Las Pedroñeras",
+    "subtitle": "Producto Local",
+    "category": "Producto local",
+    "filter": "producto-local",
+    "filters": [
+      "producto-local"
+    ],
+    "image": {
+      "src": "/assets/img/projects/turismo-rural/turismo-rural-02.webp?v=51b6bf0f",
+      "srcset": "/assets/img/projects/turismo-rural/turismo-rural-02-400.webp?v=518cb19a 400w, /assets/img/projects/turismo-rural/turismo-rural-02-800.webp?v=51b6bf0f 800w, /assets/img/projects/turismo-rural/turismo-rural-02-1200.webp?v=51b6bf0f 1200w",
+      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
+      "alt": "Ajo",
+      "width": 640,
+      "height": 1136
+    },
+    "link": {
+      "label": "Ver Proyecto",
+      "href": "https://www.instagram.com/reel/DaH0GC1tu8q/?igsh=bjV5Zmo4czdjNjkx"
+    }
+  },
+  {
+    "title": "Restaurante Casas Colgadas",
+    "subtitle": "",
+    "category": "Restauración",
+    "filter": "restaurantes",
+    "filters": [
+      "restaurantes"
+    ],
+    "image": {
+      "src": "/assets/img/projects/turismo-rural/turismo-rural-03.webp?v=f0218383",
+      "srcset": "/assets/img/projects/turismo-rural/turismo-rural-03-400.webp?v=ec0a45b6 400w, /assets/img/projects/turismo-rural/turismo-rural-03-800.webp?v=f0218383 800w, /assets/img/projects/turismo-rural/turismo-rural-03-1200.webp?v=f0218383 1200w",
+      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
+      "alt": "Escena gastronómica vinculada al origen y a la memoria de Cuenca",
+      "width": 640,
+      "height": 1136
+    },
+    "link": {
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/p/DR_ys5-jy6z/"
     }
   },
   {
@@ -155,8 +197,8 @@
       "turismo-rural"
     ],
     "image": {
-      "src": "/assets/img/projects/turismo-rural/turismo-rural-02.webp?v=51b6bf0f",
-      "srcset": "/assets/img/projects/turismo-rural/turismo-rural-02-400.webp?v=518cb19a 400w, /assets/img/projects/turismo-rural/turismo-rural-02-800.webp?v=51b6bf0f 800w, /assets/img/projects/turismo-rural/turismo-rural-02-1200.webp?v=51b6bf0f 1200w",
+      "src": "/assets/img/projects/turismo-rural/turismo-rural-04.webp?v=f5880ed4",
+      "srcset": "/assets/img/projects/turismo-rural/turismo-rural-04-400.webp?v=729e404e 400w, /assets/img/projects/turismo-rural/turismo-rural-04-800.webp?v=f5880ed4 800w, /assets/img/projects/turismo-rural/turismo-rural-04-1200.webp?v=f5880ed4 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Paisaje natural de Las Majadas en la Serranía de Cuenca",
       "width": 640,
@@ -168,6 +210,27 @@
     }
   },
   {
+    "title": "Territorio vivo",
+    "subtitle": "",
+    "category": "Territorio y naturaleza",
+    "filter": "otros",
+    "filters": [
+      "otros"
+    ],
+    "image": {
+      "src": "/assets/img/projects/turismo-rural/turismo-rural-06.webp?v=75b7fc69",
+      "srcset": "/assets/img/projects/turismo-rural/turismo-rural-06-400.webp?v=e8f37974 400w, /assets/img/projects/turismo-rural/turismo-rural-06-800.webp?v=75b7fc69 800w, /assets/img/projects/turismo-rural/turismo-rural-06-1200.webp?v=75b7fc69 1200w",
+      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
+      "alt": "Territorio rural con presencia humana y naturaleza",
+      "width": 610,
+      "height": 1084
+    },
+    "link": {
+      "label": "Ver publicación",
+      "href": "https://www.instagram.com/p/DW1lAEKjRmQ/"
+    }
+  },
+  {
     "title": "Puente del Arzobispo",
     "subtitle": "",
     "category": "Turismo rural",
@@ -176,8 +239,8 @@
       "turismo-rural"
     ],
     "image": {
-      "src": "/assets/img/projects/turismo-rural/turismo-rural-03.webp?v=f0218383",
-      "srcset": "/assets/img/projects/turismo-rural/turismo-rural-03-400.webp?v=ec0a45b6 400w, /assets/img/projects/turismo-rural/turismo-rural-03-800.webp?v=f0218383 800w, /assets/img/projects/turismo-rural/turismo-rural-03-1200.webp?v=f0218383 1200w",
+      "src": "/assets/img/projects/alojamientos/alojamientos-01.webp?v=0cb63aa1",
+      "srcset": "/assets/img/projects/alojamientos/alojamientos-01-400.webp?v=4319717d 400w, /assets/img/projects/alojamientos/alojamientos-01-800.webp?v=0cb63aa1 800w, /assets/img/projects/alojamientos/alojamientos-01-1200.webp?v=0cb63aa1 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Calles y oficio cerámico en El Puente del Arzobispo",
       "width": 640,
@@ -197,16 +260,37 @@
       "turismo-rural"
     ],
     "image": {
-      "src": "/assets/img/projects/turismo-rural/turismo-rural-04.webp?v=f5880ed4",
-      "srcset": "/assets/img/projects/turismo-rural/turismo-rural-04-400.webp?v=729e404e 400w, /assets/img/projects/turismo-rural/turismo-rural-04-800.webp?v=f5880ed4 800w, /assets/img/projects/turismo-rural/turismo-rural-04-1200.webp?v=f5880ed4 1200w",
+      "src": "/assets/img/projects/queserias/queserias-01.webp?v=c98891e3",
+      "srcset": "/assets/img/projects/queserias/queserias-01-400.webp?v=54fb6222 400w, /assets/img/projects/queserias/queserias-01-800.webp?v=c98891e3 800w, /assets/img/projects/queserias/queserias-01-1200.webp?v=c98891e3 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Vista vertical del casco histórico y paisaje de Letur",
-      "width": 640,
-      "height": 1136
+      "width": 610,
+      "height": 1084
     },
     "link": {
       "label": "Ver proyecto",
       "href": "https://www.instagram.com/p/DYWrtc7Nw4t/"
+    }
+  },
+  {
+    "title": "Raíces vivas",
+    "subtitle": "",
+    "category": "Identidad y memoria",
+    "filter": "otros",
+    "filters": [
+      "otros"
+    ],
+    "image": {
+      "src": "/assets/img/projects/queserias/queserias-02.webp?v=54e06fdf",
+      "srcset": "/assets/img/projects/queserias/queserias-02-400.webp?v=6ade36a5 400w, /assets/img/projects/queserias/queserias-02-800.webp?v=54e06fdf 800w, /assets/img/projects/queserias/queserias-02-1200.webp?v=54e06fdf 1200w",
+      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
+      "alt": "Composición visual sobre raíces, identidad y memoria rural",
+      "width": 444,
+      "height": 789
+    },
+    "link": {
+      "label": "Explorar proyecto",
+      "href": "https://www.instagram.com/p/DScfFHwjccd/"
     }
   },
   {
@@ -218,12 +302,12 @@
       "turismo-rural"
     ],
     "image": {
-      "src": "/assets/img/projects/turismo-rural/turismo-rural-06.webp?v=75b7fc69",
-      "srcset": "/assets/img/projects/turismo-rural/turismo-rural-06-400.webp?v=e8f37974 400w, /assets/img/projects/turismo-rural/turismo-rural-06-800.webp?v=75b7fc69 800w, /assets/img/projects/turismo-rural/turismo-rural-06-1200.webp?v=75b7fc69 1200w",
+      "src": "/assets/img/projects/queserias/queserias-03.webp?v=c1979afd",
+      "srcset": "/assets/img/projects/queserias/queserias-03-400.webp?v=e0c6c7bf 400w, /assets/img/projects/queserias/queserias-03-800.webp?v=c1979afd 800w, /assets/img/projects/queserias/queserias-03-1200.webp?v=c1979afd 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Paisaje natural y monumental de Yeste en Albacete",
-      "width": 610,
-      "height": 1084
+      "width": 640,
+      "height": 1136
     },
     "link": {
       "label": "Ver proyecto",
@@ -239,8 +323,8 @@
       "alojamientos"
     ],
     "image": {
-      "src": "/assets/img/projects/alojamientos/alojamientos-01.webp?v=0cb63aa1",
-      "srcset": "/assets/img/projects/alojamientos/alojamientos-01-400.webp?v=4319717d 400w, /assets/img/projects/alojamientos/alojamientos-01-800.webp?v=0cb63aa1 800w, /assets/img/projects/alojamientos/alojamientos-01-1200.webp?v=0cb63aa1 1200w",
+      "src": "/assets/img/projects/panaderias/panaderias-01.webp?v=06899c83",
+      "srcset": "/assets/img/projects/panaderias/panaderias-01-400.webp?v=c36a7fd5 400w, /assets/img/projects/panaderias/panaderias-01-800.webp?v=06899c83 800w, /assets/img/projects/panaderias/panaderias-01-1200.webp?v=06899c83 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Complejo rural El Hosquillo rodeado de naturaleza en Las Majadas",
       "width": 640,
@@ -260,12 +344,12 @@
       "queserias"
     ],
     "image": {
-      "src": "/assets/img/projects/queserias/queserias-01.webp?v=c98891e3",
-      "srcset": "/assets/img/projects/queserias/queserias-01-400.webp?v=54fb6222 400w, /assets/img/projects/queserias/queserias-01-800.webp?v=c98891e3 800w, /assets/img/projects/queserias/queserias-01-1200.webp?v=c98891e3 1200w",
+      "src": "/assets/img/projects/panaderias/panaderias-02.webp?v=d744cdd6",
+      "srcset": "/assets/img/projects/panaderias/panaderias-02-400.webp?v=e7ad23f1 400w, /assets/img/projects/panaderias/panaderias-02-800.webp?v=d744cdd6 800w, /assets/img/projects/panaderias/panaderias-02-1200.webp?v=d744cdd6 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Trabajo artesanal en la quesería Campo Rus",
-      "width": 610,
-      "height": 1084
+      "width": 640,
+      "height": 1136
     },
     "link": {
       "label": "Ver proyecto",
@@ -281,37 +365,16 @@
       "queserias"
     ],
     "image": {
-      "src": "/assets/img/projects/queserias/queserias-02.webp?v=54e06fdf",
-      "srcset": "/assets/img/projects/queserias/queserias-02-400.webp?v=6ade36a5 400w, /assets/img/projects/queserias/queserias-02-800.webp?v=54e06fdf 800w, /assets/img/projects/queserias/queserias-02-1200.webp?v=54e06fdf 1200w",
+      "src": "/assets/img/projects/tradiciones/tradiciones-01.webp?v=46b6f462",
+      "srcset": "/assets/img/projects/tradiciones/tradiciones-01-400.webp?v=aa8f9844 400w, /assets/img/projects/tradiciones/tradiciones-01-800.webp?v=46b6f462 800w, /assets/img/projects/tradiciones/tradiciones-01-1200.webp?v=46b6f462 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Quesería La Cabra Tira al Monte y su relación con el entorno",
-      "width": 444,
-      "height": 789
+      "width": 610,
+      "height": 1084
     },
     "link": {
       "label": "Ver proyecto",
       "href": "https://www.instagram.com/p/DUNju4MiMWU/"
-    }
-  },
-  {
-    "title": "Quesería Estrada Castaño",
-    "subtitle": "",
-    "category": "Queserías",
-    "filter": "queserias",
-    "filters": [
-      "queserias"
-    ],
-    "image": {
-      "src": "/assets/img/projects/queserias/queserias-03.webp?v=c1979afd",
-      "srcset": "/assets/img/projects/queserias/queserias-03-400.webp?v=e0c6c7bf 400w, /assets/img/projects/queserias/queserias-03-800.webp?v=c1979afd 800w, /assets/img/projects/queserias/queserias-03-1200.webp?v=c1979afd 1200w",
-      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
-      "alt": "Mujeres rurales trabajando en la quesería Estrada Castaño",
-      "width": 640,
-      "height": 1136
-    },
-    "link": {
-      "label": "Ver proyecto",
-      "href": "https://www.instagram.com/p/DWbAzx2NTDk/"
     }
   },
   {
@@ -323,12 +386,12 @@
       "panaderias"
     ],
     "image": {
-      "src": "/assets/img/projects/panaderias/panaderias-01.webp?v=06899c83",
-      "srcset": "/assets/img/projects/panaderias/panaderias-01-400.webp?v=c36a7fd5 400w, /assets/img/projects/panaderias/panaderias-01-800.webp?v=06899c83 800w, /assets/img/projects/panaderias/panaderias-01-1200.webp?v=06899c83 1200w",
+      "src": "/assets/img/projects/tradiciones/tradiciones-02.webp?v=fdc05b07",
+      "srcset": "/assets/img/projects/tradiciones/tradiciones-02-400.webp?v=76c63be9 400w, /assets/img/projects/tradiciones/tradiciones-02-800.webp?v=fdc05b07 800w, /assets/img/projects/tradiciones/tradiciones-02-1200.webp?v=fdc05b07 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Panadería y bollería Carlos Vindel en Priego",
-      "width": 640,
-      "height": 1136
+      "width": 610,
+      "height": 1084
     },
     "link": {
       "label": "Ver proyecto",
@@ -344,12 +407,12 @@
       "panaderias"
     ],
     "image": {
-      "src": "/assets/img/projects/panaderias/panaderias-02.webp?v=d744cdd6",
-      "srcset": "/assets/img/projects/panaderias/panaderias-02-400.webp?v=e7ad23f1 400w, /assets/img/projects/panaderias/panaderias-02-800.webp?v=d744cdd6 800w, /assets/img/projects/panaderias/panaderias-02-1200.webp?v=d744cdd6 1200w",
+      "src": "/assets/img/projects/tradiciones/tradiciones-03.webp?v=13d2633b",
+      "srcset": "/assets/img/projects/tradiciones/tradiciones-03-400.webp?v=10d44d2d 400w, /assets/img/projects/tradiciones/tradiciones-03-800.webp?v=13d2633b 800w, /assets/img/projects/tradiciones/tradiciones-03-1200.webp?v=13d2633b 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Panadería El Chulo de Letur con pan y dulces tradicionales",
-      "width": 640,
-      "height": 1136
+      "width": 610,
+      "height": 1084
     },
     "link": {
       "label": "Ver proyecto",
@@ -365,12 +428,12 @@
       "tradiciones"
     ],
     "image": {
-      "src": "/assets/img/projects/tradiciones/tradiciones-01.webp?v=46b6f462",
-      "srcset": "/assets/img/projects/tradiciones/tradiciones-01-400.webp?v=aa8f9844 400w, /assets/img/projects/tradiciones/tradiciones-01-800.webp?v=46b6f462 800w, /assets/img/projects/tradiciones/tradiciones-01-1200.webp?v=46b6f462 1200w",
+      "src": "/assets/img/projects/otros/otros-01.webp?v=3683f2fa",
+      "srcset": "/assets/img/projects/otros/otros-01-400.webp?v=39f4d1e9 400w, /assets/img/projects/otros/otros-01-800.webp?v=3683f2fa 800w, /assets/img/projects/otros/otros-01-1200.webp?v=3683f2fa 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Celebración de Las Mondas en Talavera de la Reina y su comarca",
-      "width": 610,
-      "height": 1084
+      "width": 640,
+      "height": 1136
     },
     "link": {
       "label": "Ver proyecto",
@@ -386,12 +449,12 @@
       "tradiciones"
     ],
     "image": {
-      "src": "/assets/img/projects/tradiciones/tradiciones-02.webp?v=fdc05b07",
-      "srcset": "/assets/img/projects/tradiciones/tradiciones-02-400.webp?v=76c63be9 400w, /assets/img/projects/tradiciones/tradiciones-02-800.webp?v=fdc05b07 800w, /assets/img/projects/tradiciones/tradiciones-02-1200.webp?v=fdc05b07 1200w",
+      "src": "/assets/img/projects/otros/otros-02.webp?v=0f28c46b",
+      "srcset": "/assets/img/projects/otros/otros-02-400.webp?v=958b362a 400w, /assets/img/projects/otros/otros-02-800.webp?v=0f28c46b 800w, /assets/img/projects/otros/otros-02-1200.webp?v=0f28c46b 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Festival Carlos V y el Jamón de Montánchez con tradición y gastronomía",
-      "width": 610,
-      "height": 1084
+      "width": 640,
+      "height": 1136
     },
     "link": {
       "label": "Ver proyecto",
@@ -407,37 +470,16 @@
       "tradiciones"
     ],
     "image": {
-      "src": "/assets/img/projects/tradiciones/tradiciones-03.webp?v=13d2633b",
-      "srcset": "/assets/img/projects/tradiciones/tradiciones-03-400.webp?v=10d44d2d 400w, /assets/img/projects/tradiciones/tradiciones-03-800.webp?v=13d2633b 800w, /assets/img/projects/tradiciones/tradiciones-03-1200.webp?v=13d2633b 1200w",
+      "src": "/assets/img/projects/otros/otros-03.webp?v=14168ce4",
+      "srcset": "/assets/img/projects/otros/otros-03-400.webp?v=6829b522 400w, /assets/img/projects/otros/otros-03-800.webp?v=14168ce4 800w, /assets/img/projects/otros/otros-03-1200.webp?v=14168ce4 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Romería de Villas Viejas en El Hito en honor a la Virgen de la Encarnación",
-      "width": 610,
-      "height": 1084
-    },
-    "link": {
-      "label": "Ver proyecto",
-      "href": "https://www.instagram.com/p/DYtlZNjN3Xu/"
-    }
-  },
-  {
-    "title": "Mario Ezno",
-    "subtitle": "",
-    "category": "Cultura rural",
-    "filter": "otros",
-    "filters": [
-      "otros"
-    ],
-    "image": {
-      "src": "/assets/img/projects/otros/otros-01.webp?v=3683f2fa",
-      "srcset": "/assets/img/projects/otros/otros-01-400.webp?v=39f4d1e9 400w, /assets/img/projects/otros/otros-01-800.webp?v=3683f2fa 800w, /assets/img/projects/otros/otros-01-1200.webp?v=3683f2fa 1200w",
-      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
-      "alt": "Mario Ezno actuando como titiritero en un entorno rural",
       "width": 640,
       "height": 1136
     },
     "link": {
       "label": "Ver proyecto",
-      "href": "https://www.instagram.com/p/DVnk8jMjfOO/"
+      "href": "https://www.instagram.com/p/DYtlZNjN3Xu/"
     }
   },
   {
@@ -449,8 +491,8 @@
       "otros"
     ],
     "image": {
-      "src": "/assets/img/projects/otros/otros-02.webp?v=0f28c46b",
-      "srcset": "/assets/img/projects/otros/otros-02-400.webp?v=958b362a 400w, /assets/img/projects/otros/otros-02-800.webp?v=0f28c46b 800w, /assets/img/projects/otros/otros-02-1200.webp?v=0f28c46b 1200w",
+      "src": "/assets/img/projects/otros/otros-04.webp?v=4c7e90f2",
+      "srcset": "/assets/img/projects/otros/otros-04-400.webp?v=db3deb9f 400w, /assets/img/projects/otros/otros-04-800.webp?v=4c7e90f2 800w, /assets/img/projects/otros/otros-04-1200.webp?v=4c7e90f2 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Celebración local del Día del Libro inmortalizada en vídeo",
       "width": 640,
@@ -470,12 +512,12 @@
       "otros"
     ],
     "image": {
-      "src": "/assets/img/projects/otros/otros-03.webp?v=14168ce4",
-      "srcset": "/assets/img/projects/otros/otros-03-400.webp?v=6829b522 400w, /assets/img/projects/otros/otros-03-800.webp?v=14168ce4 800w, /assets/img/projects/otros/otros-03-1200.webp?v=14168ce4 1200w",
+      "src": "/assets/img/projects/otros/otros-05.webp?v=4100fe4c",
+      "srcset": "/assets/img/projects/otros/otros-05-400.webp?v=77d69fc6 400w, /assets/img/projects/otros/otros-05-800.webp?v=4100fe4c 800w, /assets/img/projects/otros/otros-05-1200.webp?v=4100fe4c 1200w",
       "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
       "alt": "Festival de humor Gacha's Comedy en Castilla-La Mancha",
-      "width": 640,
-      "height": 1136
+      "width": 610,
+      "height": 1084
     },
     "link": {
       "label": "Ver proyecto",
@@ -490,14 +532,6 @@
     "filters": [
       "otros"
     ],
-    "image": {
-      "src": "/assets/img/projects/otros/otros-04.webp?v=4c7e90f2",
-      "srcset": "/assets/img/projects/otros/otros-04-400.webp?v=db3deb9f 400w, /assets/img/projects/otros/otros-04-800.webp?v=4c7e90f2 800w, /assets/img/projects/otros/otros-04-1200.webp?v=4c7e90f2 1200w",
-      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
-      "alt": "Tractores y agricultores en una escena de defensa del campo",
-      "width": 640,
-      "height": 1136
-    },
     "link": {
       "label": "Ver proyecto",
       "href": "https://www.instagram.com/p/DUBKNS9jayt/"
@@ -511,30 +545,48 @@
     "filters": [
       "otros"
     ],
-    "image": {
-      "src": "/assets/img/projects/otros/otros-05.webp?v=4100fe4c",
-      "srcset": "/assets/img/projects/otros/otros-05-400.webp?v=77d69fc6 400w, /assets/img/projects/otros/otros-05-800.webp?v=4100fe4c 800w, /assets/img/projects/otros/otros-05-1200.webp?v=4100fe4c 1200w",
-      "sizes": "(max-width: 767px) 88vw, (max-width: 1024px) 44vw, 360px",
-      "alt": "Personas trabajadoras ligadas a los oficios y raíces del territorio",
-      "width": 610,
-      "height": 1084
-    },
     "link": {
       "label": "Ver proyecto",
       "href": "https://www.instagram.com/p/DXyUN0mt6Mc/"
     }
   },
   {
-    "title": "Ajo Morado de Las Pedroñeras",
-    "subtitle": "Producto Local",
-    "category": "Producto local",
+    "title": "Oropesa",
+    "subtitle": "",
+    "category": "turismo-rural",
+    "filter": "turismo-rural",
+    "filters": [
+      "turismo-rural"
+    ],
+    "link": {
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/reel/DbP38TZNvyE/?igsh=aWN2OHN4MW1mOWd1"
+    }
+  },
+  {
+    "title": "Mimbre",
+    "subtitle": "",
+    "category": "Artesanía",
+    "filter": "artesanos",
+    "filters": [
+      "artesanos"
+    ],
+    "link": {
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/reel/Dcp74KktqiS/?igsi=MXJtZ2NnaHFuNXZvdQ=="
+    }
+  },
+  {
+    "title": "Cecina de León IGP",
+    "subtitle": "",
+    "category": "Producto Local",
     "filter": "producto-local",
     "filters": [
       "producto-local"
     ],
     "link": {
-      "label": "Ver Proyecto",
-      "href": "https://www.instagram.com/reel/DaH0GC1tu8q/?igsh=bjV5Zmo4czdjNjkx"
+      "label": "Ver proyecto",
+      "href": "https://www.instagram.com/reel/DcX9seFtOJk/?igsi=c3JjMmc1bXRwZzE4"
     }
   }
 ]
