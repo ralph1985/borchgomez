@@ -9,6 +9,7 @@ overrides:
   fast-uri: 3.1.6
   js-yaml: 4.3.1
   postcss: 8.5.26
+  yaml: 2.8.3
 
 importers:
 
@@ -25,7 +26,7 @@ importers:
         version: 4.5.0
       astro:
         specifier: 7.2.7
-        version: 7.2.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.0.1)(sass@1.101.0)(yaml@2.9.0)
+        version: 7.2.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.0.1)(sass@1.101.0)(yaml@2.8.3)
     devDependencies:
       '@astrojs/check':
         specifier: 0.9.9
@@ -2599,7 +2600,7 @@ packages:
       sugarss: ^5.0.0
       terser: ^5.16.0
       tsx: ^4.8.1
-      yaml: ^2.4.2
+      yaml: 2.8.3
     peerDependenciesMeta:
       '@types/node':
         optional: true
@@ -2768,13 +2769,8 @@ packages:
     resolution: {integrity: sha512-qhjK/bzSRZ6HtTvgeFvjNPJGWdZ0+x5NREV/9XZWFjIGezew2b4r5JPy66IfOhd5OA7KeFwk1JfmEbnTvev0cA==}
     hasBin: true
 
-  yaml@2.7.1:
-    resolution: {integrity: sha512-10ULxpnOCQXxJvBgxsn9ptjq6uviG/htZKk9veJGhlqn3w/DxQ631zFF+nlQXLwmImeS5amR2dl2U8sg6U9jsQ==}
-    engines: {node: '>= 14'}
-    hasBin: true
-
-  yaml@2.9.0:
-    resolution: {integrity: sha512-2AvhNX3mb8zd6Zy7INTtSpl1F15HW6Wnqj0srWlkKLcpYl/gMIMJiyuGq2KeI2YFxUPjdlB+3Lc10seMLtL4cA==}
+  yaml@2.8.3:
+    resolution: {integrity: sha512-AvbaCLOO2Otw/lW5bmh9d/WEdcDFdQp2Z2ZUH3pX9U2ihyUY0nvLv7J6TrWowklRGPYbB/IuIMfYgxaCPg5Bpg==}
     engines: {node: '>= 14.6'}
     hasBin: true
 
@@ -2932,7 +2928,7 @@ snapshots:
 
   '@astrojs/yaml2ts@0.2.4':
     dependencies:
-      yaml: 2.9.0
+      yaml: 2.8.3
 
   '@babel/code-frame@7.29.7':
     dependencies:
@@ -3784,7 +3780,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro@7.2.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.0.1)(sass@1.101.0)(yaml@2.9.0):
+  astro@7.2.7(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@26.0.1)(sass@1.101.0)(yaml@2.8.3):
     dependencies:
       '@astrojs/compiler-rs': 0.4.0(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)
       '@astrojs/internal-helpers': 0.10.4
@@ -3834,8 +3830,8 @@ snapshots:
       ultrahtml: 1.7.0
       unifont: 0.7.5
       unstorage: 1.17.5
-      vite: 8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.9.0)
-      vitefu: 1.1.3(vite@8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.9.0))
+      vite: 8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.8.3)
+      vitefu: 1.1.3(vite@8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.8.3))
       xxhash-wasm: 1.1.0
       yargs-parser: 22.0.0
       zod: 4.4.3
@@ -5196,7 +5192,7 @@ snapshots:
       '@types/unist': 3.0.3
       vfile-message: 4.0.3
 
-  vite@8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.9.0):
+  vite@8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.8.3):
     dependencies:
       lightningcss: 1.33.0
       picomatch: 4.0.7
@@ -5208,11 +5204,11 @@ snapshots:
       esbuild: 0.28.2
       fsevents: 2.3.3
       sass: 1.101.0
-      yaml: 2.9.0
+      yaml: 2.8.3
 
-  vitefu@1.1.3(vite@8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.9.0)):
+  vitefu@1.1.3(vite@8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.8.3)):
     optionalDependencies:
-      vite: 8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.9.0)
+      vite: 8.2.2(@types/node@26.0.1)(esbuild@0.28.2)(sass@1.101.0)(yaml@2.8.3)
 
   volar-service-css@0.0.70(@volar/language-service@2.4.28):
     dependencies:
@@ -5356,11 +5352,9 @@ snapshots:
       vscode-languageserver-textdocument: 1.0.12
       vscode-languageserver-types: 3.18.0
       vscode-uri: 3.1.0
-      yaml: 2.7.1
+      yaml: 2.8.3
 
-  yaml@2.7.1: {}
-
-  yaml@2.9.0: {}
+  yaml@2.8.3: {}
 
   yargs-parser@21.1.1: {}
 
