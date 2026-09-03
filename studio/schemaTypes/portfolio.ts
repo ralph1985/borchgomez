@@ -27,7 +27,7 @@ const linkFields = [
     type: "url",
     validation: (Rule) =>
       Rule.required().uri({
-        scheme: ["http", "https"],
+        scheme: ["https"],
       }),
   }),
 ];
@@ -169,14 +169,25 @@ export const portfolio = defineType({
                       return true;
                     }
 
-                    const documentFilters = Array.isArray(context.document?.filters) ? context.document.filters : [];
+                    const documentFilters = Array.isArray(
+                      context.document?.filters,
+                    )
+                      ? context.document.filters
+                      : [];
                     const validValues = new Set(
                       documentFilters
                         .map((filter) => (filter as { value?: unknown })?.value)
-                        .filter((value): value is string => typeof value === "string" && value !== "all"),
+                        .filter(
+                          (value): value is string =>
+                            typeof value === "string" && value !== "all",
+                        ),
                     );
-                    const values = filterValues.filter((value): value is string => typeof value === "string");
-                    const invalidValues = values.filter((value) => !validValues.has(value));
+                    const values = filterValues.filter(
+                      (value): value is string => typeof value === "string",
+                    );
+                    const invalidValues = values.filter(
+                      (value) => !validValues.has(value),
+                    );
 
                     return invalidValues.length === 0
                       ? true
