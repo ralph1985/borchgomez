@@ -5,5 +5,7 @@ overrides:
   "@vercel/frameworks@3.29.0>smol-toml": 1.7.1
   "typeid-js@1.2.0>uuid": 11.1.1
   adm-zip: 0.6.1
+  "brace-expansion@5": 5.0.12
+  dompurify: 3.4.16
   "undici@6": 6.28.1
   "undici@7": 7.29.1
