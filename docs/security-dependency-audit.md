@@ -8,15 +8,16 @@ Esta auditoria cubre dependencias npm/pnpm de la web Astro, dependencias del San
 
 ## Hallazgos
 
-- La raiz del proyecto ya no reporta los seis avisos de `devalue`: el override se ha actualizado a `5.9.4`.
-- La raiz mantiene un aviso alto de `http-cache-semantics@4.2.0`, transitivo bajo `astro`, sin version corregida publicada.
-- `studio/` mantiene un aviso alto de `braces@3.0.3`, transitivo bajo `sanity > @sanity/cli > @sanity/codegen > chokidar`, tambien sin version corregida publicada.
-- Los dos avisos restantes se mantienen visibles en CI; no se han ocultado moviendo dependencias ni creando overrides sin una version segura conocida.
+- Las auditorias de producción de la raiz y `studio/` no reportan vulnerabilidades conocidas con `pnpm audit --prod`.
+- `devalue` queda fijado en `5.9.4` y `fast-uri` en `3.1.8`, versiones corregidas para los avisos que afectaban al árbol completo.
+- El audit completo de la raiz conserva dos avisos altos de build tooling sin versión corregida: `http-cache-semantics@4.2.0` bajo Astro y `braces@3.0.3` bajo Stylelint.
+- El audit completo de `studio/` conserva `braces@3.0.3` bajo `sanity > @sanity/cli > @sanity/codegen > chokidar`; el advisory no publica una versión corregida.
+- `astro` y `sanity` se clasifican como `devDependencies` porque la web y el Studio se publican como contenido estático; los avisos quedan fuera del perímetro runtime, pero siguen documentados en el audit completo.
 - Secret scanning y push protection están activos en GitHub; Dependabot security updates permanece desactivado y debe activarse como tarea operativa pendiente.
 
 ## Automatizacion
 
-`.github/workflows/security-checks.yml` ejecuta `pnpm audit --prod` por separado para la raiz y `studio/` en cada push a `develop` o `main` y en cada pull request contra esas ramas. El check seguira fallando mientras los avisos upstream no tengan una version corregida.
+`.github/workflows/security-checks.yml` ejecuta `pnpm audit --prod` por separado para la raiz y `studio/` en cada push a `develop` o `main` y en cada pull request contra esas ramas. Ambos checks de producción pasan; el audit completo conserva los avisos de build tooling sin parche upstream.
 
 ## Buenas practicas aplicadas
 
