@@ -830,9 +830,16 @@ function mergeProjects(
   const validFilters = new Set(
     mergeProjectFilters([], source.filters).map((filter) => filter.value),
   );
+  const fallbackProjectsByLink = new Map(
+    fallbackProjects.map((project) => [project.link.href, project]),
+  );
   const projects = source.projects
-    .map((project, index) =>
-      readProject(project, fallbackProjects[index], validFilters),
+    .map((project) =>
+      readProject(
+        project,
+        fallbackProjectsByLink.get(readString(project?.link?.href) ?? ""),
+        validFilters,
+      ),
     )
     .filter((project): project is Project => project !== null);
 

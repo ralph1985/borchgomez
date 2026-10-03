@@ -492,6 +492,11 @@ function readPortfolio(source, fallbackProjects) {
   const filters = readProjectFilters(source.filters);
   const validFilterValues = new Set(filters.map((filter) => filter.value).filter((value) => value !== "all"));
   const sourceProjects = readArray(source.projects, "Sanity portfolio projects must be an array.");
+  const fallbackProjectsByLink = new Map(
+    readArray(fallbackProjects, "Local portfolio fallback must be an array.")
+      .filter((project) => project && typeof project === "object" && typeof project.link?.href === "string")
+      .map((project) => [project.link.href, project]),
+  );
 
   if (sourceProjects.length === 0) {
     throw new Error("Sanity portfolio projects must include at least one project.");
@@ -505,7 +510,9 @@ function readPortfolio(source, fallbackProjects) {
       initialVisible: readRequiredPositiveInteger(source.initialVisible, "portfolio.initialVisible"),
       loadStep: readRequiredPositiveInteger(source.loadStep, "portfolio.loadStep"),
     },
-    projects: sourceProjects.map((project, index) => readProject(project, index, fallbackProjects[index], validFilterValues)),
+    projects: sourceProjects.map((project, index) =>
+      readProject(project, index, fallbackProjectsByLink.get(project?.link?.href), validFilterValues),
+    ),
   };
 }
 
