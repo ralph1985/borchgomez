@@ -1,6 +1,6 @@
 # Dependency security audit
 
-Fecha: 2026-09-02
+Fecha: 2026-10-03
 
 ## Alcance
 
@@ -8,11 +8,15 @@ Esta auditoria cubre dependencias npm/pnpm de la web Astro, dependencias del San
 
 ## Hallazgos
 
-- La raiz del proyecto no reporta vulnerabilidades conocidas con `corepack pnpm audit --prod`.
-- `studio/` tampoco reporta vulnerabilidades conocidas con `corepack pnpm --dir studio audit --prod`.
-- La revisión inicial había detectado 9 avisos de producción en la raíz y 21 en el Studio, todos transitivos salvo las versiones base que los arrastraban.
-- Los paquetes afectados incluían `astro`, `postcss`, `js-yaml`, `nanoid`, `svgo`, `undici`, `adm-zip`, `brace-expansion`, `tar`, `browserslist` y `dompurify`.
+- La raiz del proyecto ya no reporta los seis avisos de `devalue`: el override se ha actualizado a `5.9.4`.
+- La raiz mantiene un aviso alto de `http-cache-semantics@4.2.0`, transitivo bajo `astro`, sin version corregida publicada.
+- `studio/` mantiene un aviso alto de `braces@3.0.3`, transitivo bajo `sanity > @sanity/cli > @sanity/codegen > chokidar`, tambien sin version corregida publicada.
+- Los dos avisos restantes se mantienen visibles en CI; no se han ocultado moviendo dependencias ni creando overrides sin una version segura conocida.
 - Secret scanning y push protection están activos en GitHub; Dependabot security updates permanece desactivado y debe activarse como tarea operativa pendiente.
+
+## Automatizacion
+
+`.github/workflows/security-checks.yml` ejecuta `pnpm audit --prod` por separado para la raiz y `studio/` en cada push a `develop` o `main` y en cada pull request contra esas ramas. El check seguira fallando mientras los avisos upstream no tengan una version corregida.
 
 ## Buenas practicas aplicadas
 
