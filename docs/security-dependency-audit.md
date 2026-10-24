@@ -1,6 +1,6 @@
 # Dependency security audit
 
-Fecha: 2026-10-03
+Fecha: 2026-10-24
 
 ## Alcance
 
@@ -9,11 +9,12 @@ Esta auditoria cubre dependencias npm/pnpm de la web Astro, dependencias del San
 ## Hallazgos
 
 - Las auditorias de producción de la raiz y `studio/` no reportan vulnerabilidades conocidas con `pnpm audit --prod`.
-- `devalue` queda fijado en `5.9.4` y `fast-uri` en `3.1.8`, versiones corregidas para los avisos que afectaban al árbol completo.
-- El audit completo de la raiz conserva dos avisos altos de build tooling sin versión corregida: `http-cache-semantics@4.2.0` bajo Astro y `braces@3.0.3` bajo Stylelint.
-- El audit completo de `studio/` conserva `braces@3.0.3` bajo `sanity > @sanity/cli > @sanity/codegen > chokidar`; el advisory no publica una versión corregida.
-- `astro` y `sanity` se clasifican como `devDependencies` porque la web y el Studio se publican como contenido estático; los avisos quedan fuera del perímetro runtime, pero siguen documentados en el audit completo.
-- Secret scanning y push protection están activos en GitHub; Dependabot security updates permanece desactivado y debe activarse como tarea operativa pendiente.
+- `devalue` permanece fijado en `5.9.4`, versión corregida para el aviso anterior. El audit actual detecta nuevos avisos de `fast-uri@3.1.8`; la versión corregida indicada ahora es `3.1.9`.
+- La rama de remediacion actualiza Astro a `7.4.0`, con `vite@8.3.4`, `http-cache-semantics@4.3.0` y `postcss-selector-parser@7.1.6`. El audit completo local ya no señala `http-cache-semantics`; la alerta de GitHub en `main` sigue abierta y no declara primera version corregida, por lo que debe releerse tras integrar la PR.
+- El audit completo actual de la raiz muestra 9 hallazgos (3 altos, 4 moderados y 2 bajos), en rutas de build tooling que incluyen `source-map-js`, `sharp`, `undici` y `fast-uri`.
+- El audit completo actual de `studio/` muestra 11 hallazgos (1 critico, 5 altos, 4 moderados y 1 bajo), en rutas de build tooling que incluyen `DOMPurify`, `source-map-js`, `zod`, `undici` y `smol-toml`.
+- `astro` y `sanity` se clasifican como `devDependencies` porque la web y el Studio se publican como contenido estatico; los hallazgos quedan fuera del perimetro runtime, pero siguen visibles en el audit completo.
+- Secret scanning, push protection y las alertas de Dependabot estan activos en GitHub; las actualizaciones de seguridad automaticas de Dependabot tambien estan habilitadas.
 
 ## Automatizacion
 
