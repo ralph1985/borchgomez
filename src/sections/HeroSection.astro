@@ -87,8 +87,21 @@ const heroTitleWords = hero.title.split(/\s+/).filter(Boolean);
         {site.socialLinks.map((link) => <a href={link.href} class="home__icon" target="_blank" rel="noopener" aria-label={link.label}><SocialIcon type={link.type} /></a>)}
       </div>
     </div>
-    <div class="home__img">
-      <img src={hero.image.src} srcset={hero.image.srcset} sizes={hero.image.sizes} alt={hero.image.alt} width={hero.image.width} height={hero.image.height} fetchpriority="high" decoding="async" class="home-image" />
+    <div class="home__img home__video" aria-label="Vídeo promocional de Borja Gómez">
+      <div class="home__video-frame">
+        <iframe
+          class="home-video"
+          src="https://www.youtube.com/embed/s2WFH5N-3BA?rel=0&modestbranding=1&playsinline=1"
+          title="Vídeo promocional de Borja Gómez"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          referrerpolicy="strict-origin-when-cross-origin"
+          loading="eager"
+        ></iframe>
+      </div>
+      <a class="home__video-link" href="https://youtube.com/shorts/s2WFH5N-3BA?feature=shared" target="_blank" rel="noopener">
+        Ver en YouTube
+      </a>
     </div>
   </div>
 </section>

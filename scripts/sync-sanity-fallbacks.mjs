@@ -492,6 +492,11 @@ function readPortfolio(source, fallbackProjects) {
   const filters = readProjectFilters(source.filters);
   const validFilterValues = new Set(filters.map((filter) => filter.value).filter((value) => value !== "all"));
   const sourceProjects = readArray(source.projects, "Sanity portfolio projects must be an array.");
+  const fallbackProjectsByLink = new Map(
+    readArray(fallbackProjects, "Local portfolio fallback must be an array.")
+      .filter((project) => project && typeof project === "object" && typeof project.link?.href === "string")
+      .map((project) => [project.link.href, project]),
+  );
 
   if (sourceProjects.length === 0) {
     throw new Error("Sanity portfolio projects must include at least one project.");
@@ -505,7 +510,9 @@ function readPortfolio(source, fallbackProjects) {
       initialVisible: readRequiredPositiveInteger(source.initialVisible, "portfolio.initialVisible"),
       loadStep: readRequiredPositiveInteger(source.loadStep, "portfolio.loadStep"),
     },
-    projects: sourceProjects.map((project, index) => readProject(project, index, fallbackProjects[index], validFilterValues)),
+    projects: sourceProjects.map((project, index) =>
+      readProject(project, index, fallbackProjectsByLink.get(project?.link?.href), validFilterValues),
+    ),
   };
 }
 
@@ -534,7 +541,6 @@ function readProjectFilters(source) {
 
 function readProject(project, index, fallbackProject, validFilterValues) {
   assertObject(project, `Sanity portfolio.projects[${index}] must be an object.`);
-  assertObject(project.image, `Sanity portfolio.projects[${index}].image is missing.`);
   assertObject(project.link, `Sanity portfolio.projects[${index}].link is missing.`);
 
   const filters = readRequiredStringArray(project.filterValues, `portfolio.projects[${index}].filterValues`);
@@ -544,24 +550,37 @@ function readProject(project, index, fallbackProject, validFilterValues) {
     throw new Error(`Sanity portfolio.projects[${index}] uses unknown filters: ${invalidFilters.join(", ")}.`);
   }
 
-  readRequiredString(project.image.src, `portfolio.projects[${index}].image.asset.url`);
-  readRequiredPositiveNumber(project.image.width, `portfolio.projects[${index}].image.asset.metadata.dimensions.width`);
-  readRequiredPositiveNumber(project.image.height, `portfolio.projects[${index}].image.asset.metadata.dimensions.height`);
-
-  return {
+  return removeUndefined({
     title: readRequiredString(project.title, `portfolio.projects[${index}].title`),
     subtitle: readOptionalString(project.subtitle, `portfolio.projects[${index}].subtitle`) ?? "",
     category: readRequiredString(project.category, `portfolio.projects[${index}].category`),
     filter: filters[0],
     filters,
-    image: {
-      ...readFallbackImage(fallbackProject?.image, `portfolio.projects[${index}].image`),
-      alt: readRequiredString(project.image.alt, `portfolio.projects[${index}].image.alt`),
-    },
+    image: readOptionalProjectImage(project.image, fallbackProject?.image, `portfolio.projects[${index}].image`),
     link: {
       label: readRequiredString(project.link.label, `portfolio.projects[${index}].link.label`),
       href: readRequiredString(project.link.href, `portfolio.projects[${index}].link.href`),
     },
+  });
+}
+
+function readOptionalProjectImage(source, fallbackImage, fieldName) {
+  if (source === undefined || source === null) {
+    return fallbackImage ? readFallbackImage(fallbackImage, fieldName) : undefined;
+  }
+
+  assertObject(source, `Sanity ${fieldName} must be an object when provided.`);
+  readRequiredString(source.src, `${fieldName}.asset.url`);
+  readRequiredPositiveNumber(source.width, `${fieldName}.asset.metadata.dimensions.width`);
+  readRequiredPositiveNumber(source.height, `${fieldName}.asset.metadata.dimensions.height`);
+
+  if (!fallbackImage) {
+    return undefined;
+  }
+
+  return {
+    ...readFallbackImage(fallbackImage, fieldName),
+    alt: readRequiredString(source.alt, `${fieldName}.alt`),
   };
 }
 

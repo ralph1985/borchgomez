@@ -681,6 +681,42 @@ main {
   backdrop-filter: blur(6px);
 }
 
+.footer__credit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  max-width: 100%;
+  margin: 0;
+  color: var(--color-secondary);
+  font-size: 0.78rem;
+  line-height: 1.2;
+}
+
+.footer__credit-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  border-radius: 0.2rem;
+  opacity: 0.82;
+  transition: opacity 180ms ease;
+}
+
+.footer__credit-logo {
+  display: block;
+  width: clamp(5.9rem, 18vw, 7.2rem);
+  height: auto;
+}
+
+.footer__credit-link:hover {
+  opacity: 1;
+}
+
+.footer__credit-link:focus-visible {
+  outline: 2px solid var(--color-primary-deep);
+  outline-offset: 0.18rem;
+}
+
 .footer__legal-list {
   display: flex;
   flex-wrap: wrap;
@@ -1073,6 +1109,49 @@ main {
 .home__img.is-hero-awake::before {
   opacity: 1;
   transform: scale(1);
+}
+
+.home__video {
+  width: min(390px, 88vw);
+  text-align: center;
+}
+
+.home__video-frame {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--color-image-border);
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(23, 19, 15, 0.18), rgba(23, 19, 15, 0.72)), var(--color-ink);
+  box-shadow: 0 18px 40px var(--color-shadow-earth-medium);
+  aspect-ratio: 9/16;
+  transform-origin: center;
+  will-change: transform;
+}
+
+.home-video {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.home__video-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.82rem;
+  color: var(--soil);
+  font-size: 0.86rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+.home__video-link:hover {
+  color: var(--ink);
 }
 
 .home__img img {
@@ -1664,6 +1743,20 @@ main {
   transition: transform 0.35s ease;
 }
 
+.portfolio__img--placeholder {
+  display: grid;
+  aspect-ratio: 3/4;
+  place-items: center;
+  border: 1px solid var(--color-image-border-soft);
+  background: repeating-linear-gradient(135deg, var(--color-surface-warm) 0 1.25rem, var(--color-cream) 1.25rem 2.5rem);
+  color: var(--color-secondary);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .portfolio__card:hover .portfolio__img img {
   transform: scale(1.015);
 }
@@ -1755,6 +1848,9 @@ main {
   }
   .home__img {
     width: min(500px, 100%);
+  }
+  .home__video {
+    width: min(430px, 100%);
   }
   .purpose__layout {
     grid-template-columns: minmax(260px, 0.45fr) minmax(0, 0.55fr);

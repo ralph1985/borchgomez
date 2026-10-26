@@ -1,4 +1,5 @@
 import * as anime from "animejs";
+import { inject } from "@vercel/analytics";
 
 import { initDecorativeAnimations } from "./decorative-animations.js";
 import { initHeroAnimation } from "./hero-animation.js";
@@ -13,3 +14,11 @@ initHeroAnimation({ anime });
 initDecorativeAnimations({ anime });
 initInteractiveMotion({ anime });
 initPortfolioFilters();
+
+inject(
+  {
+    framework: "astro",
+    basePath: import.meta.env.PUBLIC_VERCEL_OBSERVABILITY_BASEPATH,
+  },
+  import.meta.env.PUBLIC_VERCEL_OBSERVABILITY_CLIENT_CONFIG,
+);

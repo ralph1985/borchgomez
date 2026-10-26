@@ -1,0 +1,57 @@
+name: Security checks
+
+on:
+  push:
+    branches:
+      - develop
+      - main
+  pull_request:
+    branches:
+      - develop
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  audit-root:
+    name: Audit website dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install website dependencies
+        run: corepack pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Audit website production dependencies
+        run: corepack pnpm audit --prod
+
+  audit-studio:
+    name: Audit Studio dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Enable Corepack
+        run: corepack enable
+
+      - name: Install Studio dependencies
+        run: corepack pnpm --dir studio install --frozen-lockfile --ignore-scripts
+
+      - name: Audit Studio production dependencies
+        run: corepack pnpm --dir studio audit --prod
