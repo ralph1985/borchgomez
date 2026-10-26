@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.25.0",
   "scripts": {
     "dev": "sanity dev",
     "build": "sanity build",
@@ -16,12 +17,13 @@
     "seed:services": "sanity exec scripts/seed-services.mjs --with-user-token"
   },
   "dependencies": {
-    "react": "19.2.7",
-    "react-dom": "19.2.7",
-    "sanity": "6.4.0",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "styled-components": "6.4.3"
   },
   "devDependencies": {
-    "typescript": "5.9.3"
+    "sanity": "6.17.0",
+    "typescript": "6.0.3",
+    "vite": "8.3.4"
   }
 }

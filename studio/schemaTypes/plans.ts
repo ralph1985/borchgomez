@@ -17,7 +17,11 @@ const ctaFields = [
     name: "href",
     title: "Enlace",
     type: "string",
-    validation: (Rule) => Rule.required(),
+    validation: (Rule) =>
+      Rule.required().uri({
+        scheme: ["https", "mailto", "tel"],
+        allowRelative: true,
+      }),
   }),
 ];
 
