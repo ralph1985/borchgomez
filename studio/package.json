@@ -22,7 +22,7 @@
     "styled-components": "6.6.0"
   },
   "devDependencies": {
-    "sanity": "6.19.0",
+    "sanity": "6.20.0",
     "typescript": "7.0.2",
     "vite": "8.3.4"
   }
