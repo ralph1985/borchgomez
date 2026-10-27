@@ -17,13 +17,13 @@
     "seed:services": "sanity exec scripts/seed-services.mjs --with-user-token"
   },
   "dependencies": {
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "styled-components": "6.4.3"
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "styled-components": "6.6.0"
   },
   "devDependencies": {
-    "sanity": "6.17.0",
-    "typescript": "6.0.3",
+    "sanity": "6.20.0",
+    "typescript": "7.0.2",
     "vite": "8.3.4"
   }
 }
