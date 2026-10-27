@@ -51,7 +51,7 @@
     "@types/node": "26.6.5",
     "astro": "7.4.0",
     "eslint": "10.13.0",
-    "eslint-plugin-astro": "2.1.1",
+    "eslint-plugin-astro": "3.1.0",
     "globals": "17.13.0",
     "husky": "9.1.7",
     "prettier": "3.9.10",
