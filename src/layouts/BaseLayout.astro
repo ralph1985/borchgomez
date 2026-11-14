@@ -11,14 +11,16 @@ interface Props {
 }
 
 const { site, services, title = site.title, description = site.description, indexable = true } = Astro.props;
-const siteOrigin = Astro.site ?? new URL("https://borchgomez.es");
-const canonicalUrl = new URL(Astro.url.pathname, siteOrigin).toString();
+const siteOrigin = Astro.site ?? new URL("https://www.borchgomez.es");
+const routePath = Astro.url.pathname.replace(/\.html$/, "").replace(/\/+$/, "") || "/";
+const canonicalPath = routePath === "/index" ? "/" : routePath;
+const canonicalUrl = new URL(canonicalPath, siteOrigin).toString();
 const socialImageUrl = toAbsoluteUrl(site.metadata.ogImage);
 const socialTitle = title === site.title ? site.metadata.ogTitle : title;
 const socialDescription = description === site.description ? site.metadata.ogDescription : description;
 const publisherId = new URL("/#borja-gomez", siteOrigin).toString();
 const websiteId = new URL("/#website", siteOrigin).toString();
-const webpageId = new URL(`${Astro.url.pathname}#webpage`, siteOrigin).toString();
+const webpageId = new URL(`${canonicalPath}#webpage`, siteOrigin).toString();
 const professionalServiceId = new URL("/#professional-service", siteOrigin).toString();
 const socialUrls = site.socialLinks.filter((link) => link.type !== "whatsapp").map((link) => link.href);
 const serviceJsonLd = services.map((service) => ({
