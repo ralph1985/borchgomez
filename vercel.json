@@ -1,4 +1,11 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "git": {
+    "deploymentEnabled": {
+      "fix/seo-canonical-www": false
+    }
+  },
   "headers": [
     {
       "source": "/(.*)",
