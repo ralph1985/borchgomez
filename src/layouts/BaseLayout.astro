@@ -20,7 +20,7 @@ const socialTitle = title === site.title ? site.metadata.ogTitle : title;
 const socialDescription = description === site.description ? site.metadata.ogDescription : description;
 const publisherId = new URL("/#borja-gomez", siteOrigin).toString();
 const websiteId = new URL("/#website", siteOrigin).toString();
-const webpageId = new URL(`${Astro.url.pathname}#webpage`, siteOrigin).toString();
+const webpageId = new URL(`${canonicalPath}#webpage`, siteOrigin).toString();
 const professionalServiceId = new URL("/#professional-service", siteOrigin).toString();
 const socialUrls = site.socialLinks.filter((link) => link.type !== "whatsapp").map((link) => link.href);
 const serviceJsonLd = services.map((service) => ({
